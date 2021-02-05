@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="92faed72-7fc1-420d-8b7a-a1848b5409f9" name="Default Changelist" comment="" />
+    <list default="true" id="92faed72-7fc1-420d-8b7a-a1848b5409f9" name="Default Changelist" comment="testing commiting from intelliJ" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,19 +112,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Team exhalation, pair 2 was hear." />
     <option name="LAST_COMMIT_MESSAGE" value="Team exhalation, pair 2 was hear." />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="355" y="23" key="CommitChangelistDialog2" timestamp="1612494139664">
-      <screen x="0" y="23" width="1280" height="715" />
-    </state>
-    <state x="355" y="23" key="CommitChangelistDialog2/0.23.1280.715@0.23.1280.715" timestamp="1612494139664" />
-    <state x="278" y="144" key="MultipleFileMergeDialog" timestamp="1612494322014">
-      <screen x="0" y="23" width="1280" height="715" />
-    </state>
-    <state x="278" y="144" key="MultipleFileMergeDialog/0.23.1280.715@0.23.1280.715" timestamp="1612494322014" />
-    <state x="240" y="116" key="Vcs.Push.Dialog.v2" timestamp="1612494174652">
-      <screen x="0" y="23" width="1280" height="715" />
-    </state>
-    <state x="240" y="116" key="Vcs.Push.Dialog.v2/0.23.1280.715@0.23.1280.715" timestamp="1612494174652" />
   </component>
 </project>
