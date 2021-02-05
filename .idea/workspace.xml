@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="92faed72-7fc1-420d-8b7a-a1848b5409f9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-    </list>
+    <list default="true" id="92faed72-7fc1-420d-8b7a-a1848b5409f9" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +26,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -66,12 +65,30 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1612488432569</updated>
-      <workItem from="1612490821120" duration="655000" />
+      <workItem from="1612490821120" duration="841000" />
     </task>
+    <task id="LOCAL-00001" summary="Team exhalation, pair 2 was hear.">
+      <created>1612494140296</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1612494140296</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -84,5 +101,23 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Team exhalation, pair 2 was hear." />
+    <option name="LAST_COMMIT_MESSAGE" value="Team exhalation, pair 2 was hear." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="355" y="23" key="CommitChangelistDialog2" timestamp="1612494139664">
+      <screen x="0" y="23" width="1280" height="715" />
+    </state>
+    <state x="355" y="23" key="CommitChangelistDialog2/0.23.1280.715@0.23.1280.715" timestamp="1612494139664" />
+    <state x="278" y="144" key="MultipleFileMergeDialog" timestamp="1612494322014">
+      <screen x="0" y="23" width="1280" height="715" />
+    </state>
+    <state x="278" y="144" key="MultipleFileMergeDialog/0.23.1280.715@0.23.1280.715" timestamp="1612494322014" />
+    <state x="240" y="116" key="Vcs.Push.Dialog.v2" timestamp="1612494174652">
+      <screen x="0" y="23" width="1280" height="715" />
+    </state>
+    <state x="240" y="116" key="Vcs.Push.Dialog.v2/0.23.1280.715@0.23.1280.715" timestamp="1612494174652" />
   </component>
 </project>
