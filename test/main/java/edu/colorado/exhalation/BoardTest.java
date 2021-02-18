@@ -30,7 +30,7 @@ class BoardTest {
     }//inialize
 
     @Test
-    void testPrint(){
+    void testEmptyPrint(){
         String top_of_board = "   A B C D E | F G H I J\n";
         //ensure space at the end of the test string
         String empty_row = "O O O O O | O O O O O \n";
@@ -53,9 +53,40 @@ class BoardTest {
         Board empty_test_board = new Board();
 
         assertTrue(empty_board.equals(empty_test_board.print()));
-        empty_test_board.getPeg(3,1).setType_(1);
-        empty_test_board.getPeg(3,1).hit();
-        System.out.println(empty_test_board.print());
+
+    }
+
+    @Test
+    void testFullPrint(){
+        String top_of_board = "   A B C D E | F G H I J\n";
+        //ensure space at the end of the test string
+        String empty_row = "# # # # # | # # # # # \n";
+        String seperator = "   - - - - - | - - - - -\n";
+        String full_board = top_of_board;
+
+        //build board string
+        for(int i =0; i <5; i++){
+            String num = String.valueOf(i);
+            full_board+= num+"| ";
+            full_board += empty_row;
+        }
+        full_board+= seperator;
+        for(int i =5; i <10; i++){
+            String num = String.valueOf(i);
+            full_board += num+"| ";
+            full_board += empty_row;
+        }
+
+        Board full_test_board = new Board();
+
+        //hit every peg
+        for(int i =0; i< 10; i++){
+            for(int j = 0; j< 10;j++){
+                full_test_board.getPeg(i,j).hit();
+            }
+        }
+
+        assertTrue(full_board.equals(full_test_board.print()));
     }
 
 }//boardTest
