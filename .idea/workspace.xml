@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92faed72-7fc1-420d-8b7a-a1848b5409f9" name="Default Changelist" comment="testing commiting from intelliJ">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Peg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Peg.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/PegTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/PegTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +67,7 @@
       <recent name="main.java.edu.colorado.exhalation" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PegTest.testCreate">
+  <component name="RunManager" selected="JUnit.PegTest.voidTestPegType">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.colorado.exhalation.Main" />
       <module name="project" />
@@ -94,6 +92,22 @@
       <option name="PACKAGE_NAME" value="main.java.edu.colorado.exhalation" />
       <option name="MAIN_CLASS_NAME" value="main.java.edu.colorado.exhalation.PegTest" />
       <option name="METHOD_NAME" value="testCreate" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PegTest.voidTestPegType" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.edu.colorado.exhalation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main.java.edu.colorado.exhalation" />
+      <option name="MAIN_CLASS_NAME" value="main.java.edu.colorado.exhalation.PegTest" />
+      <option name="METHOD_NAME" value="voidTestPegType" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -132,6 +146,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PegTest.voidTestPegType" />
         <item itemvalue="JUnit.PegTest.testCreate" />
         <item itemvalue="JUnit.ShipTest" />
         <item itemvalue="Application.Main" />
