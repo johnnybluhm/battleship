@@ -37,5 +37,22 @@ class PegTest {
         assertTrue(test_peg.isHit());
     }
 
+    @Test
+    void testHasShip(){
+
+        //peg has a ship
+        Peg no_ship = new Peg(1,0);
+        Peg ship_1 = new Peg(1,0,1);
+        Peg ship_2 = new Peg(1,0);
+        Peg ship_3 = new Peg(1,0, 3);
+        ship_2.setType_(2);
+
+
+        assertFalse(no_ship.hasShip());
+        assertTrue(ship_1.hasShip());
+        assertTrue(ship_2.hasShip());
+        assertTrue(ship_3.hasShip());
+    }
+
 
 }
