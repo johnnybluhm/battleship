@@ -68,4 +68,18 @@ public class Peg {
             return true;
         }
     }
+
+    public char print(){
+        if(isHit()){
+            if(getType_()==0){
+                return '#';
+            }
+            else{
+                return 'X';
+            }
+        }//if isHit()
+        else{
+            return 'O';
+        }
+    }
 }//Peg

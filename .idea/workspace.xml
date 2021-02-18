@@ -68,7 +68,7 @@
       <recent name="main.java.edu.colorado.exhalation" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PegTest.testHasShip">
+  <component name="RunManager" selected="JUnit.PegTest.testPegPrint">
     <configuration name="PegTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="project" />
       <extension name="coverage">
@@ -132,7 +132,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PegTest.voidTestPegType" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PegTest.testPegPrint" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="project" />
       <extension name="coverage">
         <pattern>
@@ -142,7 +142,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="main.java.edu.colorado.exhalation" />
       <option name="MAIN_CLASS_NAME" value="main.java.edu.colorado.exhalation.PegTest" />
-      <option name="METHOD_NAME" value="voidTestPegType" />
+      <option name="METHOD_NAME" value="testPegPrint" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -150,11 +150,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PegTest.testPegPrint" />
         <item itemvalue="JUnit.PegTest.testHasShip" />
         <item itemvalue="JUnit.PegTest" />
         <item itemvalue="JUnit.PegTest.testHit" />
         <item itemvalue="JUnit.PegTest.TestPegType" />
-        <item itemvalue="JUnit.PegTest.voidTestPegType" />
       </list>
     </recent_temporary>
   </component>
