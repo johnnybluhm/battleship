@@ -4,10 +4,14 @@ public class Peg {
 
     private int pos_x_;
     private int pos_y_;
+
+    //1 - mine, 2 - battle, 3 -ship, 99-water
     private int type_;
     public Peg(int pos_x, int pos_y){
         this.pos_x_ = pos_x;
         this.pos_y_ = pos_y;
+        this.type_ =0;
+
     }
 
     public int getPos_x_() {
