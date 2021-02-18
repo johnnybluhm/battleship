@@ -7,10 +7,16 @@ public class Peg {
 
     //1 - mine, 2 - battle, 3 -ship, 99-water
     private int type_;
+
+
+    private boolean hit_;
+
+
     public Peg(int pos_x, int pos_y){
         this.pos_x_ = pos_x;
         this.pos_y_ = pos_y;
         this.type_ =0;
+        this.hit_ =false;
 
     }
 
@@ -36,5 +42,13 @@ public class Peg {
 
     public void setType_(int type) {
         this.type_ = type;
+    }
+
+    public boolean isHit() {
+        return hit_;
+    }
+
+    public void hit() {
+        this.hit_ = true;
     }
 }

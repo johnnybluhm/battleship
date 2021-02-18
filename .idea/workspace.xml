@@ -68,7 +68,7 @@
       <recent name="main.java.edu.colorado.exhalation" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PegTest">
+  <component name="RunManager" selected="JUnit.PegTest.testHit">
     <configuration name="PegTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="project" />
       <extension name="coverage">
@@ -116,6 +116,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PegTest.testHit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.edu.colorado.exhalation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main.java.edu.colorado.exhalation" />
+      <option name="MAIN_CLASS_NAME" value="main.java.edu.colorado.exhalation.PegTest" />
+      <option name="METHOD_NAME" value="testHit" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PegTest.voidTestPegType" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="project" />
       <extension name="coverage">
@@ -132,28 +148,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShipTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main.java.edu.colorado.exhalation.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="main.java.edu.colorado.exhalation" />
-      <option name="MAIN_CLASS_NAME" value="main.java.edu.colorado.exhalation.ShipTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PegTest.testHit" />
         <item itemvalue="JUnit.PegTest" />
         <item itemvalue="JUnit.PegTest.TestPegType" />
         <item itemvalue="JUnit.PegTest.voidTestPegType" />
         <item itemvalue="JUnit.PegTest.testCreate" />
-        <item itemvalue="JUnit.ShipTest" />
       </list>
     </recent_temporary>
   </component>

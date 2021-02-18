@@ -30,6 +30,9 @@ class PegTest {
 
     @Test
     void testHit(){
+        assertTrue(test_peg.isHit() == false);
+        test_peg.hit();
+        assertTrue(test_peg.isHit());
         test_peg.hit();
         assertTrue(test_peg.isHit());
     }
