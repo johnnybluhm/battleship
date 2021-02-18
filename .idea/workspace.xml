@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92faed72-7fc1-420d-8b7a-a1848b5409f9" name="Default Changelist" comment="testing commiting from intelliJ">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/BoardTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +68,7 @@
       <recent name="main.java.edu.colorado.exhalation" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.BoardTest.testFullPrint">
+  <component name="RunManager" selected="JUnit.BoardTest.testPrintWithShips">
     <configuration name="BoardTest.testFullPrint" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="project" />
       <extension name="coverage">
@@ -116,7 +117,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PegTest.testHasShip" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BoardTest.testPrintWithShips" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="project" />
       <extension name="coverage">
         <pattern>
@@ -125,8 +126,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="main.java.edu.colorado.exhalation" />
-      <option name="MAIN_CLASS_NAME" value="main.java.edu.colorado.exhalation.PegTest" />
-      <option name="METHOD_NAME" value="testHasShip" />
+      <option name="MAIN_CLASS_NAME" value="main.java.edu.colorado.exhalation.BoardTest" />
+      <option name="METHOD_NAME" value="testPrintWithShips" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -150,11 +151,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.BoardTest.testPrintWithShips" />
         <item itemvalue="JUnit.BoardTest.testFullPrint" />
         <item itemvalue="JUnit.BoardTest.testPrint" />
         <item itemvalue="JUnit.BoardTest.testInitialize" />
         <item itemvalue="JUnit.PegTest.testPegPrint" />
-        <item itemvalue="JUnit.PegTest.testHasShip" />
       </list>
     </recent_temporary>
   </component>

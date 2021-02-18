@@ -89,4 +89,51 @@ class BoardTest {
         assertTrue(full_board.equals(full_test_board.print()));
     }
 
+    @Test
+    void testPrintWithShips(){
+        String top_of_board = "   A B C D E | F G H I J\n";
+        //ensure space at the end of the test string
+        String empty_row = "O O O O O | O O O O O \n";
+        String seperator = "   - - - - - | - - - - -\n";
+        String board = top_of_board;
+        String last_row = "9| X X X O O | O O # X X \n";
+
+        //build board string
+        for(int i =0; i <5; i++){
+            String num = String.valueOf(i);
+            board += num+"| ";
+            board += empty_row;
+        }
+        board+= seperator;
+        for(int i =5; i <9; i++){
+            String num = String.valueOf(i);
+            board += num+"| ";
+            board += empty_row;
+        }
+        board+= last_row;
+        Board empty_test_board = new Board();
+        System.out.println(board);
+
+        //set last row to reflect hard coded last row
+        empty_test_board.getPeg(0,9).setType_(1);
+        empty_test_board.getPeg(1,9).setType_(1);
+        empty_test_board.getPeg(2,9).setType_(1);
+        empty_test_board.getPeg(8,9).setType_(2);
+        empty_test_board.getPeg(9,9).setType_(2);
+
+
+        //hit ships
+        empty_test_board.getPeg(0,9).hit();
+        empty_test_board.getPeg(1,9).hit();
+        empty_test_board.getPeg(2,9).hit();
+        empty_test_board.getPeg(8,9).hit();
+        empty_test_board.getPeg(9,9).hit();
+
+        //hit empty square
+        empty_test_board.getPeg(7,9).hit();
+
+        System.out.println(empty_test_board.print());
+        assertTrue(board.equals(empty_test_board.print()));
+    }
+
 }//boardTest
