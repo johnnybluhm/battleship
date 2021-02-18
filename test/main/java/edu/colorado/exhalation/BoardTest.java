@@ -32,7 +32,8 @@ class BoardTest {
     @Test
     void testPrint(){
         String top_of_board = "   A B C D E | F G H I J\n";
-        String empty_row = "O O O O O | O O O O O\n";
+        //ensure space at the end of the test string
+        String empty_row = "O O O O O | O O O O O \n";
         String seperator = "   - - - - - | - - - - -\n";
         String empty_board = top_of_board;
 
@@ -52,8 +53,9 @@ class BoardTest {
         Board empty_test_board = new Board();
 
         assertTrue(empty_board.equals(empty_test_board.print()));
-
-        //System.out.println(empty_board);
+        empty_test_board.getPeg(3,1).setType_(1);
+        empty_test_board.getPeg(3,1).hit();
+        System.out.println(empty_test_board.print());
     }
 
 }//boardTest

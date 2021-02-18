@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="92faed72-7fc1-420d-8b7a-a1848b5409f9" name="Default Changelist" comment="testing commiting from intelliJ">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/BoardTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -213,5 +214,19 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Team exhalation, pair 2 was hear." />
     <option name="LAST_COMMIT_MESSAGE" value="Team exhalation, pair 2 was hear." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/BoardTest.java</url>
+          <line>32</line>
+          <properties class="main.java.edu.colorado.exhalation.BoardTest" method="testPrint">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
