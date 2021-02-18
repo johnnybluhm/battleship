@@ -59,4 +59,13 @@ public class Peg {
     public void hit() {
         this.hit_ = true;
     }
-}
+
+    public boolean hasShip(){
+        if(getType_() == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+}//Peg

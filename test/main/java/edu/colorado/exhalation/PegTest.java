@@ -40,7 +40,6 @@ class PegTest {
     @Test
     void testHasShip(){
 
-        //peg has a ship
         Peg no_ship = new Peg(1,0);
         Peg ship_1 = new Peg(1,0,1);
         Peg ship_2 = new Peg(1,0);
@@ -52,6 +51,24 @@ class PegTest {
         assertTrue(ship_1.hasShip());
         assertTrue(ship_2.hasShip());
         assertTrue(ship_3.hasShip());
+    }
+
+
+    //O for no hit, X for hit ship, # for hit no ship
+    @Test
+    void testPegPrint(){
+        Peg no_ship = new Peg(1,0);
+        Peg ship_1 = new Peg(1,0,1);
+        Peg ship_2 = new Peg(1,0);
+        Peg noship2 = new Peg(1,0);
+
+        no_ship.hit();
+        ship_1.hit();
+        assertEquals('#', no_ship.print());
+        assertEquals('X', ship_1.print());
+        assertEquals('O', ship_2.print());
+        assertEquals('O', noship2.print());
+
     }
 
 
