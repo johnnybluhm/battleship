@@ -5,7 +5,7 @@ public class Peg {
     private int pos_x_;
     private int pos_y_;
 
-    //1 - mine, 2 - battle, 3 -ship, 0-water
+    //2 - mine, 3 - destroyer, 4 -battleship, 0-water
     private int type_;
 
 
