@@ -13,8 +13,8 @@ class PegTest {
     @Test
     void testCreate(){
         test_peg = new Peg(1,0);
-        assertEquals(1, test_peg.getPostition_x());
-        assertEquals(0, test_peg.getPostition_y());
+        assertEquals(1, test_peg.getPos_x_());
+        assertEquals(0, test_peg.getPos_y_());
     }
 
 
