@@ -27,5 +27,33 @@ class BoardTest {
             }
         }
 
+    }//inialize
+
+    @Test
+    void testPrint(){
+        String top_of_board = "   A B C D E | F G H I J\n";
+        String empty_row = "O O O O O | O O O O O\n";
+        String seperator = "   - - - - - | - - - - -\n";
+        String empty_board = top_of_board;
+
+        //build board string
+        for(int i =0; i <5; i++){
+            String num = String.valueOf(i);
+            empty_board += num+"| ";
+            empty_board += empty_row;
+        }
+        empty_board+= seperator;
+        for(int i =5; i <10; i++){
+            String num = String.valueOf(i);
+            empty_board += num+"| ";
+            empty_board += empty_row;
+        }
+
+        Board empty_test_board = new Board();
+
+        assertTrue(empty_board.equals(empty_test_board.print()));
+
+        //System.out.println(empty_board);
     }
-}
+
+}//boardTest
