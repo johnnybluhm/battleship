@@ -1,4 +1,4 @@
-package main.java.edu.colorado.exhalation;
+package edu.colorado.exhalation;
 
 public class Peg {
 

@@ -2,6 +2,7 @@ package main.java.edu.colorado.exhalation;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import edu.colorado.exhalation.Peg;
 
 import static org.junit.jupiter.api.Assertions.*;
 

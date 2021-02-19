@@ -1,5 +1,7 @@
 package main.java.edu.colorado.exhalation;
 
+import edu.colorado.exhalation.Peg;
+import edu.colorado.exhalation.Board;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
