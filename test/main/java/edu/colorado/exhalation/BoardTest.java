@@ -169,9 +169,9 @@ class BoardTest {
         Point point = new Point(0,9);
         Point point2 = new Point(1,9);
         Point point3 = new Point(2,9);
-        Point[] point_array = new Point[3];
-        //point_array = [point, point2, point3];
-        //test_board.place(point_array);
+        Point[] point_array = {point, point2, point3};
+        
+        test_board.place(point_array);
         assertTrue(board.equals(test_board.print()));
 
         System.out.println(test_board.printFriendly());
