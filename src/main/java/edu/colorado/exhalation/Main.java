@@ -7,6 +7,5 @@ public class Main {
         //change
          Ship ship = new Ship();
          ship.show();
-
     }
 }

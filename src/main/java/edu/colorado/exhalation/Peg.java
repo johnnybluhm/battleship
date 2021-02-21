@@ -82,4 +82,33 @@ public class Peg {
             return 'O';
         }
     }
+
+    public boolean overlap() {
+        if(print() == '#'){
+            System.out.println("Already attacked here! It was a miss!");
+            return true;
+        }
+        else if(print() == 'X') {
+            System.out.println("Already attacked here! It was a hit!");
+            return true;
+        }
+        else if(hasShip()){
+            if(getType_() == 2){
+                System.out.println("Minesweeper is already here! Place ship elsewhere!");
+                return true;
+            }
+            else if(getType_() == 3){
+                System.out.println("Destroyer is already here! Place ship elsewhere!");
+                return true;
+            }
+            else if(getType_() == 4){
+                System.out.println("Battleship is already here! Place ship elsewhere!");
+                return true;
+            }
+            else{
+                System.out.println("You really shouldn't be seeing this");
+            }
+        }
+        return false;
+    }
 }//Peg
