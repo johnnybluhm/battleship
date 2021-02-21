@@ -1,7 +1,7 @@
 package main.java.edu.colorado.exhalation;
 
 import org.junit.jupiter.api.Test;
-
+import edu.colorado.exhalation.Point;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PointTest {

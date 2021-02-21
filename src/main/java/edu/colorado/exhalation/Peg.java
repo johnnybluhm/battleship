@@ -79,6 +79,15 @@ public class Peg {
             }
         }//if isHit()
         else{
+            if(getType_() == 2){
+                return '2';
+            }
+            else if(getType_() == 3){
+                return '3';
+            }
+            else if(getType_() == 4){
+                return '4';
+            }
             return 'O';
         }
     }

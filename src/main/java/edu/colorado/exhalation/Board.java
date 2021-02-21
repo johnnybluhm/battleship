@@ -1,6 +1,4 @@
 package edu.colorado.exhalation;
-import edu.colorado.exhalation.Peg;
-import main.java.edu.colorado.exhalation.Point;
 
 public class Board {
 
@@ -155,27 +153,27 @@ public class Board {
             //ship is vertical
             else if(point1.getX_() == point2.getX_()){
 
-                if (point1.getY_()-point2.getY_() != 1 || point1.getY_()-point2.getY_() != -1 ){
-                    //point is invalid
-                    return -1;
-                }
-                //point is valid
-                else {
+                if (point1.getY_()-point2.getY_() == 1 || point1.getY_()-point2.getY_() == -1 ){
+                    // point is valid
                     this.getPeg(point1).setType_(MINE_SWEEPER);
                     this.getPeg(point2).setType_(MINE_SWEEPER);
+                }
+                else {
+                    //point is invalid
+                    return -1;
                 }
             }
             //ship is horizontal
             else if(point1.getY_() == point2.getY_()){
 
-                if (point1.getX_()-point2.getX_() != 1 || point1.getX_()-point2.getX_() != -1 ){
-                    //point is invalid
-                    return -1;
-                }
-                //point is valid
-                else {
+                if (point1.getX_()-point2.getX_() == 1 || point1.getX_()-point2.getX_() == -1 ){
+                    // point is valid
                     this.getPeg(point1).setType_(MINE_SWEEPER);
                     this.getPeg(point2).setType_(MINE_SWEEPER);
+                }
+                else {
+                    //point is invalid
+                    return -1;
                 }
             }
         }//MINESWEEPER
@@ -190,37 +188,36 @@ public class Board {
                 return -1;
             }
             //ship is vertical
-            else if(point1.getX_() == point2.getX_() && point1.getX_() == point3.getX_()){
+            else if(point1.getX_() == point2.getX_() && point1.getX_() == point3.getX_()) {
 
                 int point_12_diff = point1.getY_() - point2.getY_();
                 int point_23_diff = point2.getY_() - point3.getY_();
 
-                if((point_12_diff == 1 && point_23_diff == 2) || (point_12_diff == -1 && point_23_diff == -2) ){
+                if ((point_12_diff == 1 && point_23_diff == 2) || (point_12_diff == -1 && point_23_diff == -2)) {
                     //points are adjacent
                     this.getPeg(point1).setType_(DESTROYER);
                     this.getPeg(point2).setType_(DESTROYER);
                     this.getPeg(point3).setType_(DESTROYER);
                     return 1;
-                }
-                else{
+                } else {
                     return -1;
                 }
+            }
                 //ship is vertical
-            else if(point1.getX_() == point2.getX_() && point1.getX_() == point3.getX_()){
+            else if(point1.getY_() == point2.getY_() && point1.getY_() == point3.getY_()) {
 
-                    int point_12_diff = point1.getY_() - point2.getY_();
-                    int point_23_diff = point2.getY_() - point3.getY_();
+                int point_12_diff = point1.getX_() - point2.getX_();
+                int point_23_diff = point2.getX_() - point3.getX_();
 
-                    if((point_12_diff == 1 && point_23_diff == 2) || (point_12_diff == -1 && point_23_diff == -2) ){
-                        //points are adjacent
-                        this.getPeg(point1).setType_(DESTROYER);
-                        this.getPeg(point2).setType_(DESTROYER);
-                        this.getPeg(point3).setType_(DESTROYER);
-                        return 1;
-                    }
-                    else{
-                        return -1;
-                    }
+                if ((point_12_diff == 1 && point_23_diff == 2) || (point_12_diff == -1 && point_23_diff == -2)) {
+                    //points are adjacent
+                    this.getPeg(point1).setType_(DESTROYER);
+                    this.getPeg(point2).setType_(DESTROYER);
+                    this.getPeg(point3).setType_(DESTROYER);
+                    return 1;
+                } else {
+                    return -1;
+                }
 
 
             }
@@ -229,12 +226,59 @@ public class Board {
 
         //handle battleship
         else if (size == BATTLESHIP){
+            Point point1 = point_array[0];
+            Point point2 = point_array[1];
+            Point point3 = point_array[2];
+            Point point4 = point_array[3];
+            if( point1 == point2 || point1 == point3 || point2 == point3 || point1 == point4 || point2 == point4 || point3 == point4){
+                return -1;
+            }
+            //ship is vertical
+            else if(point1.getX_() == point2.getX_() && point1.getX_() == point3.getX_() && point1.getX_() == point4.getX_()) {
 
-        }
+                int point_12_diff = point1.getY_() - point2.getY_();
+                int point_23_diff = point2.getY_() - point3.getY_();
+                int point_34_diff = point3.getY_() - point4.getY_();
+
+                if ((point_12_diff == 1 && point_23_diff == 2 && point_34_diff == 3) || (point_12_diff == -1 && point_23_diff == -2 && point_34_diff == -3)) {
+                    //points are adjacent
+                    this.getPeg(point1).setType_(BATTLESHIP);
+                    this.getPeg(point2).setType_(BATTLESHIP);
+                    this.getPeg(point3).setType_(BATTLESHIP);
+                    this.getPeg(point3).setType_(BATTLESHIP);
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+            //ship is vertical
+            else if(point1.getY_() == point2.getY_() && point1.getY_() == point3.getY_() && point1.getY_() == point4.getY_()) {
+
+                int point_12_diff = point1.getX_() - point2.getX_();
+                int point_23_diff = point2.getX_() - point3.getX_();
+                int point_34_diff = point3.getX_() - point4.getX_();
+
+                if ((point_12_diff == 1 && point_23_diff == 2 && point_34_diff == 3) || (point_12_diff == -1 && point_23_diff == -2 && point_34_diff == -3)) {
+                    //points are adjacent
+                    this.getPeg(point1).setType_(BATTLESHIP);
+                    this.getPeg(point2).setType_(BATTLESHIP);
+                    this.getPeg(point3).setType_(BATTLESHIP);
+                    this.getPeg(point3).setType_(BATTLESHIP);
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+            else{
+                return -1;
+            }
+        }//BATTLESHIP
+
         //error
         else{
             return -1;
         }
+        return -1;
     }
 
 

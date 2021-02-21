@@ -2,9 +2,11 @@ package main.java.edu.colorado.exhalation;
 
 import edu.colorado.exhalation.Peg;
 import edu.colorado.exhalation.Board;
+import edu.colorado.exhalation.Point;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 
 class BoardTest {
 
@@ -29,7 +31,7 @@ class BoardTest {
             }
         }
 
-    }//inialize
+    }//initialize
 
     @Test
     void testEmptyPrint(){
@@ -141,13 +143,12 @@ class BoardTest {
     @Test
     void createShips(){
 
-
         String top_of_board = "   A B C D E | F G H I J\n";
         //ensure space at the end of the test string
         String empty_row = "O O O O O | O O O O O \n";
         String seperator = "   - - - - - | - - - - -\n";
         String board = top_of_board;
-        String last_row = "9| X X X O O | O O O O O \n";
+        String last_row = "9| 2 2 O O O | O O O O O \n";
 
         //build board string
         for(int i =0; i <5; i++){
@@ -164,14 +165,16 @@ class BoardTest {
         board+= last_row;
 
         Board test_board = new Board();
-        test_board.printFriendly();
+//        test_board.printFriendly();
 
         Point point = new Point(0,9);
         Point point2 = new Point(1,9);
-        Point point3 = new Point(2,9);
-        Point[] point_array = {point, point2, point3};
+        // Point point3 = new Point(2,9);
+        Point[] point_array = {point, point2};
 
         test_board.placeShip(point_array);
+        System.out.println(board);
+        System.out.println(test_board.print());
         assertTrue(board.equals(test_board.print()));
 
         System.out.println(test_board.printFriendly());
