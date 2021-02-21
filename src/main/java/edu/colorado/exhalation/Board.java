@@ -24,9 +24,17 @@ public class Board {
         }
     }//constructor
 
+    public Peg getPeg(Point point){
+
+        return peg_array_[point.getX_()][point.getY_()];
+    }
+
     public Peg getPeg(int x, int y){
+
         return peg_array_[x][y];
     }
+
+
 
     public String print(){
         String top_of_board = "   A B C D E | F G H I J\n";
@@ -125,6 +133,86 @@ public class Board {
         }//outer for
         return board;
     }//printFriendly
+
+    //returns -1 on error
+    public int placeShip(Point[] point_array){
+        int size = point_array.length;
+
+        //checks all points can be on board
+        for(int i =0; i< size; i++){
+            if(!point_array[i].verify()){
+                return -1;
+            }
+        }
+
+        //handle minesweeper
+        if (size == MINE_SWEEPER) {
+            Point point1 = point_array[0];
+            Point point2 = point_array[1];
+            if( point1 == point2){
+                return -1;
+            }
+            //ship is vertical
+            else if(point1.getX_() == point2.getX_()){
+
+                if (point1.getY_()-point2.getY_() != 1 || point1.getY_()-point2.getY_() != -1 ){
+                    //point is invalid
+                    return -1;
+                }
+                //point is valid
+                else {
+                    this.getPeg(point1).setType_(MINE_SWEEPER);
+                    this.getPeg(point2).setType_(MINE_SWEEPER);
+                }
+            }
+            //ship is horizontal
+            else if(point1.getY_() == point2.getY_()){
+
+                if (point1.getX_()-point2.getX_() != 1 || point1.getX_()-point2.getX_() != -1 ){
+                    //point is invalid
+                    return -1;
+                }
+                //point is valid
+                else {
+                    this.getPeg(point1).setType_(MINE_SWEEPER);
+                    this.getPeg(point2).setType_(MINE_SWEEPER);
+                }
+            }
+        }//MINESWEEPER
+
+        //handle destroyer
+        else if( size == DESTROYER){
+
+            Point point1 = point_array[0];
+            Point point2 = point_array[1];
+            Point point3 = point_array[2];
+            if( point1 == point2 || point1 == point3 || point2 == point3){
+                return -1;
+            }
+            //ship is vertical
+            else if(point1.getX_() == point2.getX_() && point1.getX_() == point3.getX_()){
+
+                point1_2_diff = point1.getY_() - point3.getY_();
+                point2_3_diff = point2.getY_()
+
+                    return -1;
+                }
+                //point is valid
+                else {
+                    this.getPeg(point1).setType_(MINE_SWEEPER);
+                    this.getPeg(point2).setType_(MINE_SWEEPER);
+                }
+            }
+        }
+        //handle battleship
+        else if (size == BATTLESHIP){
+
+        }
+        //error
+        else{
+            return -1;
+        }
+    }
 
 
 

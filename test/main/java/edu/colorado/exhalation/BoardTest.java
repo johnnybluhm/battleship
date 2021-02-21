@@ -170,8 +170,8 @@ class BoardTest {
         Point point2 = new Point(1,9);
         Point point3 = new Point(2,9);
         Point[] point_array = {point, point2, point3};
-        
-        test_board.place(point_array);
+
+        test_board.placeShip(point_array);
         assertTrue(board.equals(test_board.print()));
 
         System.out.println(test_board.printFriendly());
