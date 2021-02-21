@@ -72,5 +72,37 @@ class PegTest {
 
     }
 
+    //Make sure you can't attack same place twice
+    @Test
+    void testPegOverlap(){
+        Peg peg_hit = new Peg(1,0);
+        Peg ship_hit = new Peg(1, 1, 1);
+        Peg no_hit = new Peg(1, 2);
+        peg_hit.hit();
+        ship_hit.hit();
 
+//        String miss_msg = "Already attacked here! It was a miss!";
+//        String hit_msg = "Already attacked here! It was a hit!";
+
+        assertEquals(true, peg_hit.overlap());
+        assertEquals(true, ship_hit.overlap());
+        assertEquals(false, no_hit.overlap());
+    }
+
+    @Test
+    void testShipOverlap(){
+        Peg ship1 = new Peg(1, 0, 2);
+        Peg ship2 = new Peg(1, 1, 3);
+        Peg ship3 = new Peg(1, 2, 4);
+        Peg no_ship = new Peg(1, 3, 0);
+
+//        String mine_msg = "Minesweeper is here! Place ship elsewhere!";
+//        String dest_msg = "Destroyer is here! Place ship elsewhere!";
+//        String batt_msg = "Battleship is here! Place ship elsewhere!";
+
+        assertEquals(true, ship1.overlap());
+        assertEquals(true, ship2.overlap());
+        assertEquals(true, ship3.overlap());
+        assertEquals(false, no_ship.overlap());
+    }
 }
