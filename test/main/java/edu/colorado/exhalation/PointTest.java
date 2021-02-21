@@ -21,8 +21,6 @@ class PointTest {
 
         assertEquals(2, test_point2.getX_());
         assertEquals(0, test_point2.getY_());
-
-
     }
 
 

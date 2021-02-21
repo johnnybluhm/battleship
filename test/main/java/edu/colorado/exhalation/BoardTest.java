@@ -138,4 +138,43 @@ class BoardTest {
         assertTrue(board.equals(empty_test_board.print()));
     }
 
+    @Test
+    void createShips(){
+
+
+        String top_of_board = "   A B C D E | F G H I J\n";
+        //ensure space at the end of the test string
+        String empty_row = "O O O O O | O O O O O \n";
+        String seperator = "   - - - - - | - - - - -\n";
+        String board = top_of_board;
+        String last_row = "9| X X X O O | O O O O O \n";
+
+        //build board string
+        for(int i =0; i <5; i++){
+            String num = String.valueOf(i);
+            board += num+"| ";
+            board += empty_row;
+        }
+        board+= seperator;
+        for(int i =5; i <9; i++){
+            String num = String.valueOf(i);
+            board += num+"| ";
+            board += empty_row;
+        }
+        board+= last_row;
+
+        Board test_board = new Board();
+        test_board.printFriendly();
+
+        Point point = new Point(0,9);
+        Point point2 = new Point(1,9);
+        Point point3 = new Point(2,9);
+        Point[] point_array = new Point[3];
+        //point_array = [point, point2, point3];
+        //test_board.place(point_array);
+        assertTrue(board.equals(test_board.print()));
+
+        System.out.println(test_board.printFriendly());
+    }
+
 }//boardTest
