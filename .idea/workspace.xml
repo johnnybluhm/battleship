@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92faed72-7fc1-420d-8b7a-a1848b5409f9" name="Default Changelist" comment="testing commiting from intelliJ" />
+    <list default="true" id="92faed72-7fc1-420d-8b7a-a1848b5409f9" name="Default Changelist" comment="testing commiting from intelliJ">
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Point.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/PointTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project/edu/colorado/exhalation/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/edu/colorado/exhalation/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project/edu/colorado/exhalation/Ship.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/edu/colorado/exhalation/Ship.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,7 +71,7 @@
       <recent name="main.java.edu.colorado.exhalation" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.BoardTest.testPrintWithShips">
+  <component name="RunManager" selected="JUnit.PointTest.testPoint">
     <configuration name="BoardTest.testFullPrint" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="project" />
       <extension name="coverage">
@@ -130,7 +136,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PegTest.testPegPrint" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PointTest.testPoint" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="project" />
       <extension name="coverage">
         <pattern>
@@ -139,8 +145,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="main.java.edu.colorado.exhalation" />
-      <option name="MAIN_CLASS_NAME" value="main.java.edu.colorado.exhalation.PegTest" />
-      <option name="METHOD_NAME" value="testPegPrint" />
+      <option name="MAIN_CLASS_NAME" value="main.java.edu.colorado.exhalation.PointTest" />
+      <option name="METHOD_NAME" value="testPoint" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -148,11 +154,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PointTest.testPoint" />
         <item itemvalue="JUnit.BoardTest.testPrintWithShips" />
         <item itemvalue="JUnit.BoardTest.testFullPrint" />
         <item itemvalue="JUnit.BoardTest.testPrint" />
         <item itemvalue="JUnit.BoardTest.testInitialize" />
-        <item itemvalue="JUnit.PegTest.testPegPrint" />
       </list>
     </recent_temporary>
   </component>
@@ -217,8 +223,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/BoardTest.java</url>
-          <line>32</line>
-          <properties class="main.java.edu.colorado.exhalation.BoardTest" method="testPrint">
+          <line>34</line>
+          <properties class="main.java.edu.colorado.exhalation.BoardTest" method="testEmptyPrint">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="9" />
