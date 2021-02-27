@@ -1,4 +1,6 @@
 package edu.colorado.exhalation;
+import edu.colorado.exhalation.Point;
+import edu.colorado.exhalation.Peg;
 
 public class Board {
 
@@ -24,7 +26,7 @@ public class Board {
 
     public Peg getPeg(Point point){
 
-        return peg_array_[point.getX_()][point.getY_()];
+        return peg_array_[point.getX()][point.getY()];
     }
 
     public Peg getPeg(int x, int y){
@@ -151,9 +153,9 @@ public class Board {
                 return -1;
             }
             //ship is vertical
-            else if(point1.getX_() == point2.getX_()){
+            else if(point1.getX() == point2.getX()){
 
-                if (point1.getY_()-point2.getY_() == 1 || point1.getY_()-point2.getY_() == -1 ){
+                if (point1.getY()-point2.getY() == 1 || point1.getY()-point2.getY() == -1 ){
                     // point is valid
                     this.getPeg(point1).setType_(MINE_SWEEPER);
                     this.getPeg(point2).setType_(MINE_SWEEPER);
@@ -164,9 +166,9 @@ public class Board {
                 }
             }
             //ship is horizontal
-            else if(point1.getY_() == point2.getY_()){
+            else if(point1.getY() == point2.getY()){
 
-                if (point1.getX_()-point2.getX_() == 1 || point1.getX_()-point2.getX_() == -1 ){
+                if (point1.getX()-point2.getX() == 1 || point1.getX()-point2.getX() == -1 ){
                     // point is valid
                     this.getPeg(point1).setType_(MINE_SWEEPER);
                     this.getPeg(point2).setType_(MINE_SWEEPER);
@@ -188,10 +190,10 @@ public class Board {
                 return -1;
             }
             //ship is vertical
-            else if(point1.getX_() == point2.getX_() && point1.getX_() == point3.getX_()) {
+            else if(point1.getX() == point2.getX() && point1.getX() == point3.getX()) {
 
-                int point_12_diff = point1.getY_() - point2.getY_();
-                int point_23_diff = point2.getY_() - point3.getY_();
+                int point_12_diff = point1.getY() - point2.getY();
+                int point_23_diff = point2.getY() - point3.getY();
 
                 if ((point_12_diff == 1 && point_23_diff == 2) || (point_12_diff == -1 && point_23_diff == -2)) {
                     //points are adjacent
@@ -204,10 +206,10 @@ public class Board {
                 }
             }
                 //ship is vertical
-            else if(point1.getY_() == point2.getY_() && point1.getY_() == point3.getY_()) {
+            else if(point1.getY() == point2.getY() && point1.getY() == point3.getY()) {
 
-                int point_12_diff = point1.getX_() - point2.getX_();
-                int point_23_diff = point2.getX_() - point3.getX_();
+                int point_12_diff = point1.getX() - point2.getX();
+                int point_23_diff = point2.getX() - point3.getX();
 
                 if ((point_12_diff == 1 && point_23_diff == 2) || (point_12_diff == -1 && point_23_diff == -2)) {
                     //points are adjacent
@@ -234,11 +236,11 @@ public class Board {
                 return -1;
             }
             //ship is vertical
-            else if(point1.getX_() == point2.getX_() && point1.getX_() == point3.getX_() && point1.getX_() == point4.getX_()) {
+            else if(point1.getX() == point2.getX() && point1.getX() == point3.getX() && point1.getX() == point4.getX()) {
 
-                int point_12_diff = point1.getY_() - point2.getY_();
-                int point_23_diff = point2.getY_() - point3.getY_();
-                int point_34_diff = point3.getY_() - point4.getY_();
+                int point_12_diff = point1.getY() - point2.getY();
+                int point_23_diff = point2.getY() - point3.getY();
+                int point_34_diff = point3.getY() - point4.getY();
 
                 if ((point_12_diff == 1 && point_23_diff == 2 && point_34_diff == 3) || (point_12_diff == -1 && point_23_diff == -2 && point_34_diff == -3)) {
                     //points are adjacent
@@ -252,11 +254,11 @@ public class Board {
                 }
             }
             //ship is vertical
-            else if(point1.getY_() == point2.getY_() && point1.getY_() == point3.getY_() && point1.getY_() == point4.getY_()) {
+            else if(point1.getY() == point2.getY() && point1.getY() == point3.getY() && point1.getY() == point4.getY()) {
 
-                int point_12_diff = point1.getX_() - point2.getX_();
-                int point_23_diff = point2.getX_() - point3.getX_();
-                int point_34_diff = point3.getX_() - point4.getX_();
+                int point_12_diff = point1.getX() - point2.getX();
+                int point_23_diff = point2.getX() - point3.getX();
+                int point_34_diff = point3.getX() - point4.getX();
 
                 if ((point_12_diff == 1 && point_23_diff == 2 && point_34_diff == 3) || (point_12_diff == -1 && point_23_diff == -2 && point_34_diff == -3)) {
                     //points are adjacent

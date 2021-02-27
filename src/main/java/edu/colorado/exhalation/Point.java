@@ -11,19 +11,19 @@ public class Point {
     }
 
 
-    public int getX_() {
+    public int getX() {
         return x_;
     }
 
-    public void setX_(int x_) {
+    public void setX(int x_) {
         this.x_ = x_;
     }
 
-    public int getY_() {
+    public int getY() {
         return y_;
     }
 
-    public void setY_(int y_) {
+    public void setY(int y_) {
         this.y_ = y_;
     }
 
@@ -38,5 +38,15 @@ public class Point {
             return true;
         }
     } //verify
+
+
+    public boolean equals(Point point){
+        if(getY() == point.getY() && getX() == point.getX()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
 

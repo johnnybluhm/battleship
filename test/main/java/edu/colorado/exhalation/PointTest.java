@@ -16,11 +16,17 @@ class PointTest {
         Point test_point = new Point(1,2);
         Point test_point2 = new Point(2,0);
 
-        assertEquals(1, test_point.getX_());
-        assertEquals(2, test_point.getY_());
+        assertEquals(1, test_point.getX());
+        assertEquals(2, test_point.getY());
 
-        assertEquals(2, test_point2.getX_());
-        assertEquals(0, test_point2.getY_());
+        assertEquals(2, test_point2.getX());
+        assertEquals(0, test_point2.getY());
+
+        Point point1 = new Point(1,0);
+        Point point2 = new Point(1,0);
+
+        assertTrue(point1.equals(point2));
+
     }
 
 
