@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92faed72-7fc1-420d-8b7a-a1848b5409f9" name="Default Changelist" comment="testing commiting from intelliJ">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Battleship.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Destroyer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Minesweeper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Ship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/ShipTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/ShipTest.java" afterDir="false" />
     </list>
@@ -21,8 +23,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>

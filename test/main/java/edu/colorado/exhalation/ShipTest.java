@@ -27,15 +27,12 @@ class ShipTest {
     @Test
     void testOrientation(){
 
-        //create point arrays for making ships
-        Point horizontal_point_array[] = new Point[2];
-        Point vertical_point_array[] = new Point[2];
-        horizontal_point_array[0] = new Point(1,0);
-        horizontal_point_array[1] = new Point(2,0);
-        vertical_point_array[0] = new Point(0,1);
-        vertical_point_array[1] = new Point(0, 2);
 
-        Ship horizontal_ship = new Ship(horizontal_point_array);
+        Point horizontal_start_point = new Point(1,0);
+        Point vertical_start_point = new Point(0,1);
+
+
+        Ship horizontal_ship = new Ship("horizontal", );
         Ship vertical_ship = new Ship(vertical_point_array);
 
         assertTrue(horizontal_ship.isHorizontal());
@@ -75,7 +72,7 @@ class ShipTest {
         System.out.println(good_vertical_ship[0].getY_());
     }
     @Test
-    void testSort(){
+    /*void testSort(){
         Point unsorted_horizontal_point_array[] = new Point[3];
         unsorted_horizontal_point_array[0] = new Point(2,0);
         unsorted_horizontal_point_array[1] = new Point(3,0);
@@ -113,5 +110,5 @@ class ShipTest {
 
         }
 
-    }
+    }//testSort()*/
 }
