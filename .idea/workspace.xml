@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92faed72-7fc1-420d-8b7a-a1848b5409f9" name="Default Changelist" comment="testing commiting from intelliJ">
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Ship.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/ShipTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Ship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/ShipTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/ShipTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +69,7 @@
       <recent name="main.java.edu.colorado.exhalation" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ShipTest.testVerify">
+  <component name="RunManager" selected="JUnit.ShipTest.testOrientation">
     <configuration name="BoardTest.createShips" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="project" />
       <extension name="coverage">
@@ -81,22 +81,6 @@
       <option name="PACKAGE_NAME" value="main.java.edu.colorado.exhalation" />
       <option name="MAIN_CLASS_NAME" value="main.java.edu.colorado.exhalation.BoardTest" />
       <option name="METHOD_NAME" value="createShips" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BoardTest.testFullPrint" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main.java.edu.colorado.exhalation.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="main.java.edu.colorado.exhalation" />
-      <option name="MAIN_CLASS_NAME" value="main.java.edu.colorado.exhalation.BoardTest" />
-      <option name="METHOD_NAME" value="testFullPrint" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -134,6 +118,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ShipTest.testOrientation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.edu.colorado.exhalation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main.java.edu.colorado.exhalation" />
+      <option name="MAIN_CLASS_NAME" value="main.java.edu.colorado.exhalation.ShipTest" />
+      <option name="METHOD_NAME" value="testOrientation" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ShipTest.testVerify" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="project" />
       <extension name="coverage">
@@ -152,11 +152,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ShipTest.testOrientation" />
         <item itemvalue="JUnit.ShipTest.testVerify" />
         <item itemvalue="JUnit.BoardTest.createShips" />
         <item itemvalue="JUnit.BoardTest.testPrintWithShips" />
         <item itemvalue="JUnit.PointTest.testPoint" />
-        <item itemvalue="JUnit.BoardTest.testFullPrint" />
       </list>
     </recent_temporary>
   </component>

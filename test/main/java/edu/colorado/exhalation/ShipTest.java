@@ -35,11 +35,11 @@ class ShipTest {
         vertical_point_array[0] = new Point(0,1);
         vertical_point_array[1] = new Point(0, 2);
 
-        //Ship horizontal_ship = new Ship(horizontal_point_array);
-        //Ship vertical_ship = new Ship(vertical_point_array);
+        Ship horizontal_ship = new Ship(horizontal_point_array);
+        Ship vertical_ship = new Ship(vertical_point_array);
 
-        //assertTrue(horizontal_ship.isHorizontal());
-       // assertTrue(vertical_ship.isVertical());
+        assertTrue(horizontal_ship.isHorizontal());
+        assertTrue(vertical_ship.isVertical());
     }
 
     @Test
@@ -73,9 +73,45 @@ class ShipTest {
         assertFalse(horizontal_ship_points_bad_order.verify());
 
         System.out.println(good_vertical_ship[0].getY_());
+    }
+    @Test
+    void testSort(){
+        Point unsorted_horizontal_point_array[] = new Point[3];
+        unsorted_horizontal_point_array[0] = new Point(2,0);
+        unsorted_horizontal_point_array[1] = new Point(3,0);
+        unsorted_horizontal_point_array[1] = new Point(1,0);
 
+        Point unsorted_vertical_point_array[] = new Point[3];
+        unsorted_vertical_point_array[0] = new Point(0,2);
+        unsorted_vertical_point_array[1] = new Point(0, 3);
+        unsorted_vertical_point_array[2] = new Point(0, 1);
 
+        Point sorted_horizontal_point_array[] = new Point[3];
+        sorted_horizontal_point_array[0] = new Point(1,0);
+        sorted_horizontal_point_array[1] = new Point(2,0);
+        sorted_horizontal_point_array[1] = new Point(3,0);
 
+        Point sorted_vertical_point_array[] = new Point[3];
+        sorted_vertical_point_array[0] = new Point(0,1);
+        sorted_vertical_point_array[1] = new Point(0, 2);
+        sorted_vertical_point_array[2] = new Point(0, 3);
+
+        Ship vertical_test_ship = new Ship(unsorted_vertical_point_array);
+        Ship horizontal_test_ship = new Ship(unsorted_horizontal_point_array);
+
+        vertical_test_ship.sort();
+        horizontal_test_ship.sort();
+
+        for(int i =0; i<sorted_vertical_point_array.length; i++){
+            assertEquals(sorted_vertical_point_array[i].getX_(), vertical_test_ship.getPointArray[i].getX_());
+            assertEquals(sorted_vertical_point_array[i].getY_(), vertical_test_ship.getPointArray[i].getY_());
+
+        }
+        for(int i =0; i<sorted_horizontal_point_array.length; i++){
+            assertEquals(sorted_horizontal_point_array[i].getX_(), vertical_test_ship.getPointArray[i].getX_());
+            assertEquals(sorted_horizontal_point_array[i].getY_(), vertical_test_ship.getPointArray[i].getY_());
+
+        }
 
     }
 }
