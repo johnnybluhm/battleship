@@ -21,5 +21,15 @@ abstract public class Ship {
         }
     }
 
+    public boolean verify(){
+
+        for(int i =0; i< this.point_array_.length; i++){
+            if(this.point_array_[i].verify()==false){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
 

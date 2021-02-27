@@ -7,10 +7,7 @@
     <list default="true" id="92faed72-7fc1-420d-8b7a-a1848b5409f9" name="Default Changelist" comment="testing commiting from intelliJ">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Destroyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Destroyer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/colorado/exhalation/Ship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/PointTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/PointTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/ShipTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/main/java/edu/colorado/exhalation/ShipTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +70,7 @@
       <recent name="main.java.edu.colorado.exhalation" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ShipTest.testCreation">
+  <component name="RunManager" selected="JUnit.ShipTest.testVerify">
     <configuration name="BoardTest.createShips" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="project" />
       <extension name="coverage">
@@ -156,10 +153,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ShipTest.testVerify" />
         <item itemvalue="JUnit.ShipTest.testCreation" />
         <item itemvalue="JUnit.PointTest.testPoint" />
         <item itemvalue="JUnit.ShipTest.testOrientation" />
-        <item itemvalue="JUnit.ShipTest.testVerify" />
         <item itemvalue="JUnit.BoardTest.createShips" />
       </list>
     </recent_temporary>
