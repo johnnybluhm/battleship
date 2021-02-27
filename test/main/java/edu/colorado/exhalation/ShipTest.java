@@ -115,6 +115,7 @@ class ShipTest {
 
         Assertions.assertTrue(good_horizontal_ship.verify());
         Assertions.assertTrue((good_vertical_ship.verify()));
+        
 
 
     }
