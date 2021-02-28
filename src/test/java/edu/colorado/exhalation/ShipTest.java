@@ -2,7 +2,7 @@ package edu.colorado.exhalation;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import exhalation.Minesweeper;
+
 class ShipTest {
 
     Point[] getGoodVerticalDestroyer(){
@@ -52,7 +52,7 @@ class ShipTest {
 
         Point horizontal_point_array[] = new Point[2];
         horizontal_point_array[0] = new Point(0,1);
-        horizontal_point_array[1] = new Point(1,1);
+        horizontal_point_array[1] = new Point(0,2);
         return horizontal_point_array;
     }
     Point[] getGoodVerticalBattleship(){
@@ -71,7 +71,7 @@ class ShipTest {
         horizontal_point_array[0] = new Point(0,1);
         horizontal_point_array[1] = new Point(1,1);
         horizontal_point_array[2] = new Point(2,1);
-        horizontal_point_array[2] = new Point(3,1);
+        horizontal_point_array[3] = new Point(3,1);
         return horizontal_point_array;
     }
 
