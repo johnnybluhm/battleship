@@ -23,24 +23,6 @@ class ShipTest {
         return horizontal_point_array;
     }
 
-    Point[] getBadVerticalDestroyer(){
-
-        Point vertical_point_array[] = new Point[3];
-        vertical_point_array[0] = new Point(-2,99);
-        vertical_point_array[1] = new Point(78, 22);
-        vertical_point_array[2] = new Point(20, 32);
-        return vertical_point_array;
-    }
-
-    Point[] getBadHorizontalDestroyer(){
-
-        Point horizontal_point_array[] = new Point[3];
-        horizontal_point_array[0] = new Point(10,11);
-        horizontal_point_array[1] = new Point(21,21);
-        horizontal_point_array[2] = new Point(42,31);
-        return horizontal_point_array;
-    }
-
     Point[] getGoodHorizontalMinesweeper(){
 
         Point horizontal_point_array[] = new Point[2];
@@ -94,6 +76,7 @@ class ShipTest {
     @Test
     void testCreation(){
 
+        //point arrays to compare our ship's too once they create their own point array
         Point[] horizontal_d = getGoodHorizontalDestroyer();
         Point[] vertical_d = getGoodVerticalDestroyer();
         Point[] horizontal_m = getGoodHorizontalMinesweeper();
@@ -104,6 +87,7 @@ class ShipTest {
         //point is start of test arrays
         Point test_point = new Point(0,1);
 
+        //create ships for testing
         Ship horizontal_destroyer = new Destroyer ("horizontal",test_point);
         Ship vertical_destroyer = new Destroyer("vertical", test_point);
 
@@ -113,6 +97,7 @@ class ShipTest {
         Ship horizontal_minesweeper = new Minesweeper("horizontal",test_point);
         Ship vertical_minesweeper = new Minesweeper("vertical", test_point);
 
+        //loop through point arrays and check that they match
         for(int i =0; i< horizontal_d.length; i++){
             Assertions.assertTrue(horizontal_d[i].equals(horizontal_destroyer.getPointArray()[i]));
             Assertions.assertTrue(vertical_d[i].equals(vertical_destroyer.getPointArray()[i]));
@@ -138,8 +123,8 @@ class ShipTest {
         //bad points for testing
         Point bad_point1 = new Point(99,99);
         Point bad_point2 = new Point(-10,-4);
-        Point semi_bad_horizontal_point = new Point(8,0);
-        Point semi_bad_vertical_point = new Point(0,8);
+        Point semi_bad_horizontal_point = new Point(9,0);
+        Point semi_bad_vertical_point = new Point(0,9);
 
 
         //arrays of points for testing
@@ -153,22 +138,42 @@ class ShipTest {
         Ship bad_vertical_ship;
         Ship bad_horizontal_ship;
 
-        //test destroyer
+        //test all ships with bad points
         for(int i =0; i< bad_vertical_ships.length; i++){
             bad_vertical_ship = new Destroyer("vertical", bad_vertical_ships[i]);
             Assertions.assertFalse(bad_vertical_ship.verify());
+            bad_vertical_ship = new Minesweeper("vertical", bad_vertical_ships[i]);
+            Assertions.assertFalse(bad_vertical_ship.verify());
+            bad_vertical_ship = new Battleship("vertical", bad_vertical_ships[i]);
+            Assertions.assertFalse(bad_vertical_ship.verify());
+
         }
         for(int i =0; i< bad_horizontal_ships.length; i++){
             bad_horizontal_ship = new Destroyer("horizontal", bad_horizontal_ships[i]);
             Assertions.assertFalse(bad_horizontal_ship.verify());
+            bad_horizontal_ship = new Minesweeper("horizontal", bad_horizontal_ships[i]);
+            Assertions.assertFalse(bad_horizontal_ship.verify());
+            bad_horizontal_ship = new Battleship("horizontal", bad_horizontal_ships[i]);
+            Assertions.assertFalse(bad_horizontal_ship.verify());
         }
 
+        //test good points on all ships
         Ship good_horizontal_ship = new Destroyer("horizontal",good_point);
         Ship good_vertical_ship = new Destroyer("vertical", good_point);
+        Assertions.assertTrue(good_horizontal_ship.verify());
+        Assertions.assertTrue((good_vertical_ship.verify()));
+
+        good_horizontal_ship = new Minesweeper("horizontal",good_point);
+        good_vertical_ship = new Minesweeper("vertical", good_point);
 
         Assertions.assertTrue(good_horizontal_ship.verify());
         Assertions.assertTrue((good_vertical_ship.verify()));
-        
+
+        good_horizontal_ship = new Battleship("horizontal",good_point);
+        good_vertical_ship = new Battleship("vertical", good_point);
+
+        Assertions.assertTrue(good_horizontal_ship.verify());
+        Assertions.assertTrue((good_vertical_ship.verify()));
 
 
     }
