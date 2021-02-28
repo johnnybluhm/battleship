@@ -1,4 +1,4 @@
-package main.java.edu.colorado.exhalation;
+package edu.colorado.exhalation;
 import edu.colorado.exhalation.Point;
 abstract public class Ship {
 

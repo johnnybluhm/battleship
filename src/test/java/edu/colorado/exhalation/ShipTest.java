@@ -1,6 +1,5 @@
-package main.java.edu.colorado.exhalation;
+package edu.colorado.exhalation;
 
-import edu.colorado.exhalation.Point;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -67,7 +66,7 @@ class ShipTest {
         //point is start of test arrays
         Point test_point = new Point(0,1);
 
-        Ship horizontal_ship = new Destroyer("horizontal",test_point);
+        Ship horizontal_ship = new Destroyer ("horizontal",test_point);
         Ship vertical_ship = new Destroyer("vertical", test_point);
 
         for(int i =0; i< horizontal.length; i++){

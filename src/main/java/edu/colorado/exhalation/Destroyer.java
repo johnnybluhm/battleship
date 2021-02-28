@@ -1,6 +1,5 @@
-package main.java.edu.colorado.exhalation;
+package edu.colorado.exhalation;
 
-import edu.colorado.exhalation.Point;
 
 public class Destroyer extends Ship{
     final private int SIZE = 3;

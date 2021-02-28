@@ -1,4 +1,4 @@
-package main.java.edu.colorado.exhalation;
+package exhalation;
 
 public class Minesweeper {
 }

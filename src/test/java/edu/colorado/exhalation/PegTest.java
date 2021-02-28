@@ -1,4 +1,4 @@
-package main.java.edu.colorado.exhalation;
+package edu.colorado.exhalation;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
