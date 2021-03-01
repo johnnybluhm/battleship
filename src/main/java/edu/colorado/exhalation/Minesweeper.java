@@ -26,4 +26,8 @@ public class Minesweeper extends Ship{
             this.point_array_ = null;
         }
     }//constructor
+
+    public int getSIZE(){
+        return this.SIZE;
+    }
 }

@@ -1,8 +1,5 @@
 package edu.colorado.exhalation;
 
-import edu.colorado.exhalation.Peg;
-import edu.colorado.exhalation.Board;
-import edu.colorado.exhalation.Point;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -56,7 +53,7 @@ class BoardTest {
 
         Board empty_test_board = new Board();
 
-        assertTrue(empty_board.equals(empty_test_board.print()));
+        assertTrue(empty_board.equals(empty_test_board.getState()));
 
     }
 
@@ -90,7 +87,7 @@ class BoardTest {
             }
         }
 
-        assertTrue(full_board.equals(full_test_board.print()));
+        assertTrue(full_board.equals(full_test_board.getState()));
     }
 
     @Test
@@ -136,8 +133,8 @@ class BoardTest {
         //hit empty square
         empty_test_board.getPeg(7,9).hit();
 
-        System.out.println(empty_test_board.print());
-        assertTrue(board.equals(empty_test_board.print()));
+        System.out.println(empty_test_board.getState());
+        assertTrue(board.equals(empty_test_board.getState()));
     }
 
     @Test
@@ -147,35 +144,32 @@ class BoardTest {
         //ensure space at the end of the test string
         String empty_row = "O O O O O | O O O O O \n";
         String seperator = "   - - - - - | - - - - -\n";
-        String board = top_of_board;
+        String board_string = top_of_board;
         String last_row = "9| 2 2 O O O | O O O O O \n";
 
         //build board string
         for(int i =0; i <5; i++){
             String num = String.valueOf(i);
-            board += num+"| ";
-            board += empty_row;
+            board_string += num+"| ";
+            board_string += empty_row;
         }
-        board+= seperator;
+        board_string+= seperator;
         for(int i =5; i <9; i++){
             String num = String.valueOf(i);
-            board += num+"| ";
-            board += empty_row;
+            board_string += num+"| ";
+            board_string += empty_row;
         }
-        board+= last_row;
+        board_string+= last_row;
 
         Board test_board = new Board();
-//        test_board.printFriendly();
 
-        Point point = new Point(0,9);
-        Point point2 = new Point(1,9);
-        // Point point3 = new Point(2,9);
-        Point[] point_array = {point, point2};
+        Ship bottom_left_corner_ship = new Minesweeper("horizontal", new Point(0,9)) ;
 
-        test_board.placeShip(point_array);
-        System.out.println(board);
-        System.out.println(test_board.print());
-        assertTrue(board.equals(test_board.print()));
+        test_board.placeShip(bottom_left_corner_ship);
+
+        System.out.println(board_string);
+        System.out.println(test_board.getState());
+        assertTrue(board_string.equals(test_board.getState()));
 
         System.out.println(test_board.printFriendly());
     }

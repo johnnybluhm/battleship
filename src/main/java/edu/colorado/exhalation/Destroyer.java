@@ -28,5 +28,9 @@ public class Destroyer extends Ship{
         }
     }//constructor
 
+    public int getSIZE(){
+        return this.SIZE;
+    }
+
 
 }
