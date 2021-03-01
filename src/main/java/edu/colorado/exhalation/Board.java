@@ -148,7 +148,7 @@ public class Board {
                 return -1;
             }
         }
-
+        //all pegs are water, so now change to type of ship
         for(int i = 0; i<point_array.length; i++){
             Peg peg_for_ship = this.getPeg(point_array[i]);
             peg_for_ship.setType_(ship_type);

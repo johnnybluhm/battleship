@@ -170,8 +170,9 @@ class BoardTest {
         System.out.println(board_string);
         System.out.println(test_board.getState());
         assertTrue(board_string.equals(test_board.getState()));
+        test_board.getPeg(new Point(0,9)).hit();
 
-        System.out.println(test_board.printFriendly());
+        System.out.println(test_board.getState());
     }
 
 }//boardTest
