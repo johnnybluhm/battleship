@@ -170,9 +170,44 @@ class BoardTest {
         System.out.println(board_string);
         System.out.println(test_board.getState());
         assertTrue(board_string.equals(test_board.getState()));
-        test_board.getPeg(new Point(0,9)).hit();
-
         System.out.println(test_board.getState());
+    }
+
+    @Test
+    void testHiddenBoard(){
+
+        String top_of_board = "   A B C D E | F G H I J\n";
+        //ensure space at the end of the test string
+        String empty_row = "O O O O O | O O O O O \n";
+        String seperator = "   - - - - - | - - - - -\n";
+        String board_string = top_of_board;
+        String last_row = "9| 0 0 O O O | O O O O O \n";
+
+        //build board string
+        for(int i =0; i <5; i++){
+            String num = String.valueOf(i);
+            board_string += num+"| ";
+            board_string += empty_row;
+        }
+        board_string+= seperator;
+        for(int i =5; i <9; i++){
+            String num = String.valueOf(i);
+            board_string += num+"| ";
+            board_string += empty_row;
+        }
+        board_string+= last_row;
+
+        Board test_board = new Board();
+
+        Ship bottom_left_corner_ship = new Minesweeper("horizontal", new Point(0,9)) ;
+
+        test_board.placeShip(bottom_left_corner_ship);
+
+        System.out.println(board_string);
+        System.out.println(test_board.getState());
+        assertTrue(board_string.equals(test_board.printHidden()));
+        System.out.println(test_board.getState());
+
     }
 
 }//boardTest

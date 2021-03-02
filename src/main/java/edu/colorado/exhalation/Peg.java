@@ -92,7 +92,7 @@ public class Peg {
         }
     }
 
-    public boolean overlap() {
+    /*public boolean overlap() {
         if(print() == '#'){
             System.out.println("Already attacked here! It was a miss!");
             return true;
@@ -106,7 +106,7 @@ public class Peg {
                 System.out.println("Minesweeper is already here! Place ship elsewhere!");
                 return true;
             }
-            else if(getType_() == 3){
+            else if(getType_ () == 3){
                 System.out.println("Destroyer is already here! Place ship elsewhere!");
                 return true;
             }
@@ -119,5 +119,5 @@ public class Peg {
             }
         }
         return false;
-    }
+    }*/
 }//Peg
