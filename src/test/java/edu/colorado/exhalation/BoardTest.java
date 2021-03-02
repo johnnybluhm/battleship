@@ -344,8 +344,22 @@ class BoardTest {
         board.placeShip(destroyer);
         board.placeShip(battleship);
         Point pulse_point = new Point(0,0);
-        System.out.println(board.getState());
-        System.out.println(board.sonarPulse(pulse_point));
+
+        Board test_board = new Board();
+
+        Ship bottom_left_corner_ship = new Minesweeper("horizontal", new Point(3, 6));
+        Ship top_right_corner_down_ship = new Battleship("horizontal", new Point(3, 5));
+        Ship middle_destroyer = new Destroyer("horizontal", new Point(3, 4));
+        test_board.placeShip(bottom_left_corner_ship);
+        test_board.placeShip(top_right_corner_down_ship);
+        test_board.placeShip(middle_destroyer);
+        pulse_point = new Point(5,5);
+        test_board.sonarPulse(pulse_point);
+
+
+        System.out.println(test_board.getState());
+        System.out.println(test_board.getHiddenState());
+        System.out.println(test_board.sonarPulse(pulse_point));
     }
 
 }//boardTest
