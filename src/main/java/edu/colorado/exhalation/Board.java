@@ -11,8 +11,8 @@ public class Board {
 
     private Peg[][]  peg_array_ = new Peg[BOARD_SIZE][BOARD_SIZE];
 
-    //ships as point arrays
-    private Ship[] ships_array =  {null, null, null};
+    //ships initialized to null so we can check for double ships
+    private Ship[] ships_array = {null, null, null};
 
     //creates board with all empty pegs, positions are set in the loop
     public Board(){
@@ -74,7 +74,9 @@ public class Board {
         return board;
     }//print
 
-    public String printFriendly(){
+    //returns -1 on most errors
+    //returns -2 if ship can be placed, but we already have that ship on the board
+    public String getHiddenState(){
         String top_of_board = "   A B C D E | F G H I J\n";
         String seperator = "   - - - - - | - - - - -\n";
         String board = top_of_board;
@@ -87,7 +89,7 @@ public class Board {
             //inner loop goes left to right
             for(int i = 0; i< BOARD_SIZE; i++){
                 //go across the row
-                board += String.valueOf(getPeg(i,j).getType_());
+                board += getPeg(i,j).printHidden();
                 board += " ";
 
 
@@ -107,7 +109,7 @@ public class Board {
             //inner loop goes left to right
             for(int i = 0; i< BOARD_SIZE; i++){
                 //go across the row
-                board += String.valueOf(getPeg(i,j).getType_());
+                board += getPeg(i,j).printHidden();
                 board += " ";
 
                 //insert | in middle of row
@@ -117,7 +119,7 @@ public class Board {
             board+="\n";
         }//outer for
         return board;
-    }//printFriendly
+    }//printHidden
 
     //returns -1 on error
     public int placeShip(Ship ship){
@@ -153,9 +155,25 @@ public class Board {
             Peg peg_for_ship = this.getPeg(point_array[i]);
             peg_for_ship.setType_(ship_type);
         }
-        this.ships_array[array_index] = ship;
 
-      return 1;
+        if(this.ships_array[array_index] != null){
+            //ship is already in array
+            return -2;
+        }
+        this.ships_array[array_index] = ship;
+        return 1;
     }//place ship
+
+    public void hit(Point point){
+        this.getPeg(point).hit();
+    }
+
+    public int getBOARD_SIZE(){
+        return this.BOARD_SIZE;
+    }
+
+    public Peg[][] getPegArray(){
+        return this.peg_array_;
+    }
 
 }//Board

@@ -92,6 +92,20 @@ public class Peg {
         }
     }
 
+    public char printHidden() {
+        if (isHit()) {
+            if (getType_() == 0) {
+                return '#';
+            } else {
+                return 'X';
+            }
+
+        }
+        else {
+            return 'O';
+        }
+    }//printHidden()
+
     /*public boolean overlap() {
         if(print() == '#'){
             System.out.println("Already attacked here! It was a miss!");
