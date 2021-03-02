@@ -3,6 +3,7 @@ package edu.colorado.exhalation;
 
 public class Destroyer extends Ship{
     final private int SIZE = 3;
+    final private int CAPTAINS_QUARTERS = 1;
 
     public Destroyer(String orientation, Point point){
         if(orientation.equals("vertical")){
@@ -30,6 +31,10 @@ public class Destroyer extends Ship{
 
     public int getSIZE(){
         return this.SIZE;
+    }
+
+    public int getCaptainsQuarters(){
+        return this.CAPTAINS_QUARTERS;
     }
 
 

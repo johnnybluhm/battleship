@@ -306,8 +306,8 @@ class BoardTest {
         board.placeShip(minesweeper);
         board.placeShip(destroyer);
         board.placeShip(battleship);
-        System.out.println(board.getState());
-        System.out.println(board.getHiddenState());
+        //System.out.println(board.getState());
+        //System.out.println(board.getHiddenState());
 
         //hits every point on every ship and checks that they are sunk
         Point[] points = minesweeper.getPointArray();
@@ -329,9 +329,6 @@ class BoardTest {
         Assertions.assertTrue(board.isSunk(battleship));
 
         //captains quarters check
-
-        
-
     }//testSunk
 
 }//boardTest

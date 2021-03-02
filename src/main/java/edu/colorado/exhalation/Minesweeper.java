@@ -2,7 +2,7 @@ package edu.colorado.exhalation;
 
 public class Minesweeper extends Ship{
     final private int SIZE = 2;
-
+    final private int CAPTAINS_QUARTERS = 0;
     public Minesweeper(String orientation, Point point){
         if(orientation.equals("vertical")){
             this.vertical_ = true;
@@ -29,5 +29,9 @@ public class Minesweeper extends Ship{
 
     public int getSIZE(){
         return this.SIZE;
+    }
+
+    public int getCaptainsQuarters(){
+        return this.CAPTAINS_QUARTERS;
     }
 }

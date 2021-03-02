@@ -176,4 +176,16 @@ public class Board {
         return this.peg_array_;
     }
 
+    public boolean isSunk(Ship ship){
+        Point[] ship_points = ship.getPointArray();
+        int captains_quarters = ship.getCaptainsQuarters();
+        Point captains_quarters_point = ship_points[captains_quarters];
+        if(this.getPeg(captains_quarters_point).isHit()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }//isSunk()
+
 }//Board

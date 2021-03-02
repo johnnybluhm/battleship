@@ -5,6 +5,7 @@ abstract public class Ship {
     protected Point[] point_array_;
     protected boolean vertical_;
 
+
     public Point[] getPointArray() {
         return this.point_array_;
     }
@@ -30,6 +31,7 @@ abstract public class Ship {
         }
         return true;
     }
+    abstract public int getCaptainsQuarters();
 
 }
 

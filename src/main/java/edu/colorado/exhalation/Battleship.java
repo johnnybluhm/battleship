@@ -3,6 +3,7 @@ package edu.colorado.exhalation;
 public class Battleship extends Ship{
 
     final private int SIZE = 4;
+    final private int CAPTAINS_QUARTERS = 2;
 
     public Battleship(String orientation, Point point){
         if(orientation.equals("vertical")){
@@ -30,5 +31,9 @@ public class Battleship extends Ship{
 
     public int getSIZE(){
         return this.SIZE;
+    }
+
+    public int getCaptainsQuarters(){
+        return this.CAPTAINS_QUARTERS;
     }
 }//battleship
