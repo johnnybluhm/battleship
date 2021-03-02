@@ -37,5 +37,8 @@ public class Destroyer extends Ship{
         return this.CAPTAINS_QUARTERS;
     }
 
-
+    @Override
+    public boolean isArmoured() {
+        return true;
+    }
 }

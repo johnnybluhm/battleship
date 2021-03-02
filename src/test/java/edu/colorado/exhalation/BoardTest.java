@@ -322,15 +322,20 @@ class BoardTest {
         for(int i=0; i< points.length; i++){
             board.hit(points[i]);
         }
+        Assertions.assertFalse(board.isSunk(destroyer));
+        board.hit(points[1]);
         Assertions.assertTrue(board.isSunk(destroyer));
 
         points = battleship.getPointArray();
         for(int i=0; i< points.length; i++){
             board.hit(points[i]);
         }
+        Assertions.assertFalse(board.isSunk(battleship));
+        board.hit(points[2]);
         Assertions.assertTrue(board.isSunk(battleship));
+        //now hit captains quarters again on big ships and see if sink
+        
 
-        //captains quarters check
     }//testSunk
 
     @Test

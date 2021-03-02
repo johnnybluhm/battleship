@@ -7,9 +7,8 @@ public class Peg {
 
     //2 - mine, 3 - destroyer, 4 -battleship, 0-water
     private int type_;
-
-
     private boolean hit_;
+    private Ship ship_;
 
 
     public Peg(int pos_x, int pos_y){
@@ -17,6 +16,7 @@ public class Peg {
         this.pos_y_ = pos_y;
         this.type_ =0;
         this.hit_ =false;
+        this.ship_ = null;
 
     }
 
@@ -25,6 +25,7 @@ public class Peg {
         this.pos_y_ = pos_y;
         this.type_ =type;
         this.hit_ =false;
+        this.ship_ = null;
 
     }
 
@@ -58,7 +59,7 @@ public class Peg {
 
     public void hit() {
         this.hit_ = true;
-    }
+    }//hit
 
     public boolean hasShip(){
         if(getType_() == 0){
@@ -105,6 +106,14 @@ public class Peg {
             return 'O';
         }
     }//printHidden()
+
+    public void setShip(Ship ship) {
+        this.ship_ = ship;
+    }
+
+    public Ship getShip() {
+        return ship_;
+    }
 
     /*public boolean overlap() {
         if(print() == '#'){
