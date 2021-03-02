@@ -188,4 +188,88 @@ public class Board {
         }
     }//isSunk()
 
+    public String sonarPulse(Point point){
+
+        int x  = point.getX();
+        int y = point.getY();
+        final int PULSE_SIZE = 12;
+        Point[] points = new Point[PULSE_SIZE];
+        //get points to sides
+        points[0] = new Point(x+1,y);
+        points[1] = new Point(x+2,y);
+        points[2] = new Point(x-1,y);
+        points[3] = new Point(x-2,y);
+
+        //get points above/below
+        points[4] = new Point(x,y+1);
+        points[5] = new Point(x,y+2);
+        points[6] = new Point(x,y-1);
+        points[7] = new Point(x,y-2);
+
+        //get corners
+        points[8] = new Point(x+1,y+1);
+        points[9] = new Point(x-1,y-1);
+        points[10] = new Point(x-1,y+1);
+        points[11] = new Point(x+1,y-1);
+
+        //set bad points to null
+        for(int i =0; i<points.length; i++){
+            if(points[i].verify()==false){
+                points[i] = null;
+            }
+        }
+
+        //STRING MANIPLATION FROM HERE
+        String top_of_board = "   A B C D E | F G H I J\n";
+        String seperator = "   - - - - - | - - - - -\n";
+        String board = top_of_board;
+
+        //create first half of board before seperator is added
+        for(int j =0; j< BOARD_SIZE/2; j++){
+            //outer loop goes downward
+            String num = String.valueOf(j);
+            board += num+"| ";
+            //inner loop goes left to right
+            for(int i = 0; i< BOARD_SIZE; i++){
+                //go across the row
+
+                //loop through points and if point is in points
+                //print not hidden
+                Point current_point = new Point(i,j);
+                for (int k=0; k<points.length; k++){
+                    
+                }
+
+                board += getPeg(i,j).printHidden();
+                board += " ";
+
+
+
+                //insert | in middle of row
+                if(i == 4) board += "| ";
+
+            }//inner for
+            board+="\n";
+        }//outer for
+        board += seperator;
+        //create second half of board after seperator is added
+        for(int j =BOARD_SIZE/2; j< BOARD_SIZE; j++){
+            //outer loop goes downward
+            String num = String.valueOf(j);
+            board += num+"| ";
+            //inner loop goes left to right
+            for(int i = 0; i< BOARD_SIZE; i++){
+                //go across the row
+                board += getPeg(i,j).printHidden();
+                board += " ";
+
+                //insert | in middle of row
+                if(i == 4) board += "| ";
+
+            }//inner for
+            board+="\n";
+        }//outer for
+        return board;
+    }
+
 }//Board
