@@ -291,6 +291,8 @@ class BoardTest {
         }
         //ensure all hit empty board is same
         assertTrue(empty_board_all_hit.equals(test_board.getHiddenState()));
+
+
     }//testHiddenBoard
 
     @Test
@@ -330,5 +332,20 @@ class BoardTest {
 
         //captains quarters check
     }//testSunk
+
+    @Test
+    void testPulse(){
+        Board board = new Board();
+
+        Ship minesweeper = new Minesweeper("horizontal", new Point(0,0));
+        Ship destroyer = new Destroyer("horizontal", new Point(0,1));
+        Ship  battleship = new Battleship("horizontal", new Point(0,2));
+        board.placeShip(minesweeper);
+        board.placeShip(destroyer);
+        board.placeShip(battleship);
+        Point pulse_point = new Point(0,0);
+        System.out.println(board.getState());
+        System.out.println(board.sonarPulse(pulse_point));
+    }
 
 }//boardTest

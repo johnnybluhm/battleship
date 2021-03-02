@@ -193,7 +193,7 @@ public class Board {
         int x  = point.getX();
         int y = point.getY();
         final int PULSE_SIZE = 12;
-        Point[] points = new Point[PULSE_SIZE];
+        Point[] points = new Point[PULSE_SIZE+1];
         //get points to sides
         points[0] = new Point(x+1,y);
         points[1] = new Point(x+2,y);
@@ -211,6 +211,9 @@ public class Board {
         points[9] = new Point(x-1,y-1);
         points[10] = new Point(x-1,y+1);
         points[11] = new Point(x+1,y-1);
+
+        //add selected point
+        points[12] = point;
 
         //set bad points to null
         for(int i =0; i<points.length; i++){
@@ -236,14 +239,26 @@ public class Board {
                 //loop through points and if point is in points
                 //print not hidden
                 Point current_point = new Point(i,j);
+                boolean pulsed = false;
+
+                //check if point should be pulsed
                 for (int k=0; k<points.length; k++){
-                    
+                    if (points[k] == null){
+                        //do nothing
+                    }
+                    else if(current_point.equals(points[k])){
+
+                        pulsed = true;
+                        break;
+                    }
+                }//for k
+                if(pulsed){
+                    board += getPeg(current_point).print();
                 }
-
-                board += getPeg(i,j).printHidden();
+                else{
+                    board += getPeg(i,j).printHidden();
+                }
                 board += " ";
-
-
 
                 //insert | in middle of row
                 if(i == 4) board += "| ";
@@ -260,7 +275,26 @@ public class Board {
             //inner loop goes left to right
             for(int i = 0; i< BOARD_SIZE; i++){
                 //go across the row
-                board += getPeg(i,j).printHidden();
+                //loop through points and if point is in points
+                //print not hidden
+                Point current_point = new Point(i,j);
+                boolean pulsed = false;
+                //check if point should be pulsed
+                for (int k=0; k<points.length; k++){
+                    if (points[k] == null){
+                        //do nothing
+                    }
+                    else if(current_point.equals(points[k])){
+                        pulsed = true;
+                        break;
+                    }
+                }//for k
+                if(pulsed){
+                    board += getPeg(current_point).print();
+                }
+                else{
+                    board += getPeg(i,j).printHidden();
+                }
                 board += " ";
 
                 //insert | in middle of row
