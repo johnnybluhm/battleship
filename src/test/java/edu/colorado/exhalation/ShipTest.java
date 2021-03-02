@@ -7,7 +7,7 @@ class ShipTest {
 
     Point[] getGoodVerticalDestroyer(){
 
-        Point vertical_point_array[] = new Point[3];
+        Point[] vertical_point_array = new Point[3];
         vertical_point_array[0] = new Point(0,1);
         vertical_point_array[1] = new Point(0, 2);
         vertical_point_array[2] = new Point(0, 3);
@@ -16,7 +16,7 @@ class ShipTest {
 
     Point[] getGoodHorizontalDestroyer(){
 
-        Point horizontal_point_array[] = new Point[3];
+        Point[] horizontal_point_array = new Point[3];
         horizontal_point_array[0] = new Point(0,1);
         horizontal_point_array[1] = new Point(1,1);
         horizontal_point_array[2] = new Point(2,1);
@@ -25,21 +25,21 @@ class ShipTest {
 
     Point[] getGoodHorizontalMinesweeper(){
 
-        Point horizontal_point_array[] = new Point[2];
+        Point[] horizontal_point_array = new Point[2];
         horizontal_point_array[0] = new Point(0,1);
         horizontal_point_array[1] = new Point(1,1);
         return horizontal_point_array;
     }
     Point[] getGoodVerticalMinesweeper(){
 
-        Point horizontal_point_array[] = new Point[2];
+        Point[] horizontal_point_array = new Point[2];
         horizontal_point_array[0] = new Point(0,1);
         horizontal_point_array[1] = new Point(0,2);
         return horizontal_point_array;
     }
     Point[] getGoodVerticalBattleship(){
 
-        Point vertical_point_array[] = new Point[4];
+        Point[] vertical_point_array = new Point[4];
         vertical_point_array[0] = new Point(0,1);
         vertical_point_array[1] = new Point(0, 2);
         vertical_point_array[2] = new Point(0, 3);
@@ -49,7 +49,7 @@ class ShipTest {
 
     Point[] getGoodHorizontalBattleship(){
 
-        Point horizontal_point_array[] = new Point[4];
+        Point[] horizontal_point_array = new Point[4];
         horizontal_point_array[0] = new Point(0,1);
         horizontal_point_array[1] = new Point(1,1);
         horizontal_point_array[2] = new Point(2,1);
