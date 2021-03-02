@@ -1,6 +1,7 @@
 package edu.colorado.exhalation;
 
 //import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -206,6 +207,11 @@ class BoardTest {
         Ship second_minesweeper = new Minesweeper("horizontal", new Point(0,2));
         //test placing 2 Minesweepers on the board
         assertEquals(-2, test_board.placeShip(second_minesweeper));
+
+        Ship destroyer = new Destroyer("horizontal", new Point(0,2));
+
+        //test for placing different ship type on top of another
+        assertEquals(-1,test_board.placeShip(destroyer));
     }
 
     @Test
@@ -286,5 +292,46 @@ class BoardTest {
         //ensure all hit empty board is same
         assertTrue(empty_board_all_hit.equals(test_board.getHiddenState()));
     }//testHiddenBoard
+
+    @Test
+    void testIsSunk(){
+
+        //sweeper 0
+        //destoryer 1
+        //bship 2
+        Board board = new Board();
+        Ship minesweeper = new Minesweeper("horizontal", new Point(0,0));
+        Ship destroyer = new Destroyer("horizontal", new Point(0,1));
+        Ship  battleship = new Battleship("horizontal", new Point(0,2));
+        board.placeShip(minesweeper);
+        board.placeShip(destroyer);
+        board.placeShip(battleship);
+        System.out.println(board.getState());
+        System.out.println(board.getHiddenState());
+
+        //hits every point on every ship and checks that they are sunk
+        Point[] points = minesweeper.getPointArray();
+        for(int i=0; i< points.length; i++){
+            board.hit(points[i]);
+        }
+        Assertions.assertTrue(board.isSunk(minesweeper));
+
+        points = destroyer.getPointArray();
+        for(int i=0; i< points.length; i++){
+            board.hit(points[i]);
+        }
+        Assertions.assertTrue(board.isSunk(destroyer));
+
+        points = battleship.getPointArray();
+        for(int i=0; i< points.length; i++){
+            board.hit(points[i]);
+        }
+        Assertions.assertTrue(board.isSunk(battleship));
+
+        //captains quarters check
+
+        
+
+    }//testSunk
 
 }//boardTest
