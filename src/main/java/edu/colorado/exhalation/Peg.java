@@ -115,6 +115,27 @@ public class Peg {
         return ship_;
     }
 
+    public Point getPoint(){
+        return new Point(this.pos_x_,this.pos_y_);
+    }
+
+    public void setPoint(Point point){
+        this.pos_x_ = point.getX();
+        this.pos_y_=point.getY();
+    }
+
+    public boolean equals(Peg compare_peg){
+        boolean point_same = compare_peg.getPoint().equals(this.getPoint());
+        boolean type_same = compare_peg.getType_() == this.getType_();
+        boolean hit_same = compare_peg.isHit() == this.isHit();
+        if(point_same && type_same && hit_same){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     /*public boolean overlap() {
         if(print() == '#'){
             System.out.println("Already attacked here! It was a miss!");

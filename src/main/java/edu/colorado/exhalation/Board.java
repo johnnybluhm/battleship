@@ -326,4 +326,16 @@ public class Board {
         return board;
     }
 
+    public boolean equals(Board compare_board){
+        for(int i =0; i< BOARD_SIZE; i++){
+            for(int j = 0; j< BOARD_SIZE;j++){
+                Point test_point = new Point(i,j);
+                if(!this.getPeg(test_point).equals(compare_board.getPeg(test_point))){
+                    return false;
+                }
+            }
+        }//outer for
+        return true;
+    }
+
 }//Board
