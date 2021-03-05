@@ -6,7 +6,7 @@ public class Battleship extends Ship{
     final private int CAPTAINS_QUARTERS = 2;
 
     public Battleship(String orientation, Point point){
-        if(orientation.equals("vertical")){
+        if(orientation.equals("vertical") || orientation.equals("v")){
             this.vertical_ = true;
             this.point_array_ = new Point[SIZE];
             this.point_array_[0] = point;
@@ -15,7 +15,7 @@ public class Battleship extends Ship{
                 this.point_array_[i] = new Point(this.point_array_[0].getX(), this.point_array_[0].getY() + i);
             }//for
         }//if
-        else if(orientation.equals("horizontal")){
+        else if(orientation.equals("horizontal") || orientation.equals("h")){
             this.vertical_ =false;
             this.point_array_ = new Point[SIZE];
             this.point_array_[0] = point;
