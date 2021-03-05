@@ -40,4 +40,45 @@ class GameTest {
 
     }
 
+    @Test
+    void testWinner(){
+
+        Board test_board = new Board();
+        Ship minesweeper = new Minesweeper("horizontal", new Point(0,0));
+        Ship destroyer = new Destroyer("horizontal", new Point(0,1));
+        Ship  battleship = new Battleship("horizontal", new Point(0,2));
+        test_board.placeShip(minesweeper);
+        test_board.placeShip(destroyer);
+        test_board.placeShip(battleship);
+
+        //hits every point on every ship and checks that they are sunk
+        Point[] points = minesweeper.getPointArray();
+        for(int i=0; i< points.length; i++){
+            test_board.hit(points[i]);
+        }
+        Assertions.assertTrue(test_board.isSunk(minesweeper));
+
+        points = destroyer.getPointArray();
+        for(int i=0; i< points.length; i++){
+            test_board.hit(points[i]);
+        }
+        Assertions.assertFalse(test_board.isSunk(destroyer));
+        test_board.hit(points[1]);
+        Assertions.assertTrue(test_board.isSunk(destroyer));
+
+        points = battleship.getPointArray();
+        for(int i=0; i< points.length; i++){
+            test_board.hit(points[i]);
+        }
+        Assertions.assertFalse(test_board.isSunk(battleship));
+        test_board.hit(points[2]);
+        Assertions.assertTrue(test_board.isSunk(battleship));
+
+        Game game = new Game();
+
+        game.setBoard(test_board);
+
+        assertTrue(game.isWinner());
+    }
+
 }

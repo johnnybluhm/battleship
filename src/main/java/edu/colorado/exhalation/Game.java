@@ -64,9 +64,28 @@ public class Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
     }
-}
+
+    public void setBoard(Board board){
+        this.board_ = board;
+    }
+
+    public boolean isWinner(){
+        Board board = this.getBoard();
+        Ship[] ships = board.getShips();
+        int sunk_count =0;
+        for(int i =0; i<ships.length; i++){
+            Ship ship = ships[i];
+            if(board.isSunk(ship)){
+                sunk_count++;
+            }
+        }
+        if(sunk_count == board.getShips().length){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }//isWinner()
+
+}//Game
