@@ -70,7 +70,7 @@ public class Game {
         this.board_ = board;
     }
 
-    public boolean isWinner(){
+    public boolean isLoser(){
         Board board = this.getBoard();
         Ship[] ships = board.getShips();
         int sunk_count =0;

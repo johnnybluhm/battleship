@@ -3,8 +3,6 @@ package edu.colorado.exhalation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Scanner;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
@@ -78,7 +76,7 @@ class GameTest {
 
         game.setBoard(test_board);
 
-        assertTrue(game.isWinner());
+        assertTrue(game.isLoser());
     }
 
 }
