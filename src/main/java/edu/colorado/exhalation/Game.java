@@ -75,8 +75,7 @@ public class Game {
         Ship[] ships = board.getShips();
         int sunk_count =0;
         for(int i =0; i<ships.length; i++){
-            Ship ship = ships[i];
-            if(board.isSunk(ship)){
+            if(board.isSunk(ships[i])){
                 sunk_count++;
             }
         }
