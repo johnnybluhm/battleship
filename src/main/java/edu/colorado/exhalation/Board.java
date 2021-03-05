@@ -1,6 +1,4 @@
 package edu.colorado.exhalation;
-import edu.colorado.exhalation.Point;
-import edu.colorado.exhalation.Peg;
 
 public class Board {
 
@@ -12,7 +10,7 @@ public class Board {
     private Peg[][]  peg_array_ = new Peg[BOARD_SIZE][BOARD_SIZE];
 
     //ships initialized to null so we can check for double ships
-    private Ship[] ships_array = {null, null, null};
+    private Ship[] ships_array_ = {null, null, null};
 
     //creates board with all empty pegs, positions are set in the loop
     public Board(){
@@ -157,11 +155,11 @@ public class Board {
             peg_for_ship.setShip(ship);
         }
 
-        if(this.ships_array[array_index] != null){
+        if(this.ships_array_[array_index] != null){
             //ship is already in array
             return -2;
         }
-        this.ships_array[array_index] = ship;
+        this.ships_array_[array_index] = ship;
         return 1;
     }//place ship
 
@@ -336,6 +334,10 @@ public class Board {
             }
         }//outer for
         return true;
+    }
+
+    public Ship[] getShips(){
+        return this.ships_array_;
     }
 
 }//Board
