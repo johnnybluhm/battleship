@@ -141,39 +141,39 @@ class ShipTest {
         //test all ships with bad points
         for(int i =0; i< bad_vertical_ships.length; i++){
             bad_vertical_ship = new Destroyer("vertical", bad_vertical_ships[i]);
-            Assertions.assertFalse(bad_vertical_ship.verify());
+            Assertions.assertFalse(bad_vertical_ship.isValid());
             bad_vertical_ship = new Minesweeper("vertical", bad_vertical_ships[i]);
-            Assertions.assertFalse(bad_vertical_ship.verify());
+            Assertions.assertFalse(bad_vertical_ship.isValid());
             bad_vertical_ship = new Battleship("vertical", bad_vertical_ships[i]);
-            Assertions.assertFalse(bad_vertical_ship.verify());
+            Assertions.assertFalse(bad_vertical_ship.isValid());
 
         }
         for(int i =0; i< bad_horizontal_ships.length; i++){
             bad_horizontal_ship = new Destroyer("horizontal", bad_horizontal_ships[i]);
-            Assertions.assertFalse(bad_horizontal_ship.verify());
+            Assertions.assertFalse(bad_horizontal_ship.isValid());
             bad_horizontal_ship = new Minesweeper("horizontal", bad_horizontal_ships[i]);
-            Assertions.assertFalse(bad_horizontal_ship.verify());
+            Assertions.assertFalse(bad_horizontal_ship.isValid());
             bad_horizontal_ship = new Battleship("horizontal", bad_horizontal_ships[i]);
-            Assertions.assertFalse(bad_horizontal_ship.verify());
+            Assertions.assertFalse(bad_horizontal_ship.isValid());
         }
 
         //test good points on all ships
         Ship good_horizontal_ship = new Destroyer("horizontal",good_point);
         Ship good_vertical_ship = new Destroyer("vertical", good_point);
-        Assertions.assertTrue(good_horizontal_ship.verify());
-        Assertions.assertTrue((good_vertical_ship.verify()));
+        Assertions.assertTrue(good_horizontal_ship.isValid());
+        Assertions.assertTrue((good_vertical_ship.isValid()));
 
         good_horizontal_ship = new Minesweeper("horizontal",good_point);
         good_vertical_ship = new Minesweeper("vertical", good_point);
 
-        Assertions.assertTrue(good_horizontal_ship.verify());
-        Assertions.assertTrue((good_vertical_ship.verify()));
+        Assertions.assertTrue(good_horizontal_ship.isValid());
+        Assertions.assertTrue((good_vertical_ship.isValid()));
 
         good_horizontal_ship = new Battleship("horizontal",good_point);
         good_vertical_ship = new Battleship("vertical", good_point);
 
-        Assertions.assertTrue(good_horizontal_ship.verify());
-        Assertions.assertTrue((good_vertical_ship.verify()));
+        Assertions.assertTrue(good_horizontal_ship.isValid());
+        Assertions.assertTrue((good_vertical_ship.isValid()));
     }
 
 

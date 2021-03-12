@@ -22,7 +22,7 @@ abstract public class Ship {
         }
     }
 
-    public boolean verify(){
+    public boolean isValid(){
 
         for(int i =0; i< this.point_array_.length; i++){
             if(this.point_array_[i].isValid()==false){

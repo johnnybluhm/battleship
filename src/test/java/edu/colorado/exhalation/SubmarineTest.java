@@ -66,6 +66,18 @@ class SubmarineTest {
         }
     }
 
+    @Test
+    void testVerify(){
+
+        Ship bad_sub = new Submarine('v', new Point(9,9));
+
+        Assertions.assertTrue(!bad_sub.isValid());
+
+        bad_sub = new Submarine('h', new Point(9,9));
+
+        Assertions.assertTrue(!bad_sub.isValid());
+    }
+
     /*@Test
     void testCreation(){
 
