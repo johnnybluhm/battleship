@@ -126,7 +126,9 @@ public class Peg {
         boolean point_same = compare_peg.getPoint().equals(this.getPoint());
         boolean type_same = compare_peg.getType() == this.getType();
         boolean hit_same = compare_peg.isHit() == this.isHit();
-        if(point_same && type_same && hit_same){
+        boolean visibility_same = compare_peg.isVisible() == this.isVisible();
+        boolean ship_same = compare_peg.getShip() == this.getShip();
+        if(point_same && type_same && hit_same && visibility_same && ship_same){
             return true;
         }
         else {
@@ -135,10 +137,27 @@ public class Peg {
     }
 
     public boolean isVisible() {
-        return visible_;
+        return this.visible_;
     }
 
     public void setVisible(){
         this.visible_ = true;
     }
+
+    public void setHidden(){
+        this.visible_ = false;
+    }
+
+    public Peg copy(){
+        return new Peg(this);
+    }
+
+    @Override
+    public String toString() {
+        if (this.getShip() == null) {
+            return "Point :\n" + this.point_ + "\nVisibility: " + this.visible_ + "\nType: " + this.type_ + "\nHit: " + this.hit_ + "Ship: NULL";
+        } else {
+            return "Point :\n"  + this.point_ + "\nVisibility: " +this.visible_+"\nType: "+this.type_+"\nHit: "+this.hit_+"\nShip: \n"+this.getShip();
+        }
+    }//toString
 }//Peg

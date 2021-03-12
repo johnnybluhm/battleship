@@ -371,7 +371,8 @@ public class Board {
         Board copy_board = new Board();
         for(int i =0; i< BOARD_SIZE; i++){
             for(int j = 0; j< BOARD_SIZE;j++){
-                copy_board.getPegArray()[i][j] = new Peg(this.getPeg(i,j));
+                //copy_board.getPegArray()[i][j] = new Peg(this.getPeg(i,j));
+                copy_board.getPegArray()[i][j] = this.getPeg(i,j).copy();
             }
         }
         return copy_board;

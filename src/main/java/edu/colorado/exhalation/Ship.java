@@ -6,8 +6,6 @@ abstract public class Ship {
     protected boolean vertical_;
     protected boolean captains_quarters_hit = false;
 
-
-
     public Point[] getPointArray() {
         return this.point_array_;
     }
@@ -43,5 +41,9 @@ abstract public class Ship {
     }
     abstract public int getCaptainsQuarters();
     abstract public boolean isArmoured();
+
+    public String toString(){
+        return "SHIP START: \n"+ point_array_[0];
+    }
 }
 
