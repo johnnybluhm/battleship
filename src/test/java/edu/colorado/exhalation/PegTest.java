@@ -56,7 +56,7 @@ class PegTest {
         assertTrue(ship_2.hasShip());
         assertTrue(ship_3.hasShip());
     }
-    
+
     //O for no hit, X for hit ship, # for hit no ship
     @Test
     void testPegPrint(){

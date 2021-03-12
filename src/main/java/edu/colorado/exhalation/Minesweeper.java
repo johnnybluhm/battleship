@@ -1,8 +1,8 @@
 package edu.colorado.exhalation;
 
 public class Minesweeper extends Ship{
-    final private int SIZE = 2;
-    final private int CAPTAINS_QUARTERS = 0;
+    final static int SIZE = 2;
+    final static int CAPTAINS_QUARTERS = 0;
     public Minesweeper(String orientation, Point point){
         if(orientation.equals("vertical") || orientation.equals("v")){
             this.vertical_ = true;
@@ -51,11 +51,11 @@ public class Minesweeper extends Ship{
         }
     }//constructor
     public int getSIZE(){
-        return this.SIZE;
+        return SIZE;
     }
 
     public int getCaptainsQuarters(){
-        return this.CAPTAINS_QUARTERS;
+        return CAPTAINS_QUARTERS;
     }
 
     @Override
