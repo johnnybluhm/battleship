@@ -48,5 +48,10 @@ public class Point {
             return false;
         }
     }
+
+    @Override
+    public String toString(){
+        return "x: " + this.getX() +"\ny: "+this.getY();
+    }
 }
 

@@ -2,54 +2,42 @@ package edu.colorado.exhalation;
 
 public class Peg {
 
-    private int pos_x_;
-    private int pos_y_;
+    private Point point_;
 
     //2 - mine, 3 - destroyer, 4 -battleship, 0-water
     private int type_;
     private boolean hit_;
     private Ship ship_;
+    private boolean visible_;
 
-
+    //keep old construcotrs so we dont have to remake tests
     public Peg(int pos_x, int pos_y){
-        this.pos_x_ = pos_x;
-        this.pos_y_ = pos_y;
+        this.point_ = new Point(pos_x,pos_y);
         this.type_ =0;
         this.hit_ =false;
         this.ship_ = null;
-
+        this.visible_ = false;
     }
-
     public Peg(int pos_x, int pos_y, int type){
-        this.pos_x_ = pos_x;
-        this.pos_y_ = pos_y;
+        this.point_ = new Point(pos_x,pos_y);
         this.type_ =type;
         this.hit_ =false;
         this.ship_ = null;
-
+        this.visible_ = false;
     }
 
-    public int getPos_x_() {
-        return pos_x_;
+    public Peg(Point point){
+        this.point_ = new Point(point.getX(),point.getY());
+        this.hit_ =false;
+        this.ship_ = null;
+        this.visible_ = false;
     }
 
-    public void setPos_x_(int pos_x) {
-        this.pos_x_ = pos_x;
-    }
-
-    public int getPos_y_() {
-        return pos_y_;
-    }
-
-    public void setPos_y_(int pos_y) {
-        this.pos_y_ = pos_y;
-    }
-
-    public int getType_() {
+    public int getType() {
         return type_;
     }
 
-    public void setType_(int type) {
+    public void setType(int type) {
         this.type_ = type;
     }
 
@@ -62,7 +50,7 @@ public class Peg {
     }//hit
 
     public boolean hasShip(){
-        if(getType_() == 0){
+        if(getType() == 0){
             return false;
         }
         else{
@@ -72,7 +60,7 @@ public class Peg {
 
     public char print(){
         if(isHit()){
-            if(getType_()==0){
+            if(getType()==0){
                 return '#';
             }
             else{
@@ -80,13 +68,13 @@ public class Peg {
             }
         }//if isHit()
         else{
-            if(getType_() == 2){
+            if(getType() == 2){
                 return '2';
             }
-            else if(getType_() == 3){
+            else if(getType() == 3){
                 return '3';
             }
-            else if(getType_() == 4){
+            else if(getType() == 4){
                 return '4';
             }
             return 'O';
@@ -95,7 +83,7 @@ public class Peg {
 
     public char printHidden() {
         if (isHit()) {
-            if (getType_() == 0) {
+            if (getType() == 0) {
                 return '#';
             } else {
                 return 'X';
@@ -116,17 +104,17 @@ public class Peg {
     }
 
     public Point getPoint(){
-        return new Point(this.pos_x_,this.pos_y_);
+        return this.point_;
     }
 
     public void setPoint(Point point){
-        this.pos_x_ = point.getX();
-        this.pos_y_=point.getY();
+        this.point_.setX(point.getX());
+        this.point_.setY(point.getY());
     }
 
     public boolean equals(Peg compare_peg){
         boolean point_same = compare_peg.getPoint().equals(this.getPoint());
-        boolean type_same = compare_peg.getType_() == this.getType_();
+        boolean type_same = compare_peg.getType() == this.getType();
         boolean hit_same = compare_peg.isHit() == this.isHit();
         if(point_same && type_same && hit_same){
             return true;
@@ -136,32 +124,7 @@ public class Peg {
         }
     }
 
-    /*public boolean overlap() {
-        if(print() == '#'){
-            System.out.println("Already attacked here! It was a miss!");
-            return true;
-        }
-        else if(print() == 'X') {
-            System.out.println("Already attacked here! It was a hit!");
-            return true;
-        }
-        else if(hasShip()){
-            if(getType_() == 2){
-                System.out.println("Minesweeper is already here! Place ship elsewhere!");
-                return true;
-            }
-            else if(getType_ () == 3){
-                System.out.println("Destroyer is already here! Place ship elsewhere!");
-                return true;
-            }
-            else if(getType_() == 4){
-                System.out.println("Battleship is already here! Place ship elsewhere!");
-                return true;
-            }
-            else{
-                System.out.println("You really shouldn't be seeing this");
-            }
-        }
-        return false;
-    }*/
+    public boolean isVisible() {
+        return visible_;
+    }
 }//Peg

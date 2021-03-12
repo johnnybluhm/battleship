@@ -144,14 +144,14 @@ public class Board {
         //ensure all requested pegs are water
         for(int i = 0; i<point_array.length; i++){
             Peg peg_for_ship = this.getPeg(point_array[i]);
-            if(peg_for_ship.getType_() != 0){
+            if(peg_for_ship.getType() != 0){
                 return -1;
             }
         }
         //all pegs are water, so now change to type of ship
         for(int i = 0; i<point_array.length; i++){
             Peg peg_for_ship = this.getPeg(point_array[i]);
-            peg_for_ship.setType_(ship_type);
+            peg_for_ship.setType(ship_type);
             peg_for_ship.setShip(ship);
         }
 

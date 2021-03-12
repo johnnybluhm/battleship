@@ -22,13 +22,13 @@ class PegTest {
     //test using point (1,0)
     @Test
     void testCreate(){
-        assertEquals(1, test_peg.getPos_x_());
-        assertEquals(0, test_peg.getPos_y_());
+        assertEquals(1, test_peg.getPoint().getX());
+        assertEquals(0, test_peg.getPoint().getY());
     }
     @Test
     void testPegType(){
-        test_peg.setType_(1);
-        assertEquals(1, test_peg.getType_());
+        test_peg.setType(1);
+        assertEquals(1, test_peg.getType());
     }
 
     @Test
@@ -47,7 +47,7 @@ class PegTest {
         Peg ship_1 = new Peg(1,0,1);
         Peg ship_2 = new Peg(1,0);
         Peg ship_3 = new Peg(1,0, 3);
-        ship_2.setType_(2);
+        ship_2.setType(2);
 
 
         assertFalse(no_ship.hasShip());

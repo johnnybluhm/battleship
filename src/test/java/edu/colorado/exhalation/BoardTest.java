@@ -69,8 +69,7 @@ class BoardTest {
         //also tests getPeg() method
         for(int i =0; i< peg_array.length; i++){
             for(int j = 0; j< peg_array[i].length;j++){
-                assertEquals(peg_array[i][j].getPos_x_(), test_board.getPeg(i,j).getPos_x_());
-                assertEquals(peg_array[i][j].getPos_y_(), test_board.getPeg(i,j).getPos_y_());
+                assertTrue(peg_array[i][j].getPoint().equals(test_board.getPeg(i,j).getPoint()));
             }
         }
 
@@ -145,11 +144,11 @@ class BoardTest {
         System.out.println(board);
 
         //set last row to reflect hard coded last row
-        empty_test_board.getPeg(0,9).setType_(1);
-        empty_test_board.getPeg(1,9).setType_(1);
-        empty_test_board.getPeg(2,9).setType_(1);
-        empty_test_board.getPeg(8,9).setType_(2);
-        empty_test_board.getPeg(9,9).setType_(2);
+        empty_test_board.getPeg(0,9).setType(1);
+        empty_test_board.getPeg(1,9).setType(1);
+        empty_test_board.getPeg(2,9).setType(1);
+        empty_test_board.getPeg(8,9).setType(2);
+        empty_test_board.getPeg(9,9).setType(2);
 
 
         //hit ships
