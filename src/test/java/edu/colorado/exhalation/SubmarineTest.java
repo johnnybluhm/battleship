@@ -11,11 +11,11 @@ class SubmarineTest {
         Point[] vertical_point_array = new Point[5];
         vertical_point_array[0] = start_point;
         //tail
-        vertical_point_array[1] = new Point(x,y-1);
-        vertical_point_array[2] = new Point(x,y-2);
-        vertical_point_array[3] = new Point(x,y-3);
+        vertical_point_array[1] = new Point(x,y+1);
+        vertical_point_array[2] = new Point(x,y+2);
+        vertical_point_array[3] = new Point(x,y+3);
         //bump
-        vertical_point_array[4] = new Point(x-1,y-1);
+        vertical_point_array[4] = new Point(x+1,y+2);
 
         for (Point point: vertical_point_array
              ) {
@@ -32,11 +32,11 @@ class SubmarineTest {
         Point[] horizontal_point_array = new Point[5];
         horizontal_point_array[0] = start_point;
         //tail
-        horizontal_point_array[1] = new Point(x-1,y);
-        horizontal_point_array[2] = new Point(x-2,y);
-        horizontal_point_array[3] = new Point(x-3,y);
+        horizontal_point_array[1] = new Point(x+1,y);
+        horizontal_point_array[2] = new Point(x+2,y);
+        horizontal_point_array[3] = new Point(x+3,y);
         //bump
-        horizontal_point_array[4] = new Point(x-1,y+1);
+        horizontal_point_array[4] = new Point(x+2,y-1);
 
         for (Point point: horizontal_point_array
         ) {
@@ -53,23 +53,17 @@ class SubmarineTest {
         Point[] horizontal = getHorizontalSubPoints(start_point);
         Point[] vertical = getVerticalSubPoints(start_point);
 
-        Ship vertical_sub = new Submarine("v", start_point));
-        Ship horizontal_sub = new Submarine("h", start_point));
+        Ship vertical_sub = new Submarine('v', start_point);
+        Ship horizontal_sub = new Submarine('h', start_point);
 
         for (int i =0; i< horizontal.length; i++){
             Assertions.assertTrue(horizontal_sub.getPointArray()[i].equals(horizontal[i]));
+            //System.out.println("POINT 1\n"+horizontal[i]+"\nPOINT 2\n"+horizontal_sub.getPointArray()[i]);
         }
 
         for (int i =0; i< vertical.length; i++){
-            Assertions.assertTrue(vertical_sub.getPointArray()[i].equals(horizontal[i]));
+            Assertions.assertTrue(vertical_sub.getPointArray()[i].equals(vertical[i]));
         }
-
-
-
-
-
-        //assertTrue(horizontal);
-
     }
 
     /*@Test
