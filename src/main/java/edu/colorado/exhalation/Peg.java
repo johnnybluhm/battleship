@@ -1,5 +1,7 @@
 package edu.colorado.exhalation;
 
+import java.nio.channels.Pipe;
+
 public class Peg {
 
     private Point point_;
@@ -27,10 +29,18 @@ public class Peg {
     }
 
     public Peg(Point point){
-        this.point_ = new Point(point.getX(),point.getY());
+        this.point_ = new Point(point.getX(), point.getY());
         this.hit_ =false;
         this.ship_ = null;
         this.visible_ = false;
+    }
+
+    public Peg(Peg copy_peg){
+        this.point_ = copy_peg.getPoint();
+        this.type_ = copy_peg.getType();
+        this.hit_ = copy_peg.isHit();
+        this.ship_ = copy_peg.getShip();
+        this.visible_ = copy_peg.isVisible();
     }
 
     public int getType() {
@@ -126,5 +136,9 @@ public class Peg {
 
     public boolean isVisible() {
         return visible_;
+    }
+
+    public void setVisible(){
+        this.visible_ = true;
     }
 }//Peg

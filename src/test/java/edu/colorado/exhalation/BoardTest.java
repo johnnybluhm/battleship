@@ -53,6 +53,42 @@ class BoardTest {
         }
         return empty_board;
     }
+
+    Point[] getPulseArray(Point point){
+        int x  = point.getX();
+        int y = point.getY();
+        final int PULSE_SIZE = 12;
+        Point[] points = new Point[PULSE_SIZE+1];
+        //get points to sides
+        points[0] = new Point(x+1,y);
+        points[1] = new Point(x+2,y);
+        points[2] = new Point(x-1,y);
+        points[3] = new Point(x-2,y);
+
+        //get points above/below
+        points[4] = new Point(x,y+1);
+        points[5] = new Point(x,y+2);
+        points[6] = new Point(x,y-1);
+        points[7] = new Point(x,y-2);
+
+        //get corners
+        points[8] = new Point(x+1,y+1);
+        points[9] = new Point(x-1,y-1);
+        points[10] = new Point(x-1,y+1);
+        points[11] = new Point(x+1,y-1);
+
+        //add selected point
+        points[12] = point;
+
+        //set bad points to null
+        for(int i =0; i<points.length; i++){
+            if(points[i].isValid()==false){
+                points[i] = null;
+            }
+        }
+
+        return points;
+    }
     //board needs to start with all empty pegs
     @Test
     void testInitialize(){
@@ -81,7 +117,7 @@ class BoardTest {
 
         Board empty_test_board = new Board();
 
-        assertTrue(empty_board.equals(empty_test_board.getState()));
+        assertTrue(empty_board.equals(empty_test_board.getStateString()));
 
     }
 
@@ -115,7 +151,7 @@ class BoardTest {
             }
         }
 
-        assertTrue(full_board.equals(full_test_board.getState()));
+        assertTrue(full_board.equals(full_test_board.getStateString()));
     }
 
     @Test
@@ -161,8 +197,8 @@ class BoardTest {
         //hit empty square
         empty_test_board.getPeg(7,9).hit();
 
-        System.out.println(empty_test_board.getState());
-        assertTrue(board.equals(empty_test_board.getState()));
+        System.out.println(empty_test_board.getStateString());
+        assertTrue(board.equals(empty_test_board.getStateString()));
     }
 
     @Test
@@ -196,12 +232,12 @@ class BoardTest {
         test_board.placeShip(bottom_left_corner_ship);
 
         System.out.println(board_string);
-        System.out.println(test_board.getState());
-        assertTrue(board_string.equals(test_board.getState()));
+        System.out.println(test_board.getStateString());
+        assertTrue(board_string.equals(test_board.getStateString()));
 
         //method should return -1 as there is already a ship where we are trying to place one
         assertEquals(-1, test_board.placeShip(bottom_left_corner_ship));
-        System.out.println(test_board.getState());
+        System.out.println(test_board.getStateString());
 
         Ship second_minesweeper = new Minesweeper("horizontal", new Point(0,2));
         //test placing 2 Minesweepers on the board
@@ -255,7 +291,7 @@ class BoardTest {
 
 
         //board with no hits should be all O's
-        assertTrue(board_string.equals(test_board.getHiddenState()));
+        assertTrue(board_string.equals(test_board.getHiddenStateString()));
 
         //create array of points to hit
         Point[] right_most_vertical_points = new Point[10];
@@ -277,7 +313,7 @@ class BoardTest {
             //test_board.hit(right_most_vertical_points[i]);
         }
 
-        assertTrue(board_string_after_hits.equals(test_board.getHiddenState()));
+        assertTrue(board_string_after_hits.equals(test_board.getHiddenStateString()));
 
         String empty_board_all_hit = getEmptyBoardStringWithHits();
 
@@ -336,7 +372,7 @@ class BoardTest {
     }//testSunk
 
     @Test
-    void testPulse(){
+    void testPulseString(){
         Board board = new Board();
 
         Ship minesweeper = new Minesweeper("horizontal", new Point(0,0));
@@ -356,12 +392,41 @@ class BoardTest {
         test_board.placeShip(top_right_corner_down_ship);
         test_board.placeShip(middle_destroyer);
         pulse_point = new Point(5,5);
-        test_board.sonarPulse(pulse_point);
+        test_board.sonarPulseString(pulse_point);
 
 
-        System.out.println(test_board.getState());
-        System.out.println(test_board.getHiddenState());
-        System.out.println(test_board.sonarPulse(pulse_point));
+        System.out.println(test_board.getStateString());
+        System.out.println(test_board.getHiddenStateString());
+        System.out.println(test_board.sonarPulseString(pulse_point));
+    }
+
+    @Test
+    void testPulse(){
+
+        Point pulse_point = new Point(5,5);
+        Board hard_code_board = new Board();
+        Board test_board = new Board();
+        Point[] points = getPulseArray(pulse_point);
+
+        //set hard coded board points to visible
+        for(int i =0; i<points.length; i++){
+            if(points[i].isValid()){
+                hard_code_board.getPeg(points[i]).setVisible();
+            }
+        }
+        Board pulse_board =  test_board.sonarPulse(pulse_point);
+        Assertions.assertTrue(pulse_board.equals(hard_code_board));
+    }
+
+    @Test
+    void testCopy(){
+        Board first_board = new Board();
+        first_board.hit(new Point(1,0));
+        Board copy_board = first_board.copy();
+        Assertions.assertTrue(copy_board.equals(first_board));
+        copy_board.hit(new Point(0,0));
+        Assertions.assertFalse(copy_board.equals(first_board));
+
     }
 
 }//boardTest

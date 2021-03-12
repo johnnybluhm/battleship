@@ -2,10 +2,13 @@ package edu.colorado.exhalation;
 
 public class Board {
 
-    final private int BOARD_SIZE = 10;
-    final private int MINESWEEPER = 0;
-    final private int DESTROYER = 1;
-    final private int BATTLESHIP = 2;
+    final static int BOARD_SIZE = 10;
+
+    //array indexes for ship types
+    final static int MINESWEEPER = 0;
+    final static int DESTROYER = 1;
+    final static int BATTLESHIP = 2;
+    final static int SUBMARINE = 3;
 
     private Peg[][]  peg_array_ = new Peg[BOARD_SIZE][BOARD_SIZE];
 
@@ -31,7 +34,7 @@ public class Board {
         return peg_array_[x][y];
     }
 
-    public String getState(){
+    public String getStateString(){
         String top_of_board = "   A B C D E | F G H I J\n";
         String seperator = "   - - - - - | - - - - -\n";
         String board = top_of_board;
@@ -74,7 +77,7 @@ public class Board {
 
     //returns -1 on most errors
     //returns -2 if ship can be placed, but we already have that ship on the board
-    public String getHiddenState(){
+    public String getHiddenStateString(){
         String top_of_board = "   A B C D E | F G H I J\n";
         String seperator = "   - - - - - | - - - - -\n";
         String board = top_of_board;
@@ -138,9 +141,7 @@ public class Board {
         else{
             return -1;
         }
-
         Point[] point_array = ship.getPointArray();
-
         //ensure all requested pegs are water
         for(int i = 0; i<point_array.length; i++){
             Peg peg_for_ship = this.getPeg(point_array[i]);
@@ -187,7 +188,7 @@ public class Board {
     }//hit
 
     public int getBOARD_SIZE(){
-        return this.BOARD_SIZE;
+        return BOARD_SIZE;
     }
 
     public Peg[][] getPegArray(){
@@ -206,7 +207,7 @@ public class Board {
         }
     }//isSunk()
 
-    public String sonarPulse(Point point){
+    public String sonarPulseString(Point point){
 
         int x  = point.getX();
         int y = point.getY();
@@ -235,7 +236,7 @@ public class Board {
 
         //set bad points to null
         for(int i =0; i<points.length; i++){
-            if(points[i].verify()==false){
+            if(points[i].isValid()==false){
                 points[i] = null;
             }
         }
@@ -322,6 +323,58 @@ public class Board {
             board+="\n";
         }//outer for
         return board;
+    }
+
+    public Board sonarPulse(Point point){
+
+        int x  = point.getX();
+        int y = point.getY();
+        final int PULSE_SIZE = 12;
+        Point[] points = new Point[PULSE_SIZE+1];
+        //get points to sides
+        points[0] = new Point(x+1,y);
+        points[1] = new Point(x+2,y);
+        points[2] = new Point(x-1,y);
+        points[3] = new Point(x-2,y);
+
+        //get points above/below
+        points[4] = new Point(x,y+1);
+        points[5] = new Point(x,y+2);
+        points[6] = new Point(x,y-1);
+        points[7] = new Point(x,y-2);
+
+        //get corners
+        points[8] = new Point(x+1,y+1);
+        points[9] = new Point(x-1,y-1);
+        points[10] = new Point(x-1,y+1);
+        points[11] = new Point(x+1,y-1);
+
+        //add selected point
+        points[12] = point;
+
+        //set bad points to null
+        for(int i =0; i<points.length; i++){
+            if(points[i].isValid()==false){
+                points[i] = null;
+            }
+        }
+        Board pulse_board = this.copy();
+        for(int i =0; i<points.length; i++){
+            if(points[i].isValid()){
+                pulse_board.getPeg(points[i]).setVisible();
+            }
+        }
+        return pulse_board;
+    }
+
+    public Board copy(){
+        Board copy_board = new Board();
+        for(int i =0; i< BOARD_SIZE; i++){
+            for(int j = 0; j< BOARD_SIZE;j++){
+                copy_board.getPegArray()[i][j] = new Peg(this.getPeg(i,j));
+            }
+        }
+        return copy_board;
     }
 
     public boolean equals(Board compare_board){

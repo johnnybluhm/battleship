@@ -27,7 +27,7 @@ public class Point {
         this.y_ = y_;
     }
 
-    public boolean verify(){
+    public boolean isValid(){
         if(this.x_ <0 || this.x_ > 9){
             return false;
         }
@@ -37,7 +37,7 @@ public class Point {
         else {
             return true;
         }
-    } //verify
+    } //isValid()
 
 
     public boolean equals(Point point){

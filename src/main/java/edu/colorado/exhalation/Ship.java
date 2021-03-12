@@ -1,5 +1,5 @@
 package edu.colorado.exhalation;
-import edu.colorado.exhalation.Point;
+
 abstract public class Ship {
 
     protected Point[] point_array_;
@@ -27,7 +27,7 @@ abstract public class Ship {
     public boolean verify(){
 
         for(int i =0; i< this.point_array_.length; i++){
-            if(this.point_array_[i].verify()==false){
+            if(this.point_array_[i].isValid()==false){
                 return false;
             }
         }
