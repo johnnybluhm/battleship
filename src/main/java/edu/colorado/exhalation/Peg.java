@@ -11,6 +11,7 @@ public class Peg {
     private boolean hit_;
     private Ship ship_;
     private boolean visible_;
+    private Submarine sub_;
 
     //keep old construcotrs so we dont have to remake tests
     public Peg(int pos_x, int pos_y){
@@ -19,6 +20,7 @@ public class Peg {
         this.hit_ =false;
         this.ship_ = null;
         this.visible_ = false;
+        this.sub_ = null;
     }
     public Peg(int pos_x, int pos_y, int type){
         this.point_ = new Point(pos_x,pos_y);
@@ -26,6 +28,7 @@ public class Peg {
         this.hit_ =false;
         this.ship_ = null;
         this.visible_ = false;
+        this.sub_ = null;
     }
 
     public Peg(Point point){
@@ -33,6 +36,7 @@ public class Peg {
         this.hit_ =false;
         this.ship_ = null;
         this.visible_ = false;
+        this.sub_ = null;
     }
 
     public Peg(Peg copy_peg){
@@ -41,6 +45,7 @@ public class Peg {
         this.hit_ = copy_peg.isHit();
         this.ship_ = copy_peg.getShip();
         this.visible_ = copy_peg.isVisible();
+        this.sub_ = copy_peg.getSub();
     }
 
     public int getType() {
@@ -160,4 +165,12 @@ public class Peg {
             return "Point :\n"  + this.point_ + "\nVisibility: " +this.visible_+"\nType: "+this.type_+"\nHit: "+this.hit_+"\nShip: \n"+this.getShip();
         }
     }//toString
+
+    public Submarine getSub() {
+        return this.sub_;
+    }
+
+    public void setSub(Submarine sub) {
+        this.sub_ = sub;
+    }
 }//Peg

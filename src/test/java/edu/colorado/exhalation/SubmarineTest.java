@@ -81,6 +81,24 @@ class SubmarineTest {
     @Test
     void testPlace(){
 
+        Board board = new Board();
+        Point start_point = new Point(5,5);
+        Ship test_sub = new Submarine('v', start_point);
+        Ship test_ship = new Battleship('v', start_point);
+
+        board.placeShip(test_ship);
+
+        //ensure place ship does not return error
+        Assertions.assertTrue(board.placeShip(test_sub)==1);
+
+        //test that sub first then ship
+
+        Board board2 = new Board();
+
+        board2.placeShip(test_sub);
+
+        Assertions.assertTrue(board2.placeShip(test_ship)==1);
+
     }
 
 }
