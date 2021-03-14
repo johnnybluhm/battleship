@@ -3,15 +3,12 @@ package edu.colorado.exhalation;
 public class Board {
 
     final static int BOARD_SIZE = 10;
-
     //array indexes for ship types
     final static int MINESWEEPER = 0;
     final static int DESTROYER = 1;
     final static int BATTLESHIP = 2;
     final static int SUBMARINE = 3;
-
     private Peg[][]  peg_array_ = new Peg[BOARD_SIZE][BOARD_SIZE];
-
     //ships initialized to null so we can check for double ships
     private Ship[] ships_array_ = {null, null, null, null};
 
