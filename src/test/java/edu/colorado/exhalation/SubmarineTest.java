@@ -103,7 +103,7 @@ class SubmarineTest {
 
     @Test
     void testHitting(){
-        
+
     }
 
 }

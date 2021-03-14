@@ -3,6 +3,8 @@ package edu.colorado.exhalation;
 public class Board {
 
     final static int BOARD_SIZE = 10;
+    final static int BOMB = 0;
+    final static int LASER = 1;
     //array indexes for ship types
     final static int MINESWEEPER = 0;
     final static int DESTROYER = 1;
@@ -11,12 +13,14 @@ public class Board {
     private Peg[][]  peg_array_ = new Peg[BOARD_SIZE][BOARD_SIZE];
     //ships initialized to null so we can check for double ships
     private Ship[] ships_array_ = {null, null, null, null};
+    private int weapon_;
 
     //creates board with all empty pegs, positions are set in the loop
     public Board(){
+        this.weapon_=BOMB;
         for(int i =0; i< BOARD_SIZE; i++){
             for(int j = 0; j< BOARD_SIZE;j++){
-                this.peg_array_[i][j] = new Peg(i,j);
+                this.peg_array_[i][j] = new Peg(i,j,this);
             }
         }
     }//constructor
@@ -403,4 +407,18 @@ public class Board {
         return this.ships_array_;
     }
 
+    public int getWeapon() {
+        return weapon_;
+    }
+
+    //must take in a valid weapon, else return -1
+    public int setWeapon(int weapon) {
+        if(weapon== BOMB || weapon == LASER){
+            this.weapon_ = weapon;
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    }
 }//Board

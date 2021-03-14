@@ -125,5 +125,20 @@ class PegTest {
 
 
     }
+
+    @Test
+    void testBoardInPeg(){
+
+        Board board = new Board();
+        Assertions.assertTrue(board.getPeg(2,0).getBoard().equals(board));
+
+        board.hit(new Point(2,0));
+        Assertions.assertTrue(board.getPeg(2,0).getBoard().equals(board));
+
+        board.setWeapon(Board.LASER);
+
+        Assertions.assertTrue(board.getPeg(7,7).getBoard().getWeapon()== Board.LASER);
+
+    }
 }//TEST
 

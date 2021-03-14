@@ -10,6 +10,7 @@ public class Peg {
     private Ship ship_;
     private boolean visible_;
     private Submarine sub_;
+    private Board board_ = null;
 
     //keep old constructor so we don't have to remake tests
     public Peg(int pos_x, int pos_y){
@@ -18,6 +19,15 @@ public class Peg {
         this.ship_ = null;
         this.visible_ = false;
         this.sub_ = null;
+    }
+
+    public Peg(int pos_x, int pos_y, Board board){
+        this.point_ = new Point(pos_x,pos_y);
+        this.hit_ =false;
+        this.ship_ = null;
+        this.visible_ = false;
+        this.sub_ = null;
+        this.board_ = board;
     }
 
     public Peg(Point point){
@@ -159,5 +169,13 @@ public class Peg {
 
     public void setSub(Submarine sub) {
         this.sub_ = sub;
+    }
+
+    public Board getBoard() {
+        return board_;
+    }
+
+    public void setBoard(Board board) {
+        this.board_ = board;
     }
 }//Peg

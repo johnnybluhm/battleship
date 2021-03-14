@@ -484,4 +484,15 @@ class BoardTest {
         System.out.println(test_board.getStateString());
     }
 
+    @Test
+    void testWeapon(){
+        Board board = new Board();
+
+        Assertions.assertTrue(board.getWeapon() == Board.BOMB);
+
+        Assertions.assertTrue(board.setWeapon(3)== -1);
+        board.setWeapon(Board.LASER);
+        Assertions.assertTrue(board.getWeapon()== Board.LASER);
+    }
+
 }//boardTest
