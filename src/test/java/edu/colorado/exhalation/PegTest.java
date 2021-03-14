@@ -11,10 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 class PegTest {
 
-
     private Peg test_peg;
-
-
     @BeforeEach
     void create(){
       test_peg = new Peg(1,0);
@@ -28,8 +25,7 @@ class PegTest {
     }
     @Test
     void testPegType(){
-        test_peg.setType(1);
-        assertEquals(1, test_peg.getType());
+
     }
 
     @Test
@@ -48,7 +44,7 @@ class PegTest {
         Peg ship_1 = new Peg(1,0,1);
         Peg ship_2 = new Peg(1,0);
         Peg ship_3 = new Peg(1,0, 3);
-        ship_2.setType(2);
+
 
 
         assertFalse(no_ship.hasShip());
@@ -60,17 +56,31 @@ class PegTest {
     //O for no hit, X for hit ship, # for hit no ship
     @Test
     void testPegPrint(){
+        Peg ship_peg = new Peg(0,0);
+        Ship battle_ship = new Battleship('v', new Point(0,0));
+        ship_peg.setShip(battle_ship);
         Peg no_ship = new Peg(1,0);
-        Peg ship_1 = new Peg(1,0,1);
-        Peg ship_2 = new Peg(1,0);
-        Peg noship2 = new Peg(1,0);
 
+        assertEquals('O', no_ship.print());
         no_ship.hit();
-        ship_1.hit();
         assertEquals('#', no_ship.print());
-        assertEquals('X', ship_1.print());
-        assertEquals('O', ship_2.print());
-        assertEquals('O', noship2.print());
+
+        assertEquals('4',ship_peg.print());
+        ship_peg.hit();
+        assertEquals('X', ship_peg.print());
+
+        Peg ship_peg2 = new Peg(2,0);
+        Ship destroyer = new Destroyer('v', new Point(0,0));
+        Ship sweeper = new Minesweeper('v', new Point(0,0));
+        ship_peg2.setShip(destroyer);
+        assertEquals('3',ship_peg2.print());
+
+        ship_peg2.setShip(sweeper);
+        assertEquals('2',ship_peg2.print());
+
+
+
+
 
     }
 

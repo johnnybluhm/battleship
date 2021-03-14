@@ -74,14 +74,15 @@ public class Peg {
                 return 'O';
             }
             else{
-                return Character.valueOf((char) this.getShip().getSIZE());
+                String size = String.valueOf(this.getShip().getSIZE());
+                return size.charAt(0);
             }
         }
     }//print
 
-   /* public char printHidden() {
+   public char printHidden() {
         if (isHit()) {
-            if (getType() == 0) {
+            if (this.getShip()== null) {
                 return '#';
             } else {
                 return 'X';
@@ -91,7 +92,7 @@ public class Peg {
         else {
             return 'O';
         }
-    }//printHidden()*/
+    }//printHidden()
 
     public void setShip(Ship ship) {
         this.ship_ = ship;
