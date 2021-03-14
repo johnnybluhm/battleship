@@ -138,23 +138,42 @@ public class Board {
             ship_type = ((Destroyer) ship).getSIZE();
             array_index = DESTROYER;
         }
+        else if(ship instanceof Submarine){
+            ship_type = ((Submarine) ship).getSIZE();
+            array_index = SUBMARINE;
+        }
         else{
             return -1;
         }
         Point[] point_array = ship.getPointArray();
-        //ensure all requested pegs are water
-        for(int i = 0; i<point_array.length; i++){
-            Peg peg_for_ship = this.getPeg(point_array[i]);
-            if(peg_for_ship.getType() != 0){
-                return -1;
+
+
+        if(!(ship instanceof Submarine)){
+            //ensure all requested pegs are water
+            for(int i = 0; i<point_array.length; i++){
+                Peg peg_for_ship = this.getPeg(point_array[i]);
+                if(peg_for_ship.getShip() != null){
+                    return -1;
+                }
+            }
+            //all pegs are water , so now change to type of ship
+            for(int i = 0; i<point_array.length; i++){
+                Peg peg_for_ship = this.getPeg(point_array[i]);
+                //peg_for_ship.setType(ship_type);
+                peg_for_ship.setShip(ship);
+            }
+        }//submarine if
+        else{
+            //we are placing a submarine
+
+            for(int i = 0; i<point_array.length; i++){
+                Peg peg_for_ship = this.getPeg(point_array[i]);
+                //peg_for_ship.setType(ship_type);
+                peg_for_ship.setSub((Submarine) ship);
             }
         }
-        //all pegs are water, so now change to type of ship
-        for(int i = 0; i<point_array.length; i++){
-            Peg peg_for_ship = this.getPeg(point_array[i]);
-            peg_for_ship.setType(ship_type);
-            peg_for_ship.setShip(ship);
-        }
+
+
 
         if(this.ships_array_[array_index] != null){
             //ship is already in array

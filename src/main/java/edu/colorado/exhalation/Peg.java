@@ -6,8 +6,6 @@ public class Peg {
 
     private Point point_;
 
-    //2 - mine, 3 - destroyer, 4 -battleship, 0-water
-    private int type_;
     private boolean hit_;
     private Ship ship_;
     private boolean visible_;
@@ -16,7 +14,6 @@ public class Peg {
     //keep old construcotrs so we dont have to remake tests
     public Peg(int pos_x, int pos_y){
         this.point_ = new Point(pos_x,pos_y);
-        this.type_ =0;
         this.hit_ =false;
         this.ship_ = null;
         this.visible_ = false;
@@ -24,7 +21,6 @@ public class Peg {
     }
     public Peg(int pos_x, int pos_y, int type){
         this.point_ = new Point(pos_x,pos_y);
-        this.type_ =type;
         this.hit_ =false;
         this.ship_ = null;
         this.visible_ = false;
@@ -41,19 +37,10 @@ public class Peg {
 
     public Peg(Peg copy_peg){
         this.point_ = copy_peg.getPoint();
-        this.type_ = copy_peg.getType();
         this.hit_ = copy_peg.isHit();
         this.ship_ = copy_peg.getShip();
         this.visible_ = copy_peg.isVisible();
         this.sub_ = copy_peg.getSub();
-    }
-
-    public int getType() {
-        return type_;
-    }
-
-    public void setType(int type) {
-        this.type_ = type;
     }
 
     public boolean isHit() {
@@ -65,7 +52,7 @@ public class Peg {
     }//hit
 
     public boolean hasShip(){
-        if(getType() == 0){
+        if(this.ship_ == null){
             return false;
         }
         else{
@@ -73,9 +60,9 @@ public class Peg {
         }
     }
 
-    public char print(){
+   public char print(){
         if(isHit()){
-            if(getType()==0){
+            if(this.getShip()==null){
                 return '#';
             }
             else{
@@ -83,20 +70,16 @@ public class Peg {
             }
         }//if isHit()
         else{
-            if(getType() == 2){
-                return '2';
+            if(this.getShip() == null){
+                return 'O';
             }
-            else if(getType() == 3){
-                return '3';
+            else{
+                return Character.valueOf((char) this.getShip().getSIZE());
             }
-            else if(getType() == 4){
-                return '4';
-            }
-            return 'O';
         }
-    }
+    }//print
 
-    public char printHidden() {
+   /* public char printHidden() {
         if (isHit()) {
             if (getType() == 0) {
                 return '#';
@@ -108,7 +91,7 @@ public class Peg {
         else {
             return 'O';
         }
-    }//printHidden()
+    }//printHidden()*/
 
     public void setShip(Ship ship) {
         this.ship_ = ship;
@@ -129,11 +112,11 @@ public class Peg {
 
     public boolean equals(Peg compare_peg){
         boolean point_same = compare_peg.getPoint().equals(this.getPoint());
-        boolean type_same = compare_peg.getType() == this.getType();
         boolean hit_same = compare_peg.isHit() == this.isHit();
         boolean visibility_same = compare_peg.isVisible() == this.isVisible();
         boolean ship_same = compare_peg.getShip() == this.getShip();
-        if(point_same && type_same && hit_same && visibility_same && ship_same){
+        boolean sub_same = compare_peg.getSub() == this.getSub();
+        if(point_same && hit_same && visibility_same && ship_same && sub_same){
             return true;
         }
         else {
@@ -160,9 +143,9 @@ public class Peg {
     @Override
     public String toString() {
         if (this.getShip() == null) {
-            return "Point :\n" + this.point_ + "\nVisibility: " + this.visible_ + "\nType: " + this.type_ + "\nHit: " + this.hit_ + "Ship: NULL";
+            return "Point :\n" + this.point_ + "\nVisibility: " + this.visible_ +"\nHit: " + this.hit_ + "Ship: NULL";
         } else {
-            return "Point :\n"  + this.point_ + "\nVisibility: " +this.visible_+"\nType: "+this.type_+"\nHit: "+this.hit_+"\nShip: \n"+this.getShip();
+            return "Point :\n"  + this.point_ + "\nVisibility: " +this.visible_+"\nHit: "+this.hit_+"\nShip: \n"+this.getShip();
         }
     }//toString
 

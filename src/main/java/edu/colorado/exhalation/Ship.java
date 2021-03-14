@@ -41,6 +41,7 @@ abstract public class Ship {
     }
     abstract public int getCaptainsQuarters();
     abstract public boolean isArmoured();
+    abstract public int getSIZE();
 
     public String toString(){
         return "SHIP START: \n"+ point_array_[0];
