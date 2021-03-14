@@ -32,6 +32,23 @@ abstract public class Ship {
         return true;
     }
 
+    public boolean equals(Ship ship){
+        if(ship == null){
+            if(this == null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        for (int i = 0; i <ship.getPointArray().length; i++) {
+            if(!ship.getPointArray()[i].equals(this.getPointArray()[i])){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public boolean captainsQuartersHit(){
         return this.captains_quarters_hit;
     }

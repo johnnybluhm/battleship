@@ -13,7 +13,7 @@ public class Board {
     private Peg[][]  peg_array_ = new Peg[BOARD_SIZE][BOARD_SIZE];
 
     //ships initialized to null so we can check for double ships
-    private Ship[] ships_array_ = {null, null, null};
+    private Ship[] ships_array_ = {null, null, null, null};
 
     //creates board with all empty pegs, positions are set in the loop
     public Board(){
@@ -124,22 +124,17 @@ public class Board {
 
     //returns -1 on error
     public int placeShip(Ship ship){
-        int ship_type;
         int array_index;
         if(ship instanceof Minesweeper){
-            ship_type = ((Minesweeper) ship).getSIZE();
             array_index = MINESWEEPER;
         }
         else if(ship instanceof Battleship){
-            ship_type = ((Battleship) ship).getSIZE();
             array_index = BATTLESHIP;
         }
         else if(ship instanceof Destroyer){
-            ship_type = ((Destroyer) ship).getSIZE();
             array_index = DESTROYER;
         }
         else if(ship instanceof Submarine){
-            ship_type = ((Submarine) ship).getSIZE();
             array_index = SUBMARINE;
         }
         else{
@@ -156,28 +151,26 @@ public class Board {
                     return -1;
                 }
             }
-            //all pegs are water , so now change to type of ship
+            if(this.ships_array_[array_index] != null){
+                //ship type is already on board
+                return -2;
+            }
+            //all pegs are water, and no other ship exists
             for(int i = 0; i<point_array.length; i++){
                 Peg peg_for_ship = this.getPeg(point_array[i]);
-                //peg_for_ship.setType(ship_type);
                 peg_for_ship.setShip(ship);
             }
         }//submarine if
         else{
-            //we are placing a submarine
-
+            if(this.ships_array_[array_index] != null){
+                //ship type is already on board
+                return -2;
+            }
+            //we are placing a submarine, no need to check if water
             for(int i = 0; i<point_array.length; i++){
                 Peg peg_for_ship = this.getPeg(point_array[i]);
-                //peg_for_ship.setType(ship_type);
                 peg_for_ship.setSub((Submarine) ship);
             }
-        }
-
-
-
-        if(this.ships_array_[array_index] != null){
-            //ship is already in array
-            return -2;
         }
         this.ships_array_[array_index] = ship;
         return 1;

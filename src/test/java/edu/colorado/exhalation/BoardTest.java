@@ -154,7 +154,7 @@ class BoardTest {
         assertTrue(full_board.equals(full_test_board.getStateString()));
     }
 
-    @Test
+    /*@Test
     void testPrintWithShips(){
         String top_of_board = "   A B C D E | F G H I J\n";
         //ensure space at the end of the test string
@@ -180,11 +180,11 @@ class BoardTest {
         System.out.println(board);
 
         //set last row to reflect hard coded last row
-        /*empty_test_board.getPeg(0,9).setType(1);
+        empty_test_board.getPeg(0,9).setType(1);
         empty_test_board.getPeg(1,9).setType(1);
         empty_test_board.getPeg(2,9).setType(1);
         empty_test_board.getPeg(8,9).setType(2);
-        empty_test_board.getPeg(9,9).setType(2);*/
+        empty_test_board.getPeg(9,9).setType(2);
 
 
         //hit ships
@@ -199,7 +199,7 @@ class BoardTest {
 
         System.out.println(empty_test_board.getStateString());
         assertTrue(board.equals(empty_test_board.getStateString()));
-    }
+    }*/
 
     @Test
     void createShips(){
@@ -427,6 +427,61 @@ class BoardTest {
         copy_board.hit(new Point(0,0));
         Assertions.assertFalse(copy_board.equals(first_board));
 
+    }
+
+    @Test
+    void testEquals(){
+
+        Board first_board = new Board();
+        Point m_point = new Point(0,0);
+        Point d_point = new Point(7,0);
+        Point b_point = new Point(9,0);
+        Point s_point = new Point(7,0);
+        Ship minesweeper = new Minesweeper("v",m_point);
+        Ship destroyer = new Destroyer("v", d_point);
+        Ship battleship = new Battleship("v", b_point);
+        Ship submarine = new Submarine("v", s_point);
+        first_board.placeShip(minesweeper);
+        first_board.placeShip(destroyer);
+        first_board.placeShip(battleship);
+        first_board.placeShip(submarine);
+
+        Board compare_board_good = new Board();
+        compare_board_good.placeShip(minesweeper);
+        compare_board_good.placeShip(destroyer);
+        compare_board_good.placeShip(battleship);
+        compare_board_good.placeShip(submarine);
+
+        Board compare_board_bad = new Board();
+        compare_board_bad.placeShip(minesweeper);
+        compare_board_good.placeShip(destroyer);
+        compare_board_bad.placeShip(battleship);
+
+        Assertions.assertTrue(first_board.equals(compare_board_good));
+
+        System.out.println(compare_board_bad.placeShip(submarine));
+        Assertions.assertTrue(!first_board.equals(compare_board_bad));
+
+
+    }
+
+    //check output to see if it works
+    @Test
+    void testPrint(){
+        Board test_board = new Board();
+        Point m_point = new Point(0,0);
+        Point d_point = new Point(7,0);
+        Point b_point = new Point(9,0);
+        Point s_point = new Point(7,0);
+        Ship minesweeper = new Minesweeper("v",m_point);
+        Ship destroyer = new Destroyer("v", d_point);
+        Ship battleship = new Battleship("v", b_point);
+        Ship submarine = new Submarine("v", s_point);
+        test_board.placeShip(minesweeper);
+        test_board.placeShip(destroyer);
+        test_board.placeShip(battleship);
+        test_board.placeShip(submarine);
+        System.out.println(test_board.getStateString());
     }
 
 }//boardTest

@@ -23,19 +23,28 @@ class GameTest {
         Point m_point = new Point(0,0);
         Point d_point = new Point(7,0);
         Point b_point = new Point(9,0);
-
+        Point s_point = new Point(7,0);
         Ship minesweeper = new Minesweeper("v",m_point);
         Ship destroyer = new Destroyer("v", d_point);
         Ship battleship = new Battleship("v", b_point);
-
+        Ship submarine = new Submarine("v", s_point);
         test_board.placeShip(minesweeper);
         test_board.placeShip(destroyer);
         test_board.placeShip(battleship);
-
+        test_board.placeShip(submarine);
         Game fresh_game = new Game();
         fresh_game.place("src/test/java/edu/colorado/exhalation/user_commands.txt");
-        Assertions.assertTrue(fresh_game.getBoard().equals(test_board));
 
+       /* for (int i = 0; i < fresh_game.getBoard().getShips().length; i++) {
+            System.out.println(fresh_game.getBoard().getShips()[i]);
+        }
+        for (int i = 0; i < test_board.getShips().length; i++) {
+            System.out.println(test_board.getShips()[i]);
+        }*/
+
+        System.out.println(fresh_game.getBoard().getStateString());
+        System.out.println(test_board.getStateString());
+        Assertions.assertTrue(fresh_game.getBoard().equals(test_board));
     }
 
     @Test

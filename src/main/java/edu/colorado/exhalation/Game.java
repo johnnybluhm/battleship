@@ -19,11 +19,10 @@ public class Game {
     }
 
     //for testing, takes a file as user input
-    public void place(String file_name){
+    //returns -1 on error
+    public int place(String file_name){
 
         File user_moves = new File(file_name);
-
-
         try (FileReader file_reader = new FileReader(user_moves)) {
             //successfully opened file
 
@@ -47,23 +46,42 @@ public class Game {
 
                 if(i ==0){
                     Ship minesweeper = new Minesweeper(orientation, ship_start);
-                    this.getBoard().placeShip(minesweeper);
+                    if(this.getBoard().placeShip(minesweeper) != 1){
+                        System.out.println("Error placing ship");
+                        return -1;
+                    }
                 }
                 else if(i == 1){
                     Ship destroyer = new Destroyer(orientation, ship_start);
-                    this.getBoard().placeShip(destroyer);
+                    if(this.getBoard().placeShip(destroyer) != 1){
+                        System.out.println("Error placing ship");
+                        return -1;
+                    }
                 }
-                else{
+                else if(i==2){
                     Ship battleship = new Battleship(orientation, ship_start);
-                    this.getBoard().placeShip(battleship);
+                    if(this.getBoard().placeShip(battleship) != 1){
+                        System.out.println("Error placing ship");
+                        return -1;
+                    }
+                }
+                else {
+                    Ship submarine = new Submarine(orientation, ship_start);
+                    if(this.getBoard().placeShip(submarine) != 1){
+                        System.out.println("Error placing ship");
+                        return -1;
+                    }
                 }
             }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return -1;
         } catch (IOException e) {
             e.printStackTrace();
+            return -1;
         }
+        return -1;
     }
 
     public void setBoard(Board board){

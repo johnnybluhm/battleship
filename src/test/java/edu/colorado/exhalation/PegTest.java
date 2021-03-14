@@ -24,35 +24,25 @@ class PegTest {
         assertEquals(0, test_peg.getPoint().getY());
     }
     @Test
-    void testPegType(){
-
-    }
-
-    @Test
     void testHit(){
-        assertTrue(test_peg.isHit() == false);
+        assertFalse(test_peg.isHit());
         test_peg.hit();
         assertTrue(test_peg.isHit());
         test_peg.hit();
         assertTrue(test_peg.isHit());
     }
-
     @Test
     void testHasShip(){
 
         Peg no_ship = new Peg(1,0);
-        Peg ship_1 = new Peg(1,0,1);
-        Peg ship_2 = new Peg(1,0);
-        Peg ship_3 = new Peg(1,0, 3);
-
-
+        Peg ship_peg = new Peg(1,0);
+        Ship battle_ship = new Battleship('v', new Point(0,0));
+        ship_peg.setShip(battle_ship);
 
         assertFalse(no_ship.hasShip());
-        assertTrue(ship_1.hasShip());
-        assertTrue(ship_2.hasShip());
-        assertTrue(ship_3.hasShip());
-    }
+        assertTrue(ship_peg.hasShip());
 
+    }
     //O for no hit, X for hit ship, # for hit no ship
     @Test
     void testPegPrint(){
@@ -77,18 +67,13 @@ class PegTest {
 
         ship_peg2.setShip(sweeper);
         assertEquals('2',ship_peg2.print());
-
-
-
-
-
     }
 
     @Test
     void testCopy(){
         Peg first_peg = new Peg(1,0);
         Ship test_ship =new Minesweeper("v", new Point(0,0));
-        Ship test_ship2 =new Minesweeper("v", new Point(2,0));
+        Ship test_ship2 =new Submarine("v", new Point(2,0));
         first_peg.setVisible();
         first_peg.setShip(test_ship);
         Peg copy_peg = first_peg.copy();
@@ -102,4 +87,43 @@ class PegTest {
         assertFalse(second_peg.equals(copy_peg));
 
     }
-}
+    @Test
+    void testEquals(){
+
+        Peg first_peg = new Peg(1,0);
+        Peg compare_peg = new Peg(0,1);
+
+        Assertions.assertFalse(first_peg.equals(compare_peg));
+
+        compare_peg = new Peg(1,0);
+        Assertions.assertTrue(first_peg.equals(compare_peg));
+        compare_peg.hit();
+        Assertions.assertFalse(first_peg.equals(compare_peg));
+        compare_peg = new Peg(1,0);
+        Ship test_ship =new Minesweeper("v", new Point(0,0));
+        Ship test_sub =new Submarine("v", new Point(0,0));
+        first_peg.setShip(test_ship);
+        compare_peg.setShip(test_ship);
+        Assertions.assertTrue(first_peg.equals(compare_peg));
+        first_peg.setSub((Submarine) test_sub);
+        compare_peg.setSub((Submarine) test_sub);
+        Assertions.assertTrue(first_peg.equals(compare_peg));
+
+        Peg copy_peg = first_peg.copy();
+
+        Assertions.assertTrue(copy_peg.equals(first_peg));
+
+        Ship test_battle_ship =new Battleship("v", new Point(0,0));
+        copy_peg.setShip(test_battle_ship);
+        Assertions.assertFalse(first_peg.equals(copy_peg));
+
+        first_peg.setShip(test_battle_ship);
+        compare_peg.setShip(test_battle_ship);
+
+        Assertions.assertTrue(first_peg.equals(compare_peg));
+
+
+
+    }
+}//TEST
+

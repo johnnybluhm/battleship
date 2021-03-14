@@ -11,15 +11,8 @@ public class Peg {
     private boolean visible_;
     private Submarine sub_;
 
-    //keep old construcotrs so we dont have to remake tests
+    //keep old constructor so we don't have to remake tests
     public Peg(int pos_x, int pos_y){
-        this.point_ = new Point(pos_x,pos_y);
-        this.hit_ =false;
-        this.ship_ = null;
-        this.visible_ = false;
-        this.sub_ = null;
-    }
-    public Peg(int pos_x, int pos_y, int type){
         this.point_ = new Point(pos_x,pos_y);
         this.hit_ =false;
         this.ship_ = null;
@@ -70,14 +63,25 @@ public class Peg {
             }
         }//if isHit()
         else{
-            if(this.getShip() == null){
-                return 'O';
+            if(this.getSub() == null && this.getShip() != null) {
+                //only ship
+                String size = String.valueOf(this.getShip().getSIZE());
+                return size.charAt(0);
+            } else if(this.getShip() == null && this.getSub() != null){
+                //only sub
+                String size = String.valueOf(this.getSub().getSIZE());
+                return size.charAt(0);
             }
-            else{
+            else if(this.getSub() != null && this.getShip() != null){
+                //ship and sub
                 String size = String.valueOf(this.getShip().getSIZE());
                 return size.charAt(0);
             }
-        }
+            else{
+                //no ship no sub
+                    return 'O';
+                }
+            }
     }//print
 
    public char printHidden() {
@@ -87,7 +91,6 @@ public class Peg {
             } else {
                 return 'X';
             }
-
         }
         else {
             return 'O';
