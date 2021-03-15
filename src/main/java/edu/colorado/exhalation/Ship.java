@@ -70,9 +70,20 @@ abstract public class Ship {
     abstract public boolean isArmoured();
     abstract public int getSIZE();
 
-    int getHitCount(Point point){
-        return this.hit_count_.get(point);
+    public int getHitCount(Peg peg){
+        return this.hit_count_.get(peg);
     }
+
+    public void setHash(Peg peg, int hit_count){
+        if(this.hit_count_.containsKey(peg)){
+            this.hit_count_.replace(peg,hit_count);
+        }
+        else{
+            this.hit_count_.put(peg, hit_count);
+        }
+    }//setHash
+
+
 
     /*void hit(Point point){
         int count = this.hit_count_.get(point);

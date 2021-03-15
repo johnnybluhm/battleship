@@ -1,7 +1,5 @@
 package edu.colorado.exhalation;
 
-import java.nio.channels.Pipe;
-
 public class Peg {
 
     private Point point_;
@@ -11,6 +9,7 @@ public class Peg {
     private boolean visible_;
     private Submarine sub_;
     private Board board_ = null;
+    private int hit_count_ = 0;
 
     //keep old constructor so we don't have to remake tests
     public Peg(int pos_x, int pos_y){
@@ -44,6 +43,7 @@ public class Peg {
         this.ship_ = copy_peg.getShip();
         this.visible_ = copy_peg.isVisible();
         this.sub_ = copy_peg.getSub();
+        this.hit_count_ = copy_peg.getHitCount();
     }
 
     public boolean isHit() {
@@ -52,6 +52,13 @@ public class Peg {
 
     public void hit() {
         this.hit_ = true;
+        this.hit_count_++;
+        if(ship_!= null){
+            this.getShip().setHash(this, this.hit_count_);
+        }
+        if(this.sub_ != null){
+            this.getSub().setHash(this, this.hit_count_);
+        }
     }//hit
 
     public boolean hasShip(){
@@ -177,5 +184,9 @@ public class Peg {
 
     public void setBoard(Board board) {
         this.board_ = board;
+    }
+
+    public int getHitCount() {
+        return hit_count_;
     }
 }//Peg

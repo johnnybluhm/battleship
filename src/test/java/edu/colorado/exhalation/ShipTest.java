@@ -205,6 +205,78 @@ class ShipTest {
         //Assertions.assertTrue(!submarine.isSunk());
     }
 
+    @Test
+    void testHitCount(){
+
+        //BATTLESHIP
+        Board board = new Board();
+        Point start_point = new Point(5,5);
+        Ship ship= new Battleship('v', start_point);
+        board.placeShip(ship);
+        Point[] hits = Battleship.getVerticalPoints(start_point);
+        for (int i = 0; i < hits.length; i++) {
+            Point point = hits[i];
+            board.hit(point);
+            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 1);
+        }
+        for (int i = 0; i < hits.length; i++) {
+            Point point = hits[i];
+            board.hit(point);
+            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 2);
+        }
+
+        //DESTROYER
+        board = new Board();
+        ship = new Destroyer('v', start_point);
+        board.placeShip(ship);
+        hits = Destroyer.getVerticalPoints(start_point);
+        for (int i = 0; i < hits.length; i++) {
+            Point point = hits[i];
+            board.hit(point);
+            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 1);
+        }
+        for (int i = 0; i < hits.length; i++) {
+            Point point = hits[i];
+            board.hit(point);
+            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 2);
+        }
+
+        //MINESWEEPER
+        board = new Board();
+        ship = new Minesweeper('v', start_point);
+        board.placeShip(ship);
+        hits = Minesweeper.getVerticalPoints(start_point);
+        for (int i = 0; i < hits.length; i++) {
+            Point point = hits[i];
+            board.hit(point);
+            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 1);
+        }
+        for (int i = 0; i < hits.length; i++) {
+            Point point = hits[i];
+            board.hit(point);
+            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 2);
+        }
+
+        //SUB
+        board = new Board();
+        ship = new Submarine('v', start_point);
+        board.placeShip(ship);
+        hits = Submarine.getVerticalPoints(start_point);
+        for (int i = 0; i < hits.length; i++) {
+            Point point = hits[i];
+            board.hit(point);
+            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 1);
+        }
+        for (int i = 0; i < hits.length; i++) {
+            Point point = hits[i];
+            board.hit(point);
+            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 2);
+        }
+
+
+
+    }//hitcounttest
+
 
 
 }

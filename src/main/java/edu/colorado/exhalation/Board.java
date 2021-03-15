@@ -22,7 +22,7 @@ public class Board {
         for(int i =0; i< BOARD_SIZE; i++){
             for(int j = 0; j< BOARD_SIZE;j++){
                 this.peg_array_[i][j] = new Peg(i,j,this);
-                peg_array_[i][j].setShip(new Water(new Point(i,j)));
+                //peg_array_[i][j].setShip(new Water(new Point(i,j)));
             }
         }
     }//constructor
@@ -152,7 +152,7 @@ public class Board {
             //ensure all requested pegs are water
             for(int i = 0; i<point_array.length; i++){
                 Peg peg_for_ship = this.getPeg(point_array[i]);
-                if(!(peg_for_ship.getShip() instanceof Water)){
+                if((peg_for_ship.getShip() != null)){
                     return -3;
                 }
             }
@@ -161,6 +161,7 @@ public class Board {
                 Peg peg_for_ship = this.getPeg(point_array[i]);
                 peg_for_ship.setShip(ship);
                 ship.setPeg(peg_for_ship,i);
+                ship.setHash(peg_for_ship,peg_for_ship.getHitCount());
             }
         }//submarine if
         else{
@@ -173,6 +174,7 @@ public class Board {
                 Peg peg_for_ship = this.getPeg(point_array[i]);
                 peg_for_ship.setSub((Submarine) ship);
                 ship.setPeg(peg_for_ship,i);
+                ship.setHash(peg_for_ship,peg_for_ship.getHitCount());
             }
         }
         this.ships_array_[array_index] = ship;
@@ -182,8 +184,8 @@ public class Board {
     public void hit(Point point){
         Peg peg = this.getPeg(point);
         int weapon = this.getWeapon();
-
-        if(weapon == BOMB){
+        peg.hit();
+        /*if(weapon == BOMB){
             if(peg.getShip() == null || !peg.getShip().isArmoured()){
                 //point has no ship or ship is minesweeper
                 peg.hit();
@@ -223,7 +225,7 @@ public class Board {
                 }
             }//else
 
-        }
+        }*/
 
 
     }//hit
