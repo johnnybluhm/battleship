@@ -99,18 +99,18 @@ class ShipTest {
 
         //loop through point arrays and check that they match
         for(int i =0; i< horizontal_d.length; i++){
-            Assertions.assertTrue(horizontal_d[i].equals(horizontal_destroyer.getPointArray()[i]));
-            Assertions.assertTrue(vertical_d[i].equals(vertical_destroyer.getPointArray()[i]));
+            Assertions.assertTrue(horizontal_d[i].equals(horizontal_destroyer.getPoints()[i]));
+            Assertions.assertTrue(vertical_d[i].equals(vertical_destroyer.getPoints()[i]));
         }
 
         for(int i =0; i< horizontal_b.length; i++){
-            Assertions.assertTrue(horizontal_b[i].equals(horizontal_battleship.getPointArray()[i]));
-            Assertions.assertTrue(vertical_b[i].equals(vertical_battleship.getPointArray()[i]));
+            Assertions.assertTrue(horizontal_b[i].equals(horizontal_battleship.getPoints()[i]));
+            Assertions.assertTrue(vertical_b[i].equals(vertical_battleship.getPoints()[i]));
         }
 
         for(int i =0; i< horizontal_m.length; i++){
-            Assertions.assertTrue(horizontal_m[i].equals(horizontal_minesweeper.getPointArray()[i]));
-            Assertions.assertTrue(vertical_m[i].equals(vertical_minesweeper.getPointArray()[i]));
+            Assertions.assertTrue(horizontal_m[i].equals(horizontal_minesweeper.getPoints()[i]));
+            Assertions.assertTrue(vertical_m[i].equals(vertical_minesweeper.getPoints()[i]));
         }
     }
 

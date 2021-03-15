@@ -5,8 +5,8 @@ public class Water extends Ship{
     final static int CAPTAINS_QUARTERS = 0;
 
     public Water(Point point){
-        this.point_array_ = new Point[SIZE];
-        this.point_array_[0] = point;
+        this.points_ = new Point[SIZE];
+        this.points_[0] = point;
         this.vertical_ = false;
         this.hit_count_.put(point,0);
     }

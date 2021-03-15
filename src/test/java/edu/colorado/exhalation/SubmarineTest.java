@@ -57,12 +57,12 @@ class SubmarineTest {
         Ship horizontal_sub = new Submarine('h', start_point);
 
         for (int i =0; i< horizontal.length; i++){
-            Assertions.assertTrue(horizontal_sub.getPointArray()[i].equals(horizontal[i]));
+            Assertions.assertTrue(horizontal_sub.getPoints()[i].equals(horizontal[i]));
             //System.out.println("POINT 1\n"+horizontal[i]+"\nPOINT 2\n"+horizontal_sub.getPointArray()[i]);
         }
 
         for (int i =0; i< vertical.length; i++){
-            Assertions.assertTrue(vertical_sub.getPointArray()[i].equals(vertical[i]));
+            Assertions.assertTrue(vertical_sub.getPoints()[i].equals(vertical[i]));
         }
     }
 

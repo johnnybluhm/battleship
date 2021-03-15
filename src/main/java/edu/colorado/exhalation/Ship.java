@@ -2,13 +2,14 @@ package edu.colorado.exhalation;
 import java.util.HashMap;
 abstract public class Ship {
 
-    protected Point[] point_array_;
+    protected Point[] points_;
+    protected Peg[] pegs_;
     protected boolean vertical_;
     protected boolean captains_quarters_hit_ = false;
     protected HashMap<Point, Integer> hit_count_ = new HashMap<Point, Integer>();
 
-    public Point[] getPointArray() {
-        return this.point_array_;
+    public Point[] getPoints() {
+        return this.points_;
     }
 
     public boolean isVertical(){
@@ -25,8 +26,8 @@ abstract public class Ship {
 
     public boolean isValid(){
 
-        for(int i =0; i< this.point_array_.length; i++){
-            if(this.point_array_[i].isValid()==false){
+        for(int i = 0; i< this.points_.length; i++){
+            if(this.points_[i].isValid()==false){
                 return false;
             }
         }
@@ -42,8 +43,8 @@ abstract public class Ship {
                 return false;
             }
         }
-        for (int i = 0; i <ship.getPointArray().length; i++) {
-            if(!ship.getPointArray()[i].equals(this.getPointArray()[i])){
+        for (int i = 0; i <ship.getPoints().length; i++) {
+            if(!ship.getPoints()[i].equals(this.getPoints()[i])){
                 return false;
             }
         }
@@ -72,7 +73,7 @@ abstract public class Ship {
     }
 
     public String toString(){
-        return "SHIP START: \n"+ point_array_[0];
+        return "SHIP START: \n"+ points_[0];
     }
 
 

@@ -59,13 +59,13 @@ class GameTest {
         test_board.placeShip(battleship);
 
         //hits every point on every ship and checks that they are sunk
-        Point[] points = minesweeper.getPointArray();
+        Point[] points = minesweeper.getPoints();
         for(int i=0; i< points.length; i++){
             test_board.hit(points[i]);
         }
         Assertions.assertTrue(test_board.isSunk(minesweeper));
 
-        points = destroyer.getPointArray();
+        points = destroyer.getPoints();
         for(int i=0; i< points.length; i++){
             test_board.hit(points[i]);
         }
@@ -73,7 +73,7 @@ class GameTest {
         test_board.hit(points[1]);
         Assertions.assertTrue(test_board.isSunk(destroyer));
 
-        points = battleship.getPointArray();
+        points = battleship.getPoints();
         for(int i=0; i< points.length; i++){
             test_board.hit(points[i]);
         }

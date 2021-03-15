@@ -387,13 +387,13 @@ class BoardTest {
         //System.out.println(board.getHiddenState());
 
         //hits every point on every ship and checks that they are sunk
-        Point[] points = minesweeper.getPointArray();
+        Point[] points = minesweeper.getPoints();
         for(int i=0; i< points.length; i++){
             test_board.hit(points[i]);
         }
         Assertions.assertTrue(test_board.isSunk(minesweeper));
 
-        points = destroyer.getPointArray();
+        points = destroyer.getPoints();
         for(int i=0; i< points.length; i++){
             test_board.hit(points[i]);
         }
@@ -401,7 +401,7 @@ class BoardTest {
         test_board.hit(points[1]);
         Assertions.assertTrue(test_board.isSunk(destroyer));
 
-        points = battleship.getPointArray();
+        points = battleship.getPoints();
         for(int i=0; i< points.length; i++){
             test_board.hit(points[i]);
         }
@@ -558,6 +558,11 @@ class BoardTest {
         //due to cpt's quarter ship should still be up
         Assertions.assertFalse(board.isSunk(battleship));
         //END SUB ARMOURED SHIP UNDERNEATH CASE
+    }
+
+    @Test
+    void testPlace(){
+
     }
 
 }//boardTest

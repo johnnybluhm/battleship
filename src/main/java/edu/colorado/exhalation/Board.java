@@ -143,7 +143,7 @@ public class Board {
         else{
             return -1;
         }
-        Point[] point_array = ship.getPointArray();
+        Point[] point_array = ship.getPoints();
 
 
         if(!(ship instanceof Submarine)){
@@ -190,7 +190,7 @@ public class Board {
             }
             //check if point is captain's quarters point
             else{
-                Point captains_quarters_point = peg.getShip().getPointArray()[peg.getShip().getCaptainsQuarters()];
+                Point captains_quarters_point = peg.getShip().getPoints()[peg.getShip().getCaptainsQuarters()];
                 if(point.equals(captains_quarters_point)){
                     //need to hit twice
                     if(peg.getShip().captainsQuartersHit()){
@@ -210,7 +210,7 @@ public class Board {
             }
             //check if point is captain's quarters point
             else{
-                Point captains_quarters_point = peg.getShip().getPointArray()[peg.getShip().getCaptainsQuarters()];
+                Point captains_quarters_point = peg.getShip().getPoints()[peg.getShip().getCaptainsQuarters()];
                 if(point.equals(captains_quarters_point)){
                     //need to hit twice
                     if(peg.getShip().captainsQuartersHit()){
@@ -237,7 +237,7 @@ public class Board {
     }
 
     public boolean isSunk(Ship ship){
-        Point[] ship_points = ship.getPointArray();
+        Point[] ship_points = ship.getPoints();
         int captains_quarters = ship.getCaptainsQuarters();
         Point captains_quarters_point = ship_points[captains_quarters];
         if(this.getPeg(captains_quarters_point).isHit()){
