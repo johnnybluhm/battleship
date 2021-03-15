@@ -30,6 +30,8 @@ class PegTest {
         assertTrue(test_peg.isHit());
         test_peg.hit();
         assertTrue(test_peg.isHit());
+
+        test_peg.hit();
     }
     @Test
     void testHasShip(){
