@@ -9,7 +9,45 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
 
+    Point[] getVerticalSubPoints(Point start_point){
 
+        int x = start_point.getX();
+        int y = start_point.getY();
+        Point[] vertical_point_array = new Point[5];
+        vertical_point_array[0] = start_point;
+        //tail
+        vertical_point_array[1] = new Point(x,y+1);
+        vertical_point_array[2] = new Point(x,y+2);
+        vertical_point_array[3] = new Point(x,y+3);
+        //bump
+        vertical_point_array[4] = new Point(x+1,y+2);
+
+        for (Point point: vertical_point_array
+        ) {
+            if(!point.isValid()){
+                return null;
+            }
+        }
+        return vertical_point_array;
+    }
+    Point[] getGoodVerticalBattleshipPoints(Point start_point){
+
+        int x = start_point.getX();
+        int y = start_point.getY();
+        Point[] vertical_point_array = new Point[4];
+        vertical_point_array[0] = new Point(0,1);
+        vertical_point_array[1] = new Point(0, 2);
+        vertical_point_array[2] = new Point(0, 3);
+        vertical_point_array[3] = new Point(0, 4);
+
+        for (Point point: vertical_point_array
+        ) {
+            if(!point.isValid()){
+                return null;
+            }
+        }
+        return vertical_point_array;
+    }
     String getEmptyBoardString(){
         String top_of_board = "   A B C D E | F G H I J\n";
         //ensure space at the end of the test string
@@ -493,6 +531,31 @@ class BoardTest {
         Assertions.assertTrue(board.setWeapon(3)== -1);
         board.setWeapon(Board.LASER);
         Assertions.assertTrue(board.getWeapon()== Board.LASER);
+    }
+
+    @Test
+    void testLaser(){
+
+        //SUB ARMOURED SHIP UNDERNEATH CASE
+        Board board = new Board();
+        Point start_point = new Point(5,0);
+        Ship battleship = new Battleship('v', start_point);
+        Ship sub = new Submarine('v', start_point);
+        Point[] b_points = getGoodVerticalBattleshipPoints(start_point);
+        Point[] sub_points = getVerticalSubPoints(start_point);
+        board.placeShip(battleship);
+        board.placeShip(sub);
+        board.setWeapon(Board.LASER);
+
+        //hit sub at every point
+        for (Point point:
+             sub_points) {
+            board.hit(point);
+        }
+        Assertions.assertTrue(board.isSunk(sub));
+        //due to cpt's quarter ship should still be up
+        Assertions.assertFalse(board.isSunk(battleship));
+        //END SUB ARMOURED SHIP UNDERNEATH CASE
     }
 
 }//boardTest

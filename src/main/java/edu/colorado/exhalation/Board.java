@@ -3,6 +3,7 @@ package edu.colorado.exhalation;
 public class Board {
 
     final static int BOARD_SIZE = 10;
+    //weapons
     final static int BOMB = 0;
     final static int LASER = 1;
     //array indexes for ship types
@@ -179,25 +180,33 @@ public class Board {
 
     public void hit(Point point){
         Peg peg = this.getPeg(point);
+        int weapon = this.getWeapon();
 
-        if(peg.getShip() == null || !peg.getShip().isArmoured()){
-            //point has no ship or ship is minesweeper
-            peg.hit();
-        }
-        //check if point is captain's quarters point
-        else{
-            Point captains_quarters_point = peg.getShip().getPointArray()[peg.getShip().getCaptainsQuarters()];
-            if(point.equals(captains_quarters_point)){
-                //need to hit twice
-                if(peg.getShip().captainsQuartersHit()){
-                    //we can set to hit cuz its been hit once before
-                    peg.hit();
-                }
-                else{
-                    peg.getShip().setCaptainsQuartersHit();
-                }
+        if(weapon == BOMB){
+            if(peg.getShip() == null || !peg.getShip().isArmoured()){
+                //point has no ship or ship is minesweeper
+                peg.hit();
             }
-        }//else
+            //check if point is captain's quarters point
+            else{
+                Point captains_quarters_point = peg.getShip().getPointArray()[peg.getShip().getCaptainsQuarters()];
+                if(point.equals(captains_quarters_point)){
+                    //need to hit twice
+                    if(peg.getShip().captainsQuartersHit()){
+                        //we can set to hit cuz its been hit once before
+                        peg.hit();
+                    }
+                    else{
+                        peg.getShip().setCaptainsQuartersHit();
+                    }
+                }
+            }//else
+        }//BOMB
+        else if(weapon == LASER){
+
+        }
+
+
     }//hit
 
     public int getBOARD_SIZE(){
