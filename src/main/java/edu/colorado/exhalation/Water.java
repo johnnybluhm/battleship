@@ -8,7 +8,6 @@ public class Water extends Ship{
         this.points_ = new Point[SIZE];
         this.points_[0] = point;
         this.vertical_ = false;
-        this.hit_count_.put(point,0);
     }
 
     @Override

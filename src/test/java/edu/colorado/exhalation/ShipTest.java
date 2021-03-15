@@ -176,6 +176,35 @@ class ShipTest {
         Assertions.assertTrue((good_vertical_ship.isValid()));
     }
 
+    @Test
+    void testPegArray(){
+        Point start_point = new Point(5,5);
+
+        Ship minesweeper = new Minesweeper('v',start_point);
+        Ship submarine = new Submarine('v', start_point);
+
+        Board board = new Board();
+
+        board.placeShip(minesweeper);
+        board.placeShip(submarine);
+
+        Point[] mine_sweeper_points = Minesweeper.getVerticalPoints(start_point);
+        Point[] sub_points = Submarine.getVerticalPoints(start_point);
+
+        for (int i = 0, battleship_pointsLength = mine_sweeper_points.length; i < battleship_pointsLength; i++) {
+            Point point = mine_sweeper_points[i];
+            Assertions.assertTrue(board.getPeg(point).equals(minesweeper.getPegs()[i]));
+        }
+
+        for (int i = 0, battleship_pointsLength = sub_points.length; i < battleship_pointsLength; i++) {
+            Point point = sub_points[i];
+            Assertions.assertTrue(board.getPeg(point).equals(submarine.getPegs()[i]));
+        }
+
+        //Assertions.assertTrue(minesweeper.isSunk());
+        //Assertions.assertTrue(!submarine.isSunk());
+    }
+
 
 
 }

@@ -6,10 +6,18 @@ abstract public class Ship {
     protected Peg[] pegs_;
     protected boolean vertical_;
     protected boolean captains_quarters_hit_ = false;
-    protected HashMap<Point, Integer> hit_count_ = new HashMap<Point, Integer>();
+    protected HashMap<Peg, Integer> hit_count_ = new HashMap<Peg, Integer>();
 
     public Point[] getPoints() {
         return this.points_;
+    }
+
+    public void setPeg(Peg peg, int index){
+        this.pegs_[index] = peg;
+    }
+
+    public Peg[] getPegs(){
+        return this.pegs_;
     }
 
     public boolean isVertical(){
@@ -66,11 +74,11 @@ abstract public class Ship {
         return this.hit_count_.get(point);
     }
 
-    void hit(Point point){
+    /*void hit(Point point){
         int count = this.hit_count_.get(point);
         count++;
         this.hit_count_.replace(point,count);
-    }
+    }*/
 
     public String toString(){
         return "SHIP START: \n"+ points_[0];

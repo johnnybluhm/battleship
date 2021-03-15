@@ -561,7 +561,28 @@ class BoardTest {
     }
 
     @Test
-    void testPlace(){
+    void testHitting(){
+
+        Point start_point = new Point(5,5);
+
+        Ship minesweeper = new Minesweeper('v',start_point);
+        Ship submarine = new Submarine('v', start_point);
+
+        Board board = new Board();
+
+        board.placeShip(minesweeper);
+        board.placeShip(submarine);
+
+        Point[] battleship_points = Battleship.getVerticalPoints(start_point);
+        Point[] sub_points = Submarine.getVerticalPoints(start_point);
+
+        for (Point point:
+             battleship_points) {
+            board.hit(point);
+        }
+
+        //Assertions.assertTrue(minesweeper.isSunk());
+        //Assertions.assertTrue(!submarine.isSunk());
 
     }
 

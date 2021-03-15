@@ -143,25 +143,24 @@ public class Board {
         else{
             return -1;
         }
+        if(this.ships_array_[array_index] != null){
+            //ship type is already on board
+            return -2;
+        }
         Point[] point_array = ship.getPoints();
-
-
         if(!(ship instanceof Submarine)){
             //ensure all requested pegs are water
             for(int i = 0; i<point_array.length; i++){
                 Peg peg_for_ship = this.getPeg(point_array[i]);
-                if(peg_for_ship.getShip() != null){
-                    return -1;
+                if(!(peg_for_ship.getShip() instanceof Water)){
+                    return -3;
                 }
-            }
-            if(this.ships_array_[array_index] != null){
-                //ship type is already on board
-                return -2;
             }
             //all pegs are water, and no other ship exists
             for(int i = 0; i<point_array.length; i++){
                 Peg peg_for_ship = this.getPeg(point_array[i]);
                 peg_for_ship.setShip(ship);
+                ship.setPeg(peg_for_ship,i);
             }
         }//submarine if
         else{
@@ -173,6 +172,7 @@ public class Board {
             for(int i = 0; i<point_array.length; i++){
                 Peg peg_for_ship = this.getPeg(point_array[i]);
                 peg_for_ship.setSub((Submarine) ship);
+                ship.setPeg(peg_for_ship,i);
             }
         }
         this.ships_array_[array_index] = ship;

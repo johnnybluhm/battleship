@@ -34,22 +34,22 @@ public class Destroyer extends Ship{
             this.vertical_ = true;
             this.points_ = new Point[SIZE];
             this.points_[0] = point;
-            this.hit_count_.put(point,0);
+            this.pegs_ = new Peg[SIZE];
             //gets points below initial point
             for (int i = 1; i< points_.length; i++){
                 this.points_[i] = new Point(this.points_[0].getX(), this.points_[0].getY() + i);
-                this.hit_count_.put(this.points_[i],0);
+
             }//for
         }//if
         else if(orientation == 'h'){
             this.vertical_ =false;
             this.points_ = new Point[SIZE];
             this.points_[0] = point;
-            this.hit_count_.put(point,0);
+
             //gets points that are right to initial point
             for (int i = 1; i< points_.length; i++){
                 this.points_[i] = new Point(this.points_[0].getX() + i, this.points_[0].getY());
-                this.hit_count_.put(this.points_[i],0);
+
             }//for
         }//else if
         else{
