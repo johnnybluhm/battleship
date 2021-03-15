@@ -53,6 +53,12 @@ public class Peg {
     public void hit() {
         this.hit_ = true;
         this.hit_count_++;
+
+        //change hash map value to int array
+        //then we can check how many times peg has been hit by
+        //each weapon
+        //here we do what he have to based on weapon, and can
+        //update hit count in array by doing hit_count_[Board.BOMB]++
         if(ship_!= null){
             this.getShip().setHash(this, this.hit_count_);
         }
