@@ -48,6 +48,13 @@ public class Point {
         }
     }
 
+    public int hashCode(){
+        final int prime = 31;
+        int result =this.getX() + this.getY();
+        result = prime*result;
+        return result;
+    }//hashcode
+
     @Override
     public String toString(){
         return "x: " + this.getX() +"\ny: "+this.getY();

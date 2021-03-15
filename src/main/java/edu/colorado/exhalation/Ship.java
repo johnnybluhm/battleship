@@ -74,5 +74,7 @@ abstract public class Ship {
     public String toString(){
         return "SHIP START: \n"+ point_array_[0];
     }
+
+
 }
 

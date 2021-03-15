@@ -22,6 +22,7 @@ public class Board {
         for(int i =0; i< BOARD_SIZE; i++){
             for(int j = 0; j< BOARD_SIZE;j++){
                 this.peg_array_[i][j] = new Peg(i,j,this);
+                peg_array_[i][j].setShip(new Water(new Point(i,j)));
             }
         }
     }//constructor

@@ -8,7 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class WaterTest {
     @Test
     void testMake(){
+
+        Point test_point = new Point(0,0);
         Ship water = new Water(new Point(0,0));
+
         Assertions.assertTrue(!water.isArmoured());
         Assertions.assertTrue(water.getHitCount(water.getPointArray()[0])==0);
         water.hit(water.getPointArray()[0]);
