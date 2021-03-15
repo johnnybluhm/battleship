@@ -203,6 +203,24 @@ public class Board {
             }//else
         }//BOMB
         else if(weapon == LASER){
+            if(peg.getShip() == null || !peg.getShip().isArmoured()){
+                //point has no ship or ship is nor armoured
+                peg.hit();
+            }
+            //check if point is captain's quarters point
+            else{
+                Point captains_quarters_point = peg.getShip().getPointArray()[peg.getShip().getCaptainsQuarters()];
+                if(point.equals(captains_quarters_point)){
+                    //need to hit twice
+                    if(peg.getShip().captainsQuartersHit()){
+                        //we can set to hit cuz its been hit once before
+                        peg.hit();
+                    }
+                    else{
+                        peg.getShip().setCaptainsQuartersHit();
+                    }
+                }
+            }//else
 
         }
 

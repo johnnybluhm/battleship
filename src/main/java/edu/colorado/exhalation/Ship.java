@@ -1,10 +1,11 @@
 package edu.colorado.exhalation;
-
+import java.util.HashMap;
 abstract public class Ship {
 
     protected Point[] point_array_;
     protected boolean vertical_;
-    protected boolean captains_quarters_hit = false;
+    protected boolean captains_quarters_hit_ = false;
+    protected HashMap<Point, Integer> hit_count_ = new HashMap<Point, Integer>();
 
     public Point[] getPointArray() {
         return this.point_array_;
@@ -50,15 +51,25 @@ abstract public class Ship {
     }
 
     public boolean captainsQuartersHit(){
-        return this.captains_quarters_hit;
+        return this.captains_quarters_hit_;
     }
 
     public void setCaptainsQuartersHit(){
-        this.captains_quarters_hit = true;
+        this.captains_quarters_hit_ = true;
     }
     abstract public int getCaptainsQuarters();
     abstract public boolean isArmoured();
     abstract public int getSIZE();
+
+    int getHitCount(Point point){
+        return this.hit_count_.get(point);
+    }
+
+    void hit(Point point){
+        int count = this.hit_count_.get(point);
+        count++;
+        this.hit_count_.replace(point,count);
+    }
 
     public String toString(){
         return "SHIP START: \n"+ point_array_[0];
