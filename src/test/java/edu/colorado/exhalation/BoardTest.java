@@ -145,7 +145,7 @@ class BoardTest {
         for(int i =0; i< peg_array.length; i++){
             for(int j = 0; j< peg_array[i].length;j++){
                 assertTrue(peg_array[i][j].getPoint().equals(test_board.getPeg(i,j).getPoint()));
-                assertTrue(test_board.getPeg(i,j).getShip() instanceof Water);
+                assertTrue(test_board.getPeg(i,j).getShip() == null);
             }
         }
 
@@ -276,17 +276,25 @@ class BoardTest {
         assertTrue(board_string.equals(test_board.getStateString()));
 
         //method should return -1 as there is already a ship where we are trying to place one
-        assertEquals(-1, test_board.placeShip(bottom_left_corner_ship));
+        assertEquals(-2, test_board.placeShip(bottom_left_corner_ship));
         System.out.println(test_board.getStateString());
 
         Ship second_minesweeper = new Minesweeper('h', new Point(0,2));
         //test placing 2 Minesweepers on the board
         assertEquals(-2, test_board.placeShip(second_minesweeper));
 
-        Ship destroyer = new Destroyer('h', new Point(0,2));
+        Ship destroyer = new Destroyer('h', new Point(0,9));
 
         //test for placing different ship type on top of another
-        assertEquals(-1,test_board.placeShip(destroyer));
+        assertEquals(-3,test_board.placeShip(destroyer));
+
+        //test invalid ship placement
+
+        Board fresh_board = new Board();
+
+        destroyer = new Destroyer('h', new Point(-1,-99));
+
+        assertEquals(-4,test_board.placeShip(destroyer));
     }
 
     @Test
@@ -370,46 +378,7 @@ class BoardTest {
 
     }//testHiddenBoard
 
-    @Test
-    void testIsSunk(){
 
-        //sweeper 0
-        //destoryer 1
-        //bship 2
-        Board test_board = new Board();
-        Ship minesweeper = new Minesweeper('h', new Point(0,0));
-        Ship destroyer = new Destroyer('h', new Point(0,1));
-        Ship  battleship = new Battleship('h', new Point(0,2));
-        test_board.placeShip(minesweeper);
-        test_board.placeShip(destroyer);
-        test_board.placeShip(battleship);
-        //System.out.println(board.getState());
-        //System.out.println(board.getHiddenState());
-
-        //hits every point on every ship and checks that they are sunk
-        Point[] points = minesweeper.getPoints();
-        for(int i=0; i< points.length; i++){
-            test_board.hit(points[i]);
-        }
-        Assertions.assertTrue(test_board.isSunk(minesweeper));
-
-        points = destroyer.getPoints();
-        for(int i=0; i< points.length; i++){
-            test_board.hit(points[i]);
-        }
-        Assertions.assertFalse(test_board.isSunk(destroyer));
-        test_board.hit(points[1]);
-        Assertions.assertTrue(test_board.isSunk(destroyer));
-
-        points = battleship.getPoints();
-        for(int i=0; i< points.length; i++){
-            test_board.hit(points[i]);
-        }
-        Assertions.assertFalse(test_board.isSunk(battleship));
-        test_board.hit(points[2]);
-        Assertions.assertTrue(test_board.isSunk(battleship));
-
-    }//testSunk
 
     @Test
     void testPulseString(){

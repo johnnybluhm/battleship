@@ -6,7 +6,7 @@ abstract public class Ship {
     protected Peg[] pegs_;
     protected boolean vertical_;
     protected boolean captains_quarters_hit_ = false;
-    protected HashMap<Peg, Integer> hit_count_ = new HashMap<Peg, Integer>();
+    protected HashMap<Peg, int[]> peg_to_array_hashMap = new HashMap<Peg, int[]>();
 
     public Point[] getPoints() {
         return this.points_;
@@ -72,16 +72,27 @@ abstract public class Ship {
     abstract public boolean isArmoured();
     abstract public int getSIZE();
 
+    //returns hit count of current weapon
     public int getHitCount(Peg peg){
-        return this.hit_count_.get(peg);
+        int[] hitCount = this.peg_to_array_hashMap.get(peg);
+        return hitCount[peg.getBoard().getWeapon()];
     }
 
-    public void setHash(Peg peg, int hit_count){
-        if(this.hit_count_.containsKey(peg)){
-            this.hit_count_.replace(peg,hit_count);
+    public int getHitCount(Peg peg, int weapon){
+        int[] hitCount = this.peg_to_array_hashMap.get(peg);
+        return hitCount[weapon];
+    }
+
+    public int[] getHitCountArray(Peg peg){
+        return this.peg_to_array_hashMap.get(peg);
+    }
+
+    public void setHash(Peg peg, int[] hit_count){
+        if(this.peg_to_array_hashMap.containsKey(peg)){
+            this.peg_to_array_hashMap.replace(peg,hit_count);
         }
         else{
-            this.hit_count_.put(peg, hit_count);
+            this.peg_to_array_hashMap.put(peg, hit_count);
         }
     }//setHash
 
@@ -90,14 +101,6 @@ abstract public class Ship {
             this.points_[i] = points[i];
         }
     }
-
-
-
-    /*void hit(Point point){
-        int count = this.hit_count_.get(point);
-        count++;
-        this.hit_count_.replace(point,count);
-    }*/
 
     public String toString(){
         return "SHIP START: \n"+ points_[0];

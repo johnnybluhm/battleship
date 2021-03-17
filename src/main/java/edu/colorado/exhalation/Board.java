@@ -4,6 +4,7 @@ public class Board {
 
     final static int BOARD_SIZE = 10;
     //weapons
+    final static int NUM_WEAPONS = 2;
     final static int BOMB = 0;
     final static int LASER = 1;
     //array indexes for ship types
@@ -80,6 +81,8 @@ public class Board {
 
     //returns -1 on most errors
     //returns -2 if ship can be placed, but we already have that ship on the board
+    //returns -3 if ship is trying to be placed on another ship
+    //returns -4 if ship is invalid
     public String getHiddenStateString(){
         String top_of_board = "   A B C D E | F G H I J\n";
         String seperator = "   - - - - - | - - - - -\n";
@@ -127,6 +130,9 @@ public class Board {
 
     //returns -1 on error
     public int placeShip(Ship ship){
+        if(!ship.isValid()){
+            return -4;
+        }
         int array_index;
         if(ship instanceof Minesweeper){
             array_index = MINESWEEPER;
@@ -165,10 +171,6 @@ public class Board {
             }
         }//submarine if
         else{
-            if(this.ships_array_[array_index] != null){
-                //ship type is already on board
-                return -2;
-            }
             //we are placing a submarine, no need to check if water
             for(int i = 0; i<point_array.length; i++){
                 Peg peg_for_ship = this.getPeg(point_array[i]);

@@ -9,7 +9,7 @@ public class Peg {
     private boolean visible_;
     private Submarine sub_;
     private Board board_ = null;
-    private int hit_count_ = 0; // need to change to array of size weapon_num that board will have
+    private int hit_count_[] = new int[Board.NUM_WEAPONS]; // need to change to array of size weapon_num that board will have
 
     //keep old constructor so we don't have to remake tests
     public Peg(int pos_x, int pos_y){
@@ -52,13 +52,8 @@ public class Peg {
 
     public void hit() {
         this.hit_ = true;
-        this.hit_count_++;
+        this.hit_count_[this.board_.getWeapon()] += 1;
 
-        //change hash map value to int array
-        //then we can check how many times peg has been hit by
-        //each weapon
-        //here we do what he have to based on weapon, and can
-        //update hit count in array by doing hit_count_[Board.BOMB]++
         if(ship_!= null){
             this.getShip().setHash(this, this.hit_count_);
         }
@@ -192,7 +187,7 @@ public class Peg {
         this.board_ = board;
     }
 
-    public int getHitCount() {
+    public int[] getHitCount() {
         return hit_count_;
     }
 }//Peg
