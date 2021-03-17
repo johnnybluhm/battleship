@@ -241,15 +241,7 @@ public class Board {
     }
 
     public boolean isSunk(Ship ship){
-        Point[] ship_points = ship.getPoints();
-        int captains_quarters = ship.getCaptainsQuarters();
-        Point captains_quarters_point = ship_points[captains_quarters];
-        if(this.getPeg(captains_quarters_point).isHit()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return ship.isSunk();
     }//isSunk()
 
     public String sonarPulseString(Point point){

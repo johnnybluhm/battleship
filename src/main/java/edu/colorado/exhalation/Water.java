@@ -1,6 +1,7 @@
 package edu.colorado.exhalation;
 
 public class Water extends Ship{
+
     final static int SIZE = 1;
     final static int CAPTAINS_QUARTERS = 0;
 
@@ -23,6 +24,11 @@ public class Water extends Ship{
     @Override
     public int getSIZE() {
         return 0;
+    }
+
+    @Override
+    public boolean isSunk() {
+        return false;
     }
 
 }

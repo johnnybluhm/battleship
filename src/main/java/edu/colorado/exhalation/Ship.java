@@ -5,7 +5,6 @@ abstract public class Ship {
     protected Point[] points_;
     protected Peg[] pegs_;
     protected boolean vertical_;
-    protected boolean captains_quarters_hit_ = false;
     protected HashMap<Peg, int[]> peg_to_array_hashMap = new HashMap<Peg, int[]>();
 
     public Point[] getPoints() {
@@ -61,16 +60,10 @@ abstract public class Ship {
         return true;
     }
 
-    public boolean captainsQuartersHit(){
-        return this.captains_quarters_hit_;
-    }
-
-    public void setCaptainsQuartersHit(){
-        this.captains_quarters_hit_ = true;
-    }
     abstract public int getCaptainsQuarters();
     abstract public boolean isArmoured();
     abstract public int getSIZE();
+    abstract public boolean isSunk();
 
     //returns hit count of current weapon
     public int getHitCount(Peg peg){
@@ -78,11 +71,11 @@ abstract public class Ship {
         return hitCount[peg.getBoard().getWeapon()];
     }
 
+    //other methods may be useful in the future
     public int getHitCount(Peg peg, int weapon){
         int[] hitCount = this.peg_to_array_hashMap.get(peg);
         return hitCount[weapon];
     }
-
     public int[] getHitCountArray(Peg peg){
         return this.peg_to_array_hashMap.get(peg);
     }

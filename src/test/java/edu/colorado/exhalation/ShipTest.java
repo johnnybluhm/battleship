@@ -305,8 +305,6 @@ class ShipTest {
         test_board.placeShip(destroyer);
         test_board.placeShip(battleship);
         test_board.placeShip(submarine);
-        //System.out.println(board.getState());
-        //System.out.println(board.getHiddenState());
 
         //hits every point on every ship and checks that they are sunk
         Point[] points = minesweeper.getPoints();
@@ -330,6 +328,17 @@ class ShipTest {
         Assertions.assertFalse(test_board.isSunk(battleship));
         test_board.hit(points[2]);
         Assertions.assertTrue(test_board.isSunk(battleship));
+
+        points = submarine.getPoints();
+        for(int i=0; i< points.length; i++){
+            test_board.hit(points[i]);
+        }
+        Assertions.assertFalse(test_board.isSunk(submarine));
+        test_board.setWeapon(Board.LASER);
+        for(int i=0; i< points.length; i++){
+            test_board.hit(points[i]);
+        }
+        Assertions.assertTrue(test_board.isSunk(submarine));
 
     }//testSunk
 

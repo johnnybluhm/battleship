@@ -25,6 +25,18 @@ public class Submarine extends Ship{
         return SIZE;
     }
 
+    @Override
+    public boolean isSunk() {
+        Peg captains_quarters = this.getPegs()[CAPTAINS_QUARTERS];
+        int captains_laser_hit_count = this.getHitCount(captains_quarters, Board.LASER);
+        if(captains_laser_hit_count == 1){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public int getCaptainsQuarters(){
         return CAPTAINS_QUARTERS;
     }
