@@ -5,55 +5,20 @@ public class Battleship extends Ship{
     final static int SIZE = 4;
     final static int CAPTAINS_QUARTERS = 2;
 
-    public Battleship(String orientation, Point point){
-        if(orientation.equals("vertical") || orientation.equals("v")){
-            this.vertical_ = true;
-            this.points_ = new Point[SIZE];
-            this.points_[0] = point;
-            //gets points below initial point
-            for (int i = 1; i< points_.length; i++){
-                this.points_[i] = new Point(this.points_[0].getX(), this.points_[0].getY() + i);
-            }//for
-        }//if
-        else if(orientation.equals("horizontal") || orientation.equals("h")){
-            this.vertical_ =false;
-            this.points_ = new Point[SIZE];
-            this.points_[0] = point;
-            //gets points that are right to initial point
-            for (int i = 1; i< points_.length; i++){
-                this.points_[i] = new Point(this.points_[0].getX() + i, this.points_[0].getY());
-            }//for
-        }//else if
-        else{
-            this.points_ = null;
-        }
-    }//constructor
-
     public Battleship(char orientation, Point point){
         if(orientation == 'v'){
             this.vertical_ = true;
             this.points_ = new Point[SIZE];
-            this.points_[0] = point;
             this.pegs_ = new Peg[SIZE];
-            //gets points below initial point
-            for (int i = 1; i< points_.length; i++){
-                this.points_[i] = new Point(this.points_[0].getX(), this.points_[0].getY() + i);
-
-            }//for
+            Point[] points = getVerticalPoints(point);
+            this.setPoints(points);
         }//if
         else if(orientation == 'h'){
-            this.vertical_ =false;
+            this.vertical_ = false;
             this.points_ = new Point[SIZE];
-            this.points_[0] = point;
-
-            //gets points that are right to initial point
-            for (int i = 1; i< points_.length; i++){
-                this.points_[i] = new Point(this.points_[0].getX() + i, this.points_[0].getY());
-
-            }//for
-        }//else if
-        else{
-            this.points_ = null;
+            this.pegs_ = new Peg[SIZE];
+            Point[] points = getHorizontalPoints(point);
+            this.setPoints(points);
         }
     }//constructor
 
@@ -80,12 +45,6 @@ public class Battleship extends Ship{
         vertical_point_array[1] = new Point(x,y+1);
         vertical_point_array[2] = new Point(x,y+2);
         vertical_point_array[3] = new Point(x,y+3);
-        for (Point point: vertical_point_array
-        ) {
-            if(!point.isValid()){
-                return null;
-            }
-        }
         return vertical_point_array;
     }
 
@@ -97,13 +56,7 @@ public class Battleship extends Ship{
         //tail
         vertical_point_array[1] = new Point(x+1,y);
         vertical_point_array[2] = new Point(x+2,y);
-        vertical_point_array[2] = new Point(x+3,y);
-        for (Point point: vertical_point_array
-        ) {
-            if(!point.isValid()){
-                return null;
-            }
-        }
+        vertical_point_array[3] = new Point(x+3,y);
         return vertical_point_array;
     }
 }//battleship

@@ -24,10 +24,10 @@ class GameTest {
         Point d_point = new Point(7,0);
         Point b_point = new Point(9,0);
         Point s_point = new Point(7,0);
-        Ship minesweeper = new Minesweeper("v",m_point);
-        Ship destroyer = new Destroyer("v", d_point);
-        Ship battleship = new Battleship("v", b_point);
-        Ship submarine = new Submarine("v", s_point);
+        Ship minesweeper = new Minesweeper('v',m_point);
+        Ship destroyer = new Destroyer('v', d_point);
+        Ship battleship = new Battleship('v', b_point);
+        Ship submarine = new Submarine('v', s_point);
         test_board.placeShip(minesweeper);
         test_board.placeShip(destroyer);
         test_board.placeShip(battleship);
@@ -51,9 +51,9 @@ class GameTest {
     void testWinner(){
 
         Board test_board = new Board();
-        Ship minesweeper = new Minesweeper("horizontal", new Point(0,0));
-        Ship destroyer = new Destroyer("horizontal", new Point(0,1));
-        Ship  battleship = new Battleship("horizontal", new Point(0,2));
+        Ship minesweeper = new Minesweeper('h', new Point(0,0));
+        Ship destroyer = new Destroyer('h', new Point(0,1));
+        Ship  battleship = new Battleship('h', new Point(0,2));
         test_board.placeShip(minesweeper);
         test_board.placeShip(destroyer);
         test_board.placeShip(battleship);

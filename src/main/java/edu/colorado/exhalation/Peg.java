@@ -9,7 +9,7 @@ public class Peg {
     private boolean visible_;
     private Submarine sub_;
     private Board board_ = null;
-    private int hit_count_ = 0; // need to change to array of size weapon_num that board will have 
+    private int hit_count_ = 0; // need to change to array of size weapon_num that board will have
 
     //keep old constructor so we don't have to remake tests
     public Peg(int pos_x, int pos_y){

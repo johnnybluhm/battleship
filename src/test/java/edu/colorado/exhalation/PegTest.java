@@ -74,8 +74,8 @@ class PegTest {
     @Test
     void testCopy(){
         Peg first_peg = new Peg(1,0);
-        Ship test_ship =new Minesweeper("v", new Point(0,0));
-        Ship test_ship2 =new Submarine("v", new Point(2,0));
+        Ship test_ship =new Minesweeper('v', new Point(0,0));
+        Ship test_ship2 =new Submarine('v', new Point(2,0));
         first_peg.setVisible();
         first_peg.setShip(test_ship);
         Peg copy_peg = first_peg.copy();
@@ -102,8 +102,8 @@ class PegTest {
         compare_peg.hit();
         Assertions.assertFalse(first_peg.equals(compare_peg));
         compare_peg = new Peg(1,0);
-        Ship test_ship =new Minesweeper("v", new Point(0,0));
-        Ship test_sub =new Submarine("v", new Point(0,0));
+        Ship test_ship =new Minesweeper('v', new Point(0,0));
+        Ship test_sub =new Submarine('v', new Point(0,0));
         first_peg.setShip(test_ship);
         compare_peg.setShip(test_ship);
         Assertions.assertTrue(first_peg.equals(compare_peg));
@@ -115,7 +115,7 @@ class PegTest {
 
         Assertions.assertTrue(copy_peg.equals(first_peg));
 
-        Ship test_battle_ship =new Battleship("v", new Point(0,0));
+        Ship test_battle_ship =new Battleship('v', new Point(0,0));
         copy_peg.setShip(test_battle_ship);
         Assertions.assertFalse(first_peg.equals(copy_peg));
 

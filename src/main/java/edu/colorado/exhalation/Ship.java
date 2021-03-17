@@ -33,9 +33,11 @@ abstract public class Ship {
     }
 
     public boolean isValid(){
-
+        if(points_ == null){
+            return false;
+        }
         for(int i = 0; i< this.points_.length; i++){
-            if(this.points_[i].isValid()==false){
+            if(!this.points_[i].isValid()){
                 return false;
             }
         }
@@ -82,6 +84,12 @@ abstract public class Ship {
             this.hit_count_.put(peg, hit_count);
         }
     }//setHash
+
+    public void setPoints(Point[] points){
+        for (int i =0; i< points.length; i++){
+            this.points_[i] = points[i];
+        }
+    }
 
 
 

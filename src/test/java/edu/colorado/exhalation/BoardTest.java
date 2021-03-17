@@ -267,7 +267,7 @@ class BoardTest {
 
         Board test_board = new Board();
 
-        Ship bottom_left_corner_ship = new Minesweeper("horizontal", new Point(0,9)) ;
+        Ship bottom_left_corner_ship = new Minesweeper('h', new Point(0,9)) ;
 
         test_board.placeShip(bottom_left_corner_ship);
 
@@ -279,11 +279,11 @@ class BoardTest {
         assertEquals(-1, test_board.placeShip(bottom_left_corner_ship));
         System.out.println(test_board.getStateString());
 
-        Ship second_minesweeper = new Minesweeper("horizontal", new Point(0,2));
+        Ship second_minesweeper = new Minesweeper('h', new Point(0,2));
         //test placing 2 Minesweepers on the board
         assertEquals(-2, test_board.placeShip(second_minesweeper));
 
-        Ship destroyer = new Destroyer("horizontal", new Point(0,2));
+        Ship destroyer = new Destroyer('h', new Point(0,2));
 
         //test for placing different ship type on top of another
         assertEquals(-1,test_board.placeShip(destroyer));
@@ -322,9 +322,9 @@ class BoardTest {
 
         Board test_board = new Board();
 
-        Ship bottom_left_corner_ship = new Minesweeper("horizontal", new Point(0, 9));
-        Ship top_right_corner_down_ship = new Battleship("vertical", new Point(9, 0));
-        Ship middle_destroyer = new Destroyer("horizontal", new Point(5, 6));
+        Ship bottom_left_corner_ship = new Minesweeper('h', new Point(0, 9));
+        Ship top_right_corner_down_ship = new Battleship('v', new Point(9, 0));
+        Ship middle_destroyer = new Destroyer('h', new Point(5, 6));
         test_board.placeShip(bottom_left_corner_ship);
         test_board.placeShip(top_right_corner_down_ship);
         test_board.placeShip(middle_destroyer);
@@ -377,9 +377,9 @@ class BoardTest {
         //destoryer 1
         //bship 2
         Board test_board = new Board();
-        Ship minesweeper = new Minesweeper("horizontal", new Point(0,0));
-        Ship destroyer = new Destroyer("horizontal", new Point(0,1));
-        Ship  battleship = new Battleship("horizontal", new Point(0,2));
+        Ship minesweeper = new Minesweeper('h', new Point(0,0));
+        Ship destroyer = new Destroyer('h', new Point(0,1));
+        Ship  battleship = new Battleship('h', new Point(0,2));
         test_board.placeShip(minesweeper);
         test_board.placeShip(destroyer);
         test_board.placeShip(battleship);
@@ -415,9 +415,9 @@ class BoardTest {
     void testPulseString(){
         Board board = new Board();
 
-        Ship minesweeper = new Minesweeper("horizontal", new Point(0,0));
-        Ship destroyer = new Destroyer("horizontal", new Point(0,1));
-        Ship  battleship = new Battleship("horizontal", new Point(0,2));
+        Ship minesweeper = new Minesweeper('h', new Point(0,0));
+        Ship destroyer = new Destroyer('h', new Point(0,1));
+        Ship  battleship = new Battleship('h', new Point(0,2));
         board.placeShip(minesweeper);
         board.placeShip(destroyer);
         board.placeShip(battleship);
@@ -425,9 +425,9 @@ class BoardTest {
 
         Board test_board = new Board();
 
-        Ship bottom_left_corner_ship = new Minesweeper("horizontal", new Point(3, 6));
-        Ship top_right_corner_down_ship = new Battleship("horizontal", new Point(3, 5));
-        Ship middle_destroyer = new Destroyer("horizontal", new Point(3, 4));
+        Ship bottom_left_corner_ship = new Minesweeper('h', new Point(3, 6));
+        Ship top_right_corner_down_ship = new Battleship('h', new Point(3, 5));
+        Ship middle_destroyer = new Destroyer('h', new Point(3, 4));
         test_board.placeShip(bottom_left_corner_ship);
         test_board.placeShip(top_right_corner_down_ship);
         test_board.placeShip(middle_destroyer);
@@ -477,10 +477,10 @@ class BoardTest {
         Point d_point = new Point(7,0);
         Point b_point = new Point(9,0);
         Point s_point = new Point(7,0);
-        Ship minesweeper = new Minesweeper("v",m_point);
-        Ship destroyer = new Destroyer("v", d_point);
-        Ship battleship = new Battleship("v", b_point);
-        Ship submarine = new Submarine("v", s_point);
+        Ship minesweeper = new Minesweeper('v',m_point);
+        Ship destroyer = new Destroyer('v', d_point);
+        Ship battleship = new Battleship('v', b_point);
+        Ship submarine = new Submarine('v', s_point);
         first_board.placeShip(minesweeper);
         first_board.placeShip(destroyer);
         first_board.placeShip(battleship);
@@ -513,10 +513,10 @@ class BoardTest {
         Point d_point = new Point(7,0);
         Point b_point = new Point(9,0);
         Point s_point = new Point(7,0);
-        Ship minesweeper = new Minesweeper("v",m_point);
-        Ship destroyer = new Destroyer("v", d_point);
-        Ship battleship = new Battleship("v", b_point);
-        Ship submarine = new Submarine("v", s_point);
+        Ship minesweeper = new Minesweeper('v',m_point);
+        Ship destroyer = new Destroyer('v', d_point);
+        Ship battleship = new Battleship('v', b_point);
+        Ship submarine = new Submarine('v', s_point);
         test_board.placeShip(minesweeper);
         test_board.placeShip(destroyer);
         test_board.placeShip(battleship);
