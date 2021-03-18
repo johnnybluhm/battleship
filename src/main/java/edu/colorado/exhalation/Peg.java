@@ -3,7 +3,6 @@ package edu.colorado.exhalation;
 public class Peg {
 
     private Point point_;
-
     private boolean hit_;
     private Ship ship_;
     private boolean visible_;
@@ -165,7 +164,7 @@ public class Peg {
     @Override
     public String toString() {
         if (this.getShip() == null) {
-            return "Point :\n" + this.point_ + "\nVisibility: " + this.visible_ +"\nHit: " + this.hit_ + "Ship: NULL";
+            return "Point :\n" + this.point_ + "\nVisibility: " + this.visible_ +"\nHit: " + this.hit_ + "\nShip: NULL";
         } else {
             return "Point :\n"  + this.point_ + "\nVisibility: " +this.visible_+"\nHit: "+this.hit_+"\nShip: \n"+this.getShip();
         }

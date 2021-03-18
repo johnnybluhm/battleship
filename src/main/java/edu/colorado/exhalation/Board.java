@@ -445,4 +445,17 @@ public class Board {
             return -1;
         }
     }
+
+    public void move(char direction){
+
+        if(direction == 'E'){
+            for (Ship ship:
+                 this.getShips()) {
+                if(ship != null){
+                    ship.move(direction);
+                }
+
+            }
+        }//East
+    }
 }//Board

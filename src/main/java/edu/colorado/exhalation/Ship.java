@@ -99,6 +99,48 @@ abstract public class Ship {
         return "SHIP START: \n"+ points_[0];
     }
 
+    public void move(char direction){
+        Peg[] pegs = this.getPegs();
+        Point[] new_points = new Point[this.getPoints().length];
+        for (Peg peg:
+             this.getPegs()) {
+            System.out.println(peg);
+        }
+        System.out.println("NEXT");
+        if(direction == 'E'){
+            for (int i = 0; i < pegs.length; i++) {
+
+                Peg current_peg = pegs[i];
+                if(this instanceof Submarine){
+                    current_peg.setSub(null);
+                }
+                else{
+                    current_peg.setShip(null);
+                }
+
+                Peg next_peg;
+                Point current_peg_point = current_peg.getPoint();
+                Point next_peg_point = new Point(current_peg_point.getX()+1, current_peg_point.getY());
+                next_peg = current_peg.getBoard().getPeg(next_peg_point);
+                if(this instanceof Submarine){
+                    next_peg.setSub((Submarine) this);
+                }
+                else{
+                    current_peg.setShip(this);
+                }
+                this.setPeg(next_peg,i);
+                new_points[i] = next_peg_point;
+
+            }
+            for (Peg peg:
+                    this.getPegs()) {
+                System.out.println(peg);
+            }
+            this.setPoints(new_points);
+
+        }//East
+    }
+
 
 }
 
