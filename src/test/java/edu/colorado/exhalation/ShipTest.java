@@ -296,50 +296,75 @@ class ShipTest {
     @Test
     void testIsSunk(){
 
-        Board test_board = new Board();
+        Board board = new Board();
         Ship minesweeper = new Minesweeper('h', new Point(0,0));
         Ship destroyer = new Destroyer('h', new Point(0,1));
         Ship  battleship = new Battleship('h', new Point(0,2));
         Ship submarine = new Submarine('h', new Point(0,3));
-        test_board.placeShip(minesweeper);
-        test_board.placeShip(destroyer);
-        test_board.placeShip(battleship);
-        test_board.placeShip(submarine);
+        board.placeShip(minesweeper);
+        board.placeShip(destroyer);
+        board.placeShip(battleship);
+        board.placeShip(submarine);
 
         //hits every point on every ship and checks that they are sunk
         Point[] points = minesweeper.getPoints();
         for(int i=0; i< points.length; i++){
-            test_board.hit(points[i]);
+            board.hit(points[i]);
         }
-        Assertions.assertTrue(test_board.isSunk(minesweeper));
+        Assertions.assertTrue(board.isSunk(minesweeper));
 
         points = destroyer.getPoints();
         for(int i=0; i< points.length; i++){
-            test_board.hit(points[i]);
+            board.hit(points[i]);
         }
-        Assertions.assertFalse(test_board.isSunk(destroyer));
-        test_board.hit(points[1]);
-        Assertions.assertTrue(test_board.isSunk(destroyer));
+        Assertions.assertFalse(board.isSunk(destroyer));
+        board.hit(points[1]);
+        Assertions.assertTrue(board.isSunk(destroyer));
 
         points = battleship.getPoints();
         for(int i=0; i< points.length; i++){
-            test_board.hit(points[i]);
+            board.hit(points[i]);
         }
-        Assertions.assertFalse(test_board.isSunk(battleship));
-        test_board.hit(points[2]);
-        Assertions.assertTrue(test_board.isSunk(battleship));
+        Assertions.assertFalse(board.isSunk(battleship));
+        board.hit(points[2]);
+        Assertions.assertTrue(board.isSunk(battleship));
 
         points = submarine.getPoints();
         for(int i=0; i< points.length; i++){
-            test_board.hit(points[i]);
+            board.hit(points[i]);
         }
-        Assertions.assertFalse(test_board.isSunk(submarine));
-        test_board.setWeapon(Board.LASER);
+        Assertions.assertFalse(board.isSunk(submarine));
+        board.setWeapon(Board.LASER);
         for(int i=0; i< points.length; i++){
-            test_board.hit(points[i]);
+            board.hit(points[i]);
         }
-        Assertions.assertTrue(test_board.isSunk(submarine));
+        Assertions.assertTrue(board.isSunk(submarine));
 
     }//testSunk
+
+    @Test
+    void testShift(){
+        Board board = new Board();
+        Ship minesweeper = new Minesweeper('h', new Point(0,0));
+        Ship destroyer = new Destroyer('h', new Point(0,1));
+        Ship  battleship = new Battleship('h', new Point(0,2));
+        Ship submarine = new Submarine('h', new Point(0,3));
+        board.placeShip(minesweeper);
+        board.placeShip(destroyer);
+        board.placeShip(battleship);
+        board.placeShip(submarine);
+
+        Board shift_right_board = new Board();
+
+        minesweeper = new Minesweeper('h', new Point(1,0));
+        destroyer = new Destroyer('h', new Point(1,1));
+        battleship = new Battleship('h', new Point(1,2));
+        submarine = new Submarine('h', new Point(1,3));
+
+        board.move('E');
+
+        Assertions.assertTrue(board.equals(shift_right_board));
+
+    }
 
 }
