@@ -50,6 +50,8 @@ public class CommandTest {
         //undo_board.placeShip(submarine);
 
 
+
+
         minesweeper = new Minesweeper('h', new Point(0,0));
         destroyer = new Destroyer('h', new Point(0,1));
         battleship = new Battleship('h', new Point(0,2));
@@ -70,15 +72,17 @@ public class CommandTest {
         //System.out.println(compare_board.getStateString());
         //System.out.println(game_.getBoard().getStateString());
         //System.out.println(compare_board.getPeg(0,0));
-
+        for (int i = 0; i < game.getBoard().getShips().length; i++) {
+            System.out.println(game.getBoard().getShips()[i]);
+        }
         testingCommands.Undo(); // No slot here because things to undo are stored in a stack
-        System.out.println(game.getBoard().getPeg(0,0));
-        System.out.println(game.getBoard().getPeg(1,0));
-        System.out.println("--------COMPARE NEXT");
-        System.out.println(compare_board.getPeg(0,0));
-        System.out.println(compare_board.getPeg(1,0));
-        System.out.println(game.getBoard().getStateString());
-        System.out.println(compare_board.getStateString());
+
+        for (int i = 0; i < game.getBoard().getShips().length; i++) {
+            System.out.println(game.getBoard().getShips()[i]);
+        }
+        for (int i = 0; i < compare_board.getShips().length; i++) {
+            System.out.println(compare_board.getShips()[i]);
+        }
         Assertions.assertTrue(game.getBoard().equals(compare_board));
     }
 

@@ -21,6 +21,16 @@ public class Minesweeper extends Ship{
             this.setPoints(points);
         }
     }//constructor
+
+    public Minesweeper(Ship copy_ship){
+        this.vertical_ = copy_ship.isVertical();
+        this.points_ = new Point[SIZE];
+        this.pegs_ = new Peg[SIZE];
+        Point[] points = copy_ship.getPoints();
+        this.setPoints(points);
+        this.pegs_ = copy_ship.getPegs();
+    }
+
     public int getSIZE(){
         return SIZE;
     }

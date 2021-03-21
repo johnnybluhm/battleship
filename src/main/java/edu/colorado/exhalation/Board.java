@@ -412,7 +412,33 @@ public class Board {
                 copy_board.getPegArray()[i][j] = this.getPeg(i,j).copy();
             }
         }
-        copy_board.setShips(this.getShips());
+        Ship[] ships = this.getShips();
+        Ship[] new_ships = new Ship[this.getShips().length];
+        Ship copy_ship;
+        for (int i = 0; i < ships.length; i++) {
+            Ship ship = ships[i];
+            if(ship instanceof Minesweeper){
+                copy_ship = new Minesweeper(ship);
+                new_ships[i] = copy_ship;
+            }
+            else if(ship instanceof Destroyer){
+                copy_ship = new Destroyer(ship);
+                new_ships[i] = copy_ship;
+            }
+            else if(ship instanceof Battleship){
+                copy_ship = new Battleship(ship);
+                new_ships[i] = copy_ship;
+            }
+            else if(ship instanceof Submarine){
+                copy_ship = new Submarine(ship);
+                new_ships[i] = copy_ship;
+            }
+
+
+        }
+
+
+        copy_board.setShips(new_ships);
         copy_board.setWeapon(this.getWeapon());
         return copy_board;
     }

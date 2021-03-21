@@ -75,4 +75,13 @@ public class Submarine extends Ship{
         return horizontal_point_array;
     }
 
+    public Submarine(Ship copy_ship){
+        this.vertical_ = copy_ship.isVertical();
+        this.points_ = new Point[SIZE];
+        this.pegs_ = new Peg[SIZE];
+        Point[] points = copy_ship.getPoints();
+        this.setPoints(points);
+        this.pegs_ = copy_ship.getPegs();
+    }
+
 }

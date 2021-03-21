@@ -99,6 +99,8 @@ abstract public class Ship {
         return true;
     }
 
+
+
 //    public void move(char direction){
 //        Peg[] pegs = this.getPegs(); // gets pegs that ship is on
 //        int length = pegs.length;
