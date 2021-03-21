@@ -451,7 +451,7 @@ public class Board {
         if(direction == 'E'){
             for (Ship ship:
                  this.getShips()) { // loops through the ships on the board
-                if(ship != null){ // makes sure ship actually exists
+                if(!ship.isSunk()){ // makes sure ship actually exists
                     //ship.move(direction);
                     Peg[] pegs = ship.getPegs(); // gets pegs that ship is on
                     int length = pegs.length;
