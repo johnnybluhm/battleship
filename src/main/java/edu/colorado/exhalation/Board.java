@@ -433,11 +433,7 @@ public class Board {
                 copy_ship = new Submarine(ship);
                 new_ships[i] = copy_ship;
             }
-
-
         }
-
-
         copy_board.setShips(new_ships);
         copy_board.setWeapon(this.getWeapon());
         return copy_board;
@@ -476,13 +472,16 @@ public class Board {
         }
     }
 
-    public void move(char direction){
+    public void move(char direction) {
 
-        if(direction == 'E'){
-            for (Ship ship:
-                 this.getShips()) { // loops through the ships on the board
-                if(ship != null && !ship.isSunk()){ // makes sure ship isn't sunk and not null
-                    Peg[] pegs = ship.getPegs(); // gets pegs that ship is on
+        if (direction == 'E') {
+            for (Ship ship :
+                    this.getShips()) { // loops through the ships on the board
+                if (ship != null && !ship.isSunk()) { // makes sure ship isn't sunk and not null
+
+                    ship.move(direction);
+
+                    /*Peg[] pegs = ship.getPegs(); // gets pegs that ship is on
                     int length = pegs.length;
 
                     if(pegs[length - 1].getPoint().getX() == 9){ // Ship cannot go any further East, it's on the edge of the map
@@ -542,9 +541,11 @@ public class Board {
                         }
                     }
                 }
+            }*/
+                }//East
             }
-        }//East
-    }
+        }
+    }//move
 
     public void setShips(Ship[] ships){
         this.ships_array_ = ships;

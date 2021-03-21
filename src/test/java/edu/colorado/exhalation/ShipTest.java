@@ -365,7 +365,7 @@ class ShipTest {
         shift_right_board.placeShip(submarine);
 
 
-
+        System.out.println(board.getStateString());
         board.move('E');
         System.out.println(board.getStateString());
         System.out.println(shift_right_board.getStateString());

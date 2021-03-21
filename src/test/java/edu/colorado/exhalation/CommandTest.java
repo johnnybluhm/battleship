@@ -3,6 +3,8 @@ package edu.colorado.exhalation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Stack;
+
 public class CommandTest {
 
     @Test
@@ -41,7 +43,7 @@ public class CommandTest {
         Board undo_board = new Board();
         Board compare_board = new Board();
         Ship minesweeper = new Minesweeper('h', new Point(0,0));
-        Ship destroyer = new Destroyer('h', new Point(0,1));
+        Ship destroyer = new Destroyer('h', new Point(4,4));
         Ship  battleship = new Battleship('h', new Point(0,2));
         Ship submarine = new Submarine('h', new Point(0,3));
         undo_board.placeShip(minesweeper);
@@ -50,17 +52,21 @@ public class CommandTest {
         //undo_board.placeShip(submarine);
 
 
-
+        Stack<Board> stack = new Stack<Board>();
+        stack.push(undo_board.copy());
+        undo_board.move('E');
 
         minesweeper = new Minesweeper('h', new Point(0,0));
-        destroyer = new Destroyer('h', new Point(0,1));
+        destroyer = new Destroyer('h', new Point(4,4));
         battleship = new Battleship('h', new Point(0,2));
         submarine = new Submarine('h', new Point(0,3));
         compare_board.placeShip(minesweeper);
+
+        Assertions.assertTrue(stack.pop().equals(compare_board));
         //compare_board.placeShip(destroyer);
         //compare_board.placeShip(battleship);
         //compare_board.placeShip(submarine);
-        Game game = new Game();
+        /*Game game = new Game();
         game.setBoard(undo_board);
 
 
@@ -69,21 +75,57 @@ public class CommandTest {
         testingCommands.Move(0, 'E'); // Need to move in order to have something to undo
 
         //testingCommands.Undo(); // No slot here because things to undo are stored in a stack
-        //System.out.println(compare_board.getStateString());
-        //System.out.println(game_.getBoard().getStateString());
-        //System.out.println(compare_board.getPeg(0,0));
-        for (int i = 0; i < game.getBoard().getShips().length; i++) {
-            System.out.println(game.getBoard().getShips()[i]);
-        }
-        testingCommands.Undo(); // No slot here because things to undo are stored in a stack
+        System.out.println(compare_board.getStateString());
+        System.out.println(game.getBoard().getStateString());
+        System.out.println(compare_board.getPeg(0,0));
+        System.out.println(game.getBoard().getPeg(0,0));
 
-        for (int i = 0; i < game.getBoard().getShips().length; i++) {
-            System.out.println(game.getBoard().getShips()[i]);
-        }
-        for (int i = 0; i < compare_board.getShips().length; i++) {
-            System.out.println(compare_board.getShips()[i]);
-        }
-        Assertions.assertTrue(game.getBoard().equals(compare_board));
+        testingCommands.Undo(); // No slot here because things to undo are stored in a stack
+        System.out.println(compare_board.getPeg(0,0));
+        System.out.println(game.getBoard().getPeg(0,0));*/
+        //System.out.println(game.getBoard().getStateString());
+        //Assertions.assertTrue(undo_board.equals(compare_board));
+    }
+
+    @Test
+    void testStack(){
+        Board board = new Board();
+        Board compare_board = new Board();
+        Ship minesweeper = new Minesweeper('h', new Point(0,0));
+        Ship destroyer = new Destroyer('h', new Point(4,4));
+        Ship  battleship = new Battleship('h', new Point(0,2));
+        Ship submarine = new Submarine('h', new Point(0,3));
+        Board board2 = new Board();
+        Board compare_board2 = new Board();
+        Ship minesweeper2 = new Minesweeper('h', new Point(0,0));
+        Ship destroyer2 = new Destroyer('h', new Point(4,4));
+        Ship  battleship2 = new Battleship('h', new Point(0,2));
+        Ship submarine2 = new Submarine('h', new Point(0,3));
+
+        Stack<Board> stack = new Stack<Board>();
+        stack.push(board.copy());
+        Assertions.assertTrue(stack.pop().equals(board2));
+
+        board.placeShip(minesweeper);
+        Board board1_copy = board.copy();
+        board2.placeShip(minesweeper2);
+        stack.push(board);
+        Assertions.assertTrue(stack.pop().equals(board1_copy));
+        stack.push(board);
+        board.move('E');
+        Assertions.assertTrue(stack.pop().equals(board1_copy));
+
+
+
+
+
+
+
+
+
+
+
+        //undo_board.move('E');
     }
 
     @Test
