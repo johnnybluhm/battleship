@@ -463,6 +463,7 @@ public class Board {
 //                    System.out.println("NEXT");
 //                    if(direction == 'E'){ // direction ships are moving is East
                     if(pegs[length - 1].getPoint().getX() == 9){ // Ship cannot go any further East, it's on the edge of the map
+                        //do not move ship
                         System.out.println("SHIP NAME cannot move any further East, it's on the East edge of the board!");
                     }
                     else { // Ship can move East
@@ -476,7 +477,7 @@ public class Board {
 
                         //tail_of_ship.setSub(null);
                         tail_of_ship.setShip(null);
-                        tail_of_ship.setBoard(this);
+                        tail_of_ship.setBoard(this); //shouldn't have to change, as the board is a reference to the board
                         tail_of_ship.setSub(null);
 
                         //next_peg.setSub(head_of_ship.getSub());
