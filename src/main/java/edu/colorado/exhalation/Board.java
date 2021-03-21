@@ -420,6 +420,8 @@ public class Board {
             for(int j = 0; j< BOARD_SIZE;j++){
                 Point test_point = new Point(i,j);
                 if(!this.getPeg(test_point).equals(compare_board.getPeg(test_point))){
+                    //System.out.println(this.getPeg(test_point));
+                    //System.out.println(compare_board.getPeg(test_point));
                     return false;
                 }
             }
@@ -451,42 +453,63 @@ public class Board {
         if(direction == 'E'){
             for (Ship ship:
                  this.getShips()) { // loops through the ships on the board
-                if(!ship.isSunk()){ // makes sure ship actually exists
-                    //ship.move(direction);
+                if(ship != null && !ship.isSunk()){ // makes sure ship isn't sunk and not null
                     Peg[] pegs = ship.getPegs(); // gets pegs that ship is on
                     int length = pegs.length;
-                    Point[] new_points = new Point[length]; // new array of points for where ship is moving to
-//                    for (Peg peg:
-//                            this.getPegs()) { // iterates through this.getPegs() and prints them out, troubleshooting it looks like
-//                        System.out.println(peg);
-//                    }
-//                    System.out.println("NEXT");
-//                    if(direction == 'E'){ // direction ships are moving is East
+
                     if(pegs[length - 1].getPoint().getX() == 9){ // Ship cannot go any further East, it's on the edge of the map
                         //do not move ship
                         System.out.println("SHIP NAME cannot move any further East, it's on the East edge of the board!");
                     }
                     else { // Ship can move East
-                        Peg head_of_ship = pegs[length-1];
-                        Peg tail_of_ship = pegs[0];
+                        if(ship instanceof Submarine){
+                            Peg nub_of_ship = pegs[length-1];
+                            Peg head_of_ship = pegs[3];
+                            Peg tail_of_ship = pegs[0];
 
-                        Peg next_peg;
-                        Point current_peg_point = head_of_ship.getPoint();
-                        Point next_peg_point = new Point(current_peg_point.getX() + 1, current_peg_point.getY());
-                        next_peg = head_of_ship.getBoard().getPeg(next_peg_point);
+                            Peg next_head_peg;
+                            Point current_peg_point = head_of_ship.getPoint();
+                            Point next_peg_point = new Point(current_peg_point.getX() + 1, current_peg_point.getY());
+                            next_head_peg = head_of_ship.getBoard().getPeg(next_peg_point);
 
-                        //tail_of_ship.setSub(null);
-                        tail_of_ship.setShip(null);
-                        tail_of_ship.setBoard(this); //shouldn't have to change, as the board is a reference to the board
-                        tail_of_ship.setSub(null);
+                            Peg next_nub_peg;
+                            Point current_nub_peg_point = nub_of_ship.getPoint();
+                            Point next_nub_peg_point = new Point(current_nub_peg_point.getX() + 1, current_nub_peg_point.getY());
+                            next_nub_peg = nub_of_ship.getBoard().getPeg(next_nub_peg_point);
 
-                        //next_peg.setSub(head_of_ship.getSub());
-                        next_peg.setShip(head_of_ship.getShip());
-                        next_peg.setBoard(head_of_ship.getBoard());
-                        next_peg.setSub(head_of_ship.getSub());
+                            tail_of_ship.setSub(null);
+                            next_head_peg.setSub(head_of_ship.getSub());
+                            next_nub_peg.setSub(nub_of_ship.getSub());
 
+                            Point[] new_points = new Point[length]; // new array of points for where ship is moving to
+                            for (int i = 0; i < length; i++) {
+                                new_points[i] = new Point(pegs[i].getPoint().getX() + 1, pegs[i].getPoint().getY());
+                            }
+                            //System.out.println(Arrays.toString(ship.getPoints()));
+                            ship.setPoints(new_points);
+                            //System.out.println(Arrays.toString(ship.getPoints()));
+                        }
+                        else {
+                            Peg head_of_ship = pegs[length - 1];
+                            Peg tail_of_ship = pegs[0];
 
+                            Peg next_peg;
+                            Point current_peg_point = head_of_ship.getPoint();
+                            Point next_peg_point = new Point(current_peg_point.getX() + 1, current_peg_point.getY());
+                            next_peg = head_of_ship.getBoard().getPeg(next_peg_point);
 
+                            tail_of_ship.setShip(null);
+
+                            next_peg.setShip(head_of_ship.getShip());
+
+                            Point[] new_points = new Point[length]; // new array of points for where ship is moving to
+                            for (int i = 0; i < length; i++) {
+                                new_points[i] = new Point(pegs[i].getPoint().getX() + 1, pegs[i].getPoint().getY());
+                            }
+                            //System.out.println(Arrays.toString(ship.getPoints()));
+                            ship.setPoints(new_points);
+                            //System.out.println(Arrays.toString(ship.getPoints()));
+                        }
                     }
                 }
             }
