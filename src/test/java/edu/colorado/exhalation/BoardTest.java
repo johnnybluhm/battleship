@@ -559,4 +559,23 @@ class BoardTest {
 
     }
 
+    @Test
+    void testPlace(){
+        Point start_point = new Point(5,5);
+
+        Ship minesweeper = new Minesweeper('v',start_point);
+        //Ship submarine = new Submarine('v', start_point);
+
+        Board first_board = new Board();
+        Board second_board = new Board();
+
+        first_board.placeShip(minesweeper);
+        second_board.placeShip(minesweeper);
+
+        Assertions.assertTrue(first_board.equals(second_board));
+
+        System.out.println();
+
+    }
+
 }//boardTest

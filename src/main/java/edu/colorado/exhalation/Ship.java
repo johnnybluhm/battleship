@@ -73,9 +73,10 @@ abstract public class Ship {
     }//setHash
 
     public void setPoints(Point[] points){
-        for (int i =0; i< points.length; i++){
+        /*for (int i =0; i< points.length; i++){
             this.points_[i] = points[i];
-        }
+        }*/
+        this.points_ = points;
     }
 
     public String toString(){

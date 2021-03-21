@@ -39,6 +39,7 @@ public class CommandTest {
     @Test
     void testUndo(){ // Using the above code as a base, now we are using the Command to move and testing the undoing of that Command
         Board undo_board = new Board();
+        Board compare_board = new Board();
         Ship minesweeper = new Minesweeper('h', new Point(0,0));
         Ship destroyer = new Destroyer('h', new Point(0,1));
         Ship  battleship = new Battleship('h', new Point(0,2));
@@ -48,31 +49,37 @@ public class CommandTest {
         //undo_board.placeShip(battleship);
         //undo_board.placeShip(submarine);
 
-        Board compare_board = new Board();
-        Ship minesweeper2 = new Minesweeper('h', new Point(0,0));
+
+        minesweeper = new Minesweeper('h', new Point(0,0));
         destroyer = new Destroyer('h', new Point(0,1));
         battleship = new Battleship('h', new Point(0,2));
         submarine = new Submarine('h', new Point(0,3));
-        compare_board.placeShip(minesweeper2);
+        compare_board.placeShip(minesweeper);
         //compare_board.placeShip(destroyer);
         //compare_board.placeShip(battleship);
         //compare_board.placeShip(submarine);
+        Game game = new Game();
+        game.setBoard(undo_board);
 
-        Game game_ = new Game();
-        game_.setBoard(undo_board);
+
         PlayerAction testingCommands = new PlayerAction();
-        testingCommands.SetCommand(0, new MoveShips(game_));
+        testingCommands.SetCommand(0, new MoveShips(game));
         testingCommands.Move(0, 'E'); // Need to move in order to have something to undo
+
         //testingCommands.Undo(); // No slot here because things to undo are stored in a stack
-//        System.out.println(compare_board.getStateString());
-//        System.out.println(game_.getBoard().getStateString());
-//        System.out.println(compare_board.getPeg(0,0));
-        System.out.println(undo_board.getPeg(0,0));
+        //System.out.println(compare_board.getStateString());
+        //System.out.println(game_.getBoard().getStateString());
+        //System.out.println(compare_board.getPeg(0,0));
+
         testingCommands.Undo(); // No slot here because things to undo are stored in a stack
-//        System.out.println(game_.getBoard().getStateString());
-//        System.out.println(compare_board.getPeg(0,0));
-        System.out.println(undo_board.getPeg(0,0));
-        Assertions.assertTrue(game_.getBoard().equals(compare_board));
+        System.out.println(game.getBoard().getPeg(0,0));
+        System.out.println(game.getBoard().getPeg(1,0));
+        System.out.println("--------COMPARE NEXT");
+        System.out.println(compare_board.getPeg(0,0));
+        System.out.println(compare_board.getPeg(1,0));
+        System.out.println(game.getBoard().getStateString());
+        System.out.println(compare_board.getStateString());
+        Assertions.assertTrue(game.getBoard().equals(compare_board));
     }
 
     @Test
@@ -130,6 +137,24 @@ public class CommandTest {
 //        System.out.println(game_.getBoard().getStateString());
 
         Assertions.assertTrue(game_.getBoard().equals(no_hit_board));
+
+
+    }
+
+    @Test
+    void testPlaceUndo(){
+
+        Board undo_board = new Board();
+        Board compare_board = new Board();
+        Ship minesweeper = new Minesweeper('h', new Point(0,0));
+        Ship destroyer = new Destroyer('h', new Point(0,1));
+        Ship  battleship = new Battleship('h', new Point(0,2));
+        Ship submarine = new Submarine('h', new Point(0,3));
+
+        Game game = new Game();
+        game.setBoard(undo_board);
+        PlayerAction testingCommands = new PlayerAction();
+        testingCommands.SetCommand(0, new MoveShips(game));
 
 
     }

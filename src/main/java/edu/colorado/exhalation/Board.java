@@ -412,6 +412,8 @@ public class Board {
                 copy_board.getPegArray()[i][j] = this.getPeg(i,j).copy();
             }
         }
+        copy_board.setShips(this.getShips());
+        copy_board.setWeapon(this.getWeapon());
         return copy_board;
     }
 
@@ -463,6 +465,7 @@ public class Board {
                     }
                     else { // Ship can move East
                         if(ship instanceof Submarine){
+
                             Peg nub_of_ship = pegs[length-1];
                             Peg head_of_ship = pegs[3];
                             Peg tail_of_ship = pegs[0];
@@ -515,5 +518,9 @@ public class Board {
                 }
             }
         }//East
+    }
+
+    public void setShips(Ship[] ships){
+        this.ships_array_ = ships;
     }
 }//Board
