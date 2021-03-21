@@ -92,16 +92,21 @@ class PegTest {
     @Test
     void testEquals(){
 
-        Peg first_peg = new Peg(1,0);
-        Peg compare_peg = new Peg(0,1);
+        Board board = new Board();
+        Board compare_board = new Board();
+        Peg first_peg = board.getPeg(1,0);
+        Peg compare_peg = board.getPeg(0,1);
+        Peg second_peg = board.getPeg(2,0);
+        Peg third_peg = board.getPeg(3,0);
 
         Assertions.assertFalse(first_peg.equals(compare_peg));
 
-        compare_peg = new Peg(1,0);
+        compare_peg = compare_board.getPeg(1,0);
         Assertions.assertTrue(first_peg.equals(compare_peg));
         compare_peg.hit();
         Assertions.assertFalse(first_peg.equals(compare_peg));
-        compare_peg = new Peg(1,0);
+
+        compare_peg = first_peg.copy();
         Ship test_ship =new Minesweeper('v', new Point(0,0));
         Ship test_sub =new Submarine('v', new Point(0,0));
         first_peg.setShip(test_ship);
@@ -112,19 +117,27 @@ class PegTest {
         Assertions.assertTrue(first_peg.equals(compare_peg));
 
         Peg copy_peg = first_peg.copy();
-
         Assertions.assertTrue(copy_peg.equals(first_peg));
-
         Ship test_battle_ship =new Battleship('v', new Point(0,0));
         copy_peg.setShip(test_battle_ship);
         Assertions.assertFalse(first_peg.equals(copy_peg));
-
         first_peg.setShip(test_battle_ship);
         compare_peg.setShip(test_battle_ship);
-
         Assertions.assertTrue(first_peg.equals(compare_peg));
 
+        compare_peg = board.getPeg(3,0);
+        Ship same_ship =new Minesweeper('v', new Point(0,0));
+        Ship same_ship_diff_memory =new Minesweeper('v', new Point(0,0));
+        third_peg.setShip(same_ship);
+        compare_peg.setShip(same_ship_diff_memory);
 
+        Assertions.assertTrue(third_peg.equals(compare_peg));
+
+        board = new Board();
+        Peg fresh_peg = board.getPeg(4,4);
+        Peg fresh_peg_copy = fresh_peg.copy();
+
+        Assertions.assertTrue(fresh_peg.equals(fresh_peg_copy));
 
     }
 

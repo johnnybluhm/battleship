@@ -135,7 +135,14 @@ public class Peg {
         boolean point_same = compare_peg.getPoint().equals(this.getPoint());
         boolean hit_same = compare_peg.isHit() == this.isHit();
         boolean visibility_same = compare_peg.isVisible() == this.isVisible();
-        boolean ship_same = compare_peg.getShip() == this.getShip();
+        boolean ship_same;
+        /*
+        if(this.getShip()== null){
+            ship_same = compare_peg.getShip() == null;
+        }else {
+            ship_same = compare_peg.getShip().equals(getShip());
+        }*/
+        ship_same = compare_peg.getShip() == this.getShip();
         boolean sub_same = compare_peg.getSub() == this.getSub();
         if(point_same && hit_same && visibility_same && ship_same && sub_same){
             return true;

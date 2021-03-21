@@ -43,23 +43,6 @@ abstract public class Ship {
         return true;
     }
 
-    public boolean equals(Ship ship){
-        if(ship == null){
-            if(this == null){
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        for (int i = 0; i <ship.getPoints().length; i++) {
-            if(!ship.getPoints()[i].equals(this.getPoints()[i])){
-                return false;
-            }
-        }
-        return true;
-    }
-
     abstract public int getCaptainsQuarters();
     abstract public boolean isArmoured();
     abstract public int getSIZE();
@@ -97,6 +80,22 @@ abstract public class Ship {
 
     public String toString(){
         return "SHIP START: \n"+ points_[0];
+    }
+
+    public boolean equals(Ship compare_ship){
+        Point[] compare_ship_points = compare_ship.getPoints();
+        if(compare_ship == null){
+            return false;
+        }
+        if(this.getPoints().length!=compare_ship.getPoints().length){
+            return false;
+        }
+        for (int i = 0; i < compare_ship_points.length; i++) {
+            if(!compare_ship_points[i].equals(this.getPoints()[i])){
+                return false;
+            }
+        }
+        return true;
     }
 
 //    public void move(char direction){

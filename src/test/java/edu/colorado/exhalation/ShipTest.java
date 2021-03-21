@@ -365,17 +365,19 @@ class ShipTest {
         //shift_right_board.placeShip(submarine);
 
 
-        System.out.println(board.getStateString());
+
         board.move('E');
         System.out.println(board.getStateString());
         System.out.println(shift_right_board.getStateString());
+        //System.out.println(shift_right_board.getStateString());
 //        for(int i = 0; i < 10; i++){
 //            for(int j = 0; j < 10; j++){
 //                System.out.println(i);
 //                Assertions.assertTrue(board.getPeg(i, j).equals(shift_right_board.getPeg(i, j)));
 //            }
 //        }
-        Assertions.assertSame(board.getStateString(), shift_right_board.getStateString());
+        //Assertions.assertSame(board.getStateString(), shift_right_board.getStateString());
+        Assertions.assertTrue(board.equals(shift_right_board));
 
     }
 
