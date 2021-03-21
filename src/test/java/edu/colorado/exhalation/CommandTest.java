@@ -11,28 +11,29 @@ public class CommandTest {
         Ship minesweeper = new Minesweeper('h', new Point(0,0));
         Ship destroyer = new Destroyer('h', new Point(0,1));
         Ship  battleship = new Battleship('h', new Point(0,2));
-        Ship submarine = new Submarine('h', new Point(0,3));
-        //board.placeShip(minesweeper);
+        //Ship submarine = new Submarine('h', new Point(0,3));
+        board.placeShip(minesweeper);
         board.placeShip(destroyer);
-        //board.placeShip(battleship);
+        board.placeShip(battleship);
         //board.placeShip(submarine);
 
         Board shift_right_board = new Board();
         minesweeper = new Minesweeper('h', new Point(1,0));
         destroyer = new Destroyer('h', new Point(1,1));
         battleship = new Battleship('h', new Point(1,2));
-        submarine = new Submarine('h', new Point(1,3));
+        //submarine = new Submarine('h', new Point(1,3));
         shift_right_board.placeShip(minesweeper);
         shift_right_board.placeShip(destroyer);
         shift_right_board.placeShip(battleship);
-        shift_right_board.placeShip(submarine);
+        //shift_right_board.placeShip(submarine);
 
         Game game_ = new Game();
         game_.setBoard(board);
         PlayerAction testingCommands = new PlayerAction();
         testingCommands.SetCommand(0, new MoveShips(game_)); // sets new command MoveShips at slot 0 in testingCommands
         testingCommands.Move(0, 'E'); // slot is 0 because that's what MoveEast was set to
-
+        System.out.println(shift_right_board.getStateString());
+        System.out.println(game_.getBoard().getStateString());
         Assertions.assertTrue(game_.getBoard().equals(shift_right_board));
 
     }

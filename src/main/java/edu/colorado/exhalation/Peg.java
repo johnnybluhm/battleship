@@ -136,20 +136,16 @@ public class Peg {
         boolean hit_same = compare_peg.isHit() == this.isHit();
         boolean visibility_same = compare_peg.isVisible() == this.isVisible();
         boolean ship_same;
-        /*
+
         if(this.getShip()== null){
             ship_same = compare_peg.getShip() == null;
         }else {
             ship_same = compare_peg.getShip().equals(getShip());
-        }*/
-        ship_same = compare_peg.getShip() == this.getShip();
+        }
+
         boolean sub_same = compare_peg.getSub() == this.getSub();
-        if(point_same && hit_same && visibility_same && ship_same && sub_same){
-            return true;
-        }
-        else {
-            return false;
-        }
+
+        return (point_same && hit_same && visibility_same && ship_same && sub_same);
     }
 
     public boolean isVisible() {

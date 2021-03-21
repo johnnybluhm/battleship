@@ -456,10 +456,14 @@ class BoardTest {
         first_board.placeShip(submarine);
 
         Board compare_board_good = new Board();
-        compare_board_good.placeShip(minesweeper);
-        compare_board_good.placeShip(destroyer);
-        compare_board_good.placeShip(battleship);
-        compare_board_good.placeShip(submarine);
+        Ship minesweeper2 = new Minesweeper('v',m_point);
+        Ship destroyer2 = new Destroyer('v', d_point);
+        Ship battleship2 = new Battleship('v', b_point);
+        Ship submarine2 = new Submarine('v', s_point);
+        compare_board_good.placeShip(minesweeper2);
+        compare_board_good.placeShip(destroyer2);
+        compare_board_good.placeShip(battleship2);
+        compare_board_good.placeShip(submarine2);
 
         Board compare_board_bad = new Board();
         compare_board_bad.placeShip(minesweeper);
@@ -468,7 +472,7 @@ class BoardTest {
 
         Assertions.assertTrue(first_board.equals(compare_board_good));
 
-        System.out.println(compare_board_bad.placeShip(submarine));
+        //System.out.println(compare_board_bad.placeShip(submarine));
         Assertions.assertTrue(!first_board.equals(compare_board_bad));
 
 
