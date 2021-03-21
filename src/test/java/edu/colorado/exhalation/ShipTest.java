@@ -348,27 +348,34 @@ class ShipTest {
         Ship minesweeper = new Minesweeper('h', new Point(0,0));
         Ship destroyer = new Destroyer('h', new Point(0,1));
         Ship  battleship = new Battleship('h', new Point(0,2));
-        Ship submarine = new Submarine('h', new Point(0,3));
-        //board.placeShip(minesweeper);
+        //Ship submarine = new Submarine('h', new Point(0,3));
+        board.placeShip(minesweeper);
         board.placeShip(destroyer);
-        //board.placeShip(battleship);
+        board.placeShip(battleship);
         //board.placeShip(submarine);
 
         Board shift_right_board = new Board();
         minesweeper = new Minesweeper('h', new Point(1,0));
         destroyer = new Destroyer('h', new Point(1,1));
         battleship = new Battleship('h', new Point(1,2));
-        submarine = new Submarine('h', new Point(1,3));
+        //submarine = new Submarine('h', new Point(1,3));
         shift_right_board.placeShip(minesweeper);
         shift_right_board.placeShip(destroyer);
         shift_right_board.placeShip(battleship);
-        shift_right_board.placeShip(submarine);
+        //shift_right_board.placeShip(submarine);
 
 
         System.out.println(board.getStateString());
         board.move('E');
         System.out.println(board.getStateString());
-        Assertions.assertTrue(board.equals(shift_right_board));
+        System.out.println(shift_right_board.getStateString());
+//        for(int i = 0; i < 10; i++){
+//            for(int j = 0; j < 10; j++){
+//                System.out.println(i);
+//                Assertions.assertTrue(board.getPeg(i, j).equals(shift_right_board.getPeg(i, j)));
+//            }
+//        }
+        Assertions.assertSame(board.getStateString(), shift_right_board.getStateString());
 
     }
 

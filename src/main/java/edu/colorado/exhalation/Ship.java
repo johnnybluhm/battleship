@@ -99,47 +99,49 @@ abstract public class Ship {
         return "SHIP START: \n"+ points_[0];
     }
 
-    public void move(char direction){
-        Peg[] pegs = this.getPegs();
-        Point[] new_points = new Point[this.getPoints().length];
-        for (Peg peg:
-             this.getPegs()) {
-            System.out.println(peg);
-        }
-        System.out.println("NEXT");
-        if(direction == 'E'){
-            for (int i = 0; i < pegs.length; i++) {
-
-                Peg current_peg = pegs[i];
-                if(this instanceof Submarine){
-                    current_peg.setSub(null);
-                }
-                else{
-                    current_peg.setShip(null);
-                }
-
-                Peg next_peg;
-                Point current_peg_point = current_peg.getPoint();
-                Point next_peg_point = new Point(current_peg_point.getX()+1, current_peg_point.getY());
-                next_peg = current_peg.getBoard().getPeg(next_peg_point);
-                if(this instanceof Submarine){
-                    next_peg.setSub((Submarine) this);
-                }
-                else{
-                    current_peg.setShip(this);
-                }
-                this.setPeg(next_peg,i);
-                new_points[i] = next_peg_point;
-
-            }
-            for (Peg peg:
-                    this.getPegs()) {
-                System.out.println(peg);
-            }
-            this.setPoints(new_points);
-
-        }//East
-    }
+//    public void move(char direction){
+//        Peg[] pegs = this.getPegs(); // gets pegs that ship is on
+//        int length = pegs.length;
+//        Point[] new_points = new Point[length]; // new array of pegs for where ship is moving to
+//        for (Peg peg:
+//             this.getPegs()) { // iterates through this.getPegs() and prints them out, troubleshooting it looks like
+//            System.out.println(peg);
+//        }
+//        System.out.println("NEXT");
+//        if(direction == 'E'){ // direction ships are moving is East
+//            if(pegs[length - 1].getPoint().getX() == 9){ // Ship cannot go any further East, it's on the edge of the map
+//                System.out.println("SHIP NAME cannot move any further East, it's on the East edge of the board!");
+//            }
+//            else { // Ship can move East
+//                for (int i = 0; i < length; i++) { // iterates through pegs by the peg
+//                    Peg current_peg = pegs[i]; // sets new peg to be old peg ship was on
+//                    if (this instanceof Submarine) {
+//                        current_peg.setSub(null);
+//                    } else {
+//                        current_peg.setShip(null);
+//                    }
+//
+//                    Peg next_peg;
+//                    Point current_peg_point = current_peg.getPoint();
+//                    Point next_peg_point = new Point(current_peg_point.getX() + 1, current_peg_point.getY());
+//                    next_peg = current_peg.getBoard().getPeg(next_peg_point);
+//                    if (this instanceof Submarine) {
+//                        current_peg.setShip(this);
+//                    }
+//                    next_peg.setSub((Submarine) this);
+//                    } else {
+//                     this.setPeg(next_peg, i);
+//                    new_points[i] = next_peg_point;
+//
+//                }
+//                for (Peg peg :
+//                        this.getPegs()) {
+//                    System.out.println(peg);
+//                }
+//                this.setPoints(new_points);
+//            }
+//        }//East
+//    }
 
 
 }

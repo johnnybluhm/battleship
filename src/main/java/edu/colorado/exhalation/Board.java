@@ -450,11 +450,44 @@ public class Board {
 
         if(direction == 'E'){
             for (Ship ship:
-                 this.getShips()) {
-                if(ship != null){
-                    ship.move(direction);
-                }
+                 this.getShips()) { // loops through the ships on the board
+                if(ship != null){ // makes sure ship actually exists
+                    //ship.move(direction);
+                    Peg[] pegs = ship.getPegs(); // gets pegs that ship is on
+                    int length = pegs.length;
+                    Point[] new_points = new Point[length]; // new array of points for where ship is moving to
+//                    for (Peg peg:
+//                            this.getPegs()) { // iterates through this.getPegs() and prints them out, troubleshooting it looks like
+//                        System.out.println(peg);
+//                    }
+//                    System.out.println("NEXT");
+//                    if(direction == 'E'){ // direction ships are moving is East
+                    if(pegs[length - 1].getPoint().getX() == 9){ // Ship cannot go any further East, it's on the edge of the map
+                        System.out.println("SHIP NAME cannot move any further East, it's on the East edge of the board!");
+                    }
+                    else { // Ship can move East
+                        Peg head_of_ship = pegs[length-1];
+                        Peg tail_of_ship = pegs[0];
 
+                        Peg next_peg;
+                        Point current_peg_point = head_of_ship.getPoint();
+                        Point next_peg_point = new Point(current_peg_point.getX() + 1, current_peg_point.getY());
+                        next_peg = head_of_ship.getBoard().getPeg(next_peg_point);
+
+                        //tail_of_ship.setSub(null);
+                        tail_of_ship.setShip(null);
+                        tail_of_ship.setBoard(this);
+                        tail_of_ship.setSub(null);
+
+                        //next_peg.setSub(head_of_ship.getSub());
+                        next_peg.setShip(head_of_ship.getShip());
+                        next_peg.setBoard(head_of_ship.getBoard());
+                        next_peg.setSub(head_of_ship.getSub());
+
+
+
+                    }
+                }
             }
         }//East
     }
