@@ -125,7 +125,7 @@ class PegTest {
         compare_peg.setShip(test_battle_ship);
         Assertions.assertTrue(first_peg.equals(compare_peg));
 
-        compare_peg = board.getPeg(3,0);
+        compare_peg = compare_board.getPeg(3,0);
         Ship same_ship =new Minesweeper('v', new Point(0,0));
         Ship same_ship_diff_memory =new Minesweeper('v', new Point(0,0));
         third_peg.setShip(same_ship);

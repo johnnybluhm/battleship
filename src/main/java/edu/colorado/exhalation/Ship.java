@@ -83,10 +83,10 @@ abstract public class Ship {
     }
 
     public boolean equals(Ship compare_ship){
-        Point[] compare_ship_points = compare_ship.getPoints();
         if(compare_ship == null){
             return false;
         }
+        Point[] compare_ship_points = compare_ship.getPoints();
         if(this.getPoints().length!=compare_ship.getPoints().length){
             return false;
         }

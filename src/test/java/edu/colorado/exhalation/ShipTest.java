@@ -351,7 +351,7 @@ class ShipTest {
         Ship submarine = new Submarine('h', new Point(0,3));
         board.placeShip(minesweeper);
         board.placeShip(destroyer);
-        board.placeShip(battleship);
+        //board.placeShip(battleship);
         board.placeShip(submarine);
 
         Board shift_right_board = new Board();
@@ -361,7 +361,7 @@ class ShipTest {
         submarine = new Submarine('h', new Point(1,3));
         shift_right_board.placeShip(minesweeper);
         shift_right_board.placeShip(destroyer);
-        shift_right_board.placeShip(battleship);
+        //shift_right_board.placeShip(battleship);
         shift_right_board.placeShip(submarine);
 
 
