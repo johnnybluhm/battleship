@@ -480,6 +480,7 @@ public class Board {
                             tail_of_ship.setSub(null);
                             next_head_peg.setSub(head_of_ship.getSub());
                             next_nub_peg.setSub(nub_of_ship.getSub());
+                            nub_of_ship.setSub(null);
 
                             Point[] new_points = new Point[length]; // new array of points for where ship is moving to
                             for (int i = 0; i < length; i++) {
