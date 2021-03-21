@@ -128,14 +128,16 @@ abstract public class Ship {
                     new_peg.setSub((Submarine) this);
                 }
                 else{
+                    System.out.println(old_peg);
                     old_peg.setShip(null);
                     new_peg.setShip(this);
+                    System.out.println(old_peg);
                 }
             }
-            for (int i =0; i< old_pegs.length; i++) {
+            /*for (int i =0; i< old_pegs.length; i++) {
                 System.out.println(this.getPegs()[i]);
                 System.out.println(old_pegs[i]);
-            }
+            }*/
         }
         return 1;
     } // move

@@ -410,6 +410,7 @@ public class Board {
             for(int j = 0; j< BOARD_SIZE;j++){
                 //copy_board.getPegArray()[i][j] = new Peg(this.getPeg(i,j));
                 copy_board.getPegArray()[i][j] = this.getPeg(i,j).copy();
+                copy_board.getPegArray()[i][j].setBoard(copy_board);
             }
         }
         Ship[] ships = this.getShips();
