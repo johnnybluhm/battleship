@@ -531,6 +531,25 @@ public class Board {
         }
     }
 
+    public void removeShips(){
+        Ship[] ships = this.getShips();
+        for (int i = 0; i < ships.length; i++) {
+            Ship ship = ships[i];
+            if(!this.isSunk(ship) && ship != null){
+                for (int j = 0; j < ship.getPoints().length; j++) {
+                    Point ship_point = ship.getPoints()[j];
+                    if(!(ship instanceof Submarine)){
+                       this.getPeg(ship_point).setShip(null);
+                    }
+                    else { //it is a submarine
+                        this.getPeg(ship_point).setSub(null);
+                    }
+                }
+                this.ships_array_[i] = null;
+            }//isNotSunk
+        }//outer for
+    }//remove ships
+
     public void move(){}
 
 //    public void move(char direction) {

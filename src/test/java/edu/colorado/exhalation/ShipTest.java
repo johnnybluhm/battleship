@@ -324,10 +324,29 @@ class ShipTest {
         board.placeShip(destroyer);
         board.placeShip(battleship);
         board.placeShip(submarine);
+        board.removeShips();
+        //test removal no sunk ships
+        Assertions.assertTrue(board.equals(empty_board));
+
+        board = new Board();
+        board.placeShip(minesweeper);
+        board.placeShip(destroyer);
+
+        Board sunk_ship_board = new Board();
+        sunk_ship_board.placeShip(minesweeper);
+
+        //sink the sweeper
+        for (int i = 0; i < minesweeper.getPoints().length; i++) {
+            Point point = minesweeper.getPoints()[i];
+            board.hit(point);
+            sunk_ship_board.hit(point);
+        }
 
         board.removeShips();
 
-        Assertions.assertTrue(board.equals(empty_board));
+        Assertions.assertTrue(board.equals(sunk_ship_board));
+
+
 
     }
     @Test
