@@ -548,8 +548,6 @@ public class Board {
         }//outer for
     }//remove ships
 
-    public void move(){}
-
     public void move(char direction) {
 
         if (direction == 'E') {
