@@ -371,14 +371,10 @@ class ShipTest {
         shift_right_board.placeShip(battleship2);
         shift_right_board.placeShip(submarine2);
 
-        System.out.println(board.getStateString());
-        board.move('E');
-        System.out.println(board.getStateString());
-        System.out.println(shift_right_board.getStateString());
-        //System.out.println(shift_right_board.getStateString());
-        //Assertions.assertSame(board.getStateString(), shift_right_board.getStateString());
-        Assertions.assertTrue(board.equals(shift_right_board));
 
+        board.move('E');
+
+        Assertions.assertTrue(board.equals(shift_right_board));
 
         Board shift_left_board = new Board();
         shift_left_board.placeShip(minesweeper);
@@ -390,6 +386,36 @@ class ShipTest {
         Assertions.assertTrue(board.equals(shift_left_board));
         board.move('W');
         Assertions.assertTrue(board.equals(shift_left_board));
+
+        board = new Board();
+        board.placeShip(minesweeper);
+        board.placeShip(destroyer);
+        board.placeShip(battleship);
+        board.placeShip(submarine);
+
+        for (Point point:
+             minesweeper.getPoints()) {
+            board.hit(point);
+        }
+
+        System.out.println(board.getStateString());
+        board.move('E');
+        shift_right_board = new Board();
+        Ship minesweeper3 = new Minesweeper('h', new Point(0,0));
+        Ship destroyer3 = new Destroyer('h', new Point(1,1));
+        Ship battleship3 = new Battleship('h', new Point(1,2));
+        Ship submarine3 = new Submarine('h', new Point(1,3));
+        shift_right_board.placeShip(minesweeper3);
+        shift_right_board.placeShip(destroyer3);
+        shift_right_board.placeShip(battleship3);
+        shift_right_board.placeShip(submarine3);
+        for (Point point:
+                minesweeper.getPoints()) {
+            shift_right_board.hit(point);
+        }
+        System.out.println(board.getStateString());
+        System.out.println(shift_right_board.getStateString());
+        Assertions.assertTrue(board.equals(shift_right_board));
 
 
 
