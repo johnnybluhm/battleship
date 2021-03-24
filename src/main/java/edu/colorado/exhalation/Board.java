@@ -668,6 +668,122 @@ public class Board {
                 }
             }
         }//West
+        else if (direction == 'N') {
+            Ship[] old_ships = new Ship[this.getShips().length];
+            for (int i = 0; i < this.getShips().length; i++) {
+                old_ships[i] = this.getShips()[i];
+            }
+            Point[] new_start_points = new Point[this.getShips().length];
+            for (int i = 0; i < old_ships.length; i++) {
+                new_start_points[i] =  new Point(old_ships[i].getPoints()[0].getX(), old_ships[i].getPoints()[0].getY()+1);
+            }
+            this.removeShips();
+            for (int i = 0; i <this.getShips().length ; i++) {
+                Ship ship = this.getShips()[i];
+                if(i == MINESWEEPER && ship == null){
+                    Ship minesweeper;
+                    if (old_ships[i].isVertical()) {
+                        minesweeper = new Minesweeper('v', new_start_points[i]);
+                    } else {
+                        minesweeper = new Minesweeper('h', new_start_points[i]);
+                    }
+                    if(this.placeShip(minesweeper) <1 ){
+                        this.placeShip(old_ships[i]);
+                    }
+                }//minesweeper
+                else if(i == DESTROYER && ship == null){
+                    Ship destroyer;
+                    if (old_ships[i].isVertical()) {
+                        destroyer = new Destroyer('v', new_start_points[i]);
+                    } else {
+                        destroyer = new Destroyer('h', new_start_points[i]);
+                    }
+                    if(this.placeShip(destroyer) <1 ){
+                        this.placeShip(old_ships[i]);
+                    }
+                }
+                else if(i == BATTLESHIP && ship == null){
+                    Ship battleship;
+                    if (old_ships[i].isVertical()) {
+                        battleship = new Battleship('v', new_start_points[i]);
+                    } else {
+                        battleship = new Battleship('h', new_start_points[i]);
+                    }
+                    if(this.placeShip(battleship) <1 ){
+                        this.placeShip(old_ships[i]);
+                    }
+                }
+                else if(i == SUBMARINE && ship == null){
+                    Ship submarine;
+                    if (old_ships[i].isVertical()) {
+                        submarine = new Submarine('v', new_start_points[i]);
+                    } else {
+                        submarine = new Submarine('h', new_start_points[i]);
+                    }
+                    if(this.placeShip(submarine) <1 ){
+                        this.placeShip(old_ships[i]);
+                    }
+                }
+            }
+        }//North
+        else if (direction == 'S') {
+            Ship[] old_ships = new Ship[this.getShips().length];
+            for (int i = 0; i < this.getShips().length; i++) {
+                old_ships[i] = this.getShips()[i];
+            }
+            Point[] new_start_points = new Point[this.getShips().length];
+            for (int i = 0; i < old_ships.length; i++) {
+                new_start_points[i] =  new Point(old_ships[i].getPoints()[0].getX(), old_ships[i].getPoints()[0].getY()-1);
+            }
+            this.removeShips();
+            for (int i = 0; i <this.getShips().length ; i++) {
+                Ship ship = this.getShips()[i];
+                if(i == MINESWEEPER && ship == null){
+                    Ship minesweeper;
+                    if (old_ships[i].isVertical()) {
+                        minesweeper = new Minesweeper('v', new_start_points[i]);
+                    } else {
+                        minesweeper = new Minesweeper('h', new_start_points[i]);
+                    }
+                    if(this.placeShip(minesweeper) <1 ){
+                        this.placeShip(old_ships[i]);
+                    }
+                }//minesweeper
+                else if(i == DESTROYER && ship == null){
+                    Ship destroyer;
+                    if (old_ships[i].isVertical()) {
+                        destroyer = new Destroyer('v', new_start_points[i]);
+                    } else {
+                        destroyer = new Destroyer('h', new_start_points[i]);
+                    }
+                    if(this.placeShip(destroyer) <1 ){
+                        this.placeShip(old_ships[i]);
+                    }
+                }
+                else if(i == BATTLESHIP && ship == null){
+                    Ship battleship;
+                    if (old_ships[i].isVertical()) {
+                        battleship = new Battleship('v', new_start_points[i]);
+                    } else {
+                        battleship = new Battleship('h', new_start_points[i]);
+                    }
+                    if(this.placeShip(battleship) <1 ){
+                        this.placeShip(old_ships[i]);
+                    }
+                }
+                else if(i == SUBMARINE && ship == null){
+                    Ship submarine;
+                    if (old_ships[i].isVertical()) {
+                        submarine = new Submarine('v', new_start_points[i]);
+                    } else {
+                        submarine = new Submarine('h', new_start_points[i]);
+                    }
+                    if(this.placeShip(submarine) <1 ){
+                        this.placeShip(old_ships[i]);
+                    }
+                }
+            }
+        }//West
 
     }//move
 
