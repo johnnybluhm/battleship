@@ -313,6 +313,24 @@ class ShipTest {
     }//testSunk
 
     @Test
+    void testRemoval(){
+        Board empty_board = new Board();
+        Board board = new Board();
+        Ship minesweeper = new Minesweeper('h', new Point(0,0));
+        Ship destroyer = new Destroyer('h', new Point(0,1));
+        Ship  battleship = new Battleship('h', new Point(0,2));
+        Ship submarine = new Submarine('h', new Point(0,3));
+        board.placeShip(minesweeper);
+        board.placeShip(destroyer);
+        board.placeShip(battleship);
+        board.placeShip(submarine);
+
+        board.removeShips();
+
+        Assertions.assertTrue(board.equals(empty_board));
+
+    }
+    @Test
     void testShift(){
         Board board = new Board();
         Ship minesweeper = new Minesweeper('h', new Point(0,0));
