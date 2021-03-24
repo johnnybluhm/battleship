@@ -4,6 +4,8 @@ package edu.colorado.exhalation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Stack;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -574,6 +576,36 @@ class BoardTest {
         Assertions.assertTrue(first_board.equals(second_board));
 
         System.out.println();
+
+    }
+
+    @Test
+    void testStack() {
+        Board board = new Board();
+        Board compare_board = new Board();
+
+        Ship minesweeper = new Minesweeper('h', new Point(0,0));
+        Ship destroyer = new Destroyer('h', new Point(0,1));
+        Ship  battleship = new Battleship('h', new Point(0,2));
+        Ship submarine = new Submarine('h', new Point(0,3));
+
+        board.placeShip(minesweeper);
+        board.placeShip(destroyer);
+        board.placeShip(battleship);
+        board.placeShip(submarine);
+
+        compare_board.placeShip(minesweeper);
+        compare_board.placeShip(destroyer);
+        compare_board.placeShip(battleship);
+        compare_board.placeShip(submarine);
+
+        Stack<Board> stack = new Stack<Board>();
+        stack.push(board.copy());
+        Assertions.assertTrue(stack.peek().equals(compare_board));
+        board.move('E');
+        System.out.println(stack.peek().getStateString());
+        System.out.println(compare_board.getStateString());
+        Assertions.assertTrue(stack.pop().equals(compare_board));
 
     }
 

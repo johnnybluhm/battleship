@@ -362,15 +362,14 @@ class ShipTest {
         board.placeShip(submarine);
 
         Board shift_right_board = new Board();
-        minesweeper = new Minesweeper('h', new Point(1,0));
-        destroyer = new Destroyer('h', new Point(1,1));
-        battleship = new Battleship('h', new Point(1,2));
-        submarine = new Submarine('h', new Point(1,3));
-        shift_right_board.placeShip(minesweeper);
-        shift_right_board.placeShip(destroyer);
-        shift_right_board.placeShip(battleship);
-        shift_right_board.placeShip(submarine);
-
+        Ship minesweeper2 = new Minesweeper('h', new Point(1,0));
+        Ship destroyer2 = new Destroyer('h', new Point(1,1));
+        Ship battleship2 = new Battleship('h', new Point(1,2));
+        Ship submarine2 = new Submarine('h', new Point(1,3));
+        shift_right_board.placeShip(minesweeper2);
+        shift_right_board.placeShip(destroyer2);
+        shift_right_board.placeShip(battleship2);
+        shift_right_board.placeShip(submarine2);
 
         System.out.println(board.getStateString());
         board.move('E');
@@ -379,6 +378,21 @@ class ShipTest {
         //System.out.println(shift_right_board.getStateString());
         //Assertions.assertSame(board.getStateString(), shift_right_board.getStateString());
         Assertions.assertTrue(board.equals(shift_right_board));
+
+
+        Board shift_left_board = new Board();
+        shift_left_board.placeShip(minesweeper);
+        shift_left_board.placeShip(battleship);
+        shift_left_board.placeShip(destroyer);
+        shift_left_board.placeShip(submarine);
+
+        board.move('W');
+        Assertions.assertTrue(board.equals(shift_left_board));
+        board.move('W');
+        Assertions.assertTrue(board.equals(shift_left_board));
+
+
+
 
     }
 
