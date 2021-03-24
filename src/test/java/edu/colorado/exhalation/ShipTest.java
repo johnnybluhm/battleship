@@ -179,35 +179,6 @@ class ShipTest {
     }
 
     @Test
-    void testPegArray(){
-        Point start_point = new Point(5,5);
-
-        Ship minesweeper = new Minesweeper('v',start_point);
-        Ship submarine = new Submarine('v', start_point);
-
-        Board board = new Board();
-
-        board.placeShip(minesweeper);
-        board.placeShip(submarine);
-
-        Point[] mine_sweeper_points = Minesweeper.getVerticalPoints(start_point);
-        Point[] sub_points = Submarine.getVerticalPoints(start_point);
-
-        for (int i = 0, battleship_pointsLength = mine_sweeper_points.length; i < battleship_pointsLength; i++) {
-            Point point = mine_sweeper_points[i];
-            Assertions.assertTrue(board.getPeg(point).equals(minesweeper.getPegs()[i]));
-        }
-
-        for (int i = 0, battleship_pointsLength = sub_points.length; i < battleship_pointsLength; i++) {
-            Point point = sub_points[i];
-            Assertions.assertTrue(board.getPeg(point).equals(submarine.getPegs()[i]));
-        }
-
-        //Assertions.assertTrue(minesweeper.isSunk());
-        //Assertions.assertTrue(!submarine.isSunk());
-    }
-
-    @Test
     void testHitCount(){
 
         //BATTLESHIP
@@ -219,12 +190,12 @@ class ShipTest {
         for (int i = 0; i < hits.length; i++) {
             Point point = hits[i];
             board.hit(point);
-            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 1);
+            Assertions.assertTrue(board.getHitCount(board.getPeg(ship.getPoints()[i]), Board.BOMB) == 1);
         }
         for (int i = 0; i < hits.length; i++) {
             Point point = hits[i];
             board.hit(point);
-            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 2);
+            Assertions.assertTrue(board.getHitCount(board.getPeg(ship.getPoints()[i]), Board.BOMB) == 2);
         }
 
         //DESTROYER
@@ -235,12 +206,12 @@ class ShipTest {
         for (int i = 0; i < hits.length; i++) {
             Point point = hits[i];
             board.hit(point);
-            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 1);
+            Assertions.assertTrue(board.getHitCount(board.getPeg(ship.getPoints()[i]), Board.BOMB) == 1);
         }
         for (int i = 0; i < hits.length; i++) {
             Point point = hits[i];
             board.hit(point);
-            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 2);
+            Assertions.assertTrue(board.getHitCount(board.getPeg(ship.getPoints()[i]), Board.BOMB) == 2);
         }
 
         //MINESWEEPER
@@ -251,16 +222,15 @@ class ShipTest {
         for (int i = 0; i < hits.length; i++) {
             Point point = hits[i];
             board.hit(point);
-            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 1);
+            Assertions.assertTrue(board.getHitCount(board.getPeg(ship.getPoints()[i]), Board.BOMB) == 1);
         }
         for (int i = 0; i < hits.length; i++) {
             Point point = hits[i];
             board.hit(point);
-            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 2);
+            Assertions.assertTrue(board.getHitCount(board.getPeg(ship.getPoints()[i]), Board.BOMB) == 2);
         }
 
         //SUB
-        //hits with bomb should be 0
         board = new Board();
         ship = new Submarine('v', start_point);
         board.placeShip(ship);
@@ -268,12 +238,12 @@ class ShipTest {
         for (int i = 0; i < hits.length; i++) {
             Point point = hits[i];
             board.hit(point);
-            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 1);
+            Assertions.assertTrue(board.getHitCount(board.getPeg(ship.getPoints()[i]), Board.BOMB) == 1);
         }
         for (int i = 0; i < hits.length; i++) {
             Point point = hits[i];
             board.hit(point);
-            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 2);
+            Assertions.assertTrue(board.getHitCount(board.getPeg(ship.getPoints()[i]), Board.BOMB) == 2);
         }
 
         board.setWeapon(Board.LASER);
@@ -281,12 +251,12 @@ class ShipTest {
         for (int i = 0; i < hits.length; i++) {
             Point point = hits[i];
             board.hit(point);
-            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 1);
+            Assertions.assertTrue(board.getHitCount(board.getPeg(ship.getPoints()[i]), Board.LASER) == 1);
         }
         for (int i = 0; i < hits.length; i++) {
             Point point = hits[i];
             board.hit(point);
-            Assertions.assertTrue(ship.getHitCount(ship.getPegs()[i]) == 2);
+            Assertions.assertTrue(board.getHitCount(board.getPeg(ship.getPoints()[i]), Board.LASER) == 2);
         }
 
 
@@ -366,16 +336,10 @@ class ShipTest {
 
 
         System.out.println(board.getStateString());
-        board.move('E');
+        //board.move('E');
         System.out.println(board.getStateString());
         System.out.println(shift_right_board.getStateString());
         //System.out.println(shift_right_board.getStateString());
-//        for(int i = 0; i < 10; i++){
-//            for(int j = 0; j < 10; j++){
-//                System.out.println(i);
-//                Assertions.assertTrue(board.getPeg(i, j).equals(shift_right_board.getPeg(i, j)));
-//            }
-//        }
         //Assertions.assertSame(board.getStateString(), shift_right_board.getStateString());
         Assertions.assertTrue(board.equals(shift_right_board));
 

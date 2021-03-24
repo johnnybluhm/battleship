@@ -135,7 +135,6 @@ class BoardTest {
         for(int i =0; i< peg_array.length; i++){
             for(int j = 0; j< peg_array[i].length;j++){
                 peg_array[i][j] = new Peg(i,j);
-                peg_array[i][j].setShip(new Water(new Point(i,j)));
             }
         }
         Board test_board = new Board();

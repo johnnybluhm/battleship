@@ -8,14 +8,12 @@ public class Submarine extends Ship{
         if(orientation == 'v'){
             this.vertical_ = true;
             this.points_ = new Point[SIZE];
-            this.pegs_ = new Peg[SIZE];
             Point[] points = getVerticalPoints(point);
             this.setPoints(points);
         }//if
         else if(orientation == 'h'){
             this.vertical_ = false;
             this.points_ = new Point[SIZE];
-            this.pegs_ = new Peg[SIZE];
             Point[] points = getHorizontalPoints(point);
             this.setPoints(points);
         }
@@ -23,18 +21,6 @@ public class Submarine extends Ship{
 
     public int getSIZE(){
         return SIZE;
-    }
-
-    @Override
-    public boolean isSunk() {
-        Peg captains_quarters = this.getPegs()[CAPTAINS_QUARTERS];
-        int captains_laser_hit_count = this.getHitCount(captains_quarters, Board.LASER);
-        if(captains_laser_hit_count == 1){
-            return true;
-        }
-        else {
-            return false;
-        }
     }
 
     public int getCaptainsQuarters(){
@@ -78,10 +64,8 @@ public class Submarine extends Ship{
     public Submarine(Ship copy_ship){
         this.vertical_ = copy_ship.isVertical();
         this.points_ = new Point[SIZE];
-        this.pegs_ = new Peg[SIZE];
         Point[] points = copy_ship.getPoints();
         this.setPoints(points);
-        this.pegs_ = copy_ship.getPegs();
     }
 
 }

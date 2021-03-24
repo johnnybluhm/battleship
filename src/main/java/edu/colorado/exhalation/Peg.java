@@ -54,10 +54,10 @@ public class Peg {
         this.hit_count_[this.board_.getWeapon()] += 1;
 
         if(ship_!= null){
-            this.getShip().setHash(this, this.hit_count_);
+            this.getBoard().setHash(this, this.hit_count_);
         }
         if(this.sub_ != null){
-            this.getSub().setHash(this, this.hit_count_);
+            this.getBoard().setHash(this, this.hit_count_);
         }
     }//hit
 

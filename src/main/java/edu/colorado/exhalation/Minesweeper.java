@@ -9,14 +9,14 @@ public class Minesweeper extends Ship{
         if(orientation == 'v'){
             this.vertical_ = true;
             this.points_ = new Point[SIZE];
-            this.pegs_ = new Peg[SIZE];
+
             Point[] points = getVerticalPoints(point);
             this.setPoints(points);
         }//if
         else if(orientation == 'h'){
             this.vertical_ = false;
             this.points_ = new Point[SIZE];
-            this.pegs_ = new Peg[SIZE];
+
             Point[] points = getHorizontalPoints(point);
             this.setPoints(points);
         }
@@ -25,30 +25,12 @@ public class Minesweeper extends Ship{
     public Minesweeper(Ship copy_ship){
         this.vertical_ = copy_ship.isVertical();
         this.points_ = new Point[SIZE];
-        this.pegs_ = new Peg[SIZE];
         Point[] points = copy_ship.getPoints();
         this.setPoints(points);
-        this.pegs_ = copy_ship.getPegs();
     }
 
     public int getSIZE(){
         return SIZE;
-    }
-
-    @Override
-    public boolean isSunk() {
-        Peg captains_quarters = this.getPegs()[CAPTAINS_QUARTERS];
-        int[] captain_hit_count_array = this.getHitCountArray(captains_quarters);
-        int total_hit = 0;
-        for (int i = 0; i <captain_hit_count_array.length ; i++) {
-            total_hit+= captain_hit_count_array[i];
-        }
-        if(total_hit == 1){
-            return true;
-        }
-        else {
-            return false;
-        }
     }
 
     public int getCaptainsQuarters(){

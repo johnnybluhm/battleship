@@ -1,5 +1,7 @@
 package edu.colorado.exhalation;
 
+import java.util.HashMap;
+
 public class Board {
 
     final static int BOARD_SIZE = 10;
@@ -16,6 +18,7 @@ public class Board {
     //ships initialized to null so we can check for double ships
     private Ship[] ships_array_ = {null, null, null, null};
     private int weapon_;
+    protected HashMap<Peg, int[]> peg_to_array_hashMap = new HashMap<Peg, int[]>();
 
     //creates board with all empty pegs, positions are set in the loop
     public Board(){
@@ -166,8 +169,8 @@ public class Board {
             for(int i = 0; i<point_array.length; i++){
                 Peg peg_for_ship = this.getPeg(point_array[i]);
                 peg_for_ship.setShip(ship);
-                ship.setPeg(peg_for_ship,i);
-                ship.setHash(peg_for_ship,peg_for_ship.getHitCount());
+
+                setHash(peg_for_ship,peg_for_ship.getHitCount());
             }
         }//submarine if
         else{
@@ -175,8 +178,8 @@ public class Board {
             for(int i = 0; i<point_array.length; i++){
                 Peg peg_for_ship = this.getPeg(point_array[i]);
                 peg_for_ship.setSub((Submarine) ship);
-                ship.setPeg(peg_for_ship,i);
-                ship.setHash(peg_for_ship,peg_for_ship.getHitCount());
+
+                setHash(peg_for_ship,peg_for_ship.getHitCount());
             }
         }
         this.ships_array_[array_index] = ship;
@@ -241,7 +244,62 @@ public class Board {
     }
 
     public boolean isSunk(Ship ship){
-        return ship.isSunk();
+
+        if(ship instanceof Minesweeper){
+            Peg captains_quarters = this.getPeg(ship.getPoints()[Minesweeper.CAPTAINS_QUARTERS]);
+            int[] captain_hit_count_array = this.getHitCountArray(captains_quarters);
+            int total_hit = 0;
+            for (int i = 0; i <captain_hit_count_array.length ; i++) {
+                total_hit+= captain_hit_count_array[i];
+            }
+            if(total_hit == 1){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }//minesweeper
+        else if(ship instanceof Destroyer){
+            Peg captains_quarters = this.getPeg(ship.getPoints()[Destroyer.CAPTAINS_QUARTERS]);
+            int[] captain_hit_count_array = this.getHitCountArray(captains_quarters);
+            int total_hit = 0;
+            for (int i = 0; i <captain_hit_count_array.length ; i++) {
+                total_hit+= captain_hit_count_array[i];
+            }
+            if(total_hit == 2){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }//destroyer
+        else if(ship instanceof Battleship){
+            Peg captains_quarters = this.getPeg(ship.getPoints()[Battleship.CAPTAINS_QUARTERS]);
+            int[] captain_hit_count_array = this.getHitCountArray(captains_quarters);
+            int total_hit = 0;
+            for (int i = 0; i <captain_hit_count_array.length ; i++) {
+                total_hit+= captain_hit_count_array[i];
+            }
+            if(total_hit == 2){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }//battleship
+        else if(ship instanceof Submarine){
+            Peg captains_quarters = this.getPeg(ship.getPoints()[Submarine.CAPTAINS_QUARTERS]);
+            int captains_laser_hit_count = this.getHitCount(captains_quarters, Board.LASER);
+            if(captains_laser_hit_count == 1){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }//submarine
+        else{
+            return false;
+        }
     }//isSunk()
 
     public String sonarPulseString(Point point){
@@ -473,82 +531,104 @@ public class Board {
         }
     }
 
-    public void move(char direction) {
+    public void move(){}
 
-        if (direction == 'E') {
-            for (Ship ship :
-                    this.getShips()) { // loops through the ships on the board
-                if (ship != null && !ship.isSunk()) { // makes sure ship isn't sunk and not null
-
-                    ship.move(direction);
-
-                    /*Peg[] pegs = ship.getPegs(); // gets pegs that ship is on
-                    int length = pegs.length;
-
-                    if(pegs[length - 1].getPoint().getX() == 9){ // Ship cannot go any further East, it's on the edge of the map
-                        //do not move ship
-                        System.out.println("SHIP NAME cannot move any further East, it's on the East edge of the board!");
-                    }
-                    else { // Ship can move East
-                        if(ship instanceof Submarine){
-
-                            Peg nub_of_ship = pegs[length-1];
-                            Peg head_of_ship = pegs[3];
-                            Peg tail_of_ship = pegs[0];
-
-                            Peg next_head_peg;
-                            Point current_peg_point = head_of_ship.getPoint();
-                            Point next_peg_point = new Point(current_peg_point.getX() + 1, current_peg_point.getY());
-                            next_head_peg = head_of_ship.getBoard().getPeg(next_peg_point);
-
-                            Peg next_nub_peg;
-                            Point current_nub_peg_point = nub_of_ship.getPoint();
-                            Point next_nub_peg_point = new Point(current_nub_peg_point.getX() + 1, current_nub_peg_point.getY());
-                            next_nub_peg = nub_of_ship.getBoard().getPeg(next_nub_peg_point);
-
-                            tail_of_ship.setSub(null);
-                            next_head_peg.setSub(head_of_ship.getSub());
-                            next_nub_peg.setSub(nub_of_ship.getSub());
-                            nub_of_ship.setSub(null);
-
-                            Point[] new_points = new Point[length]; // new array of points for where ship is moving to
-                            for (int i = 0; i < length; i++) {
-                                new_points[i] = new Point(pegs[i].getPoint().getX() + 1, pegs[i].getPoint().getY());
-                            }
-                            //System.out.println(Arrays.toString(ship.getPoints()));
-                            ship.setPoints(new_points);
-                            //System.out.println(Arrays.toString(ship.getPoints()));
-                        }
-                        else {
-                            Peg head_of_ship = pegs[length - 1];
-                            Peg tail_of_ship = pegs[0];
-
-                            Peg next_peg;
-                            Point current_peg_point = head_of_ship.getPoint();
-                            Point next_peg_point = new Point(current_peg_point.getX() + 1, current_peg_point.getY());
-                            next_peg = head_of_ship.getBoard().getPeg(next_peg_point);
-
-                            tail_of_ship.setShip(null);
-
-                            next_peg.setShip(head_of_ship.getShip());
-
-                            Point[] new_points = new Point[length]; // new array of points for where ship is moving to
-                            for (int i = 0; i < length; i++) {
-                                new_points[i] = new Point(pegs[i].getPoint().getX() + 1, pegs[i].getPoint().getY());
-                            }
-                            //System.out.println(Arrays.toString(ship.getPoints()));
-                            ship.setPoints(new_points);
-                            //System.out.println(Arrays.toString(ship.getPoints()));
-                        }
-                    }
-                }
-            }*/
-                }//East
-            }
-        }
-    }//move
+//    public void move(char direction) {
+//
+//        if (direction == 'E') {
+//            for (Ship ship :
+//                    this.getShips()) { // loops through the ships on the board
+//                if (ship != null && !ship.isSunk()) { // makes sure ship isn't sunk and not null
+//
+//                    ship.move(direction);
+//
+//                    /*Peg[] pegs = ship.getPegs(); // gets pegs that ship is on
+//                    int length = pegs.length;
+//
+//                    if(pegs[length - 1].getPoint().getX() == 9){ // Ship cannot go any further East, it's on the edge of the map
+//                        //do not move ship
+//                        System.out.println("SHIP NAME cannot move any further East, it's on the East edge of the board!");
+//                    }
+//                    else { // Ship can move East
+//                        if(ship instanceof Submarine){
+//
+//                            Peg nub_of_ship = pegs[length-1];
+//                            Peg head_of_ship = pegs[3];
+//                            Peg tail_of_ship = pegs[0];
+//
+//                            Peg next_head_peg;
+//                            Point current_peg_point = head_of_ship.getPoint();
+//                            Point next_peg_point = new Point(current_peg_point.getX() + 1, current_peg_point.getY());
+//                            next_head_peg = head_of_ship.getBoard().getPeg(next_peg_point);
+//
+//                            Peg next_nub_peg;
+//                            Point current_nub_peg_point = nub_of_ship.getPoint();
+//                            Point next_nub_peg_point = new Point(current_nub_peg_point.getX() + 1, current_nub_peg_point.getY());
+//                            next_nub_peg = nub_of_ship.getBoard().getPeg(next_nub_peg_point);
+//
+//                            tail_of_ship.setSub(null);
+//                            next_head_peg.setSub(head_of_ship.getSub());
+//                            next_nub_peg.setSub(nub_of_ship.getSub());
+//                            nub_of_ship.setSub(null);
+//
+//                            Point[] new_points = new Point[length]; // new array of points for where ship is moving to
+//                            for (int i = 0; i < length; i++) {
+//                                new_points[i] = new Point(pegs[i].getPoint().getX() + 1, pegs[i].getPoint().getY());
+//                            }
+//                            //System.out.println(Arrays.toString(ship.getPoints()));
+//                            ship.setPoints(new_points);
+//                            //System.out.println(Arrays.toString(ship.getPoints()));
+//                        }
+//                        else {
+//                            Peg head_of_ship = pegs[length - 1];
+//                            Peg tail_of_ship = pegs[0];
+//
+//                            Peg next_peg;
+//                            Point current_peg_point = head_of_ship.getPoint();
+//                            Point next_peg_point = new Point(current_peg_point.getX() + 1, current_peg_point.getY());
+//                            next_peg = head_of_ship.getBoard().getPeg(next_peg_point);
+//
+//                            tail_of_ship.setShip(null);
+//
+//                            next_peg.setShip(head_of_ship.getShip());
+//
+//                            Point[] new_points = new Point[length]; // new array of points for where ship is moving to
+//                            for (int i = 0; i < length; i++) {
+//                                new_points[i] = new Point(pegs[i].getPoint().getX() + 1, pegs[i].getPoint().getY());
+//                            }
+//                            //System.out.println(Arrays.toString(ship.getPoints()));
+//                            ship.setPoints(new_points);
+//                            //System.out.println(Arrays.toString(ship.getPoints()));
+//                        }
+//                    }
+//                }
+//            }*/
+//                }//East
+//            }
+//        }
+//    }//move
 
     public void setShips(Ship[] ships){
         this.ships_array_ = ships;
     }
+
+    public void setHash(Peg peg, int[] hit_count){
+        if(this.peg_to_array_hashMap.containsKey(peg)){
+            this.peg_to_array_hashMap.replace(peg,hit_count);
+        }
+        else{
+            this.peg_to_array_hashMap.put(peg, hit_count);
+        }
+    }//setHash
+
+    public int[] getHitCountArray(Peg peg){
+        return this.peg_to_array_hashMap.get(peg);
+    }
+
+    //other methods may be useful in the future
+    public int getHitCount(Peg peg, int weapon){
+        int[] hitCount = this.peg_to_array_hashMap.get(peg);
+        return hitCount[weapon];
+    }
+
 }//Board
