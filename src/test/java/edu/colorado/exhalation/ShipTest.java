@@ -373,7 +373,7 @@ class ShipTest {
 
 
         System.out.println(board.getStateString());
-        //board.move('E');
+        board.move('E');
         System.out.println(board.getStateString());
         System.out.println(shift_right_board.getStateString());
         //System.out.println(shift_right_board.getStateString());
