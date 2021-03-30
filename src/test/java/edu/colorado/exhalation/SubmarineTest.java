@@ -97,7 +97,7 @@ class SubmarineTest {
 
         board2.placeShip(test_sub);
 
-        //Assertions.assertTrue(board2.placeShip(test_ship)==1);
+        Assertions.assertTrue(board2.placeShip(test_ship)==1);
 
     }
 

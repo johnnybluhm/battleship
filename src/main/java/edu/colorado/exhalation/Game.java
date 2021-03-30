@@ -4,19 +4,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.Stack;
 
 public class Game {
 
-    private Board board_;
+    private Board player_board_;
+    private Board computer_board_;
+    private boolean is_player_turn_;
 
     public Game(){
-        this.board_ = new Board();
+        this.player_board_ = new Board();
+        this.computer_board_ = new Board();
+        this.is_player_turn_ = true;
     }
 
     public Board getBoard(){
-        return this.board_;
+        return this.player_board_;
     }
 
     //for testing, takes a file as user input
@@ -86,7 +88,7 @@ public class Game {
     }
 
     public void setBoard(Board board){
-        this.board_ = board;
+        this.player_board_ = board;
     }
 
     public boolean isLoser(){

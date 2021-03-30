@@ -19,6 +19,8 @@ class GameTest {
     @Test
     void testPlace(){
 
+
+
         Board test_board = new Board();
         Point m_point = new Point(0,0);
         Point d_point = new Point(7,0);
@@ -35,17 +37,25 @@ class GameTest {
         Game fresh_game = new Game();
         fresh_game.place("src/test/java/edu/colorado/exhalation/user_commands.txt");
 
-       /* for (int i = 0; i < fresh_game.getBoard().getShips().length; i++) {
-            System.out.println(fresh_game.getBoard().getShips()[i]);
-        }
-        for (int i = 0; i < test_board.getShips().length; i++) {
-            System.out.println(test_board.getShips()[i]);
-        }*/
 
         System.out.println(fresh_game.getBoard().getStateString());
         System.out.println(test_board.getStateString());
         Assertions.assertTrue(fresh_game.getBoard().equals(test_board));
     }
+
+    @Test
+    void testPlaceNpc(){
+        Game game = new Game();
+
+        game.placeShipsNpc();
+
+        Ship[] ships = game.getNpcBoard().getShips();
+        for (Ship ship:
+             ships) {
+            Assertions.assertTrue(ship != null);
+        }
+    }
+
 
     @Test
     void testWinner(){
