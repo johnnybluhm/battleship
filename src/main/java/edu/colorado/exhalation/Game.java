@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Random;
 
 public class Game {
 
@@ -18,7 +17,7 @@ public class Game {
         this.is_player_turn_ = true;
     }
 
-    public Board getBoard(){
+    public Board getPlayerBoard(){
         return this.player_board_;
     }
 
@@ -30,7 +29,7 @@ public class Game {
         try (FileReader file_reader = new FileReader(user_moves)) {
             //successfully opened file
 
-            for(int i=0;i<this.getBoard().getShips().length;i++){
+            for(int i = 0; i<this.getPlayerBoard().getShips().length; i++){
                 System.out.println("Please select orientation");
                 System.out.println("v : vertical");
                 System.out.println("h : horizontal");
@@ -50,28 +49,28 @@ public class Game {
 
                 if(i ==0){
                     Ship minesweeper = new Minesweeper(orientation, ship_start);
-                    if(this.getBoard().placeShip(minesweeper) != 1){
+                    if(this.getPlayerBoard().placeShip(minesweeper) != 1){
                         System.out.println("Error placing ship");
                         return -1;
                     }
                 }
                 else if(i == 1){
                     Ship destroyer = new Destroyer(orientation, ship_start);
-                    if(this.getBoard().placeShip(destroyer) != 1){
+                    if(this.getPlayerBoard().placeShip(destroyer) != 1){
                         System.out.println("Error placing ship");
                         return -1;
                     }
                 }
                 else if(i==2){
                     Ship battleship = new Battleship(orientation, ship_start);
-                    if(this.getBoard().placeShip(battleship) != 1){
+                    if(this.getPlayerBoard().placeShip(battleship) != 1){
                         System.out.println("Error placing ship");
                         return -1;
                     }
                 }
                 else {
                     Ship submarine = new Submarine(orientation, ship_start);
-                    if(this.getBoard().placeShip(submarine) != 1){
+                    if(this.getPlayerBoard().placeShip(submarine) != 1){
                         System.out.println("Error placing ship");
                         return -1;
                     }
@@ -183,7 +182,7 @@ public class Game {
     }
 
     public boolean isLoser(){
-        Board board = this.getBoard();
+        Board board = this.getPlayerBoard();
         Ship[] ships = board.getShips();
         int sunk_count =0;
         for(int i =0; i<ships.length; i++){

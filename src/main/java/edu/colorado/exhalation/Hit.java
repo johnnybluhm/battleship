@@ -22,8 +22,8 @@ public class Hit implements Command{
 
     public void Action(Point point_){ // Stores board before hit in undo_, hits the board at point_
         undo_ = Arrays.copyOf(undo_, undo_.length + 1);
-        undo_[undo_.length - 1] = game_.getBoard().copy();
-        game_.getBoard().hit(point_);
+        undo_[undo_.length - 1] = game_.getPlayerBoard().copy();
+        game_.getPlayerBoard().hit(point_);
     }
 
     // Same Undo and Redo logic as in MoveShips.java
