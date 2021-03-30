@@ -48,7 +48,7 @@ class GameTest {
         Game game = new Game();
 
         game.placeShipsNpc();
-
+        System.out.println(game.getNpcBoard().getStateString());
         Ship[] ships = game.getNpcBoard().getShips();
         for (Ship ship:
              ships) {
@@ -66,7 +66,7 @@ class GameTest {
                 ships) {
             Assertions.assertTrue(ship != null);
         }
-
+        System.out.println(game.getNpcBoard().getStateString());
         Assertions.assertFalse(first_board.equals(game.getNpcBoard()));
     }
 

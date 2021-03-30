@@ -131,7 +131,10 @@ public class Board {
         return board;
     }//printHidden
 
-    //returns -1 on error
+    //returns -1 if what is passed in is not a ship
+    //returns -2 if placing a duplicate ship_type (2 minesweepers)
+    //returns -3 if a ships is being place on top of another
+    //returns -4 if ship is invalid
     public int placeShip(Ship ship){
         if(!ship.isValid()){
             return -4;
