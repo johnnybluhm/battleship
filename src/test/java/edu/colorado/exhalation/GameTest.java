@@ -54,6 +54,20 @@ class GameTest {
              ships) {
             Assertions.assertTrue(ship != null);
         }
+
+        Board first_board = game.getNpcBoard().copy();
+
+        game = new Game();
+
+        game.placeShipsNpc();
+
+        ships = game.getNpcBoard().getShips();
+        for (Ship ship:
+                ships) {
+            Assertions.assertTrue(ship != null);
+        }
+
+        Assertions.assertFalse(first_board.equals(game.getNpcBoard()));
     }
 
 
@@ -93,7 +107,7 @@ class GameTest {
 
         Game game = new Game();
 
-        game.setBoard(test_board);
+        game.setPlayerBoard(test_board);
 
         assertTrue(game.isLoser());
     }

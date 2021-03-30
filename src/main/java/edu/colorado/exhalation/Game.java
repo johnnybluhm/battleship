@@ -8,12 +8,12 @@ import java.io.IOException;
 public class Game {
 
     private Board player_board_;
-    private Board computer_board_;
+    private Board npc_board_;
     private boolean is_player_turn_;
 
     public Game(){
         this.player_board_ = new Board();
-        this.computer_board_ = new Board();
+        this.npc_board_ = new Board();
         this.is_player_turn_ = true;
     }
 
@@ -87,7 +87,54 @@ public class Game {
         return -1;
     }
 
-    public void setBoard(Board board){
+    public int placeShipsNpc(){
+
+        for (int i = 0; i < npc_board_.getShips().length; i++) {
+
+            int random_num_1_or_2 = (Math.random() <= 0.5) ? 1 : 2;
+            char orientation;
+            if (random_num_1_or_2 == 1){
+                orientation = 'v';
+            }
+            else {
+                orientation = 'h';
+            }
+
+            if(i ==0){
+                Ship minesweeper = new Minesweeper(orientation, ship_start);
+                if(this.getBoard().placeShip(minesweeper) != 1){
+                    System.out.println("Error placing ship");
+                    return -1;
+                }
+            }
+            else if(i == 1){
+                Ship destroyer = new Destroyer(orientation, ship_start);
+                if(this.getBoard().placeShip(destroyer) != 1){
+                    System.out.println("Error placing ship");
+                    return -1;
+                }
+            }
+            else if(i==2){
+                Ship battleship = new Battleship(orientation, ship_start);
+                if(this.getBoard().placeShip(battleship) != 1){
+                    System.out.println("Error placing ship");
+                    return -1;
+                }
+            }
+            else {
+                Ship submarine = new Submarine(orientation, ship_start);
+                if(this.getBoard().placeShip(submarine) != 1){
+                    System.out.println("Error placing ship");
+                    return -1;
+                }
+            }
+
+        }
+
+        return 1;
+    }
+
+    public void setPlayerBoard(Board board){
         this.player_board_ = board;
     }
 
@@ -108,6 +155,11 @@ public class Game {
         }
     }//isWinner()
 
-
+    public void setNpcBoard(Board board){
+        this.npc_board_ = board;
+    }
+    public Board getNpcBoard() {
+        return this.npc_board_;
+    }
 
 }//Game

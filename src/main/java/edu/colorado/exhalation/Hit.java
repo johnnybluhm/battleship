@@ -30,14 +30,14 @@ public class Hit implements Command{
     public void Undo(){
         redo_ = Arrays.copyOf(redo_, redo_.length + 1);
         redo_[redo_.length - 1] = undo_[undo_.length - 1];
-        game_.setBoard(undo_[undo_.length - 1]);
+        game_.setPlayerBoard(undo_[undo_.length - 1]);
         undo_ = Arrays.copyOf(undo_, undo_.length - 1);
     }
 
     public void Redo(){
         undo_ = Arrays.copyOf(undo_, undo_.length + 1);
         undo_[undo_.length - 1] = redo_[redo_.length - 1];
-        game_.setBoard(redo_[redo_.length - 1]);
+        game_.setPlayerBoard(redo_[redo_.length - 1]);
         redo_ = Arrays.copyOf(redo_, redo_.length - 1);
     }
 }
