@@ -10,11 +10,14 @@ public class Game {
     private Board player_board_;
     private Board npc_board_;
     private boolean is_player_turn_;
+    private PlayerAction remote;
 
     public Game(){
         this.player_board_ = new Board();
         this.npc_board_ = new Board();
         this.is_player_turn_ = true;
+        this.remote = new PlayerAction();
+        this.remote.SetCommand(0, new MoveShips(this));
     }
 
     public Board getPlayerBoard(){
@@ -204,5 +207,6 @@ public class Game {
     public Board getNpcBoard() {
         return this.npc_board_;
     }
+    public PlayerAction getRemote() {return this.remote;}
 
 }//Game

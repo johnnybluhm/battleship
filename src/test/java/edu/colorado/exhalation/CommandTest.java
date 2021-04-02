@@ -30,8 +30,11 @@ public class CommandTest {
         Game game_ = new Game();
         game_.setPlayerBoard(board);
         PlayerAction testingCommands = new PlayerAction();
-        testingCommands.SetCommand(0, new MoveShips(game_)); // sets new command MoveShips at slot 0 in testingCommands
-        testingCommands.Move(0, 'E'); // slot is 0 because that's what MoveEast was set to
+//        testingCommands.SetCommand(0, new MoveShips(game_)); // sets new command MoveShips at slot 0 in testingCommands
+//        testingCommands.Move(0, 'E'); // slot is 0 because that's what MoveEast was set to
+
+        game_.getRemote().Move(0, 'E');
+
         Assertions.assertTrue(game_.getPlayerBoard().equals(shift_right_board));
 
     }
@@ -66,18 +69,14 @@ public class CommandTest {
 
         Game game = new Game();
         game.setPlayerBoard(undo_board);
+//        PlayerAction testingCommands = new PlayerAction();
+//        testingCommands.SetCommand(0, new MoveShips(game));
+//        testingCommands.Move(0, 'E'); // Need to move in order to have something to undo
+//        testingCommands.Undo(); // No slot here because things to undo are stored in a stack
 
-        PlayerAction testingCommands = new PlayerAction();
-        testingCommands.SetCommand(0, new MoveShips(game));
-        testingCommands.Move(0, 'E'); // Need to move in order to have something to undo
+        game.getRemote().Move(0, 'E');
+        game.getRemote().Undo();
 
-        testingCommands.Undo(); // No slot here because things to undo are stored in a stack
-//        System.out.println(compare_board.getStateString());
-//        System.out.println(game.getBoard().getStateString());
-//        System.out.println(compare_board.getPeg(0,0));
-//        System.out.println(game.getBoard().getPeg(0,0));
-
-        //System.out.println(game.getPlayerBoard().getStateString());
         Assertions.assertTrue(game.getPlayerBoard().equals(compare_board));
     }
 
@@ -135,11 +134,14 @@ public class CommandTest {
 
         Game game = new Game();
         game.setPlayerBoard(redo_board);
-        PlayerAction testingCommands = new PlayerAction();
-        testingCommands.SetCommand(0, new MoveShips(game));
-        testingCommands.Move(0, 'E'); // Need to move in order to have something to undo
-        testingCommands.Undo(); // Need to undo a move in order to have something to redo
-        testingCommands.Redo(); // No slot here, redo commands are stored in testingCommands
+//        PlayerAction testingCommands = new PlayerAction();
+//        testingCommands.SetCommand(0, new MoveShips(game));
+//        testingCommands.Move(0, 'E'); // Need to move in order to have something to undo
+//        testingCommands.Undo(); // Need to undo a move in order to have something to redo
+//        testingCommands.Redo(); // No slot here, redo commands are stored in testingCommands
+        game.getRemote().Move(0, 'E');
+        game.getRemote().Undo();
+        game.getRemote().Redo();
 
         Assertions.assertTrue(game.getPlayerBoard().equals(shift_right_board));
     }
