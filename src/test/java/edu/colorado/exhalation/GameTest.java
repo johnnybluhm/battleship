@@ -119,49 +119,45 @@ class GameTest {
         Ship minesweeper = new Minesweeper('h', new Point(0,0));
         Ship destroyer = new Destroyer('h', new Point(0,1));
         Ship  battleship = new Battleship('h', new Point(0,2));
+        Ship submarine = new Submarine('h', new Point(0,3));
         test_board.placeShip(minesweeper);
         test_board.placeShip(destroyer);
         test_board.placeShip(battleship);
-
+        test_board.placeShip(submarine);
+        Game game = new Game();
+        game.setPlayerBoard(test_board);
+        test_board = game.getPlayerBoard();
         //hits every point on every ship and checks that they are sunk
         Point[] points = minesweeper.getPoints();
         for(int i=0; i< points.length; i++){
             test_board.hit(points[i]);
         }
+        game.setPlayerBoard(test_board);
         Assertions.assertTrue(game.getPlayerSunkCount() == 1);
 
         points = destroyer.getPoints();
         for(int i=0; i< points.length; i++){
             test_board.hit(points[i]);
         }
-
         test_board.hit(points[1]);
+        game.setPlayerBoard(test_board);
         Assertions.assertTrue(game.getPlayerSunkCount() == 2);
 
         points = battleship.getPoints();
         for(int i=0; i< points.length; i++){
             test_board.hit(points[i]);
         }
-
         test_board.hit(points[2]);
-
-
-        Game game = new Game();
-
         game.setPlayerBoard(test_board);
-
         Assertions.assertTrue(game.getPlayerSunkCount() == 3);
 
-        Ship submarine = new Submarine('h', new Point(0,3));
-
-        game.getPlayerBoard().placeShip(submarine);
-
+        
         points = submarine.getPoints();
-        game.getPlayerBoard().setWeapon(Board.LASER);
+        test_board.setWeapon(Board.LASER);
         for(int i=0; i< points.length; i++){
             test_board.hit(points[i]);
         }
-
+        game.setPlayerBoard(test_board);
         Assertions.assertTrue(game.getPlayerSunkCount() == 4);
 
 

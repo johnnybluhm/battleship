@@ -267,7 +267,7 @@ public class Board {
             for (int i = 0; i <captain_hit_count_array.length ; i++) {
                 total_hit+= captain_hit_count_array[i];
             }
-            if(total_hit == 2){
+            if(total_hit == 2 || total_hit>2){
                 return true;
             }
             else {
@@ -281,7 +281,7 @@ public class Board {
             for (int i = 0; i <captain_hit_count_array.length ; i++) {
                 total_hit+= captain_hit_count_array[i];
             }
-            if(total_hit == 2){
+            if(total_hit == 2 || total_hit>2){
                 return true;
             }
             else {

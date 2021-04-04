@@ -184,6 +184,19 @@ public class Game {
         this.player_board_ = board;
     }
 
+    public int getPlayerSunkCount(){
+        Board player_board = this.getPlayerBoard();
+        Ship[] ships = player_board.getShips();
+        int sunk_count = 0;
+        for (int i = 0; i <ships.length ; i++) {
+            Ship ship = ships[i];
+            if(player_board.isSunk(ship) == true){
+                sunk_count++;
+            }
+        }
+        return sunk_count;
+    }
+
     public boolean isLoser(){
         Board board = this.getPlayerBoard();
         Ship[] ships = board.getShips();
