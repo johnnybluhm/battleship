@@ -151,7 +151,7 @@ class GameTest {
         game.setPlayerBoard(test_board);
         Assertions.assertTrue(game.getPlayerSunkCount() == 3);
 
-        
+
         points = submarine.getPoints();
         test_board.setWeapon(Board.LASER);
         for(int i=0; i< points.length; i++){
