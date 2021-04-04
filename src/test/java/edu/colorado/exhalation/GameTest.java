@@ -128,29 +128,29 @@ class GameTest {
         for(int i=0; i< points.length; i++){
             test_board.hit(points[i]);
         }
-        Assertions.assertTrue(test_board.isSunk(minesweeper));
+        Assertions.assertTrue(game.getPlayerSunkCount() == 1);
 
         points = destroyer.getPoints();
         for(int i=0; i< points.length; i++){
             test_board.hit(points[i]);
         }
-        Assertions.assertFalse(test_board.isSunk(destroyer));
+
         test_board.hit(points[1]);
-        Assertions.assertTrue(test_board.isSunk(destroyer));
+        Assertions.assertTrue(game.getPlayerSunkCount() == 2);
 
         points = battleship.getPoints();
         for(int i=0; i< points.length; i++){
             test_board.hit(points[i]);
         }
-        Assertions.assertFalse(test_board.isSunk(battleship));
+
         test_board.hit(points[2]);
-        Assertions.assertTrue(test_board.isSunk(battleship));
+
 
         Game game = new Game();
 
         game.setPlayerBoard(test_board);
 
-        //Assertions.assertTrue(game.getPlayerSunkCount() == 3);
+        Assertions.assertTrue(game.getPlayerSunkCount() == 3);
 
         Ship submarine = new Submarine('h', new Point(0,3));
 
@@ -162,7 +162,7 @@ class GameTest {
             test_board.hit(points[i]);
         }
 
-        //Assertions.assertTrue(game.getPlayerSunkCount() == 4);
+        Assertions.assertTrue(game.getPlayerSunkCount() == 4);
 
 
     }
