@@ -6,10 +6,65 @@ import org.junit.jupiter.api.Test;
 
 //import static junit.framework.TestCase.assertEquals;
 //import static junit.framework.TestCase.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
+
 class PegTest {
+
+    @Test
+    void testCreateWithXY(){
+        Peg test_peg = new Peg(1, 0);
+        Point correct_point = new Point(1, 0);
+        assertTrue(correct_point.equals(test_peg.getPoint()));
+        assertFalse(test_peg.isHit());
+        assertNull(test_peg.getShip());
+        assertFalse(test_peg.isVisible());
+        assertNull(test_peg.getSub());
+        assertNull(test_peg.getBoard());
+
+//      Assertion for hit_count?
+    }
+
+    @Test
+    void testCreateWithXYAndBoard(){
+        Board test_board = new Board();
+        Peg test_peg = new Peg(1, 0, test_board);
+        Point correct_point = new Point(1, 0);
+
+        assertTrue(correct_point.equals(test_peg.getPoint()));
+        assertFalse(test_peg.isHit());
+        assertNull(test_peg.getShip());
+        assertFalse(test_peg.isVisible());
+        assertNull(test_peg.getSub());
+        assertEquals(test_board, test_peg.getBoard());
+    }
+
+    @Test
+    void testCreateWithPoint(){
+        Point test_point = new Point(1, 0);
+        Peg test_peg = new Peg(test_point);
+
+        assertTrue(test_point.equals(test_peg.getPoint()));
+        assertFalse(test_peg.isHit());
+        assertNull(test_peg.getShip());
+        assertFalse(test_peg.isVisible());
+        assertNull(test_peg.getSub());
+        assertNull(test_peg.getBoard());
+    }
+
+    @Test
+    void testCreateWithPeg(){
+        Board test_board = new Board();
+        Peg copy_peg = new Peg(1, 0, test_board);
+        Peg test_peg = new Peg(copy_peg);
+
+        assertTrue(copy_peg.getPoint().equals(test_peg.getPoint()));
+        assertEquals(copy_peg.isHit(), test_peg.isHit());
+        assertEquals(copy_peg.getShip(), test_peg.getShip());
+        assertEquals(copy_peg.isVisible(), test_peg.isVisible());
+        assertEquals(copy_peg.getSub(), test_peg.getSub());
+        // assertEquals(copy_peg.getBoard(), test_peg.getBoard());
+        // nothing in Peg(peg) constructor that copies board across?
+    }
 
     private Peg test_peg;
     @BeforeEach
@@ -18,11 +73,7 @@ class PegTest {
     }
 
     //test using point (1,0)
-    @Test
-    void testCreate(){
-        assertEquals(1, test_peg.getPoint().getX());
-        assertEquals(0, test_peg.getPoint().getY());
-    }
+
     @Test
     void testHit(){
         assertFalse(test_peg.isHit());
