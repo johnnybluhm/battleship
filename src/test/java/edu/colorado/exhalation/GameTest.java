@@ -67,6 +67,7 @@ class GameTest {
             Assertions.assertTrue(ship != null);
         }
         System.out.println(game.getNpcBoard().getStateString());
+
         Assertions.assertFalse(first_board.equals(game.getNpcBoard()));
     }
 
@@ -174,19 +175,28 @@ class GameTest {
     @Test
     void testTakeTurn(){
 
+        Board player_board = new Board();
+        Ship minesweeper = new Minesweeper('h', new Point(0,0));
+        Ship destroyer = new Destroyer('h', new Point(0,1));
+        Ship  battleship = new Battleship('h', new Point(0,2));
+        Ship submarine = new Submarine('h', new Point(0,3));
+        player_board.placeShip(minesweeper);
+        player_board.placeShip(destroyer);
+        player_board.placeShip(battleship);
+        player_board.placeShip(submarine);
+
         Game game = new Game();
         game.placeShipsNpc();
-        Board player_board = game.getNpcBoard().copy();
+        game.getNpcBoard().setWeapon(Board.LASER);
         game.setPlayerBoard(player_board);
 
-        while(game.getPlayerSunkCount() != 4 && game.getNpcSunkCount() !=4){
+        System.out.println(game.getNpcBoard().getStateString());
+        while(game.notOver()){
             game.takeTurn(Board.HIT);
             game.togglePlayer();
         }
+        System.out.println(game.getNpcBoard().getStateString());
         Assertions.assertTrue(game.getNpcSunkCount()==4);
-
-
-
     }
 
 }

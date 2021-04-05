@@ -280,7 +280,7 @@ public class Board {
             for (int i = 0; i <captain_hit_count_array.length ; i++) {
                 total_hit+= captain_hit_count_array[i];
             }
-            if(total_hit == 1){
+            if(total_hit >= 1){
                 return true;
             }
             else {
@@ -294,7 +294,7 @@ public class Board {
             for (int i = 0; i <captain_hit_count_array.length ; i++) {
                 total_hit+= captain_hit_count_array[i];
             }
-            if(total_hit == 2 || total_hit>2){
+            if(total_hit >= 2){
                 return true;
             }
             else {
@@ -308,7 +308,7 @@ public class Board {
             for (int i = 0; i <captain_hit_count_array.length ; i++) {
                 total_hit+= captain_hit_count_array[i];
             }
-            if(total_hit == 2 || total_hit>2){
+            if(total_hit >= 2){
                 return true;
             }
             else {
@@ -318,7 +318,7 @@ public class Board {
         else if(ship instanceof Submarine){
             Peg captains_quarters = this.getPeg(ship.getPoints()[Submarine.CAPTAINS_QUARTERS]);
             int captains_laser_hit_count = this.getHitCount(captains_quarters, Board.LASER);
-            if(captains_laser_hit_count == 1){
+            if(captains_laser_hit_count >= 1){
                 return true;
             }
             else {

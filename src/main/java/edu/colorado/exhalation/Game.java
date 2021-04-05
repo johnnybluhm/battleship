@@ -246,4 +246,42 @@ public class Game {
     public boolean getIsPlayerTurn() {
         return is_player_turn_;
     }
+
+    public void takeTurn(int action){
+
+        if (action == Board.HIT){
+            Point random_point = getRandomPoint();
+            if(is_player_turn_){
+                this.getPlayerBoard().hit(random_point);
+            }
+            else {
+                this.getNpcBoard().hit(random_point);
+            }
+        }
+    }//take turn
+
+    public static Point getRandomPoint(){
+
+        Point point = new Point(-1,-1);
+        int random_x;
+        int random_y;
+        while (!point.isValid()){
+            random_x = (int)(Math.random()*100 % 10);
+            random_y = (int)(Math.random()*100 % 10);
+            point = new Point(random_x,random_y);
+        }
+        return point;
+    }
+
+    public boolean notOver(){
+        int npc_sunk_count = getNpcSunkCount();
+        int player_sunk_count = getPlayerSunkCount();
+        if(npc_sunk_count == 4){
+            return false;
+        }
+        else if(player_sunk_count == 4){
+            return false;
+        }
+        return true;
+    }
 }//Game

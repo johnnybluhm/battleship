@@ -72,8 +72,11 @@ public class Peg {
 
    public char print(){
         if(isHit()){
-            if(this.getShip()==null){
+            if(this.getShip()==null && this.getSub()==null){
                 return '#';
+            }
+            else if(this.getShip()==null){
+                return 'S';
             }
             else{
                 return 'X';
