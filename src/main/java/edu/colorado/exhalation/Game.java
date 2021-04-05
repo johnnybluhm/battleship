@@ -20,6 +20,14 @@ public class Game {
         this.remote.SetCommand(0, new MoveShips(this));
     }
 
+    public void togglePlayer(){
+        if(getIsPlayerTurn() == false){
+            this.is_player_turn_ = true;
+        }
+        else{
+            this.is_player_turn_ = false;
+        }
+    }
     public Board getPlayerBoard(){
         return this.player_board_;
     }
