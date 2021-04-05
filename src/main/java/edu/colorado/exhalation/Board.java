@@ -20,6 +20,7 @@ public class Board {
     private int weapon_;
     protected HashMap<Peg, int[]> peg_to_array_hashMap = new HashMap<Peg, int[]>();
     private boolean air_strike_used_ = false;
+    private int time_left_ = 300; //seconds
 
 
     public static Point[] getRowPoints(int row_number){
@@ -835,4 +836,11 @@ public class Board {
         return hitCount[weapon];
     }
 
+    public int getTimeLeft() {
+        return time_left_;
+    }
+
+    public void setTimeLeft(int time_left) {
+        this.time_left_ = time_left;
+    }
 }//Board

@@ -624,4 +624,14 @@ class BoardTest {
         Assertions.assertTrue(test_board.equals(compare_board));
     }
 
+    @Test
+    void testTogglePlayer(){
+
+        Game game = new Game();
+        Assertions.assertTrue(game.getIsPlayerTurn() == true);
+        game.togglePlayer();
+
+        Assertions.assertTrue(game.getIsPlayerTurn() == false);
+    }
+
 }//boardTest

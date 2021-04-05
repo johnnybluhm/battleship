@@ -222,4 +222,7 @@ public class Game {
     }
     public PlayerAction getRemote() {return this.remote;}
 
+    public boolean getIsPlayerTurn() {
+        return is_player_turn_;
+    }
 }//Game
