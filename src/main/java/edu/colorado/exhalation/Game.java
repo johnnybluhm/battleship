@@ -205,6 +205,19 @@ public class Game {
         return sunk_count;
     }
 
+    public int getNpcSunkCount(){
+        Board npc_board = this.getNpcBoard();
+        Ship[] ships = npc_board.getShips();
+        int sunk_count = 0;
+        for (int i = 0; i <ships.length ; i++) {
+            Ship ship = ships[i];
+            if(npc_board.isSunk(ship) == true){
+                sunk_count++;
+            }
+        }
+        return sunk_count;
+    }
+
     public boolean isLoser(){
         Board board = this.getPlayerBoard();
         Ship[] ships = board.getShips();

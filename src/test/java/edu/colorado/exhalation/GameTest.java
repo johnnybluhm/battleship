@@ -70,7 +70,6 @@ class GameTest {
         Assertions.assertFalse(first_board.equals(game.getNpcBoard()));
     }
 
-
     @Test
     void testWinner(){
 
@@ -163,6 +162,31 @@ class GameTest {
 
     }
 
+    @Test
+    void testTogglePlayer(){
 
+        Game game = new Game();
+        Assertions.assertTrue(game.getIsPlayerTurn() == true);
+        game.togglePlayer();
+        Assertions.assertTrue(game.getIsPlayerTurn() == false);
+    }
+
+    @Test
+    void testTakeTurn(){
+
+        Game game = new Game();
+        game.placeShipsNpc();
+        Board player_board = game.getNpcBoard().copy();
+        game.setPlayerBoard(player_board);
+
+        while(game.getPlayerSunkCount() != 4 && game.getNpcSunkCount() !=4){
+            game.takeTurn(Board.HIT);
+            game.togglePlayer();
+        }
+        Assertions.assertTrue(game.getNpcSunkCount()==4);
+
+
+
+    }
 
 }

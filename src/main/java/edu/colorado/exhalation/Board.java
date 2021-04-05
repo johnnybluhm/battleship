@@ -3,7 +3,8 @@ package edu.colorado.exhalation;
 import java.util.HashMap;
 
 public class Board {
-
+    //actions
+    final static int HIT = 1;
     final static int BOARD_SIZE = 10;
     //weapons
     final static int NUM_WEAPONS = 2;
@@ -21,6 +22,7 @@ public class Board {
     protected HashMap<Peg, int[]> peg_to_array_hashMap = new HashMap<Peg, int[]>();
     private boolean air_strike_used_ = false;
     private int time_left_ = 300; //seconds
+
 
 
     public static Point[] getRowPoints(int row_number){
