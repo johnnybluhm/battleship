@@ -19,7 +19,18 @@ public class Board {
     private Ship[] ships_array_ = {null, null, null, null};
     private int weapon_;
     protected HashMap<Peg, int[]> peg_to_array_hashMap = new HashMap<Peg, int[]>();
+    private boolean air_strike_used_ = false;
 
+
+    public static Point[] getRowPoints(int row_number){
+        Point[] points = new Point[BOARD_SIZE];
+        Point row_point;
+        for (int i = 0; i <points.length ; i++) {
+            row_point = new Point(0+i, row_number);
+            points[i] = row_point;
+        }
+        return points;
+    }
     //creates board with all empty pegs, positions are set in the loop
     public Board(){
         this.weapon_=BOMB;
@@ -81,6 +92,19 @@ public class Board {
         }//outer for
         return board;
     }//print
+
+    //returns -1 if airstrike used already
+    public int airStrike(int row_number){
+        if(air_strike_used_ == true){
+            return -1;
+        }
+        Point[] row_points = Board.getRowPoints(row_number);
+        for (int i = 0; i <row_points.length ; i++) {
+            this.hit(row_points[i]);
+        }
+        this.air_strike_used_ = true;
+        return 1;
+    }
 
     //returns -1 on most errors
     //returns -2 if ship can be placed, but we already have that ship on the board

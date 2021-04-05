@@ -163,21 +163,6 @@ class GameTest {
 
     }
 
-    @Test
-    void testAirStrike(){
-        Board compare_board = new Board();
 
-        Point[] row_points = Board.getRowPoints(0);
-
-        for (int i = 0; i < row_points.length; i++) {
-            compare_board.hit(row_points[i]);
-        }
-
-        Board test_board = new Board();
-
-        test_board.airStrike(0);
-
-        Assertions.assertTrue(test_board.equals(compare_board));
-    }
 
 }
