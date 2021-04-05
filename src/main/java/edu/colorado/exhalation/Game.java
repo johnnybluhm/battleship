@@ -290,6 +290,12 @@ public class Game {
         else if(player_sunk_count == 4){
             return false;
         }
+        else if(getNpcBoard().getTimeLeft()<0){
+            return false;
+        }
+        else if(getPlayerBoard().getTimeLeft()<0){
+            return false;
+        }
         return true;
     }
 
