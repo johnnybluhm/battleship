@@ -196,7 +196,36 @@ class GameTest {
             game.togglePlayer();
         }
         System.out.println(game.getNpcBoard().getStateString());
+        System.out.println(game.getPlayerBoard().getTimeLeft());
+
+        //npc board always loses as player board cannot sink sub
         Assertions.assertTrue(game.getNpcSunkCount()==4);
+    }
+
+    @Test
+    void testChessClock(){
+
+        Board player_board = new Board();
+        Ship minesweeper = new Minesweeper('h', new Point(0,0));
+        Ship destroyer = new Destroyer('h', new Point(0,1));
+        Ship  battleship = new Battleship('h', new Point(0,2));
+        Ship submarine = new Submarine('h', new Point(0,3));
+        player_board.placeShip(minesweeper);
+        player_board.placeShip(destroyer);
+        player_board.placeShip(battleship);
+        player_board.placeShip(submarine);
+
+        Game game = new Game();
+        game.placeShipsNpc();
+        game.getNpcBoard().setWeapon(Board.LASER);
+        game.setPlayerBoard(player_board);
+
+        //loop takes 5 seconds to run
+        //Board.time takes
+        for (int i = 0; i < 10; i++) {
+            game.takeTurn(Board.TIME);
+        }
+        Assertions.assertTrue(game.getPlayerBoard().getTimeLeft()<295000);
     }
 
 }

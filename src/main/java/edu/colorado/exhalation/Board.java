@@ -5,6 +5,7 @@ import java.util.HashMap;
 public class Board {
     //actions
     final static int HIT = 1;
+    final static int TIME = 2;
     final static int BOARD_SIZE = 10;
     //weapons
     final static int NUM_WEAPONS = 2;
@@ -21,7 +22,7 @@ public class Board {
     private int weapon_;
     protected HashMap<Peg, int[]> peg_to_array_hashMap = new HashMap<Peg, int[]>();
     private boolean air_strike_used_ = false;
-    private int time_left_ = 300; //seconds
+    private long time_left_ = 300000; //milliseconds
 
 
 
@@ -838,11 +839,11 @@ public class Board {
         return hitCount[weapon];
     }
 
-    public int getTimeLeft() {
+    public long getTimeLeft() {
         return time_left_;
     }
 
-    public void setTimeLeft(int time_left) {
+    public void setTimeLeft(long time_left) {
         this.time_left_ = time_left;
     }
 }//Board

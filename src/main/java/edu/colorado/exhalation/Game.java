@@ -248,15 +248,23 @@ public class Game {
     }
 
     public void takeTurn(int action){
-
+        Board board = getBoard();
+        long start_time;
         if (action == Board.HIT){
+            start_time = System.currentTimeMillis();
             Point random_point = getRandomPoint();
-            if(is_player_turn_){
-                this.getPlayerBoard().hit(random_point);
+            board.hit(random_point);
+            updateChessClock(start_time);
+        }
+        else if (action == Board.TIME){
+            start_time = System.currentTimeMillis();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            else {
-                this.getNpcBoard().hit(random_point);
-            }
+            updateChessClock(start_time);
+
         }
     }//take turn
 
@@ -283,5 +291,23 @@ public class Game {
             return false;
         }
         return true;
+    }
+
+    public Board getBoard(){
+        if(is_player_turn_){
+            return getPlayerBoard();
+        }
+        else {
+            return getNpcBoard();
+        }
+    }
+
+    public void updateChessClock(long start_time){
+        Board board = getBoard();
+        long end_time = System.currentTimeMillis();
+        long time_elapsed = end_time - start_time;
+        long time_left = board.getTimeLeft();
+        board.setTimeLeft(time_left-time_elapsed);
+
     }
 }//Game
