@@ -196,7 +196,7 @@ class GameTest {
             game.togglePlayer();
         }
         System.out.println(game.getNpcBoard().getStateString());
-        System.out.println(game.getPlayerBoard().getTimeLeft());
+        //System.out.println(game.getPlayerBoard().getStateString());
 
         //npc board always loses as player board cannot sink sub
         Assertions.assertTrue(game.getNpcSunkCount()==4);
