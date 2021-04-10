@@ -619,6 +619,7 @@ class BoardTest {
             compare_board.hit(row_points[i]);
             Assertions.assertTrue(row_points[i].getX()==i);
         }
+
         Board test_board = new Board();
         test_board.airStrike(0);
         Assertions.assertTrue(test_board.equals(compare_board));
