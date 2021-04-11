@@ -4,57 +4,72 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 //https://stackoverflow.com/questions/13787873/adding-buttons-using-gridlayout
 public class Gui implements ActionListener {
     private JFrame frame;
-    private JPanel grid_panel;
-    private JButton[][]buttons;
+    private JPanel player_panel;
+    private JButton[][] player_buttons;
+    private JButton[][] npc_buttons;
+    private ArrayList<GuiObserver> observers;
     private final int SIZE = 10;
-    private GridLayout gridLayout;
-    private Game game;
+    private GridLayout boardLayout;
+    private Game state;
+
     public Gui(){
-        this.game = new Game();
-        game.placeShipsNpc();
+        this.state = new Game();
+        state.placeShipsNpc();
 
         JFrame frame = new JFrame("Battleship");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800,800);
+        frame.setSize(600,650);
 
+        FlowLayout outer_grid_layout = new FlowLayout();
+        JPanel outer_panel = new JPanel();
+        outer_panel.setLayout(outer_grid_layout);
+        JPanel middle_panel = new JPanel();
+        BoxLayout box_layout = new BoxLayout(middle_panel, BoxLayout.X_AXIS);
+        // Define new buttons
+        JButton jb1 = new JButton("Sonar Pulse");
+        JButton jb2 = new JButton("Air Strike");
+        JButton jb3 = new JButton("Move Fleet");
+        middle_panel.add(jb1);
+        middle_panel.add(jb2);
+        middle_panel.add(jb3);
         //panel for buttons
-        gridLayout =  new GridLayout(SIZE,SIZE);
-        grid_panel = new JPanel();
-        grid_panel.setLayout(gridLayout);
-        buttons = new JButton[SIZE][SIZE];
-        addButtons();
-        frame.add(grid_panel);
+        boardLayout =  new GridLayout(SIZE,SIZE);
+        player_panel = new JPanel();
+        JPanel npc_panel = new JPanel();
+        npc_panel.setLayout(boardLayout);
+        player_panel.setLayout(boardLayout);
+        player_buttons = new JButton[SIZE][SIZE];
+        npc_buttons = new JButton[SIZE][SIZE];
+        //addButtons();
+        for(int i=0;i<SIZE;i++)
+            for(int j=0;j<SIZE;j++)
+            {
+                Board board = this.getState().getNpcBoard();
+                player_buttons[i][j] = new JButton(String.valueOf(board.getPeg(i,j).print()));
+                npc_buttons[i][j] = new JButton(String.valueOf(board.getPeg(i,j).print()));
+                player_buttons[i][j].addActionListener(this);
+                npc_buttons[i][j].addActionListener(this);
+                player_buttons[i][j].setBackground(Color.GREEN);
+                npc_buttons[i][j].setBackground(Color.RED);
+                npc_panel.add(npc_buttons[i][j]);
+                player_panel.add(player_buttons[i][j]);
+            }
+        outer_panel.add(player_panel);
+        outer_panel.add(middle_panel);
+        outer_panel.add(npc_panel);
+        frame.add(outer_panel);
 
         frame.setVisible(true);
         this.frame = frame;
     }
 
-    public Game getGame(){
-        return this.game;
-    }
-
-    public void addButtons()
-    {
-        for(int i=0;i<SIZE;i++)
-            for(int j=0;j<SIZE;j++)
-            {
-                Board board = this.getGame().getNpcBoard();
-                buttons[i][j] = new JButton(String.valueOf(board.getPeg(i,j).print()));
-                JButton button = buttons[i][j];
-                button.addActionListener(this);
-
-                
-                grid_panel.add(buttons[i][j]);
-            }
-
-    }
-
-    public void changeColor(){
-
+    public Game getState(){
+        return this.state;
     }
 
     public JFrame getFrame(){
@@ -65,16 +80,24 @@ public class Gui implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         JButton button = (JButton) e.getSource();
-        int x = button.getX();
-        int y = button.getY();
-        y = (y-1) / 76;
-        x = (x-3) / 78;
+        int x = -1;
+        int y = -1;
+        for (int row = 0; row < player_buttons.length; row++) {
+            for (int col = 0; col < player_buttons.length; col++) {
+                if (player_buttons[row][col] == e.getSource() || npc_buttons[row][col] == e.getSource()){
+                    x = row;
+                    y = col;
+                    Board board = this.getState().getNpcBoard();
+                    board.hit(new Point(x,y));
+                    break;
+                }
+            }
+        }
 
-        Board board = this.getGame().getNpcBoard();
-        board.hit(new Point(x,y));
-        int hit_count = board.getPeg(x,y).getHitCount()[0];
+        button.setText(String.valueOf(x)+","+ String.valueOf(y));
+    }
 
-
-        button.setText(String.valueOf(hit_count));
+    public void attach(GuiObserver observer){
+        observers.add(observer);
     }
 }
