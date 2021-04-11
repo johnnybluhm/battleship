@@ -12,14 +12,25 @@ public class Gui implements ActionListener {
     private JPanel player_panel;
     private JButton[][] player_buttons;
     private JButton[][] npc_buttons;
-    private ArrayList<GuiObserver> observers;
+    private ArrayList<GuiObserver> npc_observers;
+    private ArrayList<GuiObserver> player_observers;
     private final int SIZE = 10;
     private GridLayout boardLayout;
-    private Game state;
+    private Game game;
+    private Board player_state;
+    private Board npc_state;
 
     public Gui(){
-        this.state = new Game();
-        state.placeShipsNpc();
+        this.game = new Game();
+        game.placeShipsNpc();
+
+        //get random ship placement for player board
+        Game game2 = new Game();
+        game2.placeShipsNpc();
+        game.setPlayerBoard(game2.getNpcBoard());
+        this.player_state = game.getPlayerBoard();
+        this.npc_state = game.getNpcBoard();
+
 
         JFrame frame = new JFrame("Battleship");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,7 +60,7 @@ public class Gui implements ActionListener {
         for(int i=0;i<SIZE;i++)
             for(int j=0;j<SIZE;j++)
             {
-                Board board = this.getState().getNpcBoard();
+                Board board = this.getPlayerState();
                 player_buttons[i][j] = new JButton(String.valueOf(board.getPeg(i,j).print()));
                 npc_buttons[i][j] = new JButton(String.valueOf(board.getPeg(i,j).print()));
                 player_buttons[i][j].addActionListener(this);
@@ -68,8 +79,23 @@ public class Gui implements ActionListener {
         this.frame = frame;
     }
 
-    public Game getState(){
-        return this.state;
+    public Board getPlayerState(){
+        return this.player_state;
+    }
+
+    public void setPlayerState(Board state){
+        this.player_state = state;
+        notifyAllPlayerObservers();
+    }
+
+    public void notifyAllPlayerObservers() {
+        for (GuiObserver observer: this.player_observers) {
+            observer.update();
+        }
+    }
+
+    public void attachPlayer(GuiObserver observer){
+        player_observers.add(observer);
     }
 
     public JFrame getFrame(){
@@ -87,7 +113,7 @@ public class Gui implements ActionListener {
                 if (player_buttons[row][col] == e.getSource() || npc_buttons[row][col] == e.getSource()){
                     x = row;
                     y = col;
-                    Board board = this.getState().getNpcBoard();
+                    Board board = this.getPlayerState();
                     board.hit(new Point(x,y));
                     break;
                 }
@@ -97,7 +123,4 @@ public class Gui implements ActionListener {
         button.setText(String.valueOf(x)+","+ String.valueOf(y));
     }
 
-    public void attach(GuiObserver observer){
-        observers.add(observer);
-    }
 }

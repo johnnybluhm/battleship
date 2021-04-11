@@ -10,7 +10,7 @@ public class GuiObserver {
 
     public GuiObserver(Gui observable, JButton button){
         this.observable = observable;
-        this.observable.attach(this);
+        //this.observable.attach(this);
         this.button = button;
     }
 
