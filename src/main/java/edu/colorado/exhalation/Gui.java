@@ -77,7 +77,7 @@ public class Gui implements ActionListener {
         outer_panel.add(middle_panel);
         outer_panel.add(npc_panel);
         frame.add(outer_panel);
-
+        notifyAllPlayerObservers();
         frame.setVisible(true);
         this.frame = frame;
     }
@@ -125,7 +125,7 @@ public class Gui implements ActionListener {
         int y = -1;
         for (int row = 0; row < player_buttons.length; row++) {
             for (int col = 0; col < player_buttons.length; col++) {
-                if (player_buttons[row][col] == e.getSource() || npc_buttons[row][col] == e.getSource()){
+                if (player_buttons[row][col] == e.getSource()){
                     x = row;
                     y = col;
                     Board board = this.getPlayerState();
@@ -133,9 +133,17 @@ public class Gui implements ActionListener {
                     notifyAllPlayerObservers();
                     break;
                 }
+                else if(npc_buttons[row][col] == e.getSource()){
+                    x = row;
+                    y = col;
+                    Board board = this.getNpcState();
+                    board.hit(new Point(x,y));
+                    //notifyAllNpcObservers();
+                    break;
+
+                }
             }
         }
-
         button.setText(String.valueOf(x)+","+ String.valueOf(y));
     }
 

@@ -16,7 +16,7 @@ public class MoveShips implements Command{
         this.redo_ = new Stack<Board>();
     }
 
-    public void Move(char direction_){ // Stores board before move in undo_, moves ships in direction 'direction_'
+    public void char_action(char direction_){ // Stores board before move in undo_, moves ships in direction 'direction_'
         undo_.push(game_.getPlayerBoard().copy());
 //        System.out.println(undo_.peek().getStateString());
         game_.getPlayerBoard().move(direction_); // moves ships

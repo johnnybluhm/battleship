@@ -16,7 +16,7 @@ public class Hit implements Command{
         this.redo_ = new Board[] {};
     }
 
-    public void Move(char direction){ // In our main class, we shouldn't ever call PlayerAction.Move(1, 4), since Hit will only use Attack method
+    public void char_action(char direction){ // In our main class, we shouldn't ever call PlayerAction.Move(1, 4), since Hit will only use Attack method
         System.out.println("Something's wrong here, you shouldn't be calling this in the code.");
     }
 

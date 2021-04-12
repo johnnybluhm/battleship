@@ -1,6 +1,5 @@
 package edu.colorado.exhalation;
 
-import java.util.Arrays;
 import java.util.Stack;
 
 // NOTE: I don't think the commented out CODE is necessary, but I'm leaving it in in case we decide it is
@@ -30,9 +29,9 @@ public class PlayerAction {
         actions_[slot_] = action_;
     }
 
-    public void Move(int slot_, char direction_){ // for Commands that use Move(char direction_)
+    public void char_action(int slot_, char direction_){ // for Commands that use Move(char direction_)
         undo_action.push(slot_);
-        actions_[slot_].Move(direction_); // activates Command at actions_[slot] using 'direction'
+        actions_[slot_].char_action(direction_); // activates Command at actions_[slot] using 'direction'
     }
 
     public void Action(int slot_, Point point_){ // for Commands that use Action(Point point_)

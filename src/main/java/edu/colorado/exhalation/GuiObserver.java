@@ -27,11 +27,19 @@ public class GuiObserver {
     public void update(){
         Board board =observable.getPlayerState();
         Peg peg = board.getPeg(this.location);
-
+        int hit_count = peg.getHitCount()[0];
         //can now update based on what peg corresponds to button
-        if(peg.isHit()){
+        if(hit_count==1){
+            this.button.setBackground(Color.CYAN);
+        }
+        else if(hit_count==2){
             this.button.setBackground(Color.BLUE);
         }
+
+        if(peg.hasShip()|| peg.getSub() != null){
+            this.button.setBackground(Color.BLACK);
+        }
+
 
     }
 }//Guiobserver

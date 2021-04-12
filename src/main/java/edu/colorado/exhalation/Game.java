@@ -12,6 +12,8 @@ public class Game {
     private boolean is_player_turn_;
     private PlayerAction remote;
 
+    final static int MOVE = 0;
+
     public Game(){
         this.player_board_ = new Board();
         this.npc_board_ = new Board();

@@ -33,7 +33,7 @@ public class CommandTest {
 //        testingCommands.SetCommand(0, new MoveShips(game_)); // sets new command MoveShips at slot 0 in testingCommands
 //        testingCommands.Move(0, 'E'); // slot is 0 because that's what MoveEast was set to
 
-        game_.getRemote().Move(0, 'E');
+        game_.getRemote().char_action(0, 'E');
 
         Assertions.assertTrue(game_.getPlayerBoard().equals(shift_right_board));
 
@@ -74,7 +74,7 @@ public class CommandTest {
 //        testingCommands.Move(0, 'E'); // Need to move in order to have something to undo
 //        testingCommands.Undo(); // No slot here because things to undo are stored in a stack
 
-        game.getRemote().Move(0, 'E');
+        game.getRemote().char_action(0, 'E');
         game.getRemote().Undo();
 
         Assertions.assertTrue(game.getPlayerBoard().equals(compare_board));
@@ -139,7 +139,7 @@ public class CommandTest {
 //        testingCommands.Move(0, 'E'); // Need to move in order to have something to undo
 //        testingCommands.Undo(); // Need to undo a move in order to have something to redo
 //        testingCommands.Redo(); // No slot here, redo commands are stored in testingCommands
-        game.getRemote().Move(0, 'E');
+        game.getRemote().char_action(Game.MOVE, 'E');
         game.getRemote().Undo();
         game.getRemote().Redo();
 
