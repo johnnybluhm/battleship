@@ -26,8 +26,6 @@ public class Gui implements ActionListener {
         this.game = new Game();
         game.placeShipsNpc();
 
-
-
         //get random ship placement for player board
         Game game2 = new Game();
         game2.placeShipsNpc();

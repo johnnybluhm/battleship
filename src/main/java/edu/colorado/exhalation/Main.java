@@ -35,7 +35,6 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        gui.getGame().getRemote().undo();
         gui.notifyAllPlayerObservers();
 
         gui.getGame().getRemote().char_action(0,'S');
