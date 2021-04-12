@@ -41,6 +41,10 @@ public class Board {
         for(int i =0; i< BOARD_SIZE; i++){
             for(int j = 0; j< BOARD_SIZE;j++){
                 this.peg_array_[i][j] = new Peg(i,j,this);
+                int[] int_array = new int[2];
+                int_array[0] = 0;
+                int_array[1] = 0;
+                this.setHash(this.peg_array_[i][j],int_array);
                 //peg_array_[i][j].setShip(new Water(new Point(i,j)));
             }
         }
@@ -524,6 +528,7 @@ public class Board {
         }
         copy_board.setShips(new_ships);
         copy_board.setWeapon(this.getWeapon());
+        copy_board.setHashMap(this.peg_to_array_hashMap);
         return copy_board;
     }
 
@@ -845,5 +850,9 @@ public class Board {
 
     public void setTimeLeft(long time_left) {
         this.time_left_ = time_left;
+    }
+
+    public void setHashMap(HashMap<Peg, int[]> hash_map){
+        this.peg_to_array_hashMap = hash_map;
     }
 }//Board

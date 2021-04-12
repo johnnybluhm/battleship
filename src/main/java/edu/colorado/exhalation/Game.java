@@ -10,7 +10,7 @@ public class Game {
     private Board player_board_;
     private Board npc_board_;
     private boolean is_player_turn_;
-    private PlayerAction remote;
+    private playerAction remote;
 
     final static int MOVE = 0;
 
@@ -18,8 +18,8 @@ public class Game {
         this.player_board_ = new Board();
         this.npc_board_ = new Board();
         this.is_player_turn_ = true;
-        this.remote = new PlayerAction();
-        this.remote.SetCommand(0, new MoveShips(this));
+        this.remote = new playerAction();
+        this.remote.setCommand(0, new MoveShips(this));
     }
 
     public void togglePlayer(){
@@ -243,7 +243,7 @@ public class Game {
     public Board getNpcBoard() {
         return this.npc_board_;
     }
-    public PlayerAction getRemote() {return this.remote;}
+    public playerAction getRemote() {return this.remote;}
 
     public boolean getIsPlayerTurn() {
         return is_player_turn_;
@@ -266,7 +266,6 @@ public class Game {
                 e.printStackTrace();
             }
             updateChessClock(start_time);
-
         }
     }//take turn
 

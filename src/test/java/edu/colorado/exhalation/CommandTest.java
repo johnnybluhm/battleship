@@ -29,7 +29,7 @@ public class CommandTest {
 
         Game game_ = new Game();
         game_.setPlayerBoard(board);
-        PlayerAction testingCommands = new PlayerAction();
+        playerAction testingCommands = new playerAction();
 //        testingCommands.SetCommand(0, new MoveShips(game_)); // sets new command MoveShips at slot 0 in testingCommands
 //        testingCommands.Move(0, 'E'); // slot is 0 because that's what MoveEast was set to
 
@@ -75,7 +75,7 @@ public class CommandTest {
 //        testingCommands.Undo(); // No slot here because things to undo are stored in a stack
 
         game.getRemote().char_action(0, 'E');
-        game.getRemote().Undo();
+        game.getRemote().undo();
 
         Assertions.assertTrue(game.getPlayerBoard().equals(compare_board));
     }
@@ -140,8 +140,8 @@ public class CommandTest {
 //        testingCommands.Undo(); // Need to undo a move in order to have something to redo
 //        testingCommands.Redo(); // No slot here, redo commands are stored in testingCommands
         game.getRemote().char_action(Game.MOVE, 'E');
-        game.getRemote().Undo();
-        game.getRemote().Redo();
+        game.getRemote().undo();
+        game.getRemote().redo();
 
         Assertions.assertTrue(game.getPlayerBoard().equals(shift_right_board));
     }
@@ -153,17 +153,17 @@ public class CommandTest {
 
         Game game_ = new Game();
         game_.setPlayerBoard(hit_board);
-        PlayerAction testingCommands = new PlayerAction();
-        testingCommands.SetCommand(0, new Hit(game_));
+        playerAction testingCommands = new playerAction();
+        testingCommands.setCommand(0, new Hit(game_));
 
-        testingCommands.Action(0, new Point(0,0));
+        testingCommands.action(0, new Point(0,0));
 
 //        System.out.println(no_hit_board.getStateString());
 //        System.out.println(game_.getBoard().getStateString());
 
         Assertions.assertFalse(game_.getPlayerBoard().equals(no_hit_board));
 
-        testingCommands.Undo();
+        testingCommands.undo();
 
 //        System.out.println(game_.getBoard().getStateString());
 
@@ -184,8 +184,8 @@ public class CommandTest {
 
         Game game = new Game();
         game.setPlayerBoard(undo_board);
-        PlayerAction testingCommands = new PlayerAction();
-        testingCommands.SetCommand(0, new MoveShips(game));
+        playerAction testingCommands = new playerAction();
+        testingCommands.setCommand(0, new MoveShips(game));
 
 
     }

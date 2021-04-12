@@ -26,10 +26,13 @@ public class Gui implements ActionListener {
         this.game = new Game();
         game.placeShipsNpc();
 
+
+
         //get random ship placement for player board
         Game game2 = new Game();
         game2.placeShipsNpc();
         game.setPlayerBoard(game2.getNpcBoard());
+
         this.player_state = game.getPlayerBoard();
         this.npc_state = game.getNpcBoard();
 
@@ -145,6 +148,13 @@ public class Gui implements ActionListener {
             }
         }
         button.setText(String.valueOf(x)+","+ String.valueOf(y));
+    }
+
+    public Game getGame(){
+        return this.game;
+    }
+    public void setGame(Game game){
+        this.game = game;
     }
 
 }

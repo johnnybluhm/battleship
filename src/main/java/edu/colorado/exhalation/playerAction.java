@@ -4,7 +4,7 @@ import java.util.Stack;
 
 // NOTE: I don't think the commented out CODE is necessary, but I'm leaving it in in case we decide it is
 
-public class PlayerAction {
+public class playerAction {
     Command[] actions_; // stores all classes implementing Command that we will use
 
     Stack<Integer> undo_action; // stores order of actions player has taken
@@ -19,13 +19,13 @@ public class PlayerAction {
     2 - SonarPulse
     */ // Maybe we could put PlaceShip in here too? It wouldn't be that hard
 
-    public PlayerAction() { // generic constructor
+    public playerAction() { // generic constructor
         this.actions_ = new Command[num_actions];
         this.undo_action = new Stack<Integer>();
         this.redo_action = new Stack<Integer>();
     }
 
-    public void SetCommand(int slot_, Command action_){ // sets Command 'action_' at element 'slot' in array actions_[]
+    public void setCommand(int slot_, Command action_){ // sets Command 'action_' at element 'slot' in array actions_[]
         actions_[slot_] = action_;
     }
 
@@ -34,14 +34,14 @@ public class PlayerAction {
         actions_[slot_].char_action(direction_); // activates Command at actions_[slot] using 'direction'
     }
 
-    public void Action(int slot_, Point point_){ // for Commands that use Action(Point point_)
+    public void action(int slot_, Point point_){ // for Commands that use Action(Point point_)
         undo_action.push(slot_);
 //        undo_attack = Arrays.copyOf(undo_attack, undo_attack.length + 1);
 //        undo_attack[undo_attack.length - 1] = point_;
         actions_[slot_].Action(point_); // activates Command at actions_[slot] using 'point_'
     }
 
-    public void Undo(){
+    public void undo(){
         if(undo_action.isEmpty()){ // can't undo if there's nothing to be undone
             System.out.println("No actions to undo.");
         }
@@ -61,7 +61,7 @@ public class PlayerAction {
         }
     }
 
-    public void Redo(){
+    public void redo(){
         if(redo_action.isEmpty()){ // can't redo if there's nothing to redo
             System.out.println("No actions to redo.");
         }
