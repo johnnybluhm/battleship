@@ -57,13 +57,13 @@ public class Gui implements ActionListener {
         player_buttons = new JButton[SIZE][SIZE];
         npc_buttons = new JButton[SIZE][SIZE];
         //addButtons();
-        for(int i=0;i<SIZE;i++)
-            for(int j=0;j<SIZE;j++)
+        for(int j=0;j<SIZE;j++)
+            for(int i=0;i<SIZE;i++)
             {
                 Board board = this.getPlayerState();
                 Board npc_board = this.getNpcState();
-                player_buttons[i][j] = new JButton(String.valueOf(board.getPeg(i,j).print()));
-                npc_buttons[i][j] = new JButton(String.valueOf(npc_board.getPeg(i,j).print()));
+                player_buttons[i][j] = new JButton();
+                npc_buttons[i][j] = new JButton();
                 player_buttons[i][j].addActionListener(this);
                 npc_buttons[i][j].addActionListener(this);
                 player_buttons[i][j].setBackground(Color.GREEN);
@@ -124,28 +124,34 @@ public class Gui implements ActionListener {
         JButton button = (JButton) e.getSource();
         int x = -1;
         int y = -1;
+        Board board;
+        Peg peg;
         for (int row = 0; row < player_buttons.length; row++) {
             for (int col = 0; col < player_buttons.length; col++) {
                 if (player_buttons[row][col] == e.getSource()){
                     x = row;
                     y = col;
-                    Board board = this.getPlayerState();
+                    board = this.getPlayerState();
                     board.hit(new Point(x,y));
+                    peg = board.getPeg(new Point(x,y));
+                    //button.setText(String.valueOf(peg.getHitCount()[0]));
                     notifyAllObservers();
                     break;
                 }
                 else if(npc_buttons[row][col] == e.getSource()){
                     x = row;
                     y = col;
-                    Board board = this.getNpcState();
+                    board = this.getNpcState();
                     board.hit(new Point(x,y));
+                    peg = board.getPeg(new Point(x,y));
+                    //button.setText(String.valueOf(peg.getHitCount()[0]));
                     notifyAllObservers();
                     break;
 
                 }
             }
         }
-        button.setText(String.valueOf(x)+","+ String.valueOf(y));
+
     }
 
     public Game getGame(){

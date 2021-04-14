@@ -702,7 +702,7 @@ public class Board {
                 }
             }
         }//West
-        else if (direction == 'N') {
+        else if (direction == 'S') {
             Ship[] old_ships = new Ship[this.getShips().length];
             for (int i = 0; i < this.getShips().length; i++) {
                 old_ships[i] = this.getShips()[i];
@@ -760,7 +760,7 @@ public class Board {
                 }
             }
         }//North
-        else if (direction == 'S') {
+        else if (direction == 'N') {
             Ship[] old_ships = new Ship[this.getShips().length];
             for (int i = 0; i < this.getShips().length; i++) {
                 old_ships[i] = this.getShips()[i];

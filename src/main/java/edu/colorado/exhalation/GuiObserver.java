@@ -35,29 +35,61 @@ public class GuiObserver {
         Board board;
         if(this.playerObserver == true){
             board = observable.getPlayerState();
-        }
+            Peg peg = board.getPeg(this.location);
+            int hit_count = peg.getHitCount()[0];
+            this.button.setBackground(Color.WHITE);
+            this.button.setText(String.valueOf(hit_count));
+
+            //ship coloring
+            if(peg.hasShip() && peg.getSub() != null){
+                //sub and ship
+                this.button.setBackground(Color.BLUE);
+            }
+            else if(peg.getSub() != null){
+                //just sub
+                this.button.setBackground(Color.CYAN);
+            }
+            else if(peg.hasShip()){
+                this.button.setBackground(Color.BLACK);
+            }
+
+            if(board.isSunk(peg.getShip())){
+                //ship is sunk
+                this.button.setText("X");
+                this.button.setBackground(Color.RED);
+            }
+        }//playerObserver
+
+
         else {
             board = observable.getNpcState();
-        }
-        Peg peg = board.getPeg(this.location);
-        int hit_count = peg.getHitCount()[0];
-        //can now update based on what peg corresponds to button
-        if(!peg.hasShip() && this.playerObserver == true){
-            this.button.setBackground(Color.GREEN);
-        }
-        else if(!peg.hasShip()){
-            this.button.setBackground(Color.RED);
-        }
-        if(hit_count==1){
-            this.button.setBackground(Color.CYAN);
-        }
-        else if(hit_count==2){
-            this.button.setBackground(Color.BLUE);
-        }
+            Peg peg = board.getPeg(this.location);
+            int hit_count = peg.getHitCount()[0];
 
-        if(peg.hasShip()|| peg.getSub() != null){
-            this.button.setBackground(Color.BLACK);
-        }
+            this.button.setBackground(Color.WHITE);
+            this.button.setText(String.valueOf(hit_count));
+
+            //ship coloring
+            if(peg.hasShip() && peg.getSub() != null){
+                //sub and ship
+                this.button.setBackground(Color.BLUE);
+            }
+            else if(peg.getSub() != null){
+                //just sub
+                this.button.setBackground(Color.CYAN);
+            }
+            else if(peg.hasShip()){
+                this.button.setBackground(Color.BLACK);
+            }
+
+            if(board.isSunk(peg.getShip())){
+                //ship is sunk
+                this.button.setText("X");
+                this.button.setBackground(Color.RED);
+            }
+
+        }//NpcObserver
+
 
 
     }
