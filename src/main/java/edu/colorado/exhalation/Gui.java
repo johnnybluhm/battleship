@@ -12,8 +12,7 @@ public class Gui implements ActionListener {
     private JPanel player_panel;
     private JButton[][] player_buttons;
     private JButton[][] npc_buttons;
-    private ArrayList<GuiObserver> npc_observers;
-    private ArrayList<GuiObserver> player_observers;
+    private ArrayList<GuiObserver> observers;
     private final int SIZE = 10;
     private GridLayout boardLayout;
     private Game game;
@@ -22,7 +21,7 @@ public class Gui implements ActionListener {
 
     public Gui(){
 
-        player_observers = new ArrayList<GuiObserver>();
+        observers = new ArrayList<GuiObserver>();
         this.game = new Game();
         game.placeShipsNpc();
 
@@ -72,13 +71,14 @@ public class Gui implements ActionListener {
                 npc_panel.add(npc_buttons[i][j]);
                 player_panel.add(player_buttons[i][j]);
                 //create new obsever, add to list of observers here
-                GuiObserver observer = new GuiObserver(this,player_buttons[i][j], new Point(i,j));
+                GuiObserver player_observer = new GuiObserver(this,player_buttons[i][j], new Point(i,j), true);
+                GuiObserver npc_observer = new GuiObserver(this,npc_buttons[i][j], new Point(i,j), false);
             }
         outer_panel.add(player_panel);
         outer_panel.add(middle_panel);
         outer_panel.add(npc_panel);
         frame.add(outer_panel);
-        notifyAllPlayerObservers();
+        notifyAllObservers();
         frame.setVisible(true);
         this.frame = frame;
     }
@@ -93,21 +93,21 @@ public class Gui implements ActionListener {
 
     public void setPlayerState(Board state){
         this.player_state = state;
-        notifyAllPlayerObservers();
+        notifyAllObservers();
     }
 
-    public void notifyAllPlayerObservers() {
-        for (GuiObserver observer: this.player_observers) {
+    public void notifyAllObservers() {
+        for (GuiObserver observer: this.observers) {
             observer.update();
         }
     }
 
-    public void attachPlayer(GuiObserver observer){
-        player_observers.add(observer);
+    public void attach(GuiObserver observer){
+        observers.add(observer);
     }
 
-    public ArrayList<GuiObserver> getPlayerObservers(){
-        return this.player_observers;
+    public ArrayList<GuiObserver> getObservers(){
+        return this.observers;
     }
 
     public JFrame getFrame(){
@@ -131,7 +131,7 @@ public class Gui implements ActionListener {
                     y = col;
                     Board board = this.getPlayerState();
                     board.hit(new Point(x,y));
-                    notifyAllPlayerObservers();
+                    notifyAllObservers();
                     break;
                 }
                 else if(npc_buttons[row][col] == e.getSource()){
@@ -139,7 +139,7 @@ public class Gui implements ActionListener {
                     y = col;
                     Board board = this.getNpcState();
                     board.hit(new Point(x,y));
-                    //notifyAllNpcObservers();
+                    notifyAllObservers();
                     break;
 
                 }
