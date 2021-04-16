@@ -67,6 +67,13 @@ public class GuiObserver {
                 this.button.setText("X");
                 this.button.setBackground(Color.RED);
             }
+            else if(peg.getSub()!= null){
+                if(board.isSunk(peg.getSub())){
+                    //ship is sunk
+                    this.button.setText("X");
+                    this.button.setBackground(Color.RED);
+                }
+            }
         }//playerObserver
 
 
@@ -104,6 +111,13 @@ public class GuiObserver {
                 //ship is sunk
                 this.button.setText("X");
                 this.button.setBackground(Color.RED);
+            }
+            else if(peg.getSub()!= null){
+                if(board.isSunk(peg.getSub())){
+                    //ship is sunk
+                    this.button.setText("X");
+                    this.button.setBackground(Color.RED);
+                }
             }
 
         }//NpcObserver

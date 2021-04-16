@@ -220,7 +220,7 @@ public class Game {
         return sunk_count;
     }
 
-    public boolean isLoser(){
+    public boolean gameOver(){
         Board board = this.getPlayerBoard();
         Ship[] ships = board.getShips();
         int sunk_count =0;
@@ -233,8 +233,19 @@ public class Game {
             return true;
         }
         else{
-            return false;
+            board = this.getNpcBoard();
+            ships = board.getShips();
+            sunk_count =0;
+            for(int i =0; i<ships.length; i++){
+                if(board.isSunk(ships[i])){
+                    sunk_count++;
+                }
+            }
+            if(sunk_count == board.getShips().length){
+                return true;
+            }
         }
+        return false;
     }//isWinner()
 
     public void setNpcBoard(Board board){
@@ -330,5 +341,16 @@ public class Game {
         }
 
         this.getPlayerBoard().hit(random_point);
+    }
+
+    public void checkLaser(){
+        if(this.getNpcSunkCount() == 1){
+            this.getNpcBoard().setWeapon(Board.LASER);
+        }
+        if(this.getPlayerSunkCount()==1){
+            this.getPlayerBoard().setWeapon(Board.LASER);
+        }
+
+
     }
 }//Game

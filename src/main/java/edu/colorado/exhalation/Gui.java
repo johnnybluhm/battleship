@@ -18,7 +18,7 @@ public class Gui implements ActionListener {
     private Game game;
     private Board player_state;
     private Board npc_state;
-
+    private JButton sonar_pulse;
     public Gui(){
 
         observers = new ArrayList<GuiObserver>();
@@ -42,10 +42,11 @@ public class Gui implements ActionListener {
         outer_panel.setLayout(outer_grid_layout);
         JPanel middle_panel = new JPanel();
         // Define new buttons
-        JButton jb1 = new JButton("Sonar Pulse");
+        this.sonar_pulse = new JButton("Sonar Pulse");
+        sonar_pulse.addActionListener(this);
         JButton jb2 = new JButton("Air Strike");
         JButton jb3 = new JButton("Move Fleet");
-        middle_panel.add(jb1);
+        middle_panel.add(sonar_pulse);
         middle_panel.add(jb2);
         middle_panel.add(jb3);
         //panel for buttons
@@ -142,7 +143,7 @@ public class Gui implements ActionListener {
                     //button.setText(String.valueOf(peg.getHitCount()[0]));
                     notifyAllObservers();
                     break;
-                }
+                }//player buttons
                 else if(npc_buttons[row][col] == e.getSource()){
                     x = row;
                     y = col;
@@ -150,6 +151,11 @@ public class Gui implements ActionListener {
                     board.hit(new Point(x,y));
                     peg = board.getPeg(new Point(x,y));
                     //button.setText(e.getActionCommand());
+                    this.getGame().checkLaser();
+                    if(this.getGame().gameOver()){
+                        System.out.println("GAME OVER\nPlayer won");
+                        System.exit(0);
+                    }
                     notifyAllObservers();
                     /*this.disableAllButtons();
                     //0-999
@@ -163,9 +169,16 @@ public class Gui implements ActionListener {
                     notifyAllObservers();
                     this.enableAllButtons();*/
                     this.getGame().npcRandomHit();
+                    this.getGame().checkLaser();
+                    if(this.getGame().gameOver()){
+                        System.out.println("GAME OVER\nPlayer lost");
+                        System.exit(0);
+                    }
                     notifyAllObservers();
                     break;
-
+                }//npc buttons
+                else if(sonar_pulse == e.getSource()){
+                    button.setBackground(Color.magenta);
                 }
             }
         }
