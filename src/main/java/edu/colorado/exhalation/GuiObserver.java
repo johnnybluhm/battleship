@@ -41,6 +41,9 @@ public class GuiObserver {
             this.button.setText(String.valueOf(hit_count));
 
             //ship coloring
+            if(peg.isHit()){
+                this.button.setBackground(Color.PINK);
+            }
             if(peg.hasShip() && peg.getSub() != null){
                 //sub and ship
                 this.button.setBackground(Color.BLUE);
@@ -50,7 +53,13 @@ public class GuiObserver {
                 this.button.setBackground(Color.CYAN);
             }
             else if(peg.hasShip()){
-                this.button.setBackground(Color.BLACK);
+                if(peg.getShip().isArmoured()){
+                    this.button.setBackground(Color.black);
+                }
+                else{
+                    this.button.setBackground(Color.GRAY);
+                }
+
             }
 
             if(board.isSunk(peg.getShip())){
@@ -70,16 +79,25 @@ public class GuiObserver {
             this.button.setText(String.valueOf(hit_count));
 
             //ship coloring
-            if(peg.hasShip() && peg.getSub() != null){
+            if(peg.isHit()){
+                this.button.setBackground(Color.PINK);
+            }
+            if(peg.hasShip() && peg.getSub() != null && peg.isHit()){
                 //sub and ship
                 this.button.setBackground(Color.BLUE);
             }
-            else if(peg.getSub() != null){
+            else if(peg.getSub() != null && peg.isHit()){
                 //just sub
                 this.button.setBackground(Color.CYAN);
             }
-            else if(peg.hasShip()){
-                this.button.setBackground(Color.BLACK);
+            else if(peg.hasShip() && peg.isHit()){
+                if(peg.getShip().isArmoured()){
+                    this.button.setBackground(Color.black);
+                }
+                else{
+                    this.button.setBackground(Color.GRAY);
+                }
+
             }
 
             if(board.isSunk(peg.getShip())){

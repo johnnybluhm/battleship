@@ -317,4 +317,18 @@ public class Game {
         board.setTimeLeft(time_left-time_elapsed);
 
     }
+
+    public void npcRandomHit(){
+        int random_x = (int)(Math.random()*100 % 10);
+        int random_y = (int)(Math.random()*100 % 10);
+        Point random_point = new Point(random_x,random_y);
+
+        while(!random_point.isValid()){
+            random_x = (int)(Math.random()*100 % 10);
+            random_y = (int)(Math.random()*100 % 10);
+            random_point = new Point(random_x,random_y);
+        }
+
+        this.getPlayerBoard().hit(random_point);
+    }
 }//Game

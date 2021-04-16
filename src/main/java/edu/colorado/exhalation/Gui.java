@@ -81,6 +81,8 @@ public class Gui implements ActionListener {
         notifyAllObservers();
         frame.setVisible(true);
         this.frame = frame;
+        this.disablePlayerButtons();
+
     }
 
     public Board getPlayerState(){
@@ -122,6 +124,9 @@ public class Gui implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         JButton button = (JButton) e.getSource();
+        if(!button.isEnabled()){
+            return;
+        }
         int x = -1;
         int y = -1;
         Board board;
@@ -144,7 +149,20 @@ public class Gui implements ActionListener {
                     board = this.getNpcState();
                     board.hit(new Point(x,y));
                     peg = board.getPeg(new Point(x,y));
-                    //button.setText(String.valueOf(peg.getHitCount()[0]));
+                    //button.setText(e.getActionCommand());
+                    notifyAllObservers();
+                    /*this.disableAllButtons();
+                    //0-999
+                    int random_time = (int)(Math.random()*100000 % 1000);
+                    try {
+                        Thread.sleep(random_time);
+                    } catch (InterruptedException interruptedException) {
+                        interruptedException.printStackTrace();
+                    }
+                    this.getGame().npcRandomHit();
+                    notifyAllObservers();
+                    this.enableAllButtons();*/
+                    this.getGame().npcRandomHit();
                     notifyAllObservers();
                     break;
 
@@ -159,6 +177,40 @@ public class Gui implements ActionListener {
     }
     public void setGame(Game game){
         this.game = game;
+    }
+
+    public void disableAllButtons(){
+        for (int i = 0; i <player_buttons.length ; i++) {
+            for (int j = 0; j < player_buttons.length; j++) {
+                player_buttons[i][j].setEnabled(false);
+            }
+        }
+        for (int i = 0; i <npc_buttons.length ; i++) {
+            for (int j = 0; j < npc_buttons.length; j++) {
+                npc_buttons[i][j].setEnabled(false);
+            }
+        }
+    }//disable
+
+    public void enableAllButtons(){
+        for (int i = 0; i <player_buttons.length ; i++) {
+            for (int j = 0; j < player_buttons.length; j++) {
+                player_buttons[i][j].setEnabled(true);
+            }
+        }
+        for (int i = 0; i <npc_buttons.length ; i++) {
+            for (int j = 0; j < npc_buttons.length; j++) {
+                npc_buttons[i][j].setEnabled(true);
+            }
+        }
+    }//disable
+
+    public void disablePlayerButtons(){
+        for (int i = 0; i <player_buttons.length ; i++) {
+            for (int j = 0; j < player_buttons.length; j++) {
+                player_buttons[i][j].setEnabled(false);
+            }
+        }
     }
 
 }
