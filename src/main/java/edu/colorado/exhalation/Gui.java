@@ -2,12 +2,11 @@ package edu.colorado.exhalation;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 //https://stackoverflow.com/questions/13787873/adding-buttons-using-gridlayout
-public class Gui implements ActionListener {
+public class Gui implements ActionListener, MouseListener, KeyListener {
     private JFrame frame;
     private JPanel player_panel;
     private JButton[][] player_buttons;
@@ -19,6 +18,7 @@ public class Gui implements ActionListener {
     private Board player_state;
     private Board npc_state;
     private JButton sonar_pulse;
+    char orientation = 'v';
     public Gui(){
 
         observers = new ArrayList<GuiObserver>();
@@ -45,10 +45,8 @@ public class Gui implements ActionListener {
         this.sonar_pulse = new JButton("Sonar Pulse");
         sonar_pulse.addActionListener(this);
         JButton jb2 = new JButton("Air Strike");
-        JButton jb3 = new JButton("Move Fleet");
         middle_panel.add(sonar_pulse);
         middle_panel.add(jb2);
-        middle_panel.add(jb3);
         //panel for buttons
         boardLayout =  new GridLayout(SIZE,SIZE);
         player_panel = new JPanel();
@@ -65,12 +63,16 @@ public class Gui implements ActionListener {
                 Board npc_board = this.getNpcState();
                 player_buttons[i][j] = new JButton();
                 npc_buttons[i][j] = new JButton();
-                player_buttons[i][j].addActionListener(this);
-                npc_buttons[i][j].addActionListener(this);
+                //npc_buttons[i][j].addActionListener(this);
                 player_buttons[i][j].setBackground(Color.GREEN);
                 npc_buttons[i][j].setBackground(Color.RED);
                 npc_panel.add(npc_buttons[i][j]);
                 player_panel.add(player_buttons[i][j]);
+                npc_buttons[i][j].addMouseListener(this);
+
+
+                player_buttons[i][j].addMouseListener(this);
+
                 //create new obsever, add to list of observers here
                 GuiObserver player_observer = new GuiObserver(this,player_buttons[i][j], new Point(i,j), true);
                 GuiObserver npc_observer = new GuiObserver(this,npc_buttons[i][j], new Point(i,j), false);
@@ -79,10 +81,13 @@ public class Gui implements ActionListener {
         outer_panel.add(middle_panel);
         outer_panel.add(npc_panel);
         frame.add(outer_panel);
+
         notifyAllObservers();
         frame.setVisible(true);
+        frame.setFocusable(true); //needed so that we can do keyListener
         this.frame = frame;
-        this.disablePlayerButtons();
+        frame.addKeyListener(this);
+        //JOptionPane.showMessageDialog(null, "Place your ships");
 
     }
 
@@ -123,65 +128,6 @@ public class Gui implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        JButton button = (JButton) e.getSource();
-        if(!button.isEnabled()){
-            return;
-        }
-        int x = -1;
-        int y = -1;
-        Board board;
-        Peg peg;
-        for (int row = 0; row < player_buttons.length; row++) {
-            for (int col = 0; col < player_buttons.length; col++) {
-                if (player_buttons[row][col] == e.getSource()){
-                    x = row;
-                    y = col;
-                    board = this.getPlayerState();
-                    board.hit(new Point(x,y));
-                    peg = board.getPeg(new Point(x,y));
-                    //button.setText(String.valueOf(peg.getHitCount()[0]));
-                    notifyAllObservers();
-                    break;
-                }//player buttons
-                else if(npc_buttons[row][col] == e.getSource()){
-                    x = row;
-                    y = col;
-                    board = this.getNpcState();
-                    board.hit(new Point(x,y));
-                    peg = board.getPeg(new Point(x,y));
-                    //button.setText(e.getActionCommand());
-                    this.getGame().checkLaser();
-                    if(this.getGame().gameOver()){
-                        System.out.println("GAME OVER\nPlayer won");
-                        System.exit(0);
-                    }
-                    notifyAllObservers();
-                    /*this.disableAllButtons();
-                    //0-999
-                    int random_time = (int)(Math.random()*100000 % 1000);
-                    try {
-                        Thread.sleep(random_time);
-                    } catch (InterruptedException interruptedException) {
-                        interruptedException.printStackTrace();
-                    }
-                    this.getGame().npcRandomHit();
-                    notifyAllObservers();
-                    this.enableAllButtons();*/
-                    this.getGame().npcRandomHit();
-                    this.getGame().checkLaser();
-                    if(this.getGame().gameOver()){
-                        System.out.println("GAME OVER\nPlayer lost");
-                        System.exit(0);
-                    }
-                    notifyAllObservers();
-                    break;
-                }//npc buttons
-                else if(sonar_pulse == e.getSource()){
-                    button.setBackground(Color.magenta);
-                }
-            }
-        }
 
     }
 
@@ -226,4 +172,121 @@ public class Gui implements ActionListener {
         }
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+    //https://stackoverflow.com/questions/22638926/how-to-put-hover-effect-on-jbutton
+    @Override
+    public void mousePressed(MouseEvent e) {
+        JButton button = (JButton) e.getSource();
+        if(!button.isEnabled()){
+            return;
+        }
+        int x = -1;
+        int y = -1;
+        Board board = null;
+        Peg peg;
+        //find which button was pressed
+        for (int row = 0; row < npc_buttons.length; row++) {
+            for (int col = 0; col < npc_buttons.length; col++) {
+                if(npc_buttons[row][col] == e.getSource()){
+                    x = row;
+                    y = col;
+                    board = this.getNpcState();
+                    break;
+                }//npc buttons
+                else if(player_buttons[row][col] == e.getSource()){
+                    x = row;
+                    y = col;
+                    board = this.getPlayerState();
+                    break;
+                }
+            }
+        }
+        if(board !=null){
+            board.hit(new Point(x,y));
+            peg = board.getPeg(new Point(x,y));
+            //button.setText(e.getActionCommand());
+
+            this.getGame().checkLaser();
+            if(this.getGame().gameOver()){
+                JOptionPane.showMessageDialog(null, "GAME OVER\nPlayer Won");
+                System.exit(0);
+            }
+            notifyAllObservers();
+
+            //now npc takes it turn
+            this.getGame().npcRandomHit();
+            this.getGame().checkLaser();
+            if(this.getGame().gameOver()){
+                JOptionPane.showMessageDialog(null, "GAME OVER\nPlayer lost");
+                System.exit(0);
+            }
+            notifyAllObservers();
+        }
+    }//mousePressed
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        JButton button = (JButton) e.getSource();
+        button.setBackground(Color.GREEN);
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        JButton button = (JButton) e.getSource();
+        button.setBackground(Color.WHITE);
+        notifyAllObservers();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        //change orientation with r
+        if(e.getKeyCode() == KeyEvent.VK_R){
+            switchOrientaion();
+            JOptionPane.showMessageDialog(null,"Orientation is now "+this.orientation);
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_UP){
+            this.getPlayerState().move('N');
+            notifyAllObservers();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+            this.getPlayerState().move('S');
+            notifyAllObservers();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_LEFT){
+            this.getPlayerState().move('W');
+            notifyAllObservers();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+            this.getPlayerState().move('E');
+            notifyAllObservers();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    public void switchOrientaion(){
+        if(orientation == 'v'){
+            orientation = 'h';
+        }
+        else{
+            orientation = 'v';
+        }
+    }
 }

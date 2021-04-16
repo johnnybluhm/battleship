@@ -121,9 +121,6 @@ public class GuiObserver {
             }
 
         }//NpcObserver
-
-
-
     }
 }//Guiobserver
 

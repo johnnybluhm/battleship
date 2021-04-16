@@ -1,5 +1,6 @@
 package edu.colorado.exhalation;
 
+import javax.swing.*;
 import java.util.HashMap;
 
 public class Board {
@@ -23,6 +24,7 @@ public class Board {
     protected HashMap<Peg, int[]> peg_to_array_hashMap = new HashMap<Peg, int[]>();
     private boolean air_strike_used_ = false;
     private long time_left_ = 300000; //milliseconds
+    private Ship[] previous_ships;
 
 
 
@@ -171,6 +173,9 @@ public class Board {
         if(!ship.isValid()){
             return -4;
         }
+        if(ship == null){
+            return  -5;
+        }
         int array_index;
         if(ship instanceof Minesweeper){
             array_index = MINESWEEPER;
@@ -196,7 +201,7 @@ public class Board {
             //ensure all requested pegs are water
             for(int i = 0; i<point_array.length; i++){
                 Peg peg_for_ship = this.getPeg(point_array[i]);
-                if((peg_for_ship.getShip() != null)){
+                if((peg_for_ship.hasShip())){
                     return -3;
                 }
             }
@@ -567,6 +572,7 @@ public class Board {
 
     public void removeShips(){
         Ship[] ships = this.getShips();
+        previous_ships = this.getShips().clone();
         for (int i = 0; i < ships.length; i++) {
             Ship ship = ships[i];
             if(!this.isSunk(ship) && ship != null){
@@ -585,12 +591,13 @@ public class Board {
     }//remove ships
 
     public void move(char direction) {
+        Ship[] old_ships = new Ship[this.getShips().length];
+
+        for (int i = 0; i <this.getShips().length ; i++) {
+            old_ships[i] = getShips()[i];
+        }
 
         if (direction == 'E') {
-            Ship[] old_ships = new Ship[this.getShips().length];
-            for (int i = 0; i < this.getShips().length; i++) {
-                old_ships[i] = this.getShips()[i];
-            }
             Point[] new_start_points = new Point[this.getShips().length];
             for (int i = 0; i < old_ships.length; i++) {
                 new_start_points[i] =  new Point(old_ships[i].getPoints()[0].getX()+1, old_ships[i].getPoints()[0].getY());
@@ -606,10 +613,12 @@ public class Board {
                         minesweeper = new Minesweeper('h', new_start_points[i]);
                     }
                     if(this.placeShip(minesweeper) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
+                        //this.placeShip(old_ships[i]);
                     }
                 }//minesweeper
-                else if(i == DESTROYER && ship == null){
+                else if(i == DESTROYER && ship == null && !this.isSunk(ship)){
                     Ship destroyer;
                     if (old_ships[i].isVertical()) {
                         destroyer = new Destroyer('v', new_start_points[i]);
@@ -617,7 +626,10 @@ public class Board {
                         destroyer = new Destroyer('h', new_start_points[i]);
                     }
                     if(this.placeShip(destroyer) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
+
+                        //this.placeShip(old_ships[i]);
                     }
                 }
                 else if(i == BATTLESHIP && ship == null){
@@ -628,7 +640,9 @@ public class Board {
                         battleship = new Battleship('h', new_start_points[i]);
                     }
                     if(this.placeShip(battleship) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
+                        //this.placeShip(old_ships[i]);
                     }
                 }
                 else if(i == SUBMARINE && ship == null){
@@ -639,16 +653,15 @@ public class Board {
                         submarine = new Submarine('h', new_start_points[i]);
                     }
                     if(this.placeShip(submarine) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
+                        //this.placeShip(old_ships[i]);
                     }
                 }
             }
         }//East
         else if (direction == 'W') {
-            Ship[] old_ships = new Ship[this.getShips().length];
-            for (int i = 0; i < this.getShips().length; i++) {
-                old_ships[i] = this.getShips()[i];
-            }
+
             Point[] new_start_points = new Point[this.getShips().length];
             for (int i = 0; i < old_ships.length; i++) {
                 new_start_points[i] =  new Point(old_ships[i].getPoints()[0].getX()-1, old_ships[i].getPoints()[0].getY());
@@ -664,7 +677,8 @@ public class Board {
                         minesweeper = new Minesweeper('h', new_start_points[i]);
                     }
                     if(this.placeShip(minesweeper) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
                     }
                 }//minesweeper
                 else if(i == DESTROYER && ship == null){
@@ -675,7 +689,8 @@ public class Board {
                         destroyer = new Destroyer('h', new_start_points[i]);
                     }
                     if(this.placeShip(destroyer) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
                     }
                 }
                 else if(i == BATTLESHIP && ship == null){
@@ -686,7 +701,8 @@ public class Board {
                         battleship = new Battleship('h', new_start_points[i]);
                     }
                     if(this.placeShip(battleship) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
                     }
                 }
                 else if(i == SUBMARINE && ship == null){
@@ -697,16 +713,13 @@ public class Board {
                         submarine = new Submarine('h', new_start_points[i]);
                     }
                     if(this.placeShip(submarine) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
                     }
                 }
             }
         }//West
         else if (direction == 'S') {
-            Ship[] old_ships = new Ship[this.getShips().length];
-            for (int i = 0; i < this.getShips().length; i++) {
-                old_ships[i] = this.getShips()[i];
-            }
             Point[] new_start_points = new Point[this.getShips().length];
             for (int i = 0; i < old_ships.length; i++) {
                 new_start_points[i] =  new Point(old_ships[i].getPoints()[0].getX(), old_ships[i].getPoints()[0].getY()+1);
@@ -722,7 +735,8 @@ public class Board {
                         minesweeper = new Minesweeper('h', new_start_points[i]);
                     }
                     if(this.placeShip(minesweeper) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
                     }
                 }//minesweeper
                 else if(i == DESTROYER && ship == null){
@@ -733,7 +747,8 @@ public class Board {
                         destroyer = new Destroyer('h', new_start_points[i]);
                     }
                     if(this.placeShip(destroyer) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
                     }
                 }
                 else if(i == BATTLESHIP && ship == null){
@@ -744,7 +759,8 @@ public class Board {
                         battleship = new Battleship('h', new_start_points[i]);
                     }
                     if(this.placeShip(battleship) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
                     }
                 }
                 else if(i == SUBMARINE && ship == null){
@@ -755,16 +771,13 @@ public class Board {
                         submarine = new Submarine('h', new_start_points[i]);
                     }
                     if(this.placeShip(submarine) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
                     }
                 }
             }
         }//North
         else if (direction == 'N') {
-            Ship[] old_ships = new Ship[this.getShips().length];
-            for (int i = 0; i < this.getShips().length; i++) {
-                old_ships[i] = this.getShips()[i];
-            }
             Point[] new_start_points = new Point[this.getShips().length];
             for (int i = 0; i < old_ships.length; i++) {
                 new_start_points[i] =  new Point(old_ships[i].getPoints()[0].getX(), old_ships[i].getPoints()[0].getY()-1);
@@ -780,7 +793,8 @@ public class Board {
                         minesweeper = new Minesweeper('h', new_start_points[i]);
                     }
                     if(this.placeShip(minesweeper) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
                     }
                 }//minesweeper
                 else if(i == DESTROYER && ship == null){
@@ -791,7 +805,8 @@ public class Board {
                         destroyer = new Destroyer('h', new_start_points[i]);
                     }
                     if(this.placeShip(destroyer) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
                     }
                 }
                 else if(i == BATTLESHIP && ship == null){
@@ -802,7 +817,8 @@ public class Board {
                         battleship = new Battleship('h', new_start_points[i]);
                     }
                     if(this.placeShip(battleship) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
                     }
                 }
                 else if(i == SUBMARINE && ship == null){
@@ -813,7 +829,8 @@ public class Board {
                         submarine = new Submarine('h', new_start_points[i]);
                     }
                     if(this.placeShip(submarine) <1 ){
-                        this.placeShip(old_ships[i]);
+                        this.placeShips(old_ships);
+                        return;
                     }
                 }
             }
@@ -854,5 +871,13 @@ public class Board {
 
     public void setHashMap(HashMap<Peg, int[]> hash_map){
         this.peg_to_array_hashMap = hash_map;
+    }
+
+    public void placeShips(Ship[] ships){
+
+        removeShips();
+        for (int i = 0; i <ships.length; i++) {
+            this.placeShip(ships[i]);
+        }
     }
 }//Board

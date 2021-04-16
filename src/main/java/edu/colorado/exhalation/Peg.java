@@ -70,6 +70,17 @@ public class Peg {
         }
     }
 
+    public boolean hasSub(){
+        if(this.sub_ == null){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+
+
    public char print(){
         if(isHit()){
             if(this.getShip()==null && this.getSub()==null){
