@@ -17,9 +17,11 @@ public class Board {
     final static int DESTROYER = 1;
     final static int BATTLESHIP = 2;
     final static int SUBMARINE = 3;
+
     private Peg[][]  peg_array_ = new Peg[BOARD_SIZE][BOARD_SIZE];
     //ships initialized to null so we can check for double ships
     private Ship[] ships_array_ = {null, null, null, null};
+
     private int weapon_;
     protected HashMap<Peg, int[]> peg_to_array_hashMap = new HashMap<Peg, int[]>();
     private boolean air_strike_used_ = false;
@@ -272,10 +274,6 @@ public class Board {
 
 
     }//hit
-
-    public int getBOARD_SIZE(){
-        return BOARD_SIZE;
-    }
 
     public Peg[][] getPegArray(){
         return this.peg_array_;
@@ -907,7 +905,7 @@ public class Board {
         }
     }
 
-    public boolean airStikeUsed(){
+    public boolean airStrikeUsed(){
         return this.air_strike_used_;
     }
 }//Board

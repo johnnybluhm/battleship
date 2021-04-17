@@ -31,7 +31,6 @@ abstract public class Ship {
         return true;
     }
 
-    abstract public int getCaptainsQuarters();
     abstract public boolean isArmoured();
     abstract public int getSIZE();
 
@@ -58,51 +57,6 @@ abstract public class Ship {
         }
         return true;
     }
-
-//   public int move(char direction){
-//        if (direction == 'E'){
-//            if(this.isSunk()){
-//              return -1;
-//            }
-//            Peg[] old_pegs = new Peg[this.getPegs().length];
-//            Peg[] new_pegs = new Peg[this.getPegs().length];
-//            Point[] new_points = new Point[this.getPegs().length];
-//
-//            for (int i = this.getPegs().length -1 ; i >= 0; i--) {
-//                Peg current_peg = this.getPegs()[i];
-//                old_pegs[i] = current_peg;
-//                Point next_peg_point = new Point(current_peg.getPoint().getX()+1, current_peg.getPoint().getY());
-//                Peg next_peg = current_peg.getBoard().getPeg(next_peg_point);
-//                this.getPoints()[i] = next_peg_point;
-//                new_pegs[i] = next_peg;
-//                new_points[i] = next_peg_point;
-//                this.setPeg(next_peg, i);
-//                //this.getPoints()[i] = next_peg_point;
-//            }
-//
-//            for (int i = 0; i< this.getPegs().length;i++) {
-//                Peg old_peg = old_pegs[i];
-//                Peg new_peg = new_pegs[i];
-//                if(this instanceof Submarine){
-//                    old_peg.setSub(null);
-//                    new_peg.setSub((Submarine) this);
-//                }
-//                else{
-//                    System.out.println(old_peg);
-//                    old_peg.setShip(null);
-//                    new_peg.setShip(this);
-//                    System.out.println(old_peg);
-//                }
-//            }
-//            /*for (int i =0; i< old_pegs.length; i++) {
-//                System.out.println(this.getPegs()[i]);
-//                System.out.println(old_pegs[i]);
-//            }*/
-//        }
-//        return 1;
-//    }
-
-
 
 }
 

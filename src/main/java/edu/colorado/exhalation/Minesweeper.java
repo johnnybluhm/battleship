@@ -33,10 +33,6 @@ public class Minesweeper extends Ship{
         return SIZE;
     }
 
-    public int getCaptainsQuarters(){
-        return CAPTAINS_QUARTERS;
-    }
-
     @Override
     public boolean isArmoured() {
         return false;

@@ -15,34 +15,6 @@ class GameTest {
         assertTrue(fresh_game.getPlayerBoard().equals(new_board));
 
     }
-
-    @Test
-    void testPlace(){
-
-
-
-        Board test_board = new Board();
-        Point m_point = new Point(0,0);
-        Point d_point = new Point(7,0);
-        Point b_point = new Point(9,0);
-        Point s_point = new Point(7,0);
-        Ship minesweeper = new Minesweeper('v',m_point);
-        Ship destroyer = new Destroyer('v', d_point);
-        Ship battleship = new Battleship('v', b_point);
-        Ship submarine = new Submarine('v', s_point);
-        test_board.placeShip(minesweeper);
-        test_board.placeShip(destroyer);
-        test_board.placeShip(battleship);
-        test_board.placeShip(submarine);
-        Game fresh_game = new Game();
-        fresh_game.place("src/test/java/edu/colorado/exhalation/user_commands.txt");
-
-
-        System.out.println(fresh_game.getPlayerBoard().getStateString());
-        System.out.println(test_board.getStateString());
-        Assertions.assertTrue(fresh_game.getPlayerBoard().equals(test_board));
-    }
-
     @Test
     void testPlaceNpc(){
         Game game = new Game();
@@ -70,7 +42,6 @@ class GameTest {
 
         Assertions.assertFalse(first_board.equals(game.getNpcBoard()));
     }
-
     @Test
     void testWinner(){
 
@@ -78,9 +49,11 @@ class GameTest {
         Ship minesweeper = new Minesweeper('h', new Point(0,0));
         Ship destroyer = new Destroyer('h', new Point(0,1));
         Ship  battleship = new Battleship('h', new Point(0,2));
+        Ship submarine = new Submarine('h', new Point(0,3));
         test_board.placeShip(minesweeper);
         test_board.placeShip(destroyer);
         test_board.placeShip(battleship);
+        test_board.placeShip(submarine);
 
         //hits every point on every ship and checks that they are sunk
         Point[] points = minesweeper.getPoints();
@@ -105,13 +78,20 @@ class GameTest {
         test_board.hit(points[2]);
         Assertions.assertTrue(test_board.isSunk(battleship));
 
+        test_board.setWeapon(Board.LASER);
+
+        points = submarine.getPoints();
+        for(int i=0; i< points.length; i++){
+            test_board.hit(points[i]);
+        }
+
+        Assertions.assertTrue(test_board.isSunk(submarine));
         Game game = new Game();
 
         game.setPlayerBoard(test_board);
 
-        //assertTrue(game.isLoser());
+        assertTrue(game.gameOver());
     }
-
     @Test
     void testPlayerSunkCount(){
 
@@ -162,7 +142,6 @@ class GameTest {
 
 
     }
-
     @Test
     void testTogglePlayer(){
 
@@ -171,7 +150,6 @@ class GameTest {
         game.togglePlayer();
         Assertions.assertTrue(game.getIsPlayerTurn() == false);
     }
-
     @Test
     void testTakeTurn(){
 
@@ -201,7 +179,6 @@ class GameTest {
         //npc board always loses as player board cannot sink sub
         Assertions.assertTrue(game.getNpcSunkCount()==4);
     }
-
     @Test
     void testChessClock(){
 

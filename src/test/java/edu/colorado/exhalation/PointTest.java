@@ -50,9 +50,4 @@ class PointTest {
         assertTrue(test_point4.isValid());
     }
 
-//    @Test
-//    void testHashCode(){
-//        Point test_point = new Point(1, 2);
-//        Point test_point2 = new Point(2, 1);
-//    }
 }

@@ -41,7 +41,6 @@ public class Point {
         }
     } //isValid()
 
-
     public boolean equals(Point point){
         if(getY() == point.getY() && getX() == point.getX()){
             return true;
@@ -50,13 +49,6 @@ public class Point {
             return false;
         }
     }
-
-    public int hashCode(){
-        final int prime = 31;
-        int result =this.getX() + this.getY();
-        result = prime*result;
-        return result;
-    }//hashcode
 
     @Override
     public String toString(){

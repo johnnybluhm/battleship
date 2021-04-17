@@ -71,7 +71,6 @@ class BoardTest {
         }
         return empty_board;
     }
-
     String getEmptyBoardStringWithHits(){
         String top_of_board = "   A B C D E | F G H I J\n";
         //ensure space at the end of the test string
@@ -93,7 +92,6 @@ class BoardTest {
         }
         return empty_board;
     }
-
     Point[] getPulseArray(Point point){
         int x  = point.getX();
         int y = point.getY();
@@ -129,7 +127,7 @@ class BoardTest {
 
         return points;
     }
-    //board needs to start with all empty pegs
+
     @Test
     void testInitialize(){
         Peg[][]  peg_array = new Peg[10][10];
@@ -150,8 +148,7 @@ class BoardTest {
             }
         }
 
-    }//initialize
-
+    }
     @Test
     void testEmptyPrint(){
         String empty_board = getEmptyBoardString();
@@ -161,7 +158,6 @@ class BoardTest {
         assertTrue(empty_board.equals(empty_test_board.getStateString()));
 
     }
-
     @Test
     void testFullPrint(){
         String top_of_board = "   A B C D E | F G H I J\n";
@@ -194,8 +190,6 @@ class BoardTest {
 
         assertTrue(full_board.equals(full_test_board.getStateString()));
     }
-
-
     @Test
     void createShips(){
 
@@ -251,7 +245,6 @@ class BoardTest {
 
         assertEquals(-4,test_board.placeShip(destroyer));
     }
-
     @Test
     void testHiddenBoard() {
 
@@ -322,8 +315,8 @@ class BoardTest {
 
         //hit every point in new board
         Board empty_board = new Board();
-        for (int i = 0; i < empty_board.getBOARD_SIZE(); i++) {
-            for (int j = 0; j < empty_board.getBOARD_SIZE(); j++) {
+        for (int i = 0; i < empty_board.BOARD_SIZE; i++) {
+            for (int j = 0; j < empty_board.BOARD_SIZE; j++) {
                 empty_board.hit(new Point(i, j));
             }
         }
@@ -331,10 +324,7 @@ class BoardTest {
         //assertTrue(empty_board_all_hit.equals(test_board.getHiddenState()));
 
 
-    }//testHiddenBoard
-
-
-
+    }
     @Test
     void testPulseString(){
         Board board = new Board();
@@ -363,7 +353,6 @@ class BoardTest {
         System.out.println(test_board.getHiddenStateString());
         System.out.println(test_board.sonarPulseString(pulse_point));
     }
-
     @Test
     void testPulse(){
 
@@ -381,7 +370,6 @@ class BoardTest {
         //Board pulse_board =  test_board.sonarPulse(pulse_point);
         //Assertions.assertTrue(pulse_board.equals(hard_code_board));
     }
-
     @Test
     void testCopy(){
         Board first_board = new Board();
@@ -392,7 +380,6 @@ class BoardTest {
         Assertions.assertFalse(copy_board.equals(first_board));
 
     }
-
     @Test
     void testEquals(){
 
@@ -432,8 +419,6 @@ class BoardTest {
 
 
     }
-
-    //check output to see if it works
     @Test
     void testPrint(){
         Board test_board = new Board();
@@ -451,7 +436,6 @@ class BoardTest {
         test_board.placeShip(submarine);
         System.out.println(test_board.getStateString());
     }
-
     @Test
     void testWeapon(){
         Board board = new Board();
@@ -462,7 +446,6 @@ class BoardTest {
         board.setWeapon(Board.LASER);
         Assertions.assertTrue(board.getWeapon()== Board.LASER);
     }
-
     @Test
     void testLaser(){
 
@@ -487,7 +470,6 @@ class BoardTest {
         Assertions.assertFalse(board.isSunk(battleship));
         //END SUB ARMOURED SHIP UNDERNEATH CASE
     }
-
     @Test
     void testHitting(){
 
@@ -513,7 +495,6 @@ class BoardTest {
         //Assertions.assertTrue(!submarine.isSunk());
 
     }
-
     @Test
     void testPlace(){
         Point start_point = new Point(5,5);
@@ -532,7 +513,6 @@ class BoardTest {
         System.out.println();
 
     }
-
     @Test
     void testStack() {
         Board board = new Board();
@@ -562,7 +542,6 @@ class BoardTest {
         Assertions.assertTrue(stack.pop().equals(compare_board));
 
     }
-
     @Test
     void testAirStrike(){
         Board compare_board = new Board();

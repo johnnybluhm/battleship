@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PegTest {
-
     @Test
     void testCreateWithXY(){
         Peg test_peg = new Peg(1, 0);
@@ -21,9 +20,7 @@ class PegTest {
         assertNull(test_peg.getSub());
         assertNull(test_peg.getBoard());
 
-//      Assertion for hit_count?
     }
-
     @Test
     void testCreateWithXYAndBoard(){
         Board test_board = new Board();
@@ -37,7 +34,6 @@ class PegTest {
         assertNull(test_peg.getSub());
         assertEquals(test_board, test_peg.getBoard());
     }
-
     @Test
     void testCreateWithPoint(){
         Point test_point = new Point(1, 0);
@@ -50,7 +46,6 @@ class PegTest {
         assertNull(test_peg.getSub());
         assertNull(test_peg.getBoard());
     }
-
     @Test
     void testCreateWithPeg(){
         Board test_board = new Board();
@@ -62,27 +57,16 @@ class PegTest {
         assertEquals(copy_peg.getShip(), test_peg.getShip());
         assertEquals(copy_peg.isVisible(), test_peg.isVisible());
         assertEquals(copy_peg.getSub(), test_peg.getSub());
-        // assertEquals(copy_peg.getBoard(), test_peg.getBoard());
-        // nothing in Peg(peg) constructor that copies board across?
     }
-
-    private Peg test_peg;
-    @BeforeEach
-    void create(){
-      test_peg = new Peg(1,0);
-    }
-
-    //test using point (1,0)
-
     @Test
     void testHit(){
-        assertFalse(test_peg.isHit());
-        test_peg.hit();
-        assertTrue(test_peg.isHit());
-        test_peg.hit();
-        assertTrue(test_peg.isHit());
+        Board board = new Board();
 
-        test_peg.hit();
+        Peg peg = board.getPeg(0,0);
+
+        Assertions.assertTrue(!peg.isHit());
+        board.hit(new Point(0,0));
+        Assertions.assertTrue(peg.isHit());
     }
     @Test
     void testHasShip(){
@@ -96,32 +80,6 @@ class PegTest {
         assertTrue(ship_peg.hasShip());
 
     }
-    //O for no hit, X for hit ship, # for hit no ship
-    @Test
-    void testPegPrint(){
-        Peg ship_peg = new Peg(0,0);
-        Ship battle_ship = new Battleship('v', new Point(0,0));
-        ship_peg.setShip(battle_ship);
-        Peg no_ship = new Peg(1,0);
-
-        assertEquals('O', no_ship.print());
-        no_ship.hit();
-        assertEquals('#', no_ship.print());
-
-        assertEquals('4',ship_peg.print());
-        ship_peg.hit();
-        assertEquals('X', ship_peg.print());
-
-        Peg ship_peg2 = new Peg(2,0);
-        Ship destroyer = new Destroyer('v', new Point(0,0));
-        Ship sweeper = new Minesweeper('v', new Point(0,0));
-        ship_peg2.setShip(destroyer);
-        assertEquals('3',ship_peg2.print());
-
-        ship_peg2.setShip(sweeper);
-        assertEquals('2',ship_peg2.print());
-    }
-
     @Test
     void testCopy(){
         Peg first_peg = new Peg(1,0);
@@ -191,7 +149,6 @@ class PegTest {
         Assertions.assertTrue(fresh_peg.equals(fresh_peg_copy));
 
     }
-
     @Test
     void testBoardInPeg(){
 

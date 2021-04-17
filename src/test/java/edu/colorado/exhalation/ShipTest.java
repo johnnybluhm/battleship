@@ -13,7 +13,6 @@ class ShipTest {
         vertical_point_array[2] = new Point(0, 3);
         return vertical_point_array;
     }
-
     Point[] getGoodHorizontalDestroyer(){
 
         Point[] horizontal_point_array = new Point[3];
@@ -22,7 +21,6 @@ class ShipTest {
         horizontal_point_array[2] = new Point(2,1);
         return horizontal_point_array;
     }
-
     Point[] getGoodHorizontalMinesweeper(){
 
         Point[] horizontal_point_array = new Point[2];
@@ -46,7 +44,6 @@ class ShipTest {
         vertical_point_array[3] = new Point(0, 4);
         return vertical_point_array;
     }
-
     Point[] getGoodHorizontalBattleship(){
 
         Point[] horizontal_point_array = new Point[4];
@@ -54,6 +51,47 @@ class ShipTest {
         horizontal_point_array[1] = new Point(1,1);
         horizontal_point_array[2] = new Point(2,1);
         horizontal_point_array[3] = new Point(3,1);
+        return horizontal_point_array;
+    }
+    Point[] getVerticalSubPoints(Point start_point){
+
+        int x = start_point.getX();
+        int y = start_point.getY();
+        Point[] vertical_point_array = new Point[5];
+        vertical_point_array[0] = start_point;
+        //tail
+        vertical_point_array[1] = new Point(x,y+1);
+        vertical_point_array[2] = new Point(x,y+2);
+        vertical_point_array[3] = new Point(x,y+3);
+        //bump
+        vertical_point_array[4] = new Point(x+1,y+2);
+
+        for (Point point: vertical_point_array
+        ) {
+            if(!point.isValid()){
+                return null;
+            }
+        }
+        return vertical_point_array;
+    }
+    Point[] getHorizontalSubPoints(Point start_point){
+        int x = start_point.getX();
+        int y = start_point.getY();
+        Point[] horizontal_point_array = new Point[5];
+        horizontal_point_array[0] = start_point;
+        //tail
+        horizontal_point_array[1] = new Point(x+1,y);
+        horizontal_point_array[2] = new Point(x+2,y);
+        horizontal_point_array[3] = new Point(x+3,y);
+        //bump
+        horizontal_point_array[4] = new Point(x+2,y-1);
+
+        for (Point point: horizontal_point_array
+        ) {
+            if(!point.isValid()){
+                return null;
+            }
+        }
         return horizontal_point_array;
     }
 
@@ -72,7 +110,6 @@ class ShipTest {
         Assertions.assertTrue(horizontal_ship.isHorizontal());
         Assertions.assertTrue(vertical_ship.isVertical());
     }
-
     @Test
     void testCreation(){
 
@@ -115,7 +152,6 @@ class ShipTest {
             Assertions.assertTrue(vertical_m[i].equals(vertical_minesweeper.getPoints()[i]));
         }
     }
-
     @Test
     void testVerify(){
 
@@ -177,7 +213,6 @@ class ShipTest {
         Assertions.assertTrue(good_horizontal_ship.isValid());
         Assertions.assertTrue((good_vertical_ship.isValid()));
     }
-
     @Test
     void testHitCount(){
 
@@ -262,7 +297,6 @@ class ShipTest {
 
 
     }//hitCountTest
-
     @Test
     void testIsSunk(){
 
@@ -311,7 +345,6 @@ class ShipTest {
         Assertions.assertTrue(board.isSunk(submarine));
 
     }//testSunk
-
     @Test
     void testRemoval(){
         Board empty_board = new Board();
@@ -419,6 +452,45 @@ class ShipTest {
 
 
 
+
+    }
+    @Test
+    void testSubCreation(){
+        Point start_point = new Point(2,4);
+        Point[] horizontal = getHorizontalSubPoints(start_point);
+        Point[] vertical = getVerticalSubPoints(start_point);
+
+        Ship vertical_sub = new Submarine('v', start_point);
+        Ship horizontal_sub = new Submarine('h', start_point);
+
+        for (int i =0; i< horizontal.length; i++){
+            Assertions.assertTrue(horizontal_sub.getPoints()[i].equals(horizontal[i]));
+        }
+
+        for (int i =0; i< vertical.length; i++){
+            Assertions.assertTrue(vertical_sub.getPoints()[i].equals(vertical[i]));
+        }
+    }
+    @Test
+    void testSubIsValid(){
+
+        Ship bad_sub = new Submarine('v', new Point(9,9));
+        Assertions.assertTrue(!bad_sub.isValid());
+        bad_sub = new Submarine('h', new Point(9,9));
+        Assertions.assertTrue(!bad_sub.isValid());
+    }
+    @Test
+    void testSubPlace(){
+
+        Board board = new Board();
+        Point start_point = new Point(5,5);
+        Ship test_sub = new Submarine('v', start_point);
+        Ship test_ship = new Battleship('v', start_point);
+        board.placeShip(test_ship);
+        Board board2 = new Board();
+        board2.placeShip(test_sub);
+
+        Assertions.assertTrue(board2.placeShip(test_ship)==1);
 
     }
 

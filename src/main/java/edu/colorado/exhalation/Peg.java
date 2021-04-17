@@ -79,8 +79,6 @@ public class Peg {
         }
     }
 
-
-
    public char print(){
         if(isHit()){
             if(this.getShip()==null && this.getSub()==null){

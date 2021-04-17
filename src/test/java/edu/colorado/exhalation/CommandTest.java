@@ -80,36 +80,6 @@ public class CommandTest {
         Assertions.assertTrue(game.getPlayerBoard().equals(compare_board));
     }
 
-//    @Test
-//    void testStack(){
-//        Board board = new Board();
-//        Board compare_board = new Board();
-//        Ship minesweeper = new Minesweeper('h', new Point(0,0));
-//        Ship destroyer = new Destroyer('h', new Point(4,4));
-//        Ship  battleship = new Battleship('h', new Point(0,2));
-//        Ship submarine = new Submarine('h', new Point(0,3));
-//        Board board2 = new Board();
-//        Board compare_board2 = new Board();
-//        Ship minesweeper2 = new Minesweeper('h', new Point(0,0));
-//        Ship destroyer2 = new Destroyer('h', new Point(4,4));
-//        Ship  battleship2 = new Battleship('h', new Point(0,2));
-//        Ship submarine2 = new Submarine('h', new Point(0,3));
-//
-//        Stack<Board> stack = new Stack<Board>();
-//        stack.push(board.copy());
-//        Assertions.assertTrue(stack.pop().equals(board2));
-//
-//        board.placeShip(minesweeper);
-//        Board board1_copy = board.copy();
-//        board2.placeShip(minesweeper2);
-//        stack.push(board);
-//        Assertions.assertTrue(stack.pop().equals(board1_copy));
-//        stack.push(board);
-//        board.move('E');
-//        Assertions.assertTrue(stack.pop().equals(board1_copy));
-//        //undo_board.move('E');
-//    }
-
     @Test
     void testRedo(){ // Once again using the code from above, we're moving, undoing that move, and redoing the undo and testing that here
         Board redo_board = new Board();

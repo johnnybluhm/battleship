@@ -308,7 +308,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                 npcTakeBasicTurn();
             }
             else if(SwingUtilities.isMiddleMouseButton(e)){
-                if(board.airStikeUsed()){
+                if(board.airStrikeUsed()){
                     JOptionPane.showMessageDialog(null, "Air strike already used");
                     return;
                 }
