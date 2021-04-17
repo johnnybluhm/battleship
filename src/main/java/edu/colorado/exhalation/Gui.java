@@ -78,7 +78,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                 GuiObserver npc_observer = new GuiObserver(this,npc_buttons[i][j], new Point(i,j), false);
             }
         outer_panel.add(player_panel);
-        outer_panel.add(middle_panel);
+        //outer_panel.add(middle_panel);
         outer_panel.add(npc_panel);
         frame.add(outer_panel);
 
@@ -196,6 +196,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
         int y = -1;
         Board board = null;
         Peg peg;
+
         //find which button was pressed
         for (int row = 0; row < npc_buttons.length; row++) {
             for (int col = 0; col < npc_buttons.length; col++) {
@@ -213,6 +214,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                 }
             }
         }
+
         if(board !=null){
             if(SwingUtilities.isRightMouseButton(e)){
 
@@ -274,10 +276,12 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                     Ship ship = new Submarine(this.orientation,new Point(x,y) );
                     if(board.placeShip(ship) <1){
                         JOptionPane.showMessageDialog(null,"Invalid placement, try again");
+                        return;
                     }
                     notifyAllObservers();
                     JOptionPane.showMessageDialog(null, "All ships placed. Have fun!");
                     this.enableAllButtons();
+                    this.disablePlayerButtons();
                     return;
                 }
 
@@ -306,14 +310,150 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         JButton button = (JButton) e.getSource();
-        button.setBackground(Color.GREEN);
+        if(!button.isEnabled()){
+            return;
+        }
+        int x = -1;
+        int y = -1;
+        Board board = null;
+        Peg peg;
+
+        //find which button was pressed
+        for (int row = 0; row < npc_buttons.length; row++) {
+            for (int col = 0; col < npc_buttons.length; col++) {
+                if(npc_buttons[row][col] == e.getSource()){
+                    x = row;
+                    y = col;
+                    board = this.getNpcState();
+                    break;
+                }//npc buttons
+                else if(player_buttons[row][col] == e.getSource()){
+                    x = row;
+                    y = col;
+                    board = this.getPlayerState();
+                    break;
+                }
+            }
+        }
+
+        if(board.getShips()[Board.MINESWEEPER] == null){
+            //must place minesweeper
+            Point[] points;
+            if(this.orientation == 'h'){
+                points = Minesweeper.getHorizontalPoints(new Point(x,y));
+            }
+            else{
+                points = Minesweeper.getVerticalPoints(new Point(x,y));
+            }
+            int x1;
+            int y1;
+            for (int i = 0; i <points.length ; i++) {
+                if(!points[i].isValid()){
+                    continue;
+                }
+                x1 = points[i].getX();
+                y1 = points[i].getY();
+                player_buttons[x1][y1].setBackground(Color.RED);
+            }
+        }
+        else if(board.getShips()[Board.DESTROYER] == null){
+            //must place minesweeper
+            Point[] points;
+            if(this.orientation == 'h'){
+                points = Destroyer.getHorizontalPoints(new Point(x,y));
+            }
+            else{
+                points = Destroyer.getVerticalPoints(new Point(x,y));
+            }
+            int x1;
+            int y1;
+            for (int i = 0; i <points.length ; i++) {
+                if(!points[i].isValid()){
+                    continue;
+                }
+                x1 = points[i].getX();
+                y1 = points[i].getY();
+                player_buttons[x1][y1].setBackground(Color.RED);
+            }
+        }
+        else if(board.getShips()[Board.BATTLESHIP] == null){
+            //must place minesweeper
+            Point[] points;
+            if(this.orientation == 'h'){
+                points = Battleship.getHorizontalPoints(new Point(x,y));
+            }
+            else{
+                points = Battleship.getVerticalPoints(new Point(x,y));
+            }
+            int x1;
+            int y1;
+            for (int i = 0; i <points.length ; i++) {
+                if(!points[i].isValid()){
+                    continue;
+                }
+                x1 = points[i].getX();
+                y1 = points[i].getY();
+                player_buttons[x1][y1].setBackground(Color.RED);
+            }
+        }
+        else if(board.getShips()[Board.SUBMARINE] == null){
+            //must place minesweeper
+            Point[] points;
+            if(this.orientation == 'h'){
+                points = Submarine.getHorizontalPoints(new Point(x,y));
+            }
+            else{
+                points = Submarine.getVerticalPoints(new Point(x,y));
+            }
+            int x1;
+            int y1;
+            for (int i = 0; i <points.length ; i++) {
+                if(!points[i].isValid()){
+                    continue;
+                }
+                x1 = points[i].getX();
+                y1 = points[i].getY();
+                player_buttons[x1][y1].setBackground(Color.RED);
+            }
+        }
+        else{
+            button.setBackground(Color.GREEN);
+            //notifyAllObservers();
+        }
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         JButton button = (JButton) e.getSource();
-        button.setBackground(Color.WHITE);
+        if(!button.isEnabled()){
+            return;
+        }
+        int x = -1;
+        int y = -1;
+        Board board = null;
+        Peg peg;
+
+        //find which button was pressed
+        for (int row = 0; row < npc_buttons.length; row++) {
+            for (int col = 0; col < npc_buttons.length; col++) {
+                if(npc_buttons[row][col] == e.getSource()){
+                    x = row;
+                    y = col;
+                    board = this.getNpcState();
+                    break;
+                }//npc buttons
+                else if(player_buttons[row][col] == e.getSource()){
+                    x = row;
+                    y = col;
+                    board = this.getPlayerState();
+                    break;
+                }
+            }
+        }
+
         notifyAllObservers();
+
     }
 
     @Override
@@ -327,7 +467,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
         //change orientation with r
         if(e.getKeyCode() == KeyEvent.VK_R){
             switchOrientation();
-            JOptionPane.showMessageDialog(null,"Orientation is now "+this.orientation);
+            //JOptionPane.showMessageDialog(null,"Orientation is now "+this.orientation);
         }
         else if(e.getKeyCode() == KeyEvent.VK_UP){
             this.getPlayerState().move('N');
