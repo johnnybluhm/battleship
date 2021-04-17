@@ -28,11 +28,6 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
         this.game = new Game();
         game.placeShipsNpc();
 
-        //get random ship placement for player board
-        /*Game game2 = new Game();
-        game2.placeShipsNpc();
-        game.setPlayerBoard(game2.getNpcBoard());*/
-
         this.player_state = game.getPlayerBoard();
         this.npc_state = game.getNpcBoard();
 
@@ -44,9 +39,6 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
         JPanel outer_panel = new JPanel();
         outer_panel.setLayout(outer_grid_layout);
         JPanel middle_panel = new JPanel();
-        // Define new buttons
-        /*JButton jb2 = new JButton("Air Strike");
-        middle_panel.add(jb2);*/
         //panel for buttons
         boardLayout =  new GridLayout(SIZE,SIZE);
         player_panel = new JPanel();
@@ -90,7 +82,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
         this.frame = frame;
         frame.addKeyListener(this);
         this.disableNpcButtons();
-        //JOptionPane.showMessageDialog(null, "Place your ships");
+        JOptionPane.showMessageDialog(null, "Place your ships");
 
     }
 
