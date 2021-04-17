@@ -27,9 +27,9 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
         game.placeShipsNpc();
 
         //get random ship placement for player board
-        Game game2 = new Game();
+        /*Game game2 = new Game();
         game2.placeShipsNpc();
-        game.setPlayerBoard(game2.getNpcBoard());
+        game.setPlayerBoard(game2.getNpcBoard());*/
 
         this.player_state = game.getPlayerBoard();
         this.npc_state = game.getNpcBoard();
@@ -87,7 +87,8 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
         frame.setFocusable(true); //needed so that we can do keyListener
         this.frame = frame;
         frame.addKeyListener(this);
-        //JOptionPane.showMessageDialog(null, "Place your ships");
+        this.disableNpcButtons();
+        JOptionPane.showMessageDialog(null, "Place your ships");
 
     }
 
@@ -172,6 +173,14 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
         }
     }
 
+    public void disableNpcButtons(){
+        for (int i = 0; i <npc_buttons.length ; i++) {
+            for (int j = 0; j < npc_buttons.length; j++) {
+                npc_buttons[i][j].setEnabled(false);
+            }
+        }
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -235,9 +244,40 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                 }
                 if(board.getShips()[Board.MINESWEEPER] == null){
                     //must place minesweeper
-                    Ship minesweeper = new Minesweeper(this.orientation,new Point(x,y) );
-                    board.placeShip(minesweeper);
+                    Ship ship = new Minesweeper(this.orientation,new Point(x,y) );
+                    if(board.placeShip(ship) <1){
+                        JOptionPane.showMessageDialog(null,"Invalid placement, try again");
+                    }
                     notifyAllObservers();
+                    return;
+                }
+                else if(board.getShips()[Board.DESTROYER] == null){
+                    //must place minesweeper
+                    Ship ship = new Destroyer(this.orientation,new Point(x,y) );
+                    if(board.placeShip(ship) <1){
+                        JOptionPane.showMessageDialog(null,"Invalid placement, try again");
+                    }
+                    notifyAllObservers();
+                    return;
+                }
+                else if(board.getShips()[Board.BATTLESHIP] == null){
+                    //must place minesweeper
+                    Ship ship = new Battleship(this.orientation,new Point(x,y) );
+                    if(board.placeShip(ship) <1){
+                        JOptionPane.showMessageDialog(null,"Invalid placement, try again");
+                    }
+                    notifyAllObservers();
+                    return;
+                }
+                else if(board.getShips()[Board.SUBMARINE] == null){
+                    //must place minesweeper
+                    Ship ship = new Submarine(this.orientation,new Point(x,y) );
+                    if(board.placeShip(ship) <1){
+                        JOptionPane.showMessageDialog(null,"Invalid placement, try again");
+                    }
+                    notifyAllObservers();
+                    JOptionPane.showMessageDialog(null, "All ships placed. Have fun!");
+                    this.enableAllButtons();
                     return;
                 }
 
