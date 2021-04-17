@@ -20,6 +20,8 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
     private JButton sonar_pulse;
     char orientation = 'v';
     private boolean pulsed = false;
+    private int player_laser = 0;
+    private int npc_laser = 0;
     public Gui(){
 
         observers = new ArrayList<GuiObserver>();
@@ -88,7 +90,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
         this.frame = frame;
         frame.addKeyListener(this);
         this.disableNpcButtons();
-        JOptionPane.showMessageDialog(null, "Place your ships");
+        //JOptionPane.showMessageDialog(null, "Place your ships");
 
     }
 
@@ -285,11 +287,18 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                     return;
                 }
 
+                //ships are placed so we can hit
+
                 board.hit(new Point(x,y));
                 peg = board.getPeg(new Point(x,y));
-                //button.setText(e.getActionCommand());
 
                 this.getGame().checkLaser();
+                if (board.getWeapon() == Board.LASER){
+                    this.player_laser++;
+                    if(player_laser == 1){
+                        JOptionPane.showMessageDialog(null, "Laser activated!");
+                    }
+                }
                 if(this.getGame().gameOver()){
                     JOptionPane.showMessageDialog(null, "GAME OVER\nPlayer Won");
                     System.exit(0);
@@ -298,7 +307,15 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
 
                 npcTakeBasicTurn();
             }
-
+            else if(SwingUtilities.isMiddleMouseButton(e)){
+                if(board.airStikeUsed()){
+                    JOptionPane.showMessageDialog(null, "Air strike already used");
+                    return;
+                }
+                board.airStrike(y);
+                notifyAllObservers();
+                npcTakeBasicTurn();
+            }
         }
     }//mousePressed
 
@@ -509,6 +526,12 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
         //now npc takes it turn
         this.getGame().npcRandomHit();
         this.getGame().checkLaser();
+        if (this.getGame().getPlayerBoard().getWeapon() == Board.LASER){
+            this.npc_laser++;
+            if(npc_laser == 1){
+                JOptionPane.showMessageDialog(null, "Npc has activated laser!");
+            }
+        }
         if(this.getGame().gameOver()){
             JOptionPane.showMessageDialog(null, "GAME OVER\nPlayer lost");
             System.exit(0);

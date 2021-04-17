@@ -906,4 +906,8 @@ public class Board {
             this.placeShip(ships[i]);
         }
     }
+
+    public boolean airStikeUsed(){
+        return this.air_strike_used_;
+    }
 }//Board
