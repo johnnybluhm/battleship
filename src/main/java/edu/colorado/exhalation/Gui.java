@@ -19,6 +19,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
     private Board npc_state;
     private JButton sonar_pulse;
     char orientation = 'v';
+    private boolean pulsed = false;
     public Gui(){
 
         observers = new ArrayList<GuiObserver>();
@@ -42,11 +43,8 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
         outer_panel.setLayout(outer_grid_layout);
         JPanel middle_panel = new JPanel();
         // Define new buttons
-        this.sonar_pulse = new JButton("Sonar Pulse");
-        sonar_pulse.addActionListener(this);
-        JButton jb2 = new JButton("Air Strike");
-        middle_panel.add(sonar_pulse);
-        middle_panel.add(jb2);
+        /*JButton jb2 = new JButton("Air Strike");
+        middle_panel.add(jb2);*/
         //panel for buttons
         boardLayout =  new GridLayout(SIZE,SIZE);
         player_panel = new JPanel();
@@ -69,9 +67,11 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                 npc_panel.add(npc_buttons[i][j]);
                 player_panel.add(player_buttons[i][j]);
                 npc_buttons[i][j].addMouseListener(this);
+                npc_buttons[i][j].addKeyListener(this);
 
 
                 player_buttons[i][j].addMouseListener(this);
+                player_buttons[i][j].addKeyListener(this);
 
                 //create new obsever, add to list of observers here
                 GuiObserver player_observer = new GuiObserver(this,player_buttons[i][j], new Point(i,j), true);
@@ -205,25 +205,56 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
             }
         }
         if(board !=null){
-            board.hit(new Point(x,y));
-            peg = board.getPeg(new Point(x,y));
-            //button.setText(e.getActionCommand());
+            if(SwingUtilities.isRightMouseButton(e)){
 
-            this.getGame().checkLaser();
-            if(this.getGame().gameOver()){
-                JOptionPane.showMessageDialog(null, "GAME OVER\nPlayer Won");
-                System.exit(0);
-            }
-            notifyAllObservers();
+                if(this.pulsed == true){
+                    this.pulsed = false;
+                    this.enableAllButtons();
+                    board.undoSonarPulse(new Point(x,y));
 
-            //now npc takes it turn
-            this.getGame().npcRandomHit();
-            this.getGame().checkLaser();
-            if(this.getGame().gameOver()){
-                JOptionPane.showMessageDialog(null, "GAME OVER\nPlayer lost");
-                System.exit(0);
+                    npcTakeBasicTurn();
+                }
+                else{
+                    //right click to sonar pulse
+
+                    button.setBackground(Color.RED);
+                    board.sonarPulse(new Point(x,y));
+                    notifyAllObservers();
+                    this.disableAllButtons();
+                    this.npc_buttons[x][y].setEnabled(true);
+                    this.pulsed = true;
+                }
+
+
             }
-            notifyAllObservers();
+            else if (SwingUtilities.isLeftMouseButton(e)){
+                //standard left click hit
+                if(pulsed == true){
+                    //pulse is on so user must disable pulse
+                    return;
+                }
+                if(board.getShips()[Board.MINESWEEPER] == null){
+                    //must place minesweeper
+                    Ship minesweeper = new Minesweeper(this.orientation,new Point(x,y) );
+                    board.placeShip(minesweeper);
+                    notifyAllObservers();
+                    return;
+                }
+
+                board.hit(new Point(x,y));
+                peg = board.getPeg(new Point(x,y));
+                //button.setText(e.getActionCommand());
+
+                this.getGame().checkLaser();
+                if(this.getGame().gameOver()){
+                    JOptionPane.showMessageDialog(null, "GAME OVER\nPlayer Won");
+                    System.exit(0);
+                }
+                notifyAllObservers();
+
+                npcTakeBasicTurn();
+            }
+
         }
     }//mousePressed
 
@@ -255,24 +286,28 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
     public void keyPressed(KeyEvent e) {
         //change orientation with r
         if(e.getKeyCode() == KeyEvent.VK_R){
-            switchOrientaion();
+            switchOrientation();
             JOptionPane.showMessageDialog(null,"Orientation is now "+this.orientation);
         }
         else if(e.getKeyCode() == KeyEvent.VK_UP){
             this.getPlayerState().move('N');
             notifyAllObservers();
+            npcTakeBasicTurn();
         }
         else if(e.getKeyCode() == KeyEvent.VK_DOWN){
             this.getPlayerState().move('S');
             notifyAllObservers();
+            npcTakeBasicTurn();
         }
         else if(e.getKeyCode() == KeyEvent.VK_LEFT){
             this.getPlayerState().move('W');
             notifyAllObservers();
+            npcTakeBasicTurn();
         }
         else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
             this.getPlayerState().move('E');
             notifyAllObservers();
+            npcTakeBasicTurn();
         }
     }
 
@@ -281,12 +316,23 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
 
     }
 
-    public void switchOrientaion(){
+    public void switchOrientation(){
         if(orientation == 'v'){
             orientation = 'h';
         }
         else{
             orientation = 'v';
         }
+    }
+
+    public void npcTakeBasicTurn(){
+        //now npc takes it turn
+        this.getGame().npcRandomHit();
+        this.getGame().checkLaser();
+        if(this.getGame().gameOver()){
+            JOptionPane.showMessageDialog(null, "GAME OVER\nPlayer lost");
+            System.exit(0);
+        }
+        notifyAllObservers();
     }
 }

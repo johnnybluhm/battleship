@@ -27,6 +27,9 @@ public class Point {
     }
 
     public boolean isValid(){
+        if(this == null){
+            return false;
+        }
         if(this.x_ <0 || this.x_ > 9){
             return false;
         }
