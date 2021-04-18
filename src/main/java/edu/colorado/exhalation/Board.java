@@ -799,7 +799,7 @@ public class Board {
                         return;
                     }
                 }
-            }
+            }//outer for
         }//North
         else if (direction == 'N') {
             Point[] new_start_points = new Point[this.getShips().length];
