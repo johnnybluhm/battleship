@@ -29,7 +29,7 @@ public class Minesweeper extends Ship{
         this.setPoints(points);
     }
 
-    public int getSIZE(){
+    public int getSize(){
         return SIZE;
     }
 

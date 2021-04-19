@@ -60,7 +60,10 @@ public class GuiObserver {
                     this.button.setBackground(Color.GRAY);
                 }
             }
-
+            Storm storm = this.observable.getGame().getStorm();
+            if(storm.includes(peg.getPoint())){
+                this.button.setBackground(Color.BLUE);
+            }
             if(board.isSunk(peg.getShip())){
                 //ship is sunk
                 this.button.setText("X");
@@ -131,8 +134,16 @@ public class GuiObserver {
                     }
                 }
 
-            }//isNotVisible
+            }//
+            //other effects done after all
 
+            //storm effect
+            Storm storm = this.observable.getGame().getStorm();
+            if(storm.includes(peg.getPoint())){
+                this.button.setBackground(Color.BLUE);
+            }
+
+            //sunk effect
             if(board.isSunk(peg.getShip())){
                 //ship is sunk
                 this.button.setText("X");

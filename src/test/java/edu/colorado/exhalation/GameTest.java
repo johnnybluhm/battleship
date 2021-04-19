@@ -208,11 +208,14 @@ class GameTest {
     @Test
     void testStorms(){
         Game game = new Game();
-        for (int i = 0; i <100 ; i++) {
+        Game game2 = new Game();
+        game.setPlayerBoard(game2.getNpcBoard());
+        for (int i = 0; i <20 ; i++) {
             game.generateStorm();
         }
-        //at least one ship should sink after 100 random storms
+        //at least one ship should sink after 20 random storms
         Assertions.assertTrue(game.getNpcSunkCount() > 0);
+        Assertions.assertTrue(game.getPlayerSunkCount() > 0);
     }
 
 

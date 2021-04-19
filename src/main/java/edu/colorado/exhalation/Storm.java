@@ -137,8 +137,7 @@ public class Storm {
         return this.points_;
     }
 
-    public boolean includes(Peg peg){
-        Point peg_point = peg.getPoint();
+    public boolean includes(Point peg_point){
         for (int i = 0; i <this.getPoints().length ; i++) {
             if(this.getPoints()[i].equals(peg_point)){
                 return true;

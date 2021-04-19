@@ -4,6 +4,7 @@ abstract public class Ship {
 
     protected Point[] points_;
     protected boolean vertical_;
+    protected boolean sunk_ = false;
 
     public Point[] getPoints() {
         return this.points_;
@@ -32,7 +33,7 @@ abstract public class Ship {
     }
 
     abstract public boolean isArmoured();
-    abstract public int getSIZE();
+    abstract public int getSize();
 
     public void setPoints(Point[] points){
         this.points_ = points;
@@ -56,6 +57,14 @@ abstract public class Ship {
             }
         }
         return true;
+    }
+
+    public void setSunk(){
+        this.sunk_ = true;
+    }
+
+    public boolean isSunk(){
+        return this.sunk_;
     }
 
 }

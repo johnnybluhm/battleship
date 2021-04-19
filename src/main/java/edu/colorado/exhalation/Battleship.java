@@ -20,7 +20,7 @@ public class Battleship extends Ship{
         }
     }//constructor
 
-    public int getSIZE(){
+    public int getSize(){
         return SIZE;
     }
 

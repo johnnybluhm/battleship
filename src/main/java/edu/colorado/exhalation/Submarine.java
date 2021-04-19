@@ -19,7 +19,7 @@ public class Submarine extends Ship{
         }
     }//constructor
 
-    public int getSIZE(){
+    public int getSize(){
         return SIZE;
     }
 

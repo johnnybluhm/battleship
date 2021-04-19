@@ -22,7 +22,7 @@ public class Destroyer extends Ship{
         }
     }//constructor
 
-    public int getSIZE(){
+    public int getSize(){
         return SIZE;
     }
 

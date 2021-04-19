@@ -15,7 +15,7 @@ class StormTest {
         Point test_point = storm.getPoints()[0];
 
         Peg peg = board.getPeg(test_point);
-        Assertions.assertTrue(storm.includes(peg));
+        Assertions.assertTrue(storm.includes(peg.getPoint()));
     }
 
     @Test

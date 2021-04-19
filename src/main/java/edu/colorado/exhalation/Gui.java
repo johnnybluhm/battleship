@@ -26,7 +26,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
 
         observers = new ArrayList<GuiObserver>();
         this.game = new Game();
-        game.placeShipsNpc();
+        //game.placeShipsNpc();
 
         this.player_state = game.getPlayerBoard();
         this.npc_state = game.getNpcBoard();
@@ -528,6 +528,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
             JOptionPane.showMessageDialog(null, "GAME OVER\nPlayer lost");
             System.exit(0);
         }
+        this.getGame().generateStorm();
         notifyAllObservers();
     }
 }

@@ -94,16 +94,16 @@ public class Peg {
         else{
             if(this.getSub() == null && this.getShip() != null) {
                 //only ship
-                String size = String.valueOf(this.getShip().getSIZE());
+                String size = String.valueOf(this.getShip().getSize());
                 return size.charAt(0);
             } else if(this.getShip() == null && this.getSub() != null){
                 //only sub
-                String size = String.valueOf(this.getSub().getSIZE());
+                String size = String.valueOf(this.getSub().getSize());
                 return size.charAt(0);
             }
             else if(this.getSub() != null && this.getShip() != null){
                 //ship and sub
-                String size = String.valueOf(this.getShip().getSIZE());
+                String size = String.valueOf(this.getShip().getSize());
                 return size.charAt(0);
             }
             else{

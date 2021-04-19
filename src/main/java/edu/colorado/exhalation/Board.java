@@ -238,6 +238,12 @@ public class Board {
     }
 
     public boolean isSunk(Ship ship){
+        if(ship != null){
+            if(ship.isSunk()){
+                //sunk by storm
+                return true;
+            }
+        }
 
         if(ship instanceof Minesweeper){
             Peg captains_quarters = this.getPeg(ship.getPoints()[Minesweeper.CAPTAINS_QUARTERS]);

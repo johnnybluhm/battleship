@@ -16,6 +16,8 @@ public class Game {
         this.is_player_turn_ = true;
         this.remote_ = new playerAction();
         this.remote_.setCommand(0, new MoveShips(this));
+        this.placeShipsNpc();
+        this.storm_ = new Storm();
     }
 
     public void togglePlayer(){
@@ -287,7 +289,41 @@ public class Game {
     public void generateStorm(){
         Storm old_storm = this.storm_;
         this.storm_ = new Storm();
+
         Ship[] npc_ships = this.getNpcBoard().getShips();
         Ship[] player_ships = this.getPlayerBoard().getShips();
+
+        for (Ship ship:npc_ships) {
+            if(ship instanceof Submarine) {
+                continue;
+            }
+            else if(ship == null){
+                continue;
+            }
+            Point ship_start = ship.getPoints()[0];
+            Point ship_end = ship.getPoints()[ship.getSize()-1];
+            if(old_storm.includes(ship_start) && old_storm.includes(ship_end)){
+                ship.setSunk();
+            }
+
+        }
+
+        for (Ship ship:player_ships) {
+            if(ship instanceof Submarine) {
+                continue;
+            }
+            else if(ship == null){
+                continue;
+            }
+            Point ship_start = ship.getPoints()[0];
+            Point ship_end = ship.getPoints()[ship.getSize()-1];
+            if(old_storm.includes(ship_start) && old_storm.includes(ship_end)){
+                ship.setSunk();
+            }
+        }
+    }
+
+    public Storm getStorm(){
+        return this.storm_;
     }
 }//Game
