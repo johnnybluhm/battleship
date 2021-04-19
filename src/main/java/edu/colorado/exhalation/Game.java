@@ -1,16 +1,12 @@
 package edu.colorado.exhalation;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 public class Game {
 
     private Board player_board_;
     private Board npc_board_;
     private boolean is_player_turn_;
-    private playerAction remote;
+    private playerAction remote_;
+    private Storm storm_;
 
     final static int MOVE = 0;
 
@@ -18,8 +14,8 @@ public class Game {
         this.player_board_ = new Board();
         this.npc_board_ = new Board();
         this.is_player_turn_ = true;
-        this.remote = new playerAction();
-        this.remote.setCommand(0, new MoveShips(this));
+        this.remote_ = new playerAction();
+        this.remote_.setCommand(0, new MoveShips(this));
     }
 
     public void togglePlayer(){
@@ -188,7 +184,7 @@ public class Game {
     public Board getNpcBoard() {
         return this.npc_board_;
     }
-    public playerAction getRemote() {return this.remote;}
+    public playerAction getRemote() {return this.remote_;}
 
     public boolean getIsPlayerTurn() {
         return is_player_turn_;
@@ -286,5 +282,12 @@ public class Game {
         }
 
 
+    }
+
+    public void generateStorm(){
+        Storm old_storm = this.storm_;
+        this.storm_ = new Storm();
+        Ship[] npc_ships = this.getNpcBoard().getShips();
+        Ship[] player_ships = this.getPlayerBoard().getShips();
     }
 }//Game

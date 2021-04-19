@@ -205,5 +205,15 @@ class GameTest {
         Assertions.assertTrue(game.getPlayerBoard().getTimeLeft()<295000);
     }
 
+    @Test
+    void testStorms(){
+        Game game = new Game();
+        for (int i = 0; i <100 ; i++) {
+            game.generateStorm();
+        }
+        //at least one ship should sink after 100 random storms
+        Assertions.assertTrue(game.getNpcSunkCount() > 0);
+    }
+
 
 }

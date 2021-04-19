@@ -41,7 +41,7 @@ public class Storm {
         }
     }
 
-    //-1 storm had invalid point in it
+    //returns null if storm had invalid point in it
     public static Point[] generatePoints(int storm_size){
         int random_x;
         int random_y;
