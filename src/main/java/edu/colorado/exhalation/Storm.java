@@ -9,8 +9,8 @@ public class Storm {
 
         int random_num = (int)(Math.random()*100 % 10);
         int storm_size;
-        if(random_num <3){
-            //30%
+        if(random_num <=5){
+            //60%
             storm_size = 2;
             this.size_ = storm_size;
             Point[] points = generatePoints(storm_size);
@@ -19,8 +19,8 @@ public class Storm {
             }
             this.points_ = points;
         }
-        else if(random_num >= 3 && random_num<=6){
-            //40%
+        else if(random_num >= 6 && random_num<=8){
+            //30%
             storm_size =3;
             this.size_ = storm_size;
             Point[] points = generatePoints(storm_size);
@@ -29,8 +29,8 @@ public class Storm {
             }
             this.points_ = points;
         }
-        else if(random_num >6 && random_num<=9){
-            //30%
+        else if(random_num==9){
+            //10%
             storm_size = 4;
             this.size_ = storm_size;
             Point[] points = generatePoints(storm_size);
