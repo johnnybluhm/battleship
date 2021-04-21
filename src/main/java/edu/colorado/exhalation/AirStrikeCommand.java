@@ -26,17 +26,17 @@ public class AirStrikeCommand implements Command{
 
     public void num_action(int num){
         undo_.push(num);
-        game_.getPlayerBoard().airStrike(num);
+        game_.getNpcBoard().airStrike(num);
     }
 
     // Same Undo and Redo logic as in MoveCommand.java
     public void undo(){
         redo_.push(undo_.peek());
-        game_.getPlayerBoard().undoAirStrike(undo_.pop());
+        game_.getNpcBoard().undoAirStrike(undo_.pop());
     }
 
     public void redo(){
         undo_.push(redo_.peek());
-        game_.getPlayerBoard().airStrike(redo_.pop());
+        game_.getNpcBoard().airStrike(redo_.pop());
     }
 }

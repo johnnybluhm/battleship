@@ -27,8 +27,6 @@ public class Board {
     private long time_left_ = 300000; //milliseconds
     private Ship[] previous_ships;
 
-
-
     public static Point[] getRowPoints(int row_number){
         Point[] points = new Point[BOARD_SIZE];
         Point row_point;

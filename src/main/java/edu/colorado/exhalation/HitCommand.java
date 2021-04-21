@@ -22,7 +22,7 @@ public class HitCommand implements Command{
 
     public void point_action(Point point_){ // Stores board before hit in undo_, hits the board at point_
         undo_.push(point_);
-        game_.getPlayerBoard().hit(point_);
+        game_.getNpcBoard().hit(point_);
     }
 
     public void num_action(int num){
@@ -32,11 +32,11 @@ public class HitCommand implements Command{
     // Same Undo and Redo logic as in MoveCommand.java
     public void undo(){
         redo_.push(undo_.peek());
-        game_.getPlayerBoard().unHit(undo_.pop());
+        game_.getNpcBoard().unHit(undo_.pop());
     }
 
     public void redo(){
         undo_.push(redo_.peek());
-        game_.getPlayerBoard().hit(redo_.pop());
+        game_.getNpcBoard().hit(redo_.pop());
     }
 }

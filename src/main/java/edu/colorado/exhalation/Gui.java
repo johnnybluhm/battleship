@@ -220,7 +220,6 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                 else{
                     //right click to sonar pulse
 
-                    button.setBackground(Color.RED);
                     board.sonarPulse(new Point(x,y));
                     notifyAllObservers();
                     this.disableAllButtons();
@@ -279,8 +278,6 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
 
                 //ships are placed so we can hit
                 this.getGame().getRemote().point_action(Game.HIT, new Point(x,y));
-                //board.hit(new Point(x,y));
-                peg = board.getPeg(new Point(x,y));
 
                 this.getGame().checkLaser();
                 if (board.getWeapon() == Board.LASER){
@@ -302,7 +299,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                     JOptionPane.showMessageDialog(null, "Air strike already used");
                     return;
                 }
-                board.airStrike(y);
+                this.getGame().getRemote().num_action(Game.AIR_STRIKE, y);
                 notifyAllObservers();
                 npcTakeBasicTurn();
             }
@@ -477,28 +474,34 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
             //JOptionPane.showMessageDialog(null,"Orientation is now "+this.orientation);
         }
         else if(e.getKeyCode() == KeyEvent.VK_UP){
-            this.getPlayerState().move('N');
+            //this.getPlayerState().move('N');
+            this.getGame().getRemote().char_action(Game.MOVE, 'N');
             notifyAllObservers();
             npcTakeBasicTurn();
         }
         else if(e.getKeyCode() == KeyEvent.VK_DOWN){
-            this.getPlayerState().move('S');
+            this.getGame().getRemote().char_action(Game.MOVE, 'S');
             notifyAllObservers();
             npcTakeBasicTurn();
         }
         else if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            this.getPlayerState().move('W');
+            this.getGame().getRemote().char_action(Game.MOVE, 'W');
             notifyAllObservers();
             npcTakeBasicTurn();
         }
         else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            this.getPlayerState().move('E');
+            this.getGame().getRemote().char_action(Game.MOVE, 'E');
             notifyAllObservers();
             npcTakeBasicTurn();
         }
         else if(e.getKeyCode() == KeyEvent.VK_U){
-            JOptionPane.showMessageDialog(null, "pressed u");
+            JOptionPane.showMessageDialog(null, "undid last action");
             this.getGame().getRemote().undo();
+            notifyAllObservers();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_N){
+            JOptionPane.showMessageDialog(null, "redid last action");
+            this.getGame().getRemote().redo();
             notifyAllObservers();
         }
     }
