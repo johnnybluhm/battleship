@@ -8,7 +8,7 @@ public class Peg {
     private boolean visible_;
     private Submarine sub_;
     private Board board_ = null;
-    private int hit_count_[] = new int[Board.NUM_WEAPONS]; // need to change to array of size weapon_num that board will have
+    private int[] hit_count_ = new int[Board.NUM_WEAPONS]; // need to change to array of size weapon_num that board will have
 
     //keep old constructor so we don't have to remake tests
     public Peg(int pos_x, int pos_y){
@@ -61,22 +61,26 @@ public class Peg {
         }
     }//hit
 
+    public void unHit() {
+        this.hit_count_[this.board_.getWeapon()] -= 1;
+        if(this.hit_count_[this.board_.getWeapon()] == 0){
+            this.hit_ = false;
+        }
+
+        if(ship_!= null){
+            this.getBoard().setHash(this, this.hit_count_);
+        }
+        if(this.sub_ != null){
+            this.getBoard().setHash(this, this.hit_count_);
+        }
+    }//unHit
+
     public boolean hasShip(){
-        if(this.ship_ == null){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return this.ship_ != null;
     }
 
     public boolean hasSub(){
-        if(this.sub_ == null){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return this.sub_ != null;
     }
 
    public char print(){

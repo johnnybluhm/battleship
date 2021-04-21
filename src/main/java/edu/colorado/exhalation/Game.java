@@ -16,6 +16,7 @@ public class Game {
         this.is_player_turn_ = true;
         this.remote_ = new playerAction();
         this.remote_.setCommand(0, new MoveShips(this));
+        this.remote_.setCommand(1, new HitCommand(this));
         this.placeShipsNpc();
         this.storm_ = new Storm();
     }

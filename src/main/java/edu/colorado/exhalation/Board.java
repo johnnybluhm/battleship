@@ -1,6 +1,5 @@
 package edu.colorado.exhalation;
 
-import javax.swing.*;
 import java.util.HashMap;
 
 public class Board {
@@ -228,10 +227,13 @@ public class Board {
 
     public void hit(Point point){
         Peg peg = this.getPeg(point);
-        int weapon = this.getWeapon();
         peg.hit();
-
     }//hit
+
+    public void unHit(Point point){
+        Peg peg = this.getPeg(point);
+        peg.unHit();
+    }//unHit
 
     public Peg[][] getPegArray(){
         return this.peg_array_;
