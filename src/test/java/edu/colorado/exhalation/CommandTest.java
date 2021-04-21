@@ -145,6 +145,49 @@ public class CommandTest {
     }
 
     @Test
+    void testSonarCommand(){
+        Board original_board = new Board();
+        original_board.sonarPulse(new Point(5, 5));
+        Board hit_board = new Board();
+        Game game_ = new Game();
+        game_.setPlayerBoard(hit_board);
+        game_.getRemote().point_action(2, new Point(5,5));
+
+        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+    }
+
+    @Test
+    void testSonarUndo(){
+        Board original_board = new Board();
+        Board undo_board = new Board();
+        Game game_ = new Game();
+        game_.setPlayerBoard(undo_board);
+        game_.getRemote().point_action(2, new Point(5,5));
+
+        Assertions.assertFalse(game_.getPlayerBoard().equals(original_board));
+
+        game_.getRemote().undo();
+
+        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+    }
+
+    @Test
+    void testSonarRedo(){
+        Board original_board = new Board();
+        original_board.sonarPulse(new Point(5, 5));
+        Board redo_board = new Board();
+        Game game_ = new Game();
+        game_.setPlayerBoard(redo_board);
+        game_.getRemote().point_action(2, new Point(5,5));
+
+        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+        game_.getRemote().undo();
+        Assertions.assertFalse(game_.getPlayerBoard().equals(original_board));
+        game_.getRemote().redo();
+        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+    }
+
+    @Test
     void testAirStrikeCommand(){
         Board original_board = new Board();
         original_board.airStrike(0);
