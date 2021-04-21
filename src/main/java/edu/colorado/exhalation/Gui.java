@@ -278,8 +278,8 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                 }
 
                 //ships are placed so we can hit
-
-                board.hit(new Point(x,y));
+                this.getGame().getRemote().point_action(Game.HIT, new Point(x,y));
+                //board.hit(new Point(x,y));
                 peg = board.getPeg(new Point(x,y));
 
                 this.getGame().checkLaser();
@@ -495,6 +495,11 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
             this.getPlayerState().move('E');
             notifyAllObservers();
             npcTakeBasicTurn();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_U){
+            JOptionPane.showMessageDialog(null, "pressed u");
+            this.getGame().getRemote().undo();
+            notifyAllObservers();
         }
     }
 

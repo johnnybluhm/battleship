@@ -9,16 +9,19 @@ public class Game {
     private Storm storm_;
 
     final static int MOVE = 0;
+    final static int HIT = 1;
+    final static int SONAR = 2;
+    final static int AIR_STRIKE = 3;
 
     public Game(){
         this.player_board_ = new Board();
         this.npc_board_ = new Board();
         this.is_player_turn_ = true;
         this.remote_ = new playerAction();
-        this.remote_.setCommand(0, new MoveCommand(this));
-        this.remote_.setCommand(1, new HitCommand(this));
-        this.remote_.setCommand(2, new SonarCommand(this));
-        this.remote_.setCommand(3, new AirStrikeCommand(this));
+        this.remote_.setCommand(Game.MOVE, new MoveCommand(this));
+        this.remote_.setCommand(Game.HIT, new HitCommand(this));
+        this.remote_.setCommand(Game.SONAR, new SonarCommand(this));
+        this.remote_.setCommand(Game.AIR_STRIKE, new AirStrikeCommand(this));
         this.placeShipsNpc();
         this.storm_ = new Storm();
     }
