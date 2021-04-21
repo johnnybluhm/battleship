@@ -26,6 +26,7 @@ public class GuiObserver {
     public void setButton(){
         this.button = button;
     }
+
     public JButton getButton(){
         return this.button;
     }

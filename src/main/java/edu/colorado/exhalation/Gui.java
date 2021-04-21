@@ -11,17 +11,18 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
     private JPanel player_panel;
     private JButton[][] player_buttons;
     private JButton[][] npc_buttons;
-    private ArrayList<GuiObserver> observers;
-    private final int SIZE = 10;
-    private GridLayout boardLayout;
-    private Game game;
-    private Board player_state;
-    private Board npc_state;
-    private JButton sonar_pulse;
-    char orientation = 'v';
-    private boolean pulsed = false;
+    static final int SIZE = 10;
     private int player_laser = 0;
     private int npc_laser = 0;
+    private GridLayout boardLayout;
+    private Game game;
+    char orientation = 'v';
+    private boolean pulsed = false;
+
+    private ArrayList<GuiObserver> observers;
+    private Board player_state;
+    private Board npc_state;
+
     public Gui(){
 
         observers = new ArrayList<GuiObserver>();
@@ -85,29 +86,23 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
         JOptionPane.showMessageDialog(null, "Place your ships");
 
     }
-
-    public Board getPlayerState(){
-        return this.player_state;
-    }
-
-    public Board getNpcState(){
-        return this.npc_state;
-    }
-
-    public void setPlayerState(Board state){
-        this.player_state = state;
-        notifyAllObservers();
-    }
-
     public void notifyAllObservers() {
         for (GuiObserver observer: this.observers) {
             observer.update();
         }
     }
-
     public void attach(GuiObserver observer){
         observers.add(observer);
     }
+    public Board getPlayerState(){
+        return this.player_state;
+    }
+    public Board getNpcState(){
+        return this.npc_state;
+    }
+
+
+
 
     public ArrayList<GuiObserver> getObservers(){
         return this.observers;
@@ -120,7 +115,10 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
     public JButton[][] getPlayerButtons(){
         return this.player_buttons;
     }
-
+    public void setPlayerState(Board state){
+        this.player_state = state;
+        notifyAllObservers();
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
 
