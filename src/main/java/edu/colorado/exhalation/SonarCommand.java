@@ -2,15 +2,15 @@ package edu.colorado.exhalation;
 
 import java.util.Stack;
 
-public class HitCommand implements Command{
-    // actions_[1] in PlayerAction class
+public class SonarCommand implements Command {
+    // actions_[2] in PlayerAction class
 
     // Same variables as used in all Command classes
     Game game_;
     Stack<Point> undo_;
     Stack<Point> redo_;
 
-    public HitCommand(Game game_){ // generic Constructor
+    public SonarCommand(Game game_){ // generic Constructor
         this.game_ = game_;
         this.undo_ = new Stack<>();
         this.redo_ = new Stack<>();
@@ -22,7 +22,7 @@ public class HitCommand implements Command{
 
     public void point_action(Point point_){ // Stores board before hit in undo_, hits the board at point_
         undo_.push(point_);
-        game_.getPlayerBoard().hit(point_);
+        game_.getPlayerBoard().sonarPulse(point_);
     }
 
     public void num_action(int num){
@@ -32,11 +32,11 @@ public class HitCommand implements Command{
     // Same Undo and Redo logic as in MoveCommand.java
     public void undo(){
         redo_.push(undo_.peek());
-        game_.getPlayerBoard().unHit(undo_.pop());
+        game_.getPlayerBoard().undoSonarPulse(undo_.pop());
     }
 
     public void redo(){
         undo_.push(redo_.peek());
-        game_.getPlayerBoard().hit(redo_.pop());
+        game_.getPlayerBoard().sonarPulse(redo_.pop());
     }
 }

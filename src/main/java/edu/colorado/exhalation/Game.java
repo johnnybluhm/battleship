@@ -5,7 +5,7 @@ public class Game {
     private Board player_board_;
     private Board npc_board_;
     private boolean is_player_turn_;
-    private playerAction remote_;
+    private final playerAction remote_;
     private Storm storm_;
 
     final static int MOVE = 0;
@@ -15,19 +15,16 @@ public class Game {
         this.npc_board_ = new Board();
         this.is_player_turn_ = true;
         this.remote_ = new playerAction();
-        this.remote_.setCommand(0, new MoveShips(this));
+        this.remote_.setCommand(0, new MoveCommand(this));
         this.remote_.setCommand(1, new HitCommand(this));
+        this.remote_.setCommand(2, new SonarCommand(this));
+        this.remote_.setCommand(3, new AirStrikeCommand(this));
         this.placeShipsNpc();
         this.storm_ = new Storm();
     }
 
     public void togglePlayer(){
-        if(getIsPlayerTurn() == false){
-            this.is_player_turn_ = true;
-        }
-        else{
-            this.is_player_turn_ = false;
-        }
+        this.is_player_turn_ = !getIsPlayerTurn();
     }
     public Board getPlayerBoard(){
         return this.player_board_;
@@ -133,7 +130,7 @@ public class Game {
         int sunk_count = 0;
         for (int i = 0; i <ships.length ; i++) {
             Ship ship = ships[i];
-            if(player_board.isSunk(ship) == true){
+            if(player_board.isSunk(ship)){
                 sunk_count++;
             }
         }
@@ -146,7 +143,7 @@ public class Game {
         int sunk_count = 0;
         for (int i = 0; i <ships.length ; i++) {
             Ship ship = ships[i];
-            if(npc_board.isSunk(ship) == true){
+            if(npc_board.isSunk(ship)){
                 sunk_count++;
             }
         }
@@ -174,11 +171,8 @@ public class Game {
                     sunk_count++;
                 }
             }
-            if(sunk_count == board.getShips().length){
-                return true;
-            }
+            return sunk_count == board.getShips().length;
         }
-        return false;
     }
 
     public void setNpcBoard(Board board){
@@ -238,10 +232,7 @@ public class Game {
         else if(getNpcBoard().getTimeLeft()<0){
             return false;
         }
-        else if(getPlayerBoard().getTimeLeft()<0){
-            return false;
-        }
-        return true;
+        else return getPlayerBoard().getTimeLeft() >= 0;
     }
 
     public Board getBoard(){

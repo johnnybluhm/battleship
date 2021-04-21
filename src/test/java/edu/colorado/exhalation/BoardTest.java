@@ -370,6 +370,7 @@ class BoardTest {
         //Board pulse_board =  test_board.sonarPulse(pulse_point);
         //Assertions.assertTrue(pulse_board.equals(hard_code_board));
     }
+
     @Test
     void testCopy(){
         Board first_board = new Board();

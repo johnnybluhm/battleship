@@ -2,7 +2,7 @@ package edu.colorado.exhalation;
 
 import java.util.Stack;
 
-public class MoveShips implements Command{
+public class MoveCommand implements Command{
     // actions_[0] in PlayerAction class
 
     Game game_; // Changes the board(s) connected to a specific instance of Game, this stores that instance
@@ -10,7 +10,7 @@ public class MoveShips implements Command{
     Stack<Character> redo_; // Array to be used as a stack for redoing Commands, stores Board before Undo was used
     // NOTE: These are Last-In-First-Out stacks, the top of the stack in this instance is the last element of the array
 
-    public MoveShips(Game game_){ // Generic constructor, passed game_ and makes undo_ and redo_ empty arrays
+    public MoveCommand(Game game_){ // Generic constructor, passed game_ and makes undo_ and redo_ empty arrays
         this.game_ = game_;
         this.undo_ = new Stack<Character>();
         this.redo_ = new Stack<Character>();
@@ -36,11 +36,15 @@ public class MoveShips implements Command{
         game_.getPlayerBoard().move(direction_); // moves ships
     }
 
-    public void Action(Point point_){ // Shouldn't ever call PlayerAction.Action(0, point_) in main class, since MoveShips only uses Move
+    public void point_action(Point point_){ // Shouldn't ever call PlayerAction.Action(0, point_) in main class, since MoveShips only uses Move
         System.out.println("Something's wrong here, you shouldn't be calling this in the code.");
     }
 
-    public void Undo(){
+    public void num_action(int num){
+        System.out.println("Something's wrong here, you shouldn't be calling this in the code.");
+    }
+
+    public void undo(){
         if(undo_.peek() == 'E'){
             redo_.push('W');
         }
@@ -56,7 +60,7 @@ public class MoveShips implements Command{
         game_.getPlayerBoard().move(undo_.pop());
     }
 
-    public void Redo(){
+    public void redo(){
         if(redo_.peek() == 'E'){
             undo_.push('W');
         }

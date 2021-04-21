@@ -30,8 +30,6 @@ public class CommandTest {
         Game game_ = new Game();
         game_.setPlayerBoard(board);
         playerAction testingCommands = new playerAction();
-//        testingCommands.SetCommand(0, new MoveShips(game_)); // sets new command MoveShips at slot 0 in testingCommands
-//        testingCommands.Move(0, 'E'); // slot is 0 because that's what MoveEast was set to
 
         game_.getRemote().char_action(0, 'E');
 
@@ -52,27 +50,18 @@ public class CommandTest {
         undo_board.placeShip(battleship);
         undo_board.placeShip(submarine);
 
-//        Stack<Board> stack = new Stack<Board>();
-//        stack.push(undo_board.copy());
-//        undo_board.move('E');
-
         Ship minesweeper2 = new Minesweeper('h', new Point(0,0));
         Ship destroyer2 = new Destroyer('h', new Point(4,4));
         Ship battleship2 = new Battleship('h', new Point(0,2));
         Ship submarine2 = new Submarine('h', new Point(0,3));
         compare_board.placeShip(minesweeper2);
 
-        //Assertions.assertTrue(stack.pop().equals(compare_board));
         compare_board.placeShip(destroyer2);
         compare_board.placeShip(battleship2);
         compare_board.placeShip(submarine2);
 
         Game game = new Game();
         game.setPlayerBoard(undo_board);
-//        PlayerAction testingCommands = new PlayerAction();
-//        testingCommands.SetCommand(0, new MoveShips(game));
-//        testingCommands.Move(0, 'E'); // Need to move in order to have something to undo
-//        testingCommands.Undo(); // No slot here because things to undo are stored in a stack
 
         game.getRemote().char_action(0, 'E');
         game.getRemote().undo();
@@ -104,11 +93,7 @@ public class CommandTest {
 
         Game game = new Game();
         game.setPlayerBoard(redo_board);
-//        PlayerAction testingCommands = new PlayerAction();
-//        testingCommands.SetCommand(0, new MoveShips(game));
-//        testingCommands.Move(0, 'E'); // Need to move in order to have something to undo
-//        testingCommands.Undo(); // Need to undo a move in order to have something to redo
-//        testingCommands.Redo(); // No slot here, redo commands are stored in testingCommands
+
         game.getRemote().char_action(0, 'E');
         game.getRemote().undo();
         game.getRemote().redo();
@@ -117,46 +102,86 @@ public class CommandTest {
     }
 
     @Test
-    void testHitUndo(){
-        Board no_hit_board = new Board();
+    void testHitCommand(){
+        Board original_board = new Board();
+        original_board.hit(new Point(0, 0));
         Board hit_board = new Board();
-
         Game game_ = new Game();
         game_.setPlayerBoard(hit_board);
+        game_.getRemote().point_action(1, new Point(0,0));
 
-        game_.getRemote().action(1, new Point(0,0));
+        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+    }
 
-//        System.out.println(no_hit_board.getStateString());
-//        System.out.println(game_.getBoard().getStateString());
+    @Test
+    void testHitUndo(){
+        Board original_board = new Board();
+        Board undo_board = new Board();
+        Game game_ = new Game();
+        game_.setPlayerBoard(undo_board);
+        game_.getRemote().point_action(1, new Point(0,0));
 
-        Assertions.assertFalse(game_.getPlayerBoard().equals(no_hit_board));
+        Assertions.assertFalse(game_.getPlayerBoard().equals(original_board));
 
         game_.getRemote().undo();
 
-//        System.out.println(game_.getBoard().getStateString());
-
-        Assertions.assertTrue(game_.getPlayerBoard().equals(no_hit_board));
-
-
+        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
     }
 
-//    @Test
-//    void testPlaceUndo(){
-//
-//        Board undo_board = new Board();
-//        Board compare_board = new Board();
-//        Ship minesweeper = new Minesweeper('h', new Point(0,0));
-//        Ship destroyer = new Destroyer('h', new Point(0,1));
-//        Ship  battleship = new Battleship('h', new Point(0,2));
-//        Ship submarine = new Submarine('h', new Point(0,3));
-//
-//        Game game = new Game();
-//        game.setPlayerBoard(undo_board);
-//        playerAction testingCommands = new playerAction();
-//        testingCommands.setCommand(0, new MoveShips(game));
-//
-//
-//    }
+    @Test
+    void testHitRedo(){
+        Board original_board = new Board();
+        original_board.hit(new Point(0, 0));
+        Board redo_board = new Board();
+        Game game_ = new Game();
+        game_.setPlayerBoard(redo_board);
+        game_.getRemote().point_action(1, new Point(0,0));
+
+        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+        game_.getRemote().undo();
+        Assertions.assertFalse(game_.getPlayerBoard().equals(original_board));
+        game_.getRemote().redo();
+        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+    }
+
+    @Test
+    void testAirStrikeCommand(){
+        Board original_board = new Board();
+        original_board.airStrike(0);
+        Board air_strike_board = new Board();
+        Game game_ = new Game();
+        game_.setPlayerBoard(air_strike_board);
+        game_.getRemote().num_action(3, 0);
+
+        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+    }
+
+    @Test
+    void testAirStrikeUndo(){
+        Board original_board = new Board();
+        Board undo_board = new Board();
+        Game game_ = new Game();
+        game_.setPlayerBoard(undo_board);
+        game_.getRemote().num_action(3, 0);
+        Assertions.assertFalse(game_.getPlayerBoard().equals(original_board));
+        game_.getRemote().undo();
+        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+    }
+
+    @Test
+    void testAirStrikeRedo(){
+        Board original_board = new Board();
+        original_board.airStrike(0);
+        Board redo_board = new Board();
+        Game game_ = new Game();
+        game_.setPlayerBoard(redo_board);
+        game_.getRemote().num_action(3, 0);
+        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+        game_.getRemote().undo();
+        Assertions.assertFalse(game_.getPlayerBoard().equals(original_board));
+        game_.getRemote().redo();
+        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+    }
 
     @Test
     void testMultiActionUndo(){
@@ -184,11 +209,11 @@ public class CommandTest {
         game.setPlayerBoard(changing_board);
 
         game.getRemote().char_action(0, 'E');
-        game.getRemote().action(1, new Point(0, 0));
+        game.getRemote().point_action(1, new Point(0, 0));
         game.getRemote().char_action(0, 'S');
-        game.getRemote().action(1, new Point(0, 2));
+        game.getRemote().point_action(1, new Point(0, 2));
         game.getRemote().char_action(0, 'E');
-        game.getRemote().action(1, new Point(0, 4));
+        game.getRemote().point_action(1, new Point(0, 4));
         for(int i = 0; i < 6; i++){
             game.getRemote().undo();
         }
@@ -225,11 +250,11 @@ public class CommandTest {
         game.setPlayerBoard(changing_board);
 
         game.getRemote().char_action(0, 'E');
-        game.getRemote().action(1, new Point(0, 0));
+        game.getRemote().point_action(1, new Point(0, 0));
         game.getRemote().char_action(0, 'S');
-        game.getRemote().action(1, new Point(0, 2));
+        game.getRemote().point_action(1, new Point(0, 2));
         game.getRemote().char_action(0, 'E');
-        game.getRemote().action(1, new Point(0, 4));
+        game.getRemote().point_action(1, new Point(0, 4));
         for(int i = 0; i < 6; i++){
             game.getRemote().undo();
         }

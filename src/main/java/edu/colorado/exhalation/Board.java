@@ -106,7 +106,7 @@ public class Board {
 
     //returns -1 if airstrike used already
     public int airStrike(int row_number){
-        if(air_strike_used_ == true){
+        if(air_strike_used_){
             return -1;
         }
         Point[] row_points = Board.getRowPoints(row_number);
@@ -114,6 +114,15 @@ public class Board {
             this.hit(row_points[i]);
         }
         this.air_strike_used_ = true;
+        return 1;
+    }
+
+    public int undoAirStrike(int row_number){
+        Point[] row_points = Board.getRowPoints(row_number);
+        for (int i = 0; i <row_points.length ; i++) {
+            this.unHit(row_points[i]);
+        }
+        this.air_strike_used_ = false;
         return 1;
     }
 

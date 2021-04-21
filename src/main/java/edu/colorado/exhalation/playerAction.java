@@ -10,12 +10,13 @@ public class playerAction {
     Stack<Integer> undo_action; // stores order of actions player has taken
     Stack<Integer> redo_action; // stores order of actions player has undone
 
-    int num_actions = 3;
+    int num_actions = 4;
     /* List of classes that implement Command
-    0 - MoveShips
-    1 - Hit
-    2 - SonarPulse
-    */ // Maybe we could put PlaceShip in here too? It wouldn't be that hard
+    0 - MoveCommand
+    1 - HitCommand
+    2 - SonarCommand
+    3 - AirStrikeCommand
+    */
 
     public playerAction() { // generic constructor
         this.actions_ = new Command[num_actions];
@@ -27,14 +28,19 @@ public class playerAction {
         actions_[slot_] = action_;
     }
 
-    public void char_action(int slot_, char direction_){ // for Commands that use Move(char direction_)
+    public void char_action(int slot_, char direction_){
         undo_action.push(slot_);
-        actions_[slot_].char_action(direction_); // activates Command at actions_[slot] using 'direction'
+        actions_[slot_].char_action(direction_);
     }
 
-    public void action(int slot_, Point point_){ // for Commands that use Action(Point point_)
+    public void point_action(int slot_, Point point_){
         undo_action.push(slot_);
-        actions_[slot_].Action(point_); // activates Command at actions_[slot] using 'point_'
+        actions_[slot_].point_action(point_);
+    }
+
+    public void num_action(int slot_, int num){
+        undo_action.push(slot_);
+        actions_[slot_].num_action(num);
     }
 
     public void undo(){
@@ -42,8 +48,8 @@ public class playerAction {
             System.out.println("No actions to undo.");
         }
         else { // there's something to be undone
-            redo_action.push(undo_action.peek()); // extends redo_action by 1 index
-            actions_[undo_action.pop()].Undo();
+            redo_action.push(undo_action.peek());
+            actions_[undo_action.pop()].undo();
         }
     }
 
@@ -52,8 +58,8 @@ public class playerAction {
             System.out.println("No actions to redo.");
         }
         else { // there's something to be redone
-            undo_action.push(redo_action.peek()); // extends undo_action by 1 index// puts index of redone Command into undo_action
-            actions_[redo_action.pop()].Redo(); // calls Redo() for the Command most recently undone, aka at last element in redo_action[]
+            undo_action.push(redo_action.peek());
+            actions_[redo_action.pop()].redo();
         }
     }
 
