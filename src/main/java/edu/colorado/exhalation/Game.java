@@ -10,7 +10,7 @@ public class Game {
 
     final static int MOVE = 0;
     final static int HIT = 1;
-    final static int SONAR = 2;
+    final static int PLACE = 2;
     final static int AIR_STRIKE = 3;
 
     public Game(){
@@ -20,7 +20,7 @@ public class Game {
         this.remote_ = new playerAction();
         this.remote_.setCommand(Game.MOVE, new MoveCommand(this));
         this.remote_.setCommand(Game.HIT, new HitCommand(this));
-        this.remote_.setCommand(Game.SONAR, new SonarCommand(this));
+        this.remote_.setCommand(Game.PLACE, new PlaceCommand(this));
         this.remote_.setCommand(Game.AIR_STRIKE, new AirStrikeCommand(this));
         this.placeShipsNpc();
         this.storm_ = new Storm();

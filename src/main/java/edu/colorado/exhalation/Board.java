@@ -737,5 +737,8 @@ public class Board {
         return this.air_strike_used_;
     }
 
+    public void resetPeg(Point point){
+        this.peg_array_[point.getX()][point.getY()] = new Peg(point.getX(), point.getY(), this);
+    }
 
 }//Board

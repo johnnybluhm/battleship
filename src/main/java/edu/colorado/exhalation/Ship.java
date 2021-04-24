@@ -1,5 +1,4 @@
 package edu.colorado.exhalation;
-import java.util.HashMap;
 abstract public class Ship {
 
     protected Point[] points_;
@@ -13,12 +12,7 @@ abstract public class Ship {
         return this.vertical_;
     }
     public boolean isHorizontal(){
-        if(this.vertical_ == true){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return !this.vertical_;
     }
     public boolean isValid(){
         if(points_ == null){

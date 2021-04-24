@@ -14,7 +14,7 @@ public class playerAction {
     /* List of classes that implement Command
     0 - MoveCommand
     1 - HitCommand
-    2 - SonarCommand
+    2 - PlaceCommand
     3 - AirStrikeCommand
     */
 
@@ -41,6 +41,11 @@ public class playerAction {
     public void num_action(int slot_, int num){
         undo_action.push(slot_);
         actions_[slot_].num_action(num);
+    }
+
+    public int char_point_action(int slot_, char character, Point point){
+        undo_action.push(slot_);
+        return(actions_[slot_].char_point_action(character, point));
     }
 
     public void undo(){

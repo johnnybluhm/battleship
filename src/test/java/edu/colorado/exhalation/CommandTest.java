@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class CommandTest {
 
     @Test
-    void testShiftCommand(){ // Essentially testShift() from ShipTest.java but implementing Command Pattern
+    void testMoveCommand(){ // Essentially testShift() from ShipTest.java but implementing Command Pattern
         Board board = new Board();
         Ship minesweeper = new Minesweeper('h', new Point(0,0));
         Ship destroyer = new Destroyer('h', new Point(0,1));
@@ -29,7 +29,6 @@ public class CommandTest {
 
         Game game_ = new Game();
         game_.setPlayerBoard(board);
-        playerAction testingCommands = new playerAction();
 
         game_.getRemote().char_action(0, 'E');
 
@@ -38,7 +37,7 @@ public class CommandTest {
     }
 
     @Test
-    void testUndo(){ // Using the above code as a base, now we are using the Command to move and testing the undoing of that Command
+    void testMoveUndo(){ // Using the above code as a base, now we are using the Command to move and testing the undoing of that Command
         Board undo_board = new Board();
         Board compare_board = new Board();
         Ship minesweeper = new Minesweeper('h', new Point(0,0));
@@ -70,7 +69,7 @@ public class CommandTest {
     }
 
     @Test
-    void testRedo(){ // Once again using the code from above, we're moving, undoing that move, and redoing the undo and testing that here
+    void testMoveRedo(){ // Once again using the code from above, we're moving, undoing that move, and redoing the undo and testing that here
         Board redo_board = new Board();
         Ship minesweeper = new Minesweeper('h', new Point(0,0));
         Ship destroyer = new Destroyer('h', new Point(0,1));
@@ -105,12 +104,13 @@ public class CommandTest {
     void testHitCommand(){
         Board original_board = new Board();
         original_board.hit(new Point(0, 0));
+
         Board hit_board = new Board();
         Game game_ = new Game();
-        game_.setPlayerBoard(hit_board);
+        game_.setNpcBoard(hit_board);
         game_.getRemote().point_action(1, new Point(0,0));
 
-        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+        Assertions.assertTrue(game_.getNpcBoard().equals(original_board));
     }
 
     @Test
@@ -118,14 +118,14 @@ public class CommandTest {
         Board original_board = new Board();
         Board undo_board = new Board();
         Game game_ = new Game();
-        game_.setPlayerBoard(undo_board);
+        game_.setNpcBoard(undo_board);
         game_.getRemote().point_action(1, new Point(0,0));
 
-        Assertions.assertFalse(game_.getPlayerBoard().equals(original_board));
+        Assertions.assertFalse(game_.getNpcBoard().equals(original_board));
 
         game_.getRemote().undo();
 
-        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+        Assertions.assertTrue(game_.getNpcBoard().equals(original_board));
     }
 
     @Test
@@ -134,57 +134,14 @@ public class CommandTest {
         original_board.hit(new Point(0, 0));
         Board redo_board = new Board();
         Game game_ = new Game();
-        game_.setPlayerBoard(redo_board);
+        game_.setNpcBoard(redo_board);
         game_.getRemote().point_action(1, new Point(0,0));
 
-        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+        Assertions.assertTrue(game_.getNpcBoard().equals(original_board));
         game_.getRemote().undo();
-        Assertions.assertFalse(game_.getPlayerBoard().equals(original_board));
+        Assertions.assertFalse(game_.getNpcBoard().equals(original_board));
         game_.getRemote().redo();
-        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
-    }
-
-    @Test
-    void testSonarCommand(){
-        Board original_board = new Board();
-        original_board.sonarPulse(new Point(5, 5));
-        Board hit_board = new Board();
-        Game game_ = new Game();
-        game_.setPlayerBoard(hit_board);
-        game_.getRemote().point_action(2, new Point(5,5));
-
-        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
-    }
-
-    @Test
-    void testSonarUndo(){
-        Board original_board = new Board();
-        Board undo_board = new Board();
-        Game game_ = new Game();
-        game_.setPlayerBoard(undo_board);
-        game_.getRemote().point_action(2, new Point(5,5));
-
-        Assertions.assertFalse(game_.getPlayerBoard().equals(original_board));
-
-        game_.getRemote().undo();
-
-        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
-    }
-
-    @Test
-    void testSonarRedo(){
-        Board original_board = new Board();
-        original_board.sonarPulse(new Point(5, 5));
-        Board redo_board = new Board();
-        Game game_ = new Game();
-        game_.setPlayerBoard(redo_board);
-        game_.getRemote().point_action(2, new Point(5,5));
-
-        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
-        game_.getRemote().undo();
-        Assertions.assertFalse(game_.getPlayerBoard().equals(original_board));
-        game_.getRemote().redo();
-        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+        Assertions.assertTrue(game_.getNpcBoard().equals(original_board));
     }
 
     @Test
@@ -193,10 +150,10 @@ public class CommandTest {
         original_board.airStrike(0);
         Board air_strike_board = new Board();
         Game game_ = new Game();
-        game_.setPlayerBoard(air_strike_board);
+        game_.setNpcBoard(air_strike_board);
         game_.getRemote().num_action(3, 0);
 
-        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+        Assertions.assertTrue(game_.getNpcBoard().equals(original_board));
     }
 
     @Test
@@ -204,11 +161,11 @@ public class CommandTest {
         Board original_board = new Board();
         Board undo_board = new Board();
         Game game_ = new Game();
-        game_.setPlayerBoard(undo_board);
+        game_.setNpcBoard(undo_board);
         game_.getRemote().num_action(3, 0);
-        Assertions.assertFalse(game_.getPlayerBoard().equals(original_board));
+        Assertions.assertFalse(game_.getNpcBoard().equals(original_board));
         game_.getRemote().undo();
-        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+        Assertions.assertTrue(game_.getNpcBoard().equals(original_board));
     }
 
     @Test
@@ -217,14 +174,68 @@ public class CommandTest {
         original_board.airStrike(0);
         Board redo_board = new Board();
         Game game_ = new Game();
-        game_.setPlayerBoard(redo_board);
+        game_.setNpcBoard(redo_board);
         game_.getRemote().num_action(3, 0);
-        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+        Assertions.assertTrue(game_.getNpcBoard().equals(original_board));
         game_.getRemote().undo();
-        Assertions.assertFalse(game_.getPlayerBoard().equals(original_board));
+        Assertions.assertFalse(game_.getNpcBoard().equals(original_board));
         game_.getRemote().redo();
-        Assertions.assertTrue(game_.getPlayerBoard().equals(original_board));
+        Assertions.assertTrue(game_.getNpcBoard().equals(original_board));
     }
+
+    @Test
+    void testPlaceCommand(){
+        Board original_board = new Board();
+        original_board.placeShip(new Minesweeper('h', new Point(0,0)));
+        original_board.placeShip(new Destroyer('h', new Point(0,1)));
+        original_board.placeShip(new Battleship('h', new Point(0,2)));
+        original_board.placeShip(new Submarine('h', new Point(0,3)));
+        Board test_board = new Board();
+        Game game_ = new Game();
+        game_.setPlayerBoard(test_board);
+        game_.getRemote().char_point_action(2, 'h', new Point(0,0));
+        game_.getRemote().char_point_action(2, 'h', new Point(0,1));
+        game_.getRemote().char_point_action(2, 'h', new Point(0,2));
+        game_.getRemote().char_point_action(2, 'h', new Point(0,3));
+
+        System.out.println(game_.getPlayerBoard().getStateString());
+        System.out.println(original_board.getStateString());
+
+        Assertions.assertTrue(game_.getNpcBoard().equals(original_board));
+    }
+
+    @Test
+    void testPlaceUndo(){
+        Board original_board = new Board();
+
+        Board test_board = new Board();
+        Game game_ = new Game();
+        game_.setPlayerBoard(test_board);
+        game_.getRemote().char_point_action(2, 'h', new Point(0,0));
+        game_.getRemote().char_point_action(2, 'h', new Point(0,1));
+        game_.getRemote().char_point_action(2, 'h', new Point(0,2));
+        game_.getRemote().char_point_action(2, 'h', new Point(0,3));
+
+        System.out.println(game_.getPlayerBoard().getStateString());
+        System.out.println(original_board.getStateString());
+
+        Assertions.assertFalse(game_.getNpcBoard().equals(original_board));
+
+        game_.getRemote().undo();
+        game_.getRemote().undo();
+        game_.getRemote().undo();
+        game_.getRemote().undo();
+
+        System.out.println(game_.getPlayerBoard().getStateString());
+        System.out.println(original_board.getStateString());
+
+        Assertions.assertTrue(game_.getNpcBoard().equals(original_board));
+    }
+
+//    @Test
+//    void testPlaceRedo(){
+//
+//    }
 
     @Test
     void testMultiActionUndo(){
@@ -250,6 +261,7 @@ public class CommandTest {
 
         Game game = new Game();
         game.setPlayerBoard(changing_board);
+        game.setNpcBoard(changing_board);
 
         game.getRemote().char_action(0, 'E');
         game.getRemote().point_action(1, new Point(0, 0));
@@ -262,6 +274,7 @@ public class CommandTest {
         }
 
         Assertions.assertTrue(game.getPlayerBoard().equals(original_board));
+        Assertions.assertTrue(game.getNpcBoard().equals(original_board));
     }
 
     @Test
@@ -276,6 +289,16 @@ public class CommandTest {
         changing_board.placeShip(battleship);
         changing_board.placeShip(submarine);
 
+        Board changing_board2 = new Board();
+        Ship minesweeper4 = new Minesweeper('h', new Point(0,0));
+        Ship destroyer4 = new Destroyer('h', new Point(0,1));
+        Ship  battleship4 = new Battleship('h', new Point(0,2));
+        Ship submarine4 = new Submarine('h', new Point(0,3));
+        changing_board2.placeShip(minesweeper4);
+        changing_board2.placeShip(destroyer4);
+        changing_board2.placeShip(battleship4);
+        changing_board2.placeShip(submarine4);
+
         Board redone_board = new Board();
         Ship minesweeper2 = new Minesweeper('h', new Point(2,1));
         Ship destroyer2 = new Destroyer('h', new Point(2,2));
@@ -285,12 +308,23 @@ public class CommandTest {
         redone_board.placeShip(destroyer2);
         redone_board.placeShip(battleship2);
         redone_board.placeShip(submarine2);
-        redone_board.hit(new Point(0, 0));
-        redone_board.hit(new Point(0, 2));
-        redone_board.hit(new Point(0, 4));
+
+        Board redone_board2 = new Board();
+        Ship minesweeper3 = new Minesweeper('h', new Point(0,0));
+        Ship destroyer3 = new Destroyer('h', new Point(0,1));
+        Ship battleship3 = new Battleship('h', new Point(0,2));
+        Ship submarine3 = new Submarine('h', new Point(0,3));
+        redone_board2.placeShip(minesweeper3);
+        redone_board2.placeShip(destroyer3);
+        redone_board2.placeShip(battleship3);
+        redone_board2.placeShip(submarine3);
+        redone_board2.hit(new Point(0, 0));
+        redone_board2.hit(new Point(0, 2));
+        redone_board2.hit(new Point(0, 4));
 
         Game game = new Game();
         game.setPlayerBoard(changing_board);
+        game.setNpcBoard(changing_board2);
 
         game.getRemote().char_action(0, 'E');
         game.getRemote().point_action(1, new Point(0, 0));
@@ -308,6 +342,11 @@ public class CommandTest {
             game.getRemote().redo();
         }
 
+        System.out.println(game.getPlayerBoard().getStateString());
+        System.out.println(game.getNpcBoard().getStateString());
+        System.out.println(redone_board.getStateString());
+
         Assertions.assertTrue(game.getPlayerBoard().equals(redone_board));
+        Assertions.assertTrue(game.getNpcBoard().equals(redone_board2));
     }
 }

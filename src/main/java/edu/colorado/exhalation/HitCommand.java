@@ -29,6 +29,11 @@ public class HitCommand implements Command{
         System.out.println("Something's wrong here, you shouldn't be calling this in the code.");
     }
 
+    public int char_point_action(char orientation, Point point){
+        System.out.println("Something's wrong here, you shouldn't be calling this in the code.");
+        return 0;
+    }
+
     // Same Undo and Redo logic as in MoveCommand.java
     public void undo(){
         redo_.push(undo_.peek());

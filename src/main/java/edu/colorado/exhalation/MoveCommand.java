@@ -44,6 +44,11 @@ public class MoveCommand implements Command{
         System.out.println("Something's wrong here, you shouldn't be calling this in the code.");
     }
 
+    public int char_point_action(char orientation, Point point){
+        System.out.println("Something's wrong here, you shouldn't be calling this in the code.");
+        return 0;
+    }
+
     public void undo(){
         if(undo_.peek() == 'E'){
             redo_.push('W');
