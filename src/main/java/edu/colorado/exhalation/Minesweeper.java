@@ -3,8 +3,7 @@ package edu.colorado.exhalation;
 public class Minesweeper extends Ship{
     final static int SIZE = 2;
     final static int CAPTAINS_QUARTERS = 0;
-
-
+    
     public Minesweeper(char orientation, Point point){
         if(orientation == 'v'){
             this.vertical_ = true;
@@ -28,16 +27,13 @@ public class Minesweeper extends Ship{
         Point[] points = copy_ship.getPoints();
         this.setPoints(points);
     }
-
     public int getSize(){
         return SIZE;
     }
-
     @Override
     public boolean isArmoured() {
         return false;
     }
-
     public static Point[] getVerticalPoints(Point start_point){
 
         int x = start_point.getX();
@@ -54,7 +50,6 @@ public class Minesweeper extends Ship{
         }*/
         return vertical_point_array;
     }
-
     public static Point[] getHorizontalPoints(Point start_point){
         int x = start_point.getX();
         int y = start_point.getY();

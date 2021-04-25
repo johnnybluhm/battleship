@@ -52,6 +52,7 @@ abstract public class Ship {
     public boolean isSunk(){
         return this.sunk_;
     }
+
     abstract public boolean isArmoured();
     abstract public int getSize();
 
