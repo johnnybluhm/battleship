@@ -25,18 +25,12 @@ abstract public class Ship {
         }
         return true;
     }
-
-    abstract public boolean isArmoured();
-    abstract public int getSize();
-
     public void setPoints(Point[] points){
         this.points_ = points;
     }
-
     public String toString(){
         return "SHIP START: \n"+ points_[0];
     }
-
     public boolean equals(Ship compare_ship){
         if(compare_ship == null){
             return false;
@@ -52,14 +46,14 @@ abstract public class Ship {
         }
         return true;
     }
-
     public void setSunk(){
         this.sunk_ = true;
     }
-
     public boolean isSunk(){
         return this.sunk_;
     }
+    abstract public boolean isArmoured();
+    abstract public int getSize();
 
 }
 
