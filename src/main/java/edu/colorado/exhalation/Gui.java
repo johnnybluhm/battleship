@@ -237,7 +237,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                 }
                 if(board.getShips()[Board.MINESWEEPER] == null){
                     //must place minesweeper
-                    if(game_.getRemote().char_point_action(2, this.orientation_, new Point(x,y)) <1){
+                    if(game_.getRemote().char_point_action(Game.PLACE, this.orientation_, new Point(x,y)) <1){
                         JOptionPane.showMessageDialog(null,"Invalid placement, try again");
                     }
                     notifyAllObservers();
@@ -245,7 +245,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                 }
                 else if(board.getShips()[Board.DESTROYER] == null){
                     //must place destroyer
-                    if(game_.getRemote().char_point_action(2, this.orientation_, new Point(x,y)) <1){
+                    if(game_.getRemote().char_point_action(Game.PLACE, this.orientation_, new Point(x,y)) <1){
                         JOptionPane.showMessageDialog(null,"Invalid placement, try again");
                     }
                     notifyAllObservers();
@@ -253,7 +253,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                 }
                 else if(board.getShips()[Board.BATTLESHIP] == null){
                     //must place battleship
-                    if(game_.getRemote().char_point_action(2, this.orientation_, new Point(x,y)) <1){
+                    if(game_.getRemote().char_point_action(Game.PLACE, this.orientation_, new Point(x,y)) <1){
 
                         JOptionPane.showMessageDialog(null,"Invalid placement, try again");
                     }
@@ -262,7 +262,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                 }
                 else if(board.getShips()[Board.SUBMARINE] == null){
                     //must place submarine
-                    if(game_.getRemote().char_point_action(2, this.orientation_, new Point(x,y)) <1){
+                    if(game_.getRemote().char_point_action(Game.PLACE, this.orientation_, new Point(x,y)) <1){
                         JOptionPane.showMessageDialog(null,"Invalid placement, try again");
                         return;
                     }
