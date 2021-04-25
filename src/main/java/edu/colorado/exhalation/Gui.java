@@ -244,7 +244,7 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                     return;
                 }
                 else if(board.getShips()[Board.DESTROYER] == null){
-                    //must place minesweeper
+                    //must place destroyer
                     if(game_.getRemote().char_point_action(2, this.orientation_, new Point(x,y)) <1){
                         JOptionPane.showMessageDialog(null,"Invalid placement, try again");
                     }
@@ -252,15 +252,16 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                     return;
                 }
                 else if(board.getShips()[Board.BATTLESHIP] == null){
-                    //must place minesweeper
+                    //must place battleship
                     if(game_.getRemote().char_point_action(2, this.orientation_, new Point(x,y)) <1){
+
                         JOptionPane.showMessageDialog(null,"Invalid placement, try again");
                     }
                     notifyAllObservers();
                     return;
                 }
                 else if(board.getShips()[Board.SUBMARINE] == null){
-                    //must place minesweeper
+                    //must place submarine
                     if(game_.getRemote().char_point_action(2, this.orientation_, new Point(x,y)) <1){
                         JOptionPane.showMessageDialog(null,"Invalid placement, try again");
                         return;
@@ -271,50 +272,9 @@ public class Gui implements ActionListener, MouseListener, KeyListener {
                     this.disablePlayerButtons();
                     return;
                 }
-//                if(board.getShips()[Board.MINESWEEPER] == null){
-//                    //must place minesweeper
-//                    Ship ship = new Minesweeper(this.orientation_,new Point(x,y) );
-//                    if(board.placeShip(ship) <1){
-//                        JOptionPane.showMessageDialog(null,"Invalid placement, try again");
-//                    }
-//                    notifyAllObservers();
-//                    return;
-//                }
-//                else if(board.getShips()[Board.DESTROYER] == null){
-//                    //must place minesweeper
-//                    Ship ship = new Destroyer(this.orientation_,new Point(x,y) );
-//                    if(board.placeShip(ship) <1){
-//                        JOptionPane.showMessageDialog(null,"Invalid placement, try again");
-//                    }
-//                    notifyAllObservers();
-//                    return;
-//                }
-//                else if(board.getShips()[Board.BATTLESHIP] == null){
-//                    //must place minesweeper
-//                    Ship ship = new Battleship(this.orientation_,new Point(x,y) );
-//                    if(board.placeShip(ship) <1){
-//                        JOptionPane.showMessageDialog(null,"Invalid placement, try again");
-//                    }
-//                    notifyAllObservers();
-//                    return;
-//                }
-//                else if(board.getShips()[Board.SUBMARINE] == null){
-//                    //must place minesweeper
-//                    Ship ship = new Submarine(this.orientation_,new Point(x,y) );
-//                    if(board.placeShip(ship) <1){
-//                        JOptionPane.showMessageDialog(null,"Invalid placement, try again");
-//                        return;
-//                    }
-//                    notifyAllObservers();
-//                    JOptionPane.showMessageDialog(null, "All ships placed. Have fun!");
-//                    this.enableAllButtons();
-//                    this.disablePlayerButtons();
-//                    return;
-//                }
 
                 //ships are placed so we can hit
                 this.getGame().getRemote().point_action(Game.HIT, new Point(x,y));
-
                 this.getGame().checkLaser();
                 if (board.getWeapon() == Board.LASER){
                     this.player_laser_++;
