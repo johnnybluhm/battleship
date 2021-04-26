@@ -8,7 +8,7 @@ Members:
 - Ziad Alwazzan,
 - Yosan Russom,
 
-A fun ,modified version of battleship.
+A fun, modified version of battleship.
 
 # Controls for playing:
 
