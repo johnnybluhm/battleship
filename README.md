@@ -1,27 +1,27 @@
-Course Project for CSCI 4448/5448: Battleship
+# Course Project for CSCI 4448/5448: Battleship
 
 Team Exhalation
 
 Members:
-Jonathan Bluhm,
-Ethan Bilek,
-Ziad Alwazzan,
-Yosan Russom,
+- Jonathan Bluhm,
+- Ethan Bilek,
+- Ziad Alwazzan,
+- Yosan Russom,
 
 A fun ,modified version of battleship.
 
-Controls for playing:
+# Controls for playing:
 
-Middle mouse button: air strike
+- Middle mouse button: air strike
 
-Right click: sonar pulse, right click again on "pulse point" to end effect.
+- Right click: sonar pulse, right click again on "pulse point" to end effect.
 
-Left click: hitting and placing ships
+- Left click: hitting and placing ships
 
-Arrow keys: move ships
+- Arrow keys: move ships
 
-r: change orientation when placing ships
+- r: change orientation when placing ships
 
-u: undo
+- u: undo
 
-n: redo
+- n: redo
