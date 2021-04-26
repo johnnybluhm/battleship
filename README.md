@@ -25,3 +25,11 @@ A fun, modified version of battleship.
 - u: undo
 
 - n: redo
+
+# Installation Instructions
+
+- Download file “battleship.jar”
+
+- Go to your console/terminal and navigate to the root directory of the project
+
+- In the root directory of the project type "java -jar battleship.jar"
