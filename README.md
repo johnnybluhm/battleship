@@ -29,7 +29,6 @@ A fun, modified version of battleship.
 # Installation Instructions
 
 - Download file “battleship.jar”
-
 - Go to your console/terminal and navigate to the directory containing the file
-
 - In that directory type "java -jar battleship.jar"
+- If you don't have java installed, go here:https://java.com/en/download/help/download_options.html
