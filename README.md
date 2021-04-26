@@ -30,6 +30,6 @@ A fun, modified version of battleship.
 
 - Download file “battleship.jar”
 
-- Go to your console/terminal and navigate to the root directory of the project
+- Go to your console/terminal and navigate to the directory containing the file
 
-- In the root directory of the project type "java -jar battleship.jar"
+- In that directory type "java -jar battleship.jar"
