@@ -3,12 +3,12 @@ Course Project for CSCI 4448/5448: Battleship
 Team Exhalation
 
 Members:
-Jonathan Bluhm
-Ethan Bilek
-Ziad Alwazzan
-Yosan Russom
+Jonathan Bluhm,
+Ethan Bilek,
+Ziad Alwazzan,
+Yosan Russom,
 
-A fun modified version of battleship.
+A fun ,modified version of battleship.
 
 Controls for playing:
 
